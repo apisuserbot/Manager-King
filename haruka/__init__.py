@@ -4,6 +4,10 @@ import sys
 
 import telegram.ext as tg
 
+print("haruka")
+print("Starting...")
+
+
 # enable logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -11,12 +15,10 @@ logging.basicConfig(
 
 LOGGER = logging.getLogger(__name__)
 
-LOGGER.info("Starting haruka...")
-
 # if version < 3.6, stop bot.
-if sys.version_info[0] < 3 or sys.version_info[1] < 6:
-    LOGGER.error("You MUST have a python version of at least 3.6! Multiple features depend on this. Bot quitting.")
-    quit(1)
+#if sys.version_info[0] < 3 or sys.version_info[1] < 6:
+#    LOGGER.error("You MUST have a python version of at least 3.6! Multiple features depend on this. Bot quitting.")
+#``````````````    quit(1)
 
 ENV = bool(os.environ.get('ENV', False))
 
