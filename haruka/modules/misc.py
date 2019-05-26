@@ -89,16 +89,7 @@ def slap(bot: Bot, update: Update, args: List[str]):
     #user1=user1, user2=user2, item=item_ru, hits=hit_ru, throws=throw_ru, itemp=itemp_ru, itemr=itemr_ru
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
-
-
-@run_async
-def get_bot_ip(bot: Bot, update: Update):
-    """ Sends the bot's IP address, so as to be able to ssh in if necessary.
-        OWNER ONLY.
-    """
-    res = requests.get("http://ipinfo.io/ip")
-    update.message.reply_text(res.text)
-
+    
 
 @run_async
 def get_id(bot: Bot, update: Update, args: List[str]):
@@ -542,7 +533,6 @@ __help__ = """
 __mod_name__ = "Misc"
 
 ID_HANDLER = DisableAbleCommandHandler("id", get_id, pass_args=True, admin_ok=True)
-IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID), admin_ok=True)
 PING_HANDLER = DisableAbleCommandHandler("ping", ping, admin_ok=True)
 #GOOGLE_HANDLER = DisableAbleCommandHandler("google", google)
 LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, pass_args=True, admin_ok=True)
@@ -574,7 +564,6 @@ dispatcher.add_handler(PASTE_HANDLER)
 dispatcher.add_handler(GET_PASTE_HANDLER)
 dispatcher.add_handler(PASTE_STATS_HANDLER)
 dispatcher.add_handler(ID_HANDLER)
-dispatcher.add_handler(IP_HANDLER)
 dispatcher.add_handler(INSULTS_HANDLER)
 dispatcher.add_handler(RUNS_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
