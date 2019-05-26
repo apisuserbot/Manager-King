@@ -23,4 +23,3 @@ hurry.filesize
 py_translator
 beautifulsoup4==4.6.3
 tldextract
-pytorch>==1.1
