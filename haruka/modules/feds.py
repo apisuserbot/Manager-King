@@ -298,7 +298,7 @@ def fed_info(bot: Bot, update: Update, args: List[str]):
             update.effective_message.reply_text(tld(chat.id, "This group is not in any federation!"))
             return
 
-        if is_user_fed_admin(fed_id, user.id) == True:
+        if is_user_fed_admin(fed_id, user.id) == False:
             update.effective_message.reply_text(tld(chat.id, "Only fed admins can do this!"))
             return
 
