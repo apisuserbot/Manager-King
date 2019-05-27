@@ -577,14 +577,14 @@ def main():
     if WEBHOOK:
         LOGGER.info("Using webhooks.")
         updater.start_webhook(listen="127.0.0.1",
-                              port=PORT,
-                              url_path=TOKEN)
+                              port=5000,
+                              url_path="805109027:AAFYjw4qRaje4WGdHd1_KxnYzE6v3yXqYfc")
 
         if CERT_PATH:
-            updater.bot.set_webhook(url=URL + TOKEN,
+            updater.bot.set_webhook(url="https://prakasaka.herokuapp.com/" + "805109027:AAFYjw4qRaje4WGdHd1_KxnYzE6v3yXqYfc",
                                     certificate=open(CERT_PATH, 'rb'))
         else:
-            updater.bot.set_webhook(url="https://prakasaka.herokuapp.com/" + "805109027:AAFYjw4qRaje4WGdHd1_KxnYzE6v3yXqYfc")
+            updater.bot.set_webhook(url=URL + TOKEN)
 
     else:
         LOGGER.info("Using long polling.")
