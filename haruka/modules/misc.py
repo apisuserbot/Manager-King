@@ -4,6 +4,7 @@ import json
 import random
 import time
 import pyowm
+import wikipedia
 import re
 from pyowm import timeutils, exceptions
 from datetime import datetime
