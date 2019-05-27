@@ -19,8 +19,8 @@ class Config(object):
     MESSAGE_DUMP = -1001400546607  # needed to make sure 'save from' messages persist
     LOAD = []
     NO_LOAD = ['translation', 'sed']
-    WEBHOOK = False
-    URL = None
+    WEBHOOK = ANYTHING
+    URL = "https://prakasaka.herokuapp.com/"
 
     # OPTIONAL
     SUDO_USERS = [578256572 734772540 759400881 594483221 623317613 649156353 656268508 334575345 225296581 621013608]  # List of id's (not usernames) for users which have sudo access to the bot.
