@@ -15,8 +15,8 @@ class Config(object):
     OWNER_USERNAME = "Prakaska"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'postgres://qfkohqymejypoc:7f310fd68b37d4f117a2dd4bbb9a52b35729f050ff1123d0baf6b3e449de623b@ec2-46-137-113-157.eu-west-1.compute.amazonaws.com:5432/d67rh30a38vehf'  # needed for any database modules
-    MESSAGE_DUMP = -1001400546607  # needed to make sure 'save from' messages persist
+    SQLALCHEMY_DATABASE_URI = 'postgres://tdexkzqhkojmia:d7b7a56d7c3c18bf7f6428304958b88a8342b1757773965fdb6af62072ef13df@ec2-54-247-70-127.eu-west-1.compute.amazonaws.com:5432/d3ttt3hr63j4b2'  # needed for any database modules
+    MESSAGE_DUMP = -1001326118005  # needed to make sure 'save from' messages persist
     LOAD = []
     NO_LOAD = ['translation', 'sed']
     WEBHOOK = ANYTHING
