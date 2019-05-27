@@ -554,6 +554,20 @@ def shrug(bot: Bot, update: Update):
         message.reply_to_message.reply_text(default_msg)
     else:
         message.reply_text(default_msg)
+        
+def ud(bot: Bot, update: Update, args):
+        term = ' '.join(args)
+        ud_api = "http://api.urbandictionary.com/v0/define?term=" + term
+        ud_reply = json.loads(requests.get(ud_api).content)['list']
+        if len(args) == 0:
+            update.message.reply_text("USAGE: /ud <Word>")
+        elif len(ud_reply) != 0:
+            ud = ud_reply[0]
+            reply_text = "<b>{0}</b>\n<a href='{1}'>{1}</a>\n<i>By {2}</i>\n\nDefinition: {3}\n\nExample: {4}".format(
+                ud['word'], ud['permalink'], ud['author'], ud['definition'], ud['example'])
+            update.message.reply_text(reply_text, parse_mode='HTML')
+        else:
+            update.message.reply_text("Term not found")        
 
 __help__ = """
  - /id: get the current group id. If used by replying to a message, gets that user's id.
@@ -617,6 +631,7 @@ dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
 dispatcher.add_handler(ECHO_HANDLER)
 dispatcher.add_handler(SHRUG_HANDLER)
+dispatcher.add_handler(CommandHandler('ud', ud, pass_args=True))
 dispatcher.add_handler(MD_HELP_HANDLER)
 dispatcher.add_handler(STATS_HANDLER)
 dispatcher.add_handler(GDPR_HANDLER)
