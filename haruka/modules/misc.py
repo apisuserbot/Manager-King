@@ -4,7 +4,6 @@ import json
 import random
 import time
 import pyowm
-import wikipedia
 import re
 from pyowm import timeutils, exceptions
 from datetime import datetime
@@ -580,7 +579,6 @@ __help__ = """
  - /ud: Type the word or expression you want to search. For example /ud Gay
  - /removebotkeyboard: Got a nasty bot keyboard stuck in your group?
  - /exec <language> <code> [/stdin <stdin>]: Execute a code in a specified language. Send an empty command to get the supported languages.
- - /wiki <keywords>: Get wikipedia articles just using this bot!
  - /shrug: try and check it out yourself.
  - /bot: try and check it out yourself.
  - /time <place>: gives the local time at the given place.
@@ -614,7 +612,6 @@ EXECUTE_HANDLER = CommandHandler("exec", execute, pass_args=True, filters=Custom
 PASTE_HANDLER = DisableAbleCommandHandler("paste", paste, pass_args=True)
 GET_PASTE_HANDLER = DisableAbleCommandHandler("getpaste", get_paste_content, pass_args=True)
 PASTE_STATS_HANDLER = DisableAbleCommandHandler("pastestats", get_paste_stats, pass_args=True)
-WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
 
 
 dispatcher.add_handler(PASTE_HANDLER)
@@ -639,4 +636,3 @@ dispatcher.add_handler(LYRICS_HANDLER)
 dispatcher.add_handler(REPO_HANDLER)
 dispatcher.add_handler(DisableAbleCommandHandler("removebotkeyboard", reply_keyboard_remove))
 dispatcher.add_handler(EXECUTE_HANDLER)
-dispatcher.add_handler(WIKI_HANDLER)
