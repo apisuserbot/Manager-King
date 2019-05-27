@@ -38,12 +38,6 @@ BOT_STRINGS = (
     "ｷﾀﾜァ*･゜ﾟ･*:.｡..｡.:*･゜(n‘∀‘)ηﾟ･*:.｡. .｡.:*･゜ﾟ･* !!!!! oh my god i'm a Bot!!!",
 )    
 
-
-@run_async
-def insults(bot: Bot, update: Update):
-    chat = update.effective_chat  # type: Optional[Chat]
-    text = random.choice(tld(chat.id, "INSULTS-K"))
-    update.effective_message.reply_text(text)
     
 @run_async
 def bot(bot: Bot, update: Update):
@@ -564,7 +558,6 @@ def shrug(bot: Bot, update: Update):
 __help__ = """
  - /id: get the current group id. If used by replying to a message, gets that user's id.
  - /runs: reply a random string from an array of replies.
- - /insults: reply a random string from an array of replies.
  - /slap: slap a user, or get slapped if not a reply.
  - /info: get information about a user.
  - /gdpr: deletes your information from the bot's database. Private chats only.
@@ -593,7 +586,6 @@ PING_HANDLER = DisableAbleCommandHandler("ping", ping, admin_ok=True)
 LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, pass_args=True, admin_ok=True)
 
 
-INSULTS_HANDLER = DisableAbleCommandHandler("insults", insults, admin_ok=True)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs, admin_ok=True)
 BOT_HANDLER = DisableAbleCommandHandler("bot", bot, admin_ok=True)
 SHRUG_HANDLER = DisableAbleCommandHandler("shrug", shrug, admin_ok=True)
@@ -619,7 +611,6 @@ dispatcher.add_handler(TIME_HANDLER)
 dispatcher.add_handler(GET_PASTE_HANDLER)
 dispatcher.add_handler(PASTE_STATS_HANDLER)
 dispatcher.add_handler(ID_HANDLER)
-dispatcher.add_handler(INSULTS_HANDLER)
 dispatcher.add_handler(RUNS_HANDLER)
 dispatcher.add_handler(BOT_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
