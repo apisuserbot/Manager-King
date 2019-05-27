@@ -477,7 +477,8 @@ def fed_ban(bot: Bot, update: Update, args: List[str]):
                                    mention_html(user_chat.id, user_chat.first_name),
                                                 user_chat.id, reason), 
             html=True)
-
+    text13 = f"Chu {ok123} Sucessfully Fbanned in {ok1234}."
+    update.effective_message.reply_text(text13, parse_mode=ParseMode.HTML)
 
 @run_async
 def unfban(bot: Bot, update: Update, args: List[str]):
