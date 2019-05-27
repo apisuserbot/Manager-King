@@ -143,7 +143,7 @@ Also Join [PrimeFlix Group](https://t.me/primeflixgroup) ( @Primeflixgroup ) if 
 Join [PrimeFlix Channel](https://t.me/primeflix) ( @Primeflix ) for amazing Stuff.\n\n\
 Special Thanks to @peaktogoo & His Bot @HarukaAyaBot 🙂\n\n\
 My Souce Available Here [Source](https://github.com/Prakasaka/HarukaAya)\n\n\
-Want to add me to your group? [Click here!](t.me/TheThuggBot?startgroup=true)\n\n\"
+Want to add me to your group? [Click here!](t.me/TheThuggBot?startgroup=true)"
 
     keyboard = [[InlineKeyboardButton(text="Crabinz Group", url="https://t.me/CraBinz")]]
     keyboard += [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
