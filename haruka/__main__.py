@@ -142,8 +142,7 @@ Click Help button to find out more about how to use me to my full potential.\n\n
 Also Join [PrimeFlix Group](https://t.me/primeflixgroup) ( @Primeflixgroup ) if you Want Free Accounts Like, Netflix, Spotify etc.\n\n\
 Join [PrimeFlix Channel](https://t.me/primeflix) ( @Primeflix ) for amazing Stuff.\n\n\
 Special Thanks to @peaktogoo & His Bot @HarukaAyaBot 🙂\n\n\
-Want to add me to your group? [Click here!](t.me/TheThuggBot?startgroup=true)
-    text += ""
+Want to add me to your group? [Click here!](t.me/TheThuggBot?startgroup=true)"
 
     keyboard = [[InlineKeyboardButton(text="Crabinz Group", url="https://t.me/CraBinz")]]
     keyboard += [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
