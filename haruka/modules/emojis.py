@@ -132,6 +132,7 @@ CRYMOJI_HANDLER = DisableAbleCommandHandler("crymoji", crymoji)
 CRYMOJI_ALIAS_HANDLER = DisableAbleCommandHandler("😭", crymoji)
 BMOJI_HANDLER = DisableAbleCommandHandler("🅱️", bmoji)
 BMOJI_ALIAS_HANDLER = DisableAbleCommandHandler("bmoji", bmoji)
+SHOUT_HANDLER = DisableAbleCommandHandler("shout", shout)
 
 dispatcher.add_handler(SHOUT_HANDLER)
 dispatcher.add_handler(COPYPASTA_HANDLER)
