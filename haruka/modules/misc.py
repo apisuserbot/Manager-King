@@ -445,14 +445,6 @@ def get_paste_stats(bot: Bot, update: Update, args: List[str]):
 
 
 @run_async
-def ud(bot: Bot, update: Update):
-  message = update.effective_message
-  text = message.text[len('/ud '):]
-  results = get(f'http://api.urbandictionary.com/v0/define?term={text}').json()
-  reply_text = f'Word: {text}\nDefinition: {results["list"][0]["definition"]}'
-  message.reply_text(reply_text)
-
-
 def execute(bot: Bot, update: Update, args: List[str]):
 
     message = update.effective_message
@@ -513,8 +505,6 @@ __help__ = """
  - /slap: slap a user, or get slapped if not a reply.
  - /info: get information about a user.
  - /gdpr: deletes your information from the bot's database. Private chats only.
- - /stickerid: reply to a sticker to me to tell you its file ID.
- - /getsticker: reply to a sticker to me to upload its raw PNG file.
  - /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats.
 
  - /git: Returns info about a GitHub user or organization.
@@ -554,11 +544,9 @@ EXECUTE_HANDLER = CommandHandler("exec", execute, pass_args=True, filters=Custom
 PASTE_HANDLER = DisableAbleCommandHandler("paste", paste, pass_args=True)
 GET_PASTE_HANDLER = DisableAbleCommandHandler("getpaste", get_paste_content, pass_args=True)
 PASTE_STATS_HANDLER = DisableAbleCommandHandler("pastestats", get_paste_stats, pass_args=True)
-UD_HANDLER = DisableAbleCommandHandler("ud", ud)
 WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
 
 
-dispatcher.add_handler(UD_HANDLER)
 dispatcher.add_handler(PASTE_HANDLER)
 dispatcher.add_handler(GET_PASTE_HANDLER)
 dispatcher.add_handler(PASTE_STATS_HANDLER)
