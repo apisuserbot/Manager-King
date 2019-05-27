@@ -34,12 +34,21 @@ from haruka.modules.translations.strings import tld
 
 from requests import get
 
+BOT_STRINGS = (
+    "ｷﾀﾜァ*･゜ﾟ･*:.｡..｡.:*･゜(n‘∀‘)ηﾟ･*:.｡. .｡.:*･゜ﾟ･* !!!!! oh my god i'm a Bot!!!",
+)    
+
 
 @run_async
 def insults(bot: Bot, update: Update):
     chat = update.effective_chat  # type: Optional[Chat]
     text = random.choice(tld(chat.id, "INSULTS-K"))
     update.effective_message.reply_text(text)
+    
+@run_async
+def bot(bot: Bot, update: Update):
+    bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
+    update.effective_message.reply_text(random.choice(BOT_STRINGS))     
 
 
 @run_async
@@ -496,7 +505,61 @@ def wiki(bot: Bot, update: Update):
             update.effective_message.reply_text(f"⚠ Error: {e}")
         except BadRequest as et :
             update.effective_message.reply_text(f"⚠ Error: {et}")
+            
+@run_async
+def get_time(bot: Bot, update: Update, args: List[str]):
+    if len(args) == 0:
+        update.effective_message.reply_text("Write a location to check the time.")
+        return
 
+    location = " ".join(args)
+    if location.lower() == bot.first_name.lower():
+        update.effective_message.reply_text("Its always banhammer time for me!")
+        bot.send_sticker(update.effective_chat.id, BAN_STICKER)
+        return
+
+    res = requests.get(GMAPS_LOC, params=dict(address=location))
+
+    if res.status_code == 200:
+        loc = json.loads(res.text)
+        if loc.get('status') == 'OK':
+            bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
+            lat = loc['results'][0]['geometry']['location']['lat']
+            long = loc['results'][0]['geometry']['location']['lng']
+
+            country = None
+            city = None
+
+            address_parts = loc['results'][0]['address_components']
+            for part in address_parts:
+                if 'country' in part['types']:
+                    country = part.get('long_name')
+                if 'administrative_area_level_1' in part['types'] and not city:
+                    city = part.get('long_name')
+                if 'locality' in part['types']:
+                    city = part.get('long_name')
+
+            if city and country:
+                location = "{}, {}".format(city, country)
+            elif country:
+                location = country
+
+            timenow = int(datetime.utcnow().timestamp())
+            res = requests.get(GMAPS_TIME, params=dict(location="{},{}".format(lat, long), timestamp=timenow))
+            if res.status_code == 200:
+                offset = json.loads(res.text)['dstOffset']
+                timestamp = json.loads(res.text)['rawOffset']
+                time_there = datetime.fromtimestamp(timenow + timestamp + offset).strftime("%H:%M:%S on %A %d %B")
+                update.message.reply_text("It's {} in {}".format(time_there, location))
+            
+@run_async
+def shrug(bot: Bot, update: Update):
+    default_msg = "¯\_(ツ)_/¯"
+    message = update.effective_message
+    if message.reply_to_message:
+        message.reply_to_message.reply_text(default_msg)
+    else:
+        message.reply_text(default_msg)
 
 __help__ = """
  - /id: get the current group id. If used by replying to a message, gets that user's id.
@@ -517,11 +580,15 @@ __help__ = """
  - /removebotkeyboard: Got a nasty bot keyboard stuck in your group?
  - /exec <language> <code> [/stdin <stdin>]: Execute a code in a specified language. Send an empty command to get the supported languages.
  - /wiki <keywords>: Get wikipedia articles just using this bot!
+ - /shrug: try and check it out yourself.
+ - /bot: try and check it out yourself.
+ - /time <place>: gives the local time at the given place.
 """
 
 __mod_name__ = "Misc"
 
 ID_HANDLER = DisableAbleCommandHandler("id", get_id, pass_args=True, admin_ok=True)
+TIME_HANDLER = CommandHandler("time", get_time, pass_args=True)
 PING_HANDLER = DisableAbleCommandHandler("ping", ping, admin_ok=True)
 #GOOGLE_HANDLER = DisableAbleCommandHandler("google", google)
 LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, pass_args=True, admin_ok=True)
@@ -529,6 +596,7 @@ LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, pass_args=True, adm
 
 INSULTS_HANDLER = DisableAbleCommandHandler("insults", insults, admin_ok=True)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs, admin_ok=True)
+BOT_HANDLER = DisableAbleCommandHandler("bot", bot, admin_ok=True)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True, admin_ok=True)
 INFO_HANDLER = DisableAbleCommandHandler("info", info, pass_args=True, admin_ok=True)
 GITHUB_HANDLER = DisableAbleCommandHandler("git", github, admin_ok=True)
@@ -548,11 +616,13 @@ WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
 
 
 dispatcher.add_handler(PASTE_HANDLER)
+dispatcher.add_handler(TIME_HANDLER)
 dispatcher.add_handler(GET_PASTE_HANDLER)
 dispatcher.add_handler(PASTE_STATS_HANDLER)
 dispatcher.add_handler(ID_HANDLER)
 dispatcher.add_handler(INSULTS_HANDLER)
 dispatcher.add_handler(RUNS_HANDLER)
+dispatcher.add_handler(BOT_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
 dispatcher.add_handler(ECHO_HANDLER)
