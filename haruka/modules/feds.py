@@ -156,10 +156,18 @@ def join_fed(bot: Bot, update: Update, args: List[str]):
         return
 
     if len(args) >= 1:
-        sql.chat_join_fed(args[0], chat.id)
+        fedd = args[0]
+        print(fedd)
+        if sql.search_fed_by_id(fedd) == False:
+            message.reply_text(tld(chat.id, "Please enter valid federation id."))
+            return
+
+        x = sql.chat_join_fed(fedd, chat.id)
+        if not x:
+                message.reply_text(tld(chat.id, "Failed to join to federation! Due to some errors that basically I have no idea, try reporting it in support group!"))
+                return
+
         message.reply_text(tld(chat.id, "Chat joined to federation!"))
-
-
 def leave_fed(bot: Bot, update: Update, args: List[str]):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
