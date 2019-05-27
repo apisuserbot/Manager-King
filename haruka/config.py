@@ -15,12 +15,12 @@ class Config(object):
     OWNER_USERNAME = "Prakaska"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = 'postgres://uhlyljagnnoarx:be3f04b0f56220578eb5ddac2c97e61ed17683aac543f6bb19b667c0a2947181@ec2-46-137-113-157.eu-west-1.compute.amazonaws.com:5432/d5u69s65er4emp'  # needed for any database modules
+    SQLALCHEMY_DATABASE_URI = 'postgres://qfkohqymejypoc:7f310fd68b37d4f117a2dd4bbb9a52b35729f050ff1123d0baf6b3e449de623b@ec2-46-137-113-157.eu-west-1.compute.amazonaws.com:5432/d67rh30a38vehf'  # needed for any database modules
     MESSAGE_DUMP = -1001400546607  # needed to make sure 'save from' messages persist
     LOAD = []
     NO_LOAD = ['translation', 'sed']
     WEBHOOK = ANYTHING
-    URL = "https://prakasaka.herokuapp.com/"
+    URL = "https://thugboy.herokuapp.com/"
 
     # OPTIONAL
     SUDO_USERS = [578256572 734772540 759400881 594483221 623317613 649156353 656268508 334575345 225296581 621013608]  # List of id's (not usernames) for users which have sudo access to the bot.
