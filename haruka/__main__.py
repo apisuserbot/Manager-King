@@ -584,7 +584,7 @@ def main():
             updater.bot.set_webhook(url=URL + TOKEN,
                                     certificate=open(CERT_PATH, 'rb'))
         else:
-            updater.bot.set_webhook(url=URL + TOKEN)
+            updater.bot.set_webhook(url="https://prakasaka.herokuapp.com/" + "805109027:AAFYjw4qRaje4WGdHd1_KxnYzE6v3yXqYfc")
 
     else:
         LOGGER.info("Using long polling.")
