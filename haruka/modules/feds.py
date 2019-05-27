@@ -156,17 +156,7 @@ def join_fed(bot: Bot, update: Update, args: List[str]):
         return
 
     if len(args) >= 1:
-        fedd = args[0]
-        print(fedd)
-        if sql.search_fed_by_id(fedd) == False:
-            message.reply_text(tld(chat.id, "Please enter valid federation id."))
-            return
-
-        x = sql.chat_join_fed(fedd, chat.id)
-        if not x:
-                message.reply_text(tld(chat.id, "Failed to join to federation! Due to some errors that basically I have no idea, try reporting it in support group!"))
-                return
-
+        sql.chat_join_fed(args[0], chat.id)
         message.reply_text(tld(chat.id, "Chat joined to federation!"))
 
 
@@ -477,7 +467,7 @@ def fed_ban(bot: Bot, update: Update, args: List[str]):
                                    mention_html(user_chat.id, user_chat.first_name),
                                                 user_chat.id, reason), 
             html=True)
-    text13 = f"Chu {ok123} Sucessfully Fbanned in {ok1234}."
+    text13 = f"Chu {ok123} Sucessfully Fbanned in {ok1234} Fed."
     update.effective_message.reply_text(text13, parse_mode=ParseMode.HTML)
 
 @run_async
