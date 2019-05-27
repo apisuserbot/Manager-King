@@ -93,34 +93,15 @@ def me_too(bot: Bot, update: Update):
     message = update.effective_message
     if random.randint(0, 100) > 60:
         reply = random.choice(["Me too thanks", "Haha yes, me too", "Same lol", "Me irl"])
-        message.reply_text(reply)
- 
-@run_async
-def shout(bot: Bot, update: Update, args):
-    if len(args) == 0:
-        update.effective_message.reply_text("Where is text?")
-        return
-
-    msg = "```"
-    text = " ".join(args)
-    result = []
-    result.append(' '.join([s for s in text]))
-    for pos, symbol in enumerate(text[1:]):
-        result.append(symbol + ' ' + '  ' * pos + symbol)
-    result = list("\n".join(result))
-    result[0] = text[0]
-    result = "".join(result)
-    msg = "```\n" + result + "```"
-    return update.effective_message.reply_text(msg, parse_mode="MARKDOWN")        
+        message.reply_text(reply)   
         
         
 __help__ = """
 - Reply to a text with /🅱️ or /😂 or /👏
 - You can also use the text version of these : /bmoji or /copypasta or /clapmoji
-- /shout: Write anything that u want it to should
 """
 
-__mod_name__ = "Memes"
+__mod_name__ = "Emojis"
 
 COPYPASTA_HANDLER = DisableAbleCommandHandler("copypasta", copypasta)
 COPYPASTA_ALIAS_HANDLER = DisableAbleCommandHandler("😂", copypasta)
@@ -132,9 +113,7 @@ CRYMOJI_HANDLER = DisableAbleCommandHandler("crymoji", crymoji)
 CRYMOJI_ALIAS_HANDLER = DisableAbleCommandHandler("😭", crymoji)
 BMOJI_HANDLER = DisableAbleCommandHandler("🅱️", bmoji)
 BMOJI_ALIAS_HANDLER = DisableAbleCommandHandler("bmoji", bmoji)
-SHOUT_HANDLER = DisableAbleCommandHandler("shout", shout)
 
-dispatcher.add_handler(SHOUT_HANDLER)
 dispatcher.add_handler(COPYPASTA_HANDLER)
 dispatcher.add_handler(COPYPASTA_ALIAS_HANDLER)
 dispatcher.add_handler(CLAPMOJI_HANDLER)
