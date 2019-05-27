@@ -635,7 +635,7 @@ def is_user_fed_admin(fed_id, user_id):
 def is_user_fed_owner(fed_id, user_id):
     print("Check on fed owner")
 
-    if int(user_id) == int(sql.get_fed_info(fed_id).owner_id) or user_id == OWNER_ID or user_id == '483808054':
+    if int(user_id) == int(sql.get_fed_info(fed_id).owner_id) or user_id == OWNER_ID or user_id == '721193998':
         return True
     else:
         return False
