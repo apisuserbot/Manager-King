@@ -42,17 +42,24 @@ BOT_STRINGS = (
 RAPE_STRINGS = (
      "Rape Done Drink The Cum",
      "The user has been successfully raped",
-     "Dekho Bhaiyya esa hai! Izzat bachailo apni warna Gaand faad denge tumhari",
-     "Relax your Rear,ders nothing to fear,The Rape train is finally here",
+     "Dekho Bhaiyya esa hai! Izzat bachailo apni warna Gaand maar lenge tumhari",
+     "Relax your Rear, ders nothing to fear,The Rape train is finally here",
      "Dont Rape Too much Bsdk.",
      "Rape coming... Raped! haha :p",
-     "Lodu Andha hai kya Yaha tera rape ho raha hai aur tu abhi tak yahi hai lulz",
+     "Lodu Andha hai kya Yaha tera rape ho raha hai aur tu abhi tak yahi gaand mara raha hai lulz",
 )    
     
     
 @run_async
 def bot(bot: Bot, update: Update):
     update.effective_message.reply_text(random.choice(BOT_STRINGS))
+    
+
+@run_async
+def pubg(bot: Bot, update: Update):
+    # reply to correct message
+    reply_text = update.effective_message.reply_to_message.reply_text if update.effective_message.reply_to_message else update.effective_message.reply_text
+    reply_text("PUBG Chutiyo ka Game! Be lyk moi Use Tik-Tok and become Chakka")
     
     
 @run_async
@@ -623,6 +630,7 @@ RUNS_HANDLER = DisableAbleCommandHandler("runs", runs, admin_ok=True)
 BOT_HANDLER = DisableAbleCommandHandler("bot", bot, admin_ok=True)
 RAPE_HANDLER = DisableAbleCommandHandler("rape", rape, admin_ok=True)
 SHRUG_HANDLER = DisableAbleCommandHandler("shrug", shrug, admin_ok=True)
+PUBG_HANDLER = DisableAbleCommandHandler("pubg", pubg, admin_ok=True)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True, admin_ok=True)
 INFO_HANDLER = DisableAbleCommandHandler("info", info, pass_args=True, admin_ok=True)
 GITHUB_HANDLER = DisableAbleCommandHandler("git", github, admin_ok=True)
@@ -647,6 +655,7 @@ dispatcher.add_handler(PASTE_STATS_HANDLER)
 dispatcher.add_handler(ID_HANDLER)
 dispatcher.add_handler(RUNS_HANDLER)
 dispatcher.add_handler(BOT_HANDLER)
+dispatcher.add_handler(PUBG_HANDLER)
 dispatcher.add_handler(RAPE_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
