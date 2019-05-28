@@ -124,7 +124,7 @@ def kang(bot: Bot, update: Update, args: List[str]):
 def makepack_internal(msg, user, png_sticker, emoji, bot):
     name = user.first_name
     name = name[:50]
-    packname = f"c{user.id}_by_{bot.username}"
+    packname = f"{user.id}'s Stickers Pack"
     try:
         success = bot.create_new_sticker_set(user.id, packname, name + "'s Stickers Pack",
                                              png_sticker=png_sticker,
