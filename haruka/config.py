@@ -10,7 +10,7 @@ class Config(object):
     LOGGER = True
 
     # REQUIRED
-    API_KEY = "700762897:AAFQxNdc5CnO8JTQGYMUOsdCaMVUFXsxf1w"
+    API_KEY = ""
     OWNER_ID = "721198993"  # If you dont know, run the bot and do /id in your private chat with it
     OWNER_USERNAME = "Prakaska"
 
@@ -20,7 +20,7 @@ class Config(object):
     LOAD = []
     NO_LOAD = ['translation', 'sed']
     WEBHOOK = ANYTHING
-    URL = "https://thugboy.herokuapp.com/"
+    URL = "https://prakasaka.herokuapp.com/"
 
     # OPTIONAL
     SUDO_USERS = [578256572 734772540 759400881 594483221 623317613 649156353 656268508 334575345 225296581 621013608]  # List of id's (not usernames) for users which have sudo access to the bot.
@@ -36,7 +36,7 @@ class Config(object):
     STRICT_GBAN = True
     STRICT_GMUTE = True
     ALLOW_EXCL = True  # Allow ! commands as well as /
-    API_OPENWEATHER = 'ed529683f29bb1bfe7a0392b81e37ff8' # OpenWeather API
+    API_OPENWEATHER = '' # OpenWeather API
 
     # MEMES
     DEEPFRY_TOKEN = None
