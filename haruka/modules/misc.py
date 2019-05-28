@@ -561,11 +561,12 @@ def ud(bot: Bot, update: Update, args):
             update.message.reply_text("USAGE: /ud <Word>")
         elif len(ud_reply) != 0:
             ud = ud_reply[0]
-            reply_text = "<b>Text:{0}</b>\n<i>By {2}</i>\n\nDefinition: {3}\n\nExample: {4}".format(
-                ud['word'], ud['author'], ud['definition'], ud['example'])
+            reply_text = "<b>{0}</b>\n<a href='{1}'>{1}</a>\n<i>By {2}</i>\n\nDefinition: {3}\n\nExample: {4}".format(
+                ud['word'], ud['permalink'], ud['author'], ud['definition'], ud['example'])
             update.message.reply_text(reply_text, parse_mode='HTML')
         else:
             update.message.reply_text("Term not found")
+
 
        
 
