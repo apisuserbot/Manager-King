@@ -570,15 +570,6 @@ def shrug(bot: Bot, update: Update):
     else:
         message.reply_text(default_msg)
         
-def rape(bot: Bot, update: Update):
-        r = randint(1, 100)
-        if r <= 65:
-            update.message.reply_text("Relax your Rear,ders nothing to fear,The Rape train is finally here")
-        elif r <= 90:
-            update.message.reply_text("Dont Rape Too much Bsdk.")
-        else:
-            update.message.reply_text("Rape coming... Raped! haha :p ")
-        
         
 def ud(bot: Bot, update: Update, args):
         term = ' '.join(args)
@@ -662,7 +653,6 @@ dispatcher.add_handler(INFO_HANDLER)
 dispatcher.add_handler(ECHO_HANDLER)
 dispatcher.add_handler(SHRUG_HANDLER)
 dispatcher.add_handler(CommandHandler('ud', ud, pass_args=True))
-dispatcher.add_handler(CommandHandler('rape', rape))
 dispatcher.add_handler(MD_HELP_HANDLER)
 dispatcher.add_handler(STATS_HANDLER)
 dispatcher.add_handler(GDPR_HANDLER)
