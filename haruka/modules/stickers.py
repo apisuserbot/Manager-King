@@ -1,5 +1,6 @@
 import os
 import math
+import hashlib
 import requests
 import urllib.request as urllib
 from urllib.error import URLError, HTTPError
@@ -124,7 +125,8 @@ def kang(bot: Bot, update: Update, args: List[str]):
 def makepack_internal(msg, user, png_sticker, emoji, bot):
     name = user.first_name
     name = name[:50]
-    packname = f"{user.id}'s Stickers Pack"
+    hash = hashlib.sha1(bytearray(user.id)).hexdigest()
+    packname = f"a{hash[:20]}_by_{bot.username}"
     try:
         success = bot.create_new_sticker_set(user.id, packname, name + "'s Stickers Pack",
                                              png_sticker=png_sticker,
