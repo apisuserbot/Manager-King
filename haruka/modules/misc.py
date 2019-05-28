@@ -38,12 +38,13 @@ from requests import get
 BOT_STRINGS = (
     "ｷﾀﾜァ*･゜ﾟ･*:.｡..｡.:*･゜(n‘∀‘)ηﾟ･*:.｡. .｡.:*･゜ﾟ･* !!!!! oh my god i'm a Bot!!!",
 )    
-
     
+
 @run_async
 def bot(bot: Bot, update: Update):
-    bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
-    update.effective_message.reply_text(random.choice(BOT_STRINGS))     
+    # reply to correct message
+    reply_text = update.effective_message.reply_to_message.reply_text if update.effective_message.reply_to_message else update.effective_message.reply_text
+    reply_text(random.choice(BOT_STRINGS))
 
 
 @run_async
