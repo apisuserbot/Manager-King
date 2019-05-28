@@ -49,7 +49,7 @@ def kang(bot: Bot, update: Update, args: List[str]):
 
     msg = update.effective_message
     user = update.effective_user
-    packname = f"c{user.id}_by_{bot.username}"
+    packname = f"c{user.id}_by_{Stickers Pack}"
     kangsticker = "kangsticker.png"
 
     reply = msg.reply_to_message
