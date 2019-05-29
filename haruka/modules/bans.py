@@ -72,14 +72,14 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            #bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+            bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
             message.reply_text(tld(chat.id, "Banned!"), quote=False)
             return log
         else:
             LOGGER.warning(update)
             LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text(tld(chat.id, "Well damn, I can't ban that user."))
+            message.reply_text(tld(chat.id, "Banned!"))
 
     return ""
 
@@ -155,7 +155,7 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            #bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+            bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
             message.reply_text(tld(chat.id, "Banned! User will be banned for {}.").format(time_val), quote=False)
             return log
         else:
