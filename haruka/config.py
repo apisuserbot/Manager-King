@@ -16,7 +16,7 @@ class Config(object):
 
     # RECOMMENDED
     SQLALCHEMY_DATABASE_URI = ''  # needed for any database modules
-    MESSAGE_DUMP = -1001326118005  # needed to make sure 'save from' messages persist
+    MESSAGE_DUMP = # needed to make sure 'save from' messages persist
     LOAD = []
     NO_LOAD = ['translation', 'sed']
     WEBHOOK = ANYTHING
