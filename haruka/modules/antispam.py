@@ -92,8 +92,12 @@ def gban(bot: Bot, update: Update, args: List[str]):
             message.reply_text("This user is already gbanned, but had no reason set; I've gone and updated it!")
 
         return
+    
+    ok123 = mention_html(user_chat.id, user_chat.first_name)
 
-    message.reply_text("*Summoning the ban axe* 😉")
+
+    text12 = f"Summoning the ban axe on Chu {ok123} 😉."
+    update.effective_message.reply_text(text12, parse_mode=ParseMode.HTML)
 
     banner = update.effective_user  # type: Optional[User]
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
@@ -134,7 +138,8 @@ def gban(bot: Bot, update: Update, args: List[str]):
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
                    "{} has been successfully gbanned!".format(mention_html(user_chat.id, user_chat.first_name)),
                    html=True)
-    message.reply_text("Person has been \"Dealt with\".")
+    text13 = f"Chu {ok123} has been Dealt with 😈."
+    update.effective_message.reply_text(text12, parse_mode=ParseMode.HTML)
 
 
 @run_async
