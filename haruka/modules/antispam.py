@@ -139,7 +139,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
                    "{} has been successfully gbanned!".format(mention_html(user_chat.id, user_chat.first_name)),
                    html=True)
     text13 = f"Chu {ok123} has been Dealt with 😈."
-    update.effective_message.reply_text(text12, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_text(text13, parse_mode=ParseMode.HTML)
 
 
 @run_async
