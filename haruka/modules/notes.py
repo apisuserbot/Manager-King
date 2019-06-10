@@ -114,7 +114,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
                     sql.rm_note(chat_id, notename)
                 else:
                     message.reply_text("This note could not be sent, as it is incorrectly formatted. Ask in "
-                                       "@HarukaAyaGroup if you can't figure out why!")
+                                       "@CraBinz if you can't figure out why!")
                     LOGGER.exception("Could not parse message #%s in chat %s", notename, str(chat_id))
                     LOGGER.warning("Message was: %s", str(note.value))
         return
@@ -129,7 +129,7 @@ def cmd_get(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         get(bot, update, args[0], show_none=True)
     else:
-        update.effective_message.reply_text(tld(update.effective_chat.id, "Get rekt"))
+        update.effective_message.reply_text(tld(update.effective_chat.id, "Muh Me Lega ?"))
 
 
 @run_async
