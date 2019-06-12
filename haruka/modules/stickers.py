@@ -49,7 +49,7 @@ def kang(bot: Bot, update: Update, args: List[str]):
 
     msg = update.effective_message
     user = update.effective_user
-    packname = f"c{user.id}_by_{bot.username}"
+    packname = f"c{user.id}_by_{Stickers}"
     kangsticker = "kangsticker.png"
 
     reply = msg.reply_to_message
@@ -124,7 +124,7 @@ def kang(bot: Bot, update: Update, args: List[str]):
 def makepack_internal(msg, user, png_sticker, emoji, bot):
     name = user.first_name
     name = name[:50]
-    packname = f"c{user.id}_by_{bot.username}"
+    packname = f"c{user.id}_by_{Stickers}"
     try:
         success = bot.create_new_sticker_set(user.id, packname, name + "'s Stickers pack",
                                              png_sticker=png_sticker,
@@ -136,7 +136,7 @@ def makepack_internal(msg, user, png_sticker, emoji, bot):
                            parse_mode=ParseMode.MARKDOWN)
         elif e.message == "Peer_id_invalid":
             msg.reply_text("I need you to PM to me first to able to gain your basic information.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
-                text="PM the bot", url=f"t.me/{bot.username}")]]))
+                text="PM the bot", url=f"t.me/{Stickers}")]]))
         return
 
     if success:
