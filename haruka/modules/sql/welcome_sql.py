@@ -181,6 +181,17 @@ def get_clean_pref(chat_id):
     return False
 
 
+
+def get_cmd_pref(chat_id):
+    welc = SESSION.query(Welcome).get(str(chat_id))
+    SESSION.close()
+
+    if welc:
+        return welc.del_commands
+
+    return False
+
+
 def set_welc_preference(chat_id, should_welcome):
     with INSERTION_LOCK:
         curr = SESSION.query(Welcome).get(str(chat_id))
