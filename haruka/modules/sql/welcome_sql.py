@@ -23,6 +23,9 @@ class Welcome(BASE):
     leave_type = Column(Integer, default=Types.TEXT.value)
 
     clean_welcome = Column(BigInteger)
+    del_joined = Column(BigInteger)
+    del_commands = Column(BigInteger)
+
 
     def __init__(self, chat_id, should_welcome=True, should_goodbye=True):
         self.chat_id = chat_id
