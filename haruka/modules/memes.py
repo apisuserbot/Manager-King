@@ -268,7 +268,7 @@ def deepfryer(bot: Bot, update: Update):
         image = Image.open("sticker.png")
 
     # the following needs to be executed async (because dumb lib)
-    loop = asyncio.new_event_loop()
+    loop = asyncio.new_event_loop()token=os.getenv('DEEPFRY_TOKEN', ''),
     loop.run_until_complete(process_deepfry(image, message.reply_to_message, bot))
     loop.close()
 
@@ -277,7 +277,7 @@ async def process_deepfry(image: Image, reply: Message, bot: Bot):
     # DEEPFRY IT
     image = await deepfry(
         img=image,
-        token=DEEPFRY_TOKEN,
+        token=os.getenv('DEEPFRY_TOKEN', ''),
         url_base='westeurope'
     )
 
