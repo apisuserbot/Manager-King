@@ -22,3 +22,4 @@ hurry.filesize
 #translator
 beautifulsoup4==4.6.3
 tldextract
+wikipedia
