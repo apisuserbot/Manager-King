@@ -19,6 +19,6 @@ Pillow>=4.2.0
 PyLyrics
 #AEX
 hurry.filesize
-translator_py
+py_translator
 beautifulsoup4==4.6.3
 tldextract
