@@ -84,6 +84,6 @@ __help__ = """
 
 __mod_name__ = "Insults"
 
-INSULT_HANDLER = CommandHandler("insult", insult, filters=Filters.user(OWNER_ID))
+INSULT_HANDLER = DisableAbleCommandHandler("insult", insult)
 
 dispatcher.add_handler(INSULT_HANDLER)
