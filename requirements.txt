@@ -23,3 +23,5 @@ hurry.filesize
 beautifulsoup4==4.6.3
 tldextract
 wikipedia
+googletrans
+alphabet_detector
