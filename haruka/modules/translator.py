@@ -1,5 +1,5 @@
 from typing import Optional, List
-
+import emoji
 
 from telegram import Message, Update, Bot, User
 from telegram import MessageEntity
