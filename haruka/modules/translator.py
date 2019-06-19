@@ -1,5 +1,5 @@
 from typing import Optional, List
-from emoji import Translator
+
 
 from telegram import Message, Update, Bot, User
 from telegram import MessageEntity
@@ -8,7 +8,7 @@ from telegram.ext import Filters, MessageHandler, run_async
 from haruka import dispatcher, LOGGER
 from haruka.modules.disable import DisableAbleCommandHandler
 
-from googletrans import Translator
+from googletrans import Translator, emoji
 
 
 @run_async
