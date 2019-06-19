@@ -1,5 +1,4 @@
 from typing import Optional, List
-import emoji
 
 from telegram import Message, Update, Bot, User
 from telegram import MessageEntity
@@ -23,8 +22,7 @@ def do_translate(bot: Bot, update: Update, args: List[str]):
         src_lang = translated.src
         translated_text = translated.text
         msg.reply_text("Translated from {} to {}.\n {}".format(src_lang, lan, translated_text))
-    except :
-        emoji_text = emoji.demojize(text.strip())
+    except:
         msg.reply_text("Error")
 
 
