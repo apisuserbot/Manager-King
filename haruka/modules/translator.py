@@ -24,7 +24,7 @@ def do_translate(bot: Bot, update: Update, args: List[str]):
         translated_text = translated.text
         msg.reply_text("Translated from {} to {}.\n {}".format(src_lang, lan, translated_text))
     except :
-        text = emoji.demojize(text.strip())
+        emoji_text = emoji.demojize(text.strip())
         msg.reply_text("Error")
 
 
