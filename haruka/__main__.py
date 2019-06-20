@@ -139,7 +139,7 @@ Click Help button to find out more about how to use me to my full potential.\n\n
 
     text += "Special Thanks to @peaktogoo & His Bot @HarukaAyaBot 🙂\n\n\
 My Souce Available Here [Source](https://github.com/Prakasaka/HarukaAya)\n\n\
-Want to add me to your group? [Click here!](t.me/TheThuggBot?startgroup=true)"
+Want to add me to your group? [Click here!](t.me/TheThuggBot?startgroup=true);)"
 
    
     keyboard = [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
