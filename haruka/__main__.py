@@ -134,7 +134,7 @@ def send_start(bot, update):
         pass
 
     #chat = update.effective_chat  # type: Optional[Chat] and unused variable
-    text = "Hey there! My name is ThugBot - I'm here to help you manage your groups!\n\
+    text = "Hey {} My name is ThugBot - I'm here to help you manage your groups!\n\
 Click Help button to find out more about how to use me to my full potential.\n\n"
 
     text += "Special Thanks to @peaktogoo & His Bot @HarukaAyaBot 🙂\n\n\
