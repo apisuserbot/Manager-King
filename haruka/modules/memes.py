@@ -313,6 +313,14 @@ def shout(bot: Bot, update: Update, args):
     return update.effective_message.reply_text(msg, parse_mode="MARKDOWN")
 
 
+@run_async
+def Chutiya(bot: Bot, update: Update):
+    message = update.effective_message
+    if random.randint(0, 100) > 60:
+        reply = random.choice(["BSDK Zinda hu Sach main F Type kar raha hai 🤬"])
+        message.reply_text(reply)
+
+
 # no help string
 __help__ = """
 Some memes command, find it all out yourself!
@@ -341,6 +349,7 @@ ZALGO_HANDLER = DisableAbleCommandHandler("zalgofy", zalgotext)
 FORBES_HANDLER = DisableAbleCommandHandler("forbes", forbesify, admin_ok=True)
 DEEPFRY_HANDLER = DisableAbleCommandHandler("deepfry", deepfryer, admin_ok=True)
 SHOUT_HANDLER = DisableAbleCommandHandler("shout", shout, pass_args=True)
+CHUTIYA_HANDLER = DisableAbleRegexHandler(r"(?i)f", Chutiya, friendly="f")
 
 
 dispatcher.add_handler(MAFIA_HANDLER)
@@ -355,4 +364,5 @@ dispatcher.add_handler(FORBES_HANDLER)
 dispatcher.add_handler(DEEPFRY_HANDLER)
 dispatcher.add_handler(KIM_HANDLER)
 dispatcher.add_handler(HITLER_HANDLER)
+dispatcher.add_handler(CHUTIYA_HANDLER)
 
