@@ -317,7 +317,7 @@ def shout(bot: Bot, update: Update, args):
 def Chutiya(bot: Bot, update: Update):
     message = update.effective_message
     if random.randint(0, 100) > 60:
-        reply = random.choice(["BSDK Zinda hu Sach main F Type kar raha hai 🤬"])
+        reply = random.choice(["BSDK Zinda hu Sach main F Type kar raha hai 🤬", "BSDK Zinda hu Sach main F Type kar raha hai 🤬", "BSDK Zinda hu Sach main F Type kar raha hai 🤬", "BSDK Zinda hu Sach main F Type kar raha hai 🤬", "BSDK Zinda hu Sach main F Type kar raha hai 🤬"])
         message.reply_text(reply)
 
 
