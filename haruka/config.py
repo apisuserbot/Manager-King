@@ -15,7 +15,7 @@ class Config(object):
     OWNER_USERNAME = "Prakaska"
 
     # RECOMMENDED
-    SQLALCHEMY_DATABASE_URI = ''  # needed for any database modules
+    SQLALCHEMY_DATABASE_URI = 'postgres://tdexkzqhkojmia:d7b7a56d7c3c18bf7f6428304958b88a8342b1757773965fdb6af62072ef13df@ec2-54-247-70-127.eu-west-1.compute.amazonaws.com:5432/d3ttt3hr63j4b2'  # needed for any database modules
     MESSAGE_DUMP = # needed to make sure 'save from' messages persist
     LOAD = []
     NO_LOAD = ['translation', 'sed']
