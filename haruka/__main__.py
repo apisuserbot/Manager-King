@@ -122,7 +122,7 @@ def start(bot: Bot, update: Update, args: List[str]):
         else:
             send_start(bot, update)
     else:
-        update.effective_message.reply_text("I'm Alive 😎")
+        update.effective_message.reply_text("RIP ThugBot 😭 Type /f for Pay Respect")
 
 
 def send_start(bot, update):
@@ -137,7 +137,7 @@ def send_start(bot, update):
     text = "Hey There! I'm PrimeBoxBot - I'm here to help you manage your groups!\n\
 Click Help button to find out more about how to use me to my full potential.\n\n"
 
-
+    text += "Special Thanks To @peaktogoo and his bot @harukaayabot"
    
     keyboard = [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
     keyboard += [[InlineKeyboardButton(text="🇺🇸 Language", callback_data="set_lang_"), 
