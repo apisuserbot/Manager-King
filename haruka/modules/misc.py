@@ -39,6 +39,10 @@ BOT_STRINGS = (
     "ｷﾀﾜァ*･゜ﾟ･*:.｡..｡.:*･゜(n‘∀‘)ηﾟ･*:.｡. .｡.:*･゜ﾟ･* !!!!! oh my god i'm a Bot!!!",
 )    
 
+F_STRINGS = [
+    "BSDK Zinda hu 🤬 Sach m /f type raha hai"
+]
+
 RAPE_STRINGS = (
      "Rape Done Drink The Cum",
      "The user has been successfully raped",
@@ -53,6 +57,11 @@ RAPE_STRINGS = (
 @run_async
 def bot(bot: Bot, update: Update):
     update.effective_message.reply_text(random.choice(BOT_STRINGS))
+    
+    
+@run_async
+def f(bot: Bot, update: Update):
+    update.effective_message.reply_text(random.choice(F_STRINGS))
     
 
 @run_async
@@ -626,6 +635,7 @@ PING_HANDLER = DisableAbleCommandHandler("ping", ping, admin_ok=True)
 LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, pass_args=True, admin_ok=True)
 
 
+F_HANDLER = DisableAbleCommandHandler("f", f, admin_ok=True)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs, admin_ok=True)
 BOT_HANDLER = DisableAbleCommandHandler("bot", bot, admin_ok=True)
 RAPE_HANDLER = DisableAbleCommandHandler("rape", rape, admin_ok=True)
@@ -648,6 +658,7 @@ GET_PASTE_HANDLER = DisableAbleCommandHandler("getpaste", get_paste_content, pas
 PASTE_STATS_HANDLER = DisableAbleCommandHandler("pastestats", get_paste_stats, pass_args=True)
 
 
+dispatcher.add_handler(F_HANDLER)
 dispatcher.add_handler(PASTE_HANDLER)
 dispatcher.add_handler(TIME_HANDLER)
 dispatcher.add_handler(GET_PASTE_HANDLER)
