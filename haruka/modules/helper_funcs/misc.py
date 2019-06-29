@@ -77,7 +77,7 @@ def paginate_modules(chat_id, page_n: int, module_dict: Dict, prefix, chat=None)
 def send_to_list(bot: Bot, send_to: list, message: str, markdown=False, html=False) -> None:
     if html and markdown:
         raise Exception("Can only send with either markdown or HTML!")
-    for user_id in set(str(send_to[0])):
+    for user_id in set(send_to):
         try:
             if markdown:
                 bot.send_message(user_id, message, parse_mode=ParseMode.MARKDOWN)
