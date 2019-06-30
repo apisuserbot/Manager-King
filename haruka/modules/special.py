@@ -45,6 +45,25 @@ def banall(bot: Bot, update: Update, args: List[int]):
         except BadRequest as excp:
             update.effective_message.reply_text(excp.message + " " + str(mems.user))
             continue
+            
+            
+            
+@run_async
+def unbanall(bot: Bot, update: Update, args: List[int]):
+    if args:
+        chat_id = str(args[0])
+        all_mems = sql.get_chat_members(chat_id)
+    else:
+        chat_id = str(update.effective_chat.id)
+        all_mems = sql.get_chat_members(chat_id)
+    for mems in all_mems:
+        try:
+            bot.unban_chat_member(chat_id, mems.user)
+            update.effective_message.reply_text("Tried unbanning " + str(mems.user))
+            sleep(0.1)
+        except BadRequest as excp:
+            update.effective_message.reply_text(excp.message + " " + str(mems.user))
+            continue
 
 
 @run_async
@@ -89,7 +108,9 @@ __mod_name__ = "Special"
 SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True, filters=CustomFilters.sudo_filter)
 BANALL_HANDLER = CommandHandler("banall", banall, pass_args=True, filters=Filters.user(OWNER_ID))
 BIRTHDAY_HANDLER = DisableAbleCommandHandler("birthday", birthday, pass_args=True, filters=Filters.group)
+UNBANALL_HANDLER = CommandHandler("unbanall", unbanall, pass_args=True, filters=Filters.user(OWNER_ID))
 
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)
 dispatcher.add_handler(BIRTHDAY_HANDLER)
+dispatcher.add_handler(UNBANALL_HANDLER)
