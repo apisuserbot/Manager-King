@@ -25,3 +25,4 @@ tldextract
 wikipedia
 googletrans
 alphabet_detector
+numpy
