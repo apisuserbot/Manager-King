@@ -96,7 +96,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
     ok123 = mention_html(user_chat.id, user_chat.first_name)
 
 
-    text12 = f"Summoning the ban axe on Chu {ok123} 😉."
+    text12 = f"Under Section 69 this Chu {ok123} is being to punished for doing Chutiyapa 😈"
     update.effective_message.reply_text(text12, parse_mode=ParseMode.HTML)
 
     banner = update.effective_user  # type: Optional[User]
@@ -138,7 +138,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
                    "{} has been successfully gbanned!".format(mention_html(user_chat.id, user_chat.first_name)),
                    html=True)
-    text13 = f"Chu {ok123} has been Dealt with 😈."
+    text13 = f"Now this Chu {ok123} will make plan to revenge me 🤣"
     update.effective_message.reply_text(text13, parse_mode=ParseMode.HTML)
 
 
