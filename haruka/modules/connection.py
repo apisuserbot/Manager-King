@@ -183,7 +183,7 @@ Actions are available with connected groups:
  • Restrict/unrestrict users in chat
  • More in future!
 
- - /connection <chatid>: Connect to remote chat
+ - /connect <chatid>: Connect to remote chat
  - /disconnect: Disconnect from chat
  - /allowconnect on/yes/off/no: Allow connect users to group
 
