@@ -138,8 +138,9 @@ def send_start(bot, update):
 Click Help button to find out more about how to use me to my full potential.\n\n"
 
     text += "This Bot Is Managed By @Hack_Eat\n\
-    Join Our Support Group ==> [Support Group](t.me/flixtv_support)\n\n
-    Download [FlixTvAnd](https://flixtv.xyz) And Enjoi Your Life"
+    Join Our Support Group ==> [Support Group](t.me/flixtv_support)\n\n"
+        
+    text += "Download [FlixTvAnd](https://flixtv.xyz) And Enjoi Your Life"
 
     
     keyboard = [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
