@@ -111,7 +111,7 @@ def start(bot: Bot, update: Update, args: List[str]):
 
                 if is_user_admin(chat, update.effective_user.id):
                     send_settings(match.group(1), update.effective_user.id, update, user=False)
-                else:
+                else: in
                     send_settings(match.group(1), update.effective_user.id, update, user=True)
 
             elif args[0][1:].isdigit() and "rules" in IMPORTED:
@@ -148,7 +148,7 @@ Click Help button to find out more about how to use me to my full potential.\n\n
    
     update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN)
 
-    update.effective_message.reply_text("Donwload FlixTv Now.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="📺 Download FlixTv", url=f"https://flixtv.xyz")]],
+    update.effective_message.reply_text("Donwload FlixTv Now.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="📺 Download FlixTv", url=f"https://flixtv.xyz")]])),
         InlineKeyboardButton(text="♥️Join Our Support Group", url=f"t.me/flixtv_support")]]))
 
 
