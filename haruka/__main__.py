@@ -137,7 +137,7 @@ def send_start(bot, update):
     text = "Hey There! I'm ThugBot - I'm here to help you manage your groups!\n\
 Click Help button to find out more about how to use me to my full potential.\n\n"
 
-    text += "This Bot Is Managed By @Hack_Eat"
+    text += "This Bot Is Managed By @Prakaska"
 
     keyboard = [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
     keyboard += [[InlineKeyboardButton(text="🇺🇸 Language", callback_data="set_lang_"), 
