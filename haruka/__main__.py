@@ -135,21 +135,23 @@ def send_start(bot, update):
 
     #chat = update.effective_chat  # type: Optional[Chat] and unused variable
     text = "Hey There! I'm ThugBot - I'm here to help you manage your groups!\n\
-Click Help button to find out more about how to use me to my full potential.\n\n"
+    Click Help button to find out more about how to use me to my full potential.\n\n"
 
     text += "This Bot Is Managed By @Hack_Eat\n\
-Join Our Support Group ==> [Support Group](t.me/flixtv_support)"
+    Join Our Support Group ==> [Support Group](t.me/flixtv_support)And Enjoi Your Life"
 
     
     keyboard = [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
     keyboard += [[InlineKeyboardButton(text="🇺🇸 Language", callback_data="set_lang_"), 
         InlineKeyboardButton(text="❔ Help", callback_data="help_back")]]
 
-    update.effective_message.reply_text("Donwload FlixTv Now.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="📺 Download FlixTv", url=f"https://flixtv.xyz")]]))
+    update.effective_message.reply_text("Donwload FlixTv Now.",
+                                        reply_markup=InlineKeyboardMarkup(
+                                            [[InlineKeyboardButton(text="📺 Download FlixTv",
+                                                                   url=f"https://flixtv.xyz")]]))
 
     
 
-   
     update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN)
 
     
