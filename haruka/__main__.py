@@ -148,7 +148,7 @@ Click Help button to find out more about how to use me to my full potential.\n\n
    
     update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN)
 
-    keyboard = reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="📺 Download FlixTv", url=f"https://flixtv.xyz"),
+    update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="📺 Download FlixTv", url=f"https://flixtv.xyz"),
         InlineKeyboardButton(text="♥️Join Our Support Group", url=f"t.me/flixtv_support")]]
 
 
