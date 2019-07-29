@@ -111,7 +111,7 @@ def start(bot: Bot, update: Update, args: List[str]):
 
                 if is_user_admin(chat, update.effective_user.id):
                     send_settings(match.group(1), update.effective_user.id, update, user=False)
-                else: in
+                else:
                     send_settings(match.group(1), update.effective_user.id, update, user=True)
 
             elif args[0][1:].isdigit() and "rules" in IMPORTED:
@@ -145,6 +145,8 @@ Click Help button to find out more about how to use me to my full potential.\n\n
     keyboard = [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
     keyboard += [[InlineKeyboardButton(text="🇺🇸 Language", callback_data="set_lang_"), 
         InlineKeyboardButton(text="❔ Help", callback_data="help_back")]]
+    keyboard += [[InlineKeyboardButton(text="📺 Download FlixTv", url=f"https://flixtv.xyz"), 
+        InlineKeyboardButton(text="♥️ Join Our Support Group", url=f"t.me/flixtv_support")]]
 
     
 
