@@ -137,12 +137,8 @@ def send_start(bot, update):
     text = "Hey There! I'm ThugBot - I'm here to help you manage your groups!\n\
 Click Help button to find out more about how to use me to my full potential.\n\n"
 
-    text += "This Bot Is Managed By @Hack_Eat\n\
-    Join Our Support Group ==> [Support Group](t.me/flixtv_support)\n\n"
-        
-    text += "Download [FlixTvAnd](https://flixtv.xyz) And Enjoi Your Life"
+    text += "This Bot Is Managed By @Hack_Eat"
 
-    
     keyboard = [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
     keyboard += [[InlineKeyboardButton(text="🇺🇸 Language", callback_data="set_lang_"), 
         InlineKeyboardButton(text="❔ Help", callback_data="help_back")]]
