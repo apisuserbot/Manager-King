@@ -62,10 +62,6 @@
       "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
       "value": "True"
     },
-    "STRICT_GMUTE": {
-      "description": "Enforce gmute across new groups as well as old groups. When a gmuted user talks, he will be gmuted.",
-      "value": "True"
-    },
     "ALLOW_EXCL": {
       "description": "Whether to allow using exclamation marks ! for commands as well as /.",
       "value": "True"
