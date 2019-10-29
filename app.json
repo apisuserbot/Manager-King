@@ -1,6 +1,6 @@
 {
-  "name": "Hitsuki",
-  "description": "Modular Telegram group management bot!",
+  "name": "Prakaska",
+  "description": "Telegram's sassiest group manager. Modular Telegram group management bot!",
   "keywords": [
     "telegram",
     "best",
@@ -8,7 +8,7 @@
     "manager",
     "3"
   ],
-  "repository": "https://github.com/HitaloKun/HarukaY",
+  "repository": "Empty :0",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable env variables",
@@ -20,11 +20,15 @@
     },
     "OWNER_ID": {
       "description": "An integer of consisting of your owner ID",
-      "value": "302253890"
+      "value": "686956429"
     },
     "OWNER_USERNAME": {
       "description": "Your username",
-      "value": "HitaloKun"
+      "value": "Prakaska"
+    },
+    "WEBHOOK": {
+      "description": "Setting this to ANYTHING will enable webhooks when in env mode messages",
+      "value": "ANYTHING"
     },
     "URL": {
       "description": "The Heroku App URL similar to https://<appname>.herokuapp.com/",
@@ -32,27 +36,27 @@
     },
     "MESSAGE_DUMP": {
       "description": "optional: a chat where your replied saved messages are stored, to stop people deleting their old",
-      "value": "-1001349863386 "
+      "value": "-1007777777777"
     },
     "SUDO_USERS": {
       "description": "A space separated list of user_ids which should be considered sudo users",
-      "value": "302253890"
+      "value": ""
     },
     "SUPPORT_USERS": {
       "description": "A space separated list of user_ids which should be considered support users (can gban/ungban, nothing else)",
-      "value": "302253890"
+      "value": ""
     },
     "WHITELIST_USERS": {
       "description": "A space separated list of user_ids which should be considered whitelisted - they can't be banned.",
-      "value": "302253890"
+      "value": ""
     },
     "DONATION_LINK": {
       "description": "Optional: link where you would like to receive donations.",
-      "value": "https://www.paypal.me/"
+      "value": "FREE :0"
     },
     "PORT": {
       "description": "Port to use for your webhooks",
-      "value": "5000"
+      "value": "8443"
     },
     "DEL_CMDS": {
       "description": "Whether to delete commands from users which don't have rights to use that command",
@@ -68,7 +72,7 @@
     },
     "BAN_STICKER": {
       "description": "Which sticker to use when banning people. Use https://telegram.dog/ShowJsonBot to get the file_id",
-      "value": "CAADBQADDQADjR\_yKCDDBtuwTt59Ag"
+      "value": "CAADBQADVQADSRstDCPAJSulhCSYAg"
     },
     "API_OPENWEATHER": {
       "description": "Your open weather API key for weather module to run",
