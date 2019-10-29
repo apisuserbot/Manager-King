@@ -2,10 +2,9 @@ future
 emoji
 requests
 sqlalchemy
-python-telegram-bot>=11.1.0
+python-telegram-bot==11.1.0
 psycopg2
 feedparser
-pyowm
 pythonping
 pynewtonmath
 #memes from SkittBot
@@ -20,9 +19,11 @@ PyLyrics
 #AEX
 hurry.filesize
 #translator
-beautifulsoup4==4.6.3
-tldextract
-wikipedia
 googletrans
-alphabet_detector
-numpy
+
+tldextract
+PyYAML
+pyowm
+wikipedia
+bleach
+markdown2
