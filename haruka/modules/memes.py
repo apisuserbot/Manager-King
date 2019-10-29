@@ -4,13 +4,10 @@ from io import BytesIO
 import base64
 from spongemock import spongemock
 from zalgo_text import zalgo
+from deeppyer import deepfry
 import os
 from pathlib import Path
 import glob
-
-import nltk # shitty lib, but it does work
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
 
 from typing import Optional, List
 from telegram import Message, Update, Bot, User
@@ -215,33 +212,6 @@ def zalgotext(bot: Bot, update: Update):
 # Less D A N K modules by @skittles9823 # holi fugg I did some maymays ^^^
 # shitty maymay modules made by @divadsn vvv
 
-@run_async
-def forbesify(bot: Bot, update: Update):
-    message = update.effective_message
-    if message.reply_to_message:
-        data = message.reply_to_message.text
-    else:
-        data = ''
-
-    data = data.lower()
-    accidentals = ['VB', 'VBD', 'VBG', 'VBN']
-    reply_text = data.split()
-    offset = 0
-
-    # use NLTK to find out where verbs are
-    tagged = dict(nltk.pos_tag(reply_text))
-
-    # let's go through every word and check if it's a verb
-    # if yes, insert ACCIDENTALLY and increase offset
-    for k in range(len(reply_text)):
-        i = reply_text[k + offset]
-        if tagged.get(i) in accidentals:
-            reply_text.insert(k + offset, 'accidentally')
-            offset += 1
-
-    reply_text = string.capwords(' '.join(reply_text))
-    message.reply_to_message.reply_text(reply_text)
-
 
 @run_async
 def deepfryer(bot: Bot, update: Update):
@@ -277,7 +247,7 @@ async def process_deepfry(image: Image, reply: Message, bot: Bot):
     # DEEPFRY IT
     image = await deepfry(
         img=image,
-        token=os.getenv('DEEPFRY_TOKEN', ''),
+        token=DEEPFRY_TOKEN,
         url_base='westeurope'
     )
 
@@ -313,9 +283,6 @@ def shout(bot: Bot, update: Update, args):
     return update.effective_message.reply_text(msg, parse_mode="MARKDOWN")
 
 
-
-
-
 # no help string
 __help__ = """
 Some memes command, find it all out yourself!
@@ -341,10 +308,8 @@ MAFIA_HANDLER = DisableAbleCommandHandler("mafia", mafiatext, admin_ok=True)
 PIDOR_HANDLER = DisableAbleCommandHandler("pidor", pidortext, admin_ok=True)
 HITLER_HANDLER = DisableAbleCommandHandler("hitler", hitlertext, admin_ok=True)
 ZALGO_HANDLER = DisableAbleCommandHandler("zalgofy", zalgotext)
-FORBES_HANDLER = DisableAbleCommandHandler("forbes", forbesify, admin_ok=True)
 DEEPFRY_HANDLER = DisableAbleCommandHandler("deepfry", deepfryer, admin_ok=True)
 SHOUT_HANDLER = DisableAbleCommandHandler("shout", shout, pass_args=True)
-
 
 
 dispatcher.add_handler(MAFIA_HANDLER)
@@ -355,9 +320,7 @@ dispatcher.add_handler(STRETCH_HANDLER)
 dispatcher.add_handler(VAPOR_HANDLER)
 dispatcher.add_handler(MOCK_HANDLER)
 dispatcher.add_handler(ZALGO_HANDLER)
-dispatcher.add_handler(FORBES_HANDLER)
 dispatcher.add_handler(DEEPFRY_HANDLER)
 dispatcher.add_handler(KIM_HANDLER)
 dispatcher.add_handler(HITLER_HANDLER)
-
 
