@@ -94,7 +94,6 @@ def test(bot: Bot, update: Update):
 
 @run_async
 def start(bot: Bot, update: Update, args: List[str]):
-    LOGGER.info("Start")
     chat = update.effective_chat  # type: Optional[Chat]
     #query = update.callback_query #Unused variable
     if update.effective_chat.type == "private":
@@ -122,8 +121,10 @@ def start(bot: Bot, update: Update, args: List[str]):
         else:
             send_start(bot, update)
     else:
-        update.effective_message.reply_text("RIP ThugBot 😭 Type /f for Pay Respect")
-
+        try:
+            update.effective_message.reply_text("Hey there! I'm alive :3")
+        except:
+            print("Nut")
 
 def send_start(bot, update):
     #Try to remove old message
@@ -134,26 +135,23 @@ def send_start(bot, update):
         pass
 
     #chat = update.effective_chat  # type: Optional[Chat] and unused variable
-    text = "Hey There! I'm ThugBot - I'm here to help you manage your groups!\n\
+    text = "Hey there! My name is Haruka Aya - I'm here to help you manage your groups!\n\
 Click Help button to find out more about how to use me to my full potential.\n\n"
 
-    text += "This Bot Is Managed By @Prakaska"
+    text += "Join [Haruka Aya Group](https://t.me/HarukaAyaGroup) ( @HarukaAyaGroup ) if you need any support or help\n\n\
+Follow [Haruka Aya](https://t.me/HarukaAya) ( @HarukaAya ) if you want to keep up with the news, updates and bot downtime!\n\n\
+Made with love by @RealAkito\n\nWant to add me to your group? [Click here!](t.me/HarukaAyaBot?startgroup=true)"
 
-    keyboard = [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
+    keyboard = [[InlineKeyboardButton(text="📢 Support Group", url="https://t.me/HarukaAyaGroup")]]
+    keyboard += [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
     keyboard += [[InlineKeyboardButton(text="🇺🇸 Language", callback_data="set_lang_"), 
         InlineKeyboardButton(text="❔ Help", callback_data="help_back")]]
-    keyboard += [[InlineKeyboardButton(text="📺 Download FlixTv", url=f"https://flixtv.xyz"), 
-        InlineKeyboardButton(text="♥️ Join Our Support Group", url=f"t.me/flixtv_support")]]
 
-    
+    update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
-    update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN)
-
-    
 
 
 def control_panel(bot, update):
-    LOGGER.info("Control panel")
     chat = update.effective_chat
     user = update.effective_user
 
@@ -169,16 +167,19 @@ def control_panel(bot, update):
     #Support to run from command handler
     query = update.callback_query
     if query:
-        query.message.delete()
+
+        try:
+           query.message.delete()
+        except BadRequest as ee:
+           update.effective_message.reply_text(f"Failed to delete query, {ee}")
 
         M_match = re.match(r"cntrl_panel_M", query.data)
         U_match = re.match(r"cntrl_panel_U", query.data)
         G_match = re.match(r"cntrl_panel_G", query.data)
         back_match = re.match(r"help_back", query.data)
 
-        LOGGER.info(query.data)
     else:
-        M_match = "ThugBot is best bot 🔥" #LMAO, don't uncomment
+        M_match = "Haruka Aya is best bot" #LMAO, don't uncomment
 
     if M_match:
         text = "*Control panel* 🛠"
@@ -286,7 +287,7 @@ def control_panel(bot, update):
                                                         chat=chat_id)))
 
         elif back_match:
-            text = "Test"
+            text = "Control Panel :3"
             query.message.reply_text(text=text, parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(paginate_modules(user.id, 0, CHAT_SETTINGS, "cntrl_panel_G")))
 
@@ -533,11 +534,9 @@ def migrate_chats(bot: Bot, update: Update):
     else:
         return
 
-    LOGGER.info("Migrating from %s, to %s", str(old_chat), str(new_chat))
     for mod in MIGRATEABLE:
         mod.__migrate__(old_chat, new_chat)
 
-    LOGGER.info("Successfully migrated!")
     raise DispatcherHandlerStop
 
 
@@ -590,8 +589,8 @@ def main():
 
     else:
         LOGGER.info("Using long polling.")
-        updater.start_polling(timeout=15, read_latency=4)
-
+        # updater.start_polling(timeout=15, read_latency=4, clean=True)
+        updater.start_polling(poll_interval=0.0, timeout=10, clean=False, bootstrap_retries=-1, read_latency=3.0)
     updater.idle()
 
 CHATS_CNT = {}
@@ -609,7 +608,11 @@ def process_update(self, update):
 
     if update.effective_chat: #Checks if update contains chat object
         now = datetime.datetime.utcnow()
+    try:
         cnt = CHATS_CNT.get(update.effective_chat.id, 0)
+    except AttributeError:
+        self.logger.exception('An uncaught error was raised while updating process')
+        return
 
         t = CHATS_TIME.get(update.effective_chat.id, datetime.datetime(1970, 1, 1))
         if t and now > t + datetime.timedelta(0, 1):
