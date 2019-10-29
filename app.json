@@ -1,6 +1,6 @@
 {
-  "name": "IronHyde",
-  "description": "Telegram's sassiest group manager. Modular Telegram group management bot!",
+  "name": "Ｈｉｔｓｕｋｉ．ＧＩＦ",
+  "description": "Modular Telegram group management bot!",
   "keywords": [
     "telegram",
     "best",
@@ -8,7 +8,7 @@
     "manager",
     "3"
   ],
-  "repository": "https://github.com/Yash-Garg/IronHyde-bot",
+  "repository": "https://github.com/HitaloKun/HarukaY",
   "env": {
     "ENV": {
       "description": "Setting this to ANYTHING will enable env variables",
@@ -20,15 +20,11 @@
     },
     "OWNER_ID": {
       "description": "An integer of consisting of your owner ID",
-      "value": "482352271"
+      "value": "302253890"
     },
     "OWNER_USERNAME": {
       "description": "Your username",
-      "value": "Yash Garg"
-    },
-    "WEBHOOK": {
-      "description": "Setting this to ANYTHING will enable webhooks when in env mode messages",
-      "value": "ANYTHING"
+      "value": "HitaloKun"
     },
     "URL": {
       "description": "The Heroku App URL similar to https://<appname>.herokuapp.com/",
@@ -36,27 +32,27 @@
     },
     "MESSAGE_DUMP": {
       "description": "optional: a chat where your replied saved messages are stored, to stop people deleting their old",
-      "value": "-1007777777777"
+      "value": "-1001349863386 "
     },
     "SUDO_USERS": {
       "description": "A space separated list of user_ids which should be considered sudo users",
-      "value": ""
+      "value": "302253890"
     },
     "SUPPORT_USERS": {
       "description": "A space separated list of user_ids which should be considered support users (can gban/ungban, nothing else)",
-      "value": ""
+      "value": "302253890"
     },
     "WHITELIST_USERS": {
       "description": "A space separated list of user_ids which should be considered whitelisted - they can't be banned.",
-      "value": ""
+      "value": "302253890"
     },
     "DONATION_LINK": {
       "description": "Optional: link where you would like to receive donations.",
-      "value": "https://www.paypal.me/YGarg917"
+      "value": "https://www.paypal.me/"
     },
     "PORT": {
       "description": "Port to use for your webhooks",
-      "value": "8443"
+      "value": "5000"
     },
     "DEL_CMDS": {
       "description": "Whether to delete commands from users which don't have rights to use that command",
@@ -66,13 +62,17 @@
       "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
       "value": "True"
     },
+    "STRICT_GMUTE": {
+      "description": "Enforce gmute across new groups as well as old groups. When a gmuted user talks, he will be gmuted.",
+      "value": "True"
+    },
     "ALLOW_EXCL": {
       "description": "Whether to allow using exclamation marks ! for commands as well as /.",
       "value": "True"
     },
     "BAN_STICKER": {
       "description": "Which sticker to use when banning people. Use https://telegram.dog/ShowJsonBot to get the file_id",
-      "value": "CAADBQADVQADSRstDCPAJSulhCSYAg"
+      "value": "CAADBQADDQADjR\_yKCDDBtuwTt59Ag"
     },
     "API_OPENWEATHER": {
       "description": "Your open weather API key for weather module to run",
