@@ -1,15 +1,12 @@
-Dear anyone kanging my bot, At least, Don't fucking spam my private messages least. I'm tired of people copying my works and think it's so funny to do that.
+# Hitsuki.GIF
 
-# Haruka Aya
+Hello i'm based on [Haruka Aya](https://t.me/HarukaAyaBot), a modular Telegram Python bot running on python3 with an sqlalchemy database.
 
-A modular Telegram Python bot running on python3 with an sqlalchemy database.
+Can be found on telegram as [Ｈｉｔｓｕｋｉ．ＧＩＦ](https://t.me/LordHitsuki_BOT).
 
-Can be found on telegram as [Haruka Aya](https://t.me/HarukaAyaBot).
+You can also join official Haruka Aya support group [here!](https://t.me/HarukaAyaBot)
+(Remember that they do not support any Haruka Aya fork.)
 
-Alternatively, [find me on telegram](https://t.me/RealAkito)! (Keep all support questions in the support chat, where more people can help you.)
-
-You can also join our support group [here!](https://t.me/HarukaAyaBot)
-(Keep in the mind that we does not support any fork of Haruka Aya.)
 ## Thanks to
 
 * MrYacha - For pYanaBot :3
