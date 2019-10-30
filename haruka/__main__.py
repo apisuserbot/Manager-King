@@ -138,7 +138,7 @@ def send_start(bot, update):
     text = "Hey there! My name is Ｈｉｔｓｕｋｉ．ＧＩＦ - I'm here to help you manage your groups!\n\
 Click Help button to find out more about how to use me to my full potential.\n\n"
 
-    text += "This Bot Is Managed By @HitaloKun\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki?startgroup=true)"
+    text += "This Bot Is Managed By @HitaloKun\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)"
 
     keyboard = [[InlineKeyboardButton(text="📢 My Channel", url="https://t.me/AndroidRepo")]]
     keyboard += [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
