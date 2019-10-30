@@ -383,7 +383,7 @@ def evo(bot: Bot, update: Update):
 
     if device == 'gsi':
         reply_text = """
-Please check Evolution Updates channel! @EvolutionXUpdates or Click the button down below to download the GSIs!
+Please check @expresslukegsi channel! or Click the button down below to download the official GSIs!
 """
         keyboard = [[InlineKeyboardButton(text="Click to Download", url="https://sourceforge.net/projects/evolution-x/files/GSI/")]]
         message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
