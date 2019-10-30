@@ -197,7 +197,10 @@ def reply_filter(bot: Bot, update: Update):
             if filt.is_sticker:
                 message.reply_sticker(filt.reply)
             elif filt.is_document:
-                message.reply_document(filt.reply)
+                try:
+                    message.reply_document(filt.reply)
+                except:
+                    print("L")
             elif filt.is_image:
                 message.reply_photo(filt.reply)
             elif filt.is_audio:
@@ -205,7 +208,10 @@ def reply_filter(bot: Bot, update: Update):
             elif filt.is_voice:
                 message.reply_voice(filt.reply)
             elif filt.is_video:
-                message.reply_video(filt.reply)
+                try:
+                    message.reply_video(filt.reply)
+                except:
+                    print("Nut")
             elif filt.has_markdown:
                 buttons = sql.get_buttons(chat.id, filt.keyword)
                 keyb = build_keyboard(buttons)
@@ -225,10 +231,12 @@ def reply_filter(bot: Bot, update: Update):
                                          disable_web_page_preview=True,
                                          reply_markup=keyboard)
                     else:
-                        message.reply_text("This note could not be sent, as it is incorrectly formatted. Ask in "
-                                           "@HarukaAyaGroup if you can't figure out why!")
-                        LOGGER.warning("Message %s could not be parsed", str(filt.reply))
-                        LOGGER.exception("Could not parse filter %s in chat %s", str(filt.keyword), str(chat.id))
+                        try:
+                            message.reply_text("This note could not be sent, as it is incorrectly formatted. Ask in @HarukaAyaGroup if you can't figure out why!")
+                            LOGGER.warning("Message %s could not be parsed", str(filt.reply))
+                            LOGGER.exception("Could not parse filter %s in chat %s", str(filt.keyword), str(chat.id))
+                        except:
+                            print("Nut")
 
             else:
                 # LEGACY - all new filters will have has_markdown set to True.
@@ -247,6 +255,13 @@ def __migrate__(old_chat_id, new_chat_id):
 def __chat_settings__(bot, update, chat, chatP, user):
     cust_filters = sql.get_chat_triggers(chat.id)
     return "There are `{}` custom filters here.".format(len(cust_filters))
+
+
+def __import_data__(chat_id, data):
+    # set chat filters
+    filters = data.get('filters', {})
+    for trigger in filters:
+        sql.add_to_blacklist(chat_id, trigger)
 
 
 __help__ = """
