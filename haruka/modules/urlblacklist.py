@@ -180,4 +180,3 @@ dispatcher.add_handler(ADD_URL_BLACKLIST_HANDLER)
 dispatcher.add_handler(RM_BLACKLIST_URL_HANDLER)
 dispatcher.add_handler(GET_BLACKLISTED_URLS)
 dispatcher.add_handler(URL_DELETE_HANDLER)
-
