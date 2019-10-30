@@ -23,8 +23,8 @@ def wiki(bot: Bot, update: Update, args):
     update.message.reply_text(summary.format(wikipedia.summary(reply, sentences=3), wikipedia.page(reply).url))
 		
 __help__ = """
- - /wiki text: Returns search from wikipedia for the input text
+ - /wiki text: Do research on wikipedia and get the result from the bot
 """
-__mod_name__ = "WikiPedia"
+__mod_name__ = "Wikipedia"
 WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki, pass_args=True)
 dispatcher.add_handler(WIKI_HANDLER)
