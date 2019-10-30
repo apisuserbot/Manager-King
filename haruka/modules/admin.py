@@ -66,14 +66,11 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
                           can_pin_messages=bot_member.can_pin_messages,
                           can_promote_members=bot_member.can_promote_members)
 
-    message.reply_text(tld(chat.id, "Successfully promoted in *{}*!").format(chatD.title), parse_mode=ParseMode.MARKDOWN)
-    return "<b>{}:</b>" \
-           "\n#PROMOTED" \
-           "\n<b>Admin:</b> {}" \
-           "\n<b>User:</b> {}".format(html.escape(chatD.title),
-                                      mention_html(user.id, user.first_name),
-                                      mention_html(user_member.user.id, user_member.user.first_name))
-
+    message.reply_text(tld(chat.id, f"Successfully promoted in *{chatD.title}*!"), parse_mode=ParseMode.MARKDOWN)
+    return f"<b>{html.escape(chatD.title)}:</b>" \
+            "\n#PROMOTED" \
+           f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}" \
+           f"\n<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
 
 
 @run_async
@@ -125,14 +122,11 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
                               can_restrict_members=False,
                               can_pin_messages=False,
                               can_promote_members=False)
-        message.reply_text(tld(chat.id, "Successfully Demoted in *{}*!").format(chatD.title), parse_mode=ParseMode.MARKDOWN)
-        return "<b>{}:</b>" \
-           "\n#DEMOTED" \
-           "\n<b>Admin:</b> {}" \
-           "\n<b>User:</b> {}".format(html.escape(chatD.title),
-                                      mention_html(user.id, user.first_name),
-                                      mention_html(user_member.user.id, user_member.user.first_name))
-
+        message.reply_text(tld(chat.id, f"Successfully demoted in *{chatD.title}*!"), parse_mode=ParseMode.MARKDOWN)
+        return f"<b>{html.escape(chatD.title)}:</b>" \
+                "\n#DEMOTED" \
+               f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}" \
+               f"\n<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
 
     except BadRequest:
         message.reply_text(
@@ -166,12 +160,11 @@ def pin(bot: Bot, update: Update, args: List[str]) -> str:
                 pass
             else:
                 raise
-        return "<b>{}:</b>" \
-               "\n#PINNED" \
-               "\n<b>Admin:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name))
+        return f"<b>{html.escape(chat.title)}:</b>" \
+                "\n#PINNED" \
+               f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}"
 
     return ""
-
 
 
 @run_async
@@ -191,10 +184,9 @@ def unpin(bot: Bot, update: Update) -> str:
         else:
             raise
 
-    return "<b>{}:</b>" \
+    return f"<b>{html.escape(chat.title)}:</b>" \
            "\n#UNPINNED" \
-           "\n<b>Admin:</b> {}".format(html.escape(chat.title),
-                                       mention_html(user.id, user.first_name))
+           f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}"
 
 
 @run_async
@@ -250,7 +242,7 @@ def adminlist(bot, update):
             name = user.first_name + (user.last_name or "") + tld(chat.id, " (Creator)")
         else:
             name = user.first_name + (user.last_name or "")
-        text += "\n• {}".format(name)
+        text += f"\n• `{name}`"
 
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
@@ -262,10 +254,10 @@ def reaction(bot: Bot, update: Update, args: List[str]) -> str:
     if len(args) >= 1:
         var = args[0]
         print(var)
-        if (var == "False"):
+        if var == "False":
             sql.set_command_reaction(chat.id, False)
             update.effective_message.reply_text("Disabled reaction on admin commands for users")
-        elif(var == "True"):
+        elif var == "True":
             sql.set_command_reaction(chat.id, True)
             update.effective_message.reply_text("Enabled reaction on admin commands for users")
         else:
@@ -276,3 +268,37 @@ def reaction(bot: Bot, update: Update, args: List[str]) -> str:
             update.effective_message.reply_text("Reaction on admin commands for users now `disabled`!", parse_mode=ParseMode.MARKDOWN)
         else:
             update.effective_message.reply_text("Reaction on admin commands for users now `enabled`!", parse_mode=ParseMode.MARKDOWN)
+        
+
+__help__ = """
+ - /adminlist | /admins: list of admins in the chat
+
+*Admin only:*
+ - /pin: silently pins the message replied to - add 'loud' or 'notify' to give notifs to users.
+ - /unpin: unpins the currently pinned message
+ - /invitelink: gets invitelink
+ - /promote: promotes the user replied to
+ - /demote: demotes the user replied to
+"""
+
+__mod_name__ = "Admin"
+
+PIN_HANDLER = DisableAbleCommandHandler("pin", pin, pass_args=True, filters=Filters.group)
+UNPIN_HANDLER = DisableAbleCommandHandler("unpin", unpin, filters=Filters.group)
+
+INVITE_HANDLER = CommandHandler("invitelink", invite)
+
+PROMOTE_HANDLER = DisableAbleCommandHandler("promote", promote, pass_args=True)
+DEMOTE_HANDLER = DisableAbleCommandHandler("demote", demote, pass_args=True)
+
+REACT_HANDLER = DisableAbleCommandHandler("reaction", reaction, pass_args=True, filters=Filters.group)
+
+ADMINLIST_HANDLER = DisableAbleCommandHandler(["adminlist", "admins"], adminlist)
+
+dispatcher.add_handler(PIN_HANDLER)
+dispatcher.add_handler(UNPIN_HANDLER)
+dispatcher.add_handler(INVITE_HANDLER)
+dispatcher.add_handler(PROMOTE_HANDLER)
+dispatcher.add_handler(DEMOTE_HANDLER)
+dispatcher.add_handler(ADMINLIST_HANDLER)
+dispatcher.add_handler(REACT_HANDLER)
