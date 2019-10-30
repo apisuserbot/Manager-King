@@ -57,95 +57,102 @@ def get(bot, update, notename, show_none=True, no_format=False):
 	message = update.effective_message  # type: Optional[Message]
 
 	if note:
-		# If we're replying to a message, reply to that message (unless it's an error)
-		if message.reply_to_message:
-			reply_id = message.reply_to_message.message_id
-		else:
-			reply_id = message.message_id
+		pass
+	elif notename[0] == "#":
+		hashnote = sql.get_note(chat_id, notename[1:])
+		if hashnote:
+			note = hashnote
+	elif show_none:
+		message.reply_text("This note doesn't exist")
+		return
 
-		if note.is_reply:
-			if MESSAGE_DUMP:
-				try:
-					bot.forward_message(chat_id=chat_id, from_chat_id=MESSAGE_DUMP, message_id=note.value)
-				except BadRequest as excp:
-					if excp.message == "Message to forward not found":
-                                                message.reply_text("This message seems to have been lost - I'll remove it "
-                                                                                   "from your notes list.")
-                                                sql.rm_note(chat_id, notename)
-					else:
-						raise
-			else:
-				try:
-					bot.forward_message(chat_id=chat_id, from_chat_id=chat_id, message_id=note.value)
+	# If we're replying to a message, reply to that message (unless it's an error)
+	if message.reply_to_message:
+		reply_id = message.reply_to_message.message_id
+	else:
+		reply_id = message.message_id
 
-				except BadRequest as excp:
-					if excp.message == "Message to forward not found":
-						message.reply_text("Looks like the original sender of this note has deleted "
-										   "their message - sorry! Get your bot admin to start using a "
-										   "message dump to avoid this. I'll remove this note from "
-										   "your saved notes.")
-					sql.rm_note(chat_id, notename)
-
+	if note.is_reply:
+		if MESSAGE_DUMP:
+			try:
+				bot.forward_message(chat_id=chat_id, from_chat_id=MESSAGE_DUMP, message_id=note.value)
+			except BadRequest as excp:
+				if excp.message == "Message to forward not found":
+											message.reply_text("This message seems to have been lost - I'll remove it "
+																				"from your notes list.")
+											sql.rm_note(chat_id, notename)
 				else:
 					raise
 		else:
-			text = note.value
-			keyb = []
-			parseMode = ParseMode.MARKDOWN
-			buttons = sql.get_buttons(chat_id, notename)
-			if no_format:
-				parseMode = None
-				text += revert_buttons(buttons)
-			else:
-				keyb = build_keyboard(buttons)
-
-			keyboard = InlineKeyboardMarkup(keyb)
-
 			try:
-				if note.msgtype in (sql.Types.BUTTON_TEXT, sql.Types.TEXT):
-					try:
-						bot.send_message(send_id, text, reply_to_message_id=reply_id,
-										 parse_mode=parseMode, disable_web_page_preview=True,
-										 reply_markup=keyboard)
-					except BadRequest as excp:
-						if excp.message == "Wrong http url":
-							failtext = "The URL on the button is invalid! Please update this note!"
-							failtext += "\n\n```\n{}```".format(note.value + revert_buttons(buttons))
-							message.reply_text(failtext, parse_mode="markdown")
-						print("Gagal mengirim catatan: " + excp.message)
-						pass
-				else:
-					ENUM_FUNC_MAP[note.msgtype](send_id, note.file, caption=text, reply_to_message_id=reply_id,
-												parse_mode=parseMode, disable_web_page_preview=True,
-												reply_markup=keyboard)
+				bot.forward_message(chat_id=chat_id, from_chat_id=chat_id, message_id=note.value)
 
 			except BadRequest as excp:
-				if excp.message == "Entity_mention_user_invalid":
-					message.reply_text("Looks like you tried to mention someone I've never seen before. If you really "
-									   "want to mention them, forward one of their messages to me, and I'll be able "
-									   "to tag them!")
+				if excp.message == "Message to forward not found":
+					message.reply_text("Looks like the original sender of this note has deleted "
+										"their message - sorry! Get your bot admin to start using a "
+										"message dump to avoid this. I'll remove this note from "
+										"your saved notes.")
+				sql.rm_note(chat_id, notename)
 
-				elif FILE_MATCHER.match(note.value):
-					message.reply_text("This note was an incorrectly imported file from another bot - I can't use "
-									   "it. If you really need it, you'll have to save it again. In "
-									   "the meantime, I'll remove it from your notes list.")
-					sql.rm_note(chat_id, notename)
-				else:
-					message.reply_text("This note could not be sent, as it is incorrectly formatted, Please ask in @HarukaAyaGroup if you can't figure out why!")
-					LOGGER.exception("Could not parse message #%s in chat %s", notename, str(chat_id))
-					LOGGER.warning("Message was: %s", str(note.value))
+			else:
+				raise
+	else:
+		text = note.value
+		keyb = []
+		parseMode = ParseMode.MARKDOWN
+		buttons = sql.get_buttons(chat_id, notename)
+		if no_format:
+			parseMode = None
+			text += revert_buttons(buttons)
+		else:
+			keyb = build_keyboard(buttons)
 
-		return
-	elif show_none:
-		message.reply_text("This note doesn't exist")
+		keyboard = InlineKeyboardMarkup(keyb)
+
+		try:
+			if note.msgtype in (sql.Types.BUTTON_TEXT, sql.Types.TEXT):
+				try:
+					bot.send_message(send_id, text, reply_to_message_id=reply_id,
+										parse_mode=parseMode, disable_web_page_preview=True,
+										reply_markup=keyboard)
+				except BadRequest as excp:
+					if excp.message == "Wrong http url":
+						failtext = "The URL on the button is invalid! Please update this note!"
+						failtext += "\n\n```\n{}```".format(note.value + revert_buttons(buttons))
+						message.reply_text(failtext, parse_mode="markdown")
+					print("Gagal mengirim catatan: " + excp.message)
+					pass
+			else:
+				ENUM_FUNC_MAP[note.msgtype](send_id, note.file, caption=text, reply_to_message_id=reply_id,
+											parse_mode=parseMode, disable_web_page_preview=True,
+											reply_markup=keyboard)
+
+		except BadRequest as excp:
+			if excp.message == "Entity_mention_user_invalid":
+				message.reply_text("Looks like you tried to mention someone I've never seen before. If you really "
+									"want to mention them, forward one of their messages to me, and I'll be able "
+									"to tag them!")
+
+			elif FILE_MATCHER.match(note.value):
+				message.reply_text("This note was an incorrectly imported file from another bot - I can't use "
+									"it. If you really need it, you'll have to save it again. In "
+									"the meantime, I'll remove it from your notes list.")
+				sql.rm_note(chat_id, notename)
+			else:
+				message.reply_text("This note could not be sent, as it is incorrectly formatted, Please ask in @HarukaAyaGroup if you can't figure out why!")
+				LOGGER.exception("Could not parse message #%s in chat %s", notename, str(chat_id))
+				LOGGER.warning("Message was: %s", str(note.value))
+
+	return
 
 
 @run_async
 def cmd_get(bot: Bot, update: Update, args: List[str]):
 	if len(args) >= 2 and args[1].lower() == "noformat":
-		get(bot, update, args[0], show_none=True, no_format=True)
+		get(bot, update, args[0].lower(), show_none=True, no_format=True)
 	elif len(args) >= 1:
-		get(bot, update, args[0], show_none=True)
+		get(bot, update, args[0].lower(), show_none=True)
 	else:
 		update.effective_message.reply_text("Get rekt")
 
@@ -154,7 +161,7 @@ def cmd_get(bot: Bot, update: Update, args: List[str]):
 def hash_get(bot: Bot, update: Update):
 	message = update.effective_message.text
 	fst_word = message.split()[0]
-	no_hash = fst_word[1:]
+	no_hash = fst_word[1:].lower()
 	get(bot, update, no_hash, show_none=False)
 
 
@@ -178,6 +185,7 @@ def save(bot: Bot, update: Update):
 	msg = update.effective_message  # type: Optional[Message]
 
 	note_name, text, data_type, content, buttons = get_note_type(msg)
+	note_name = note_name.lower()
 
 	if data_type is None:
 		msg.reply_text("Dude, there's no note!")
@@ -200,7 +208,7 @@ def clear(bot: Bot, update: Update, args: List[str]):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     conn = connected(bot, update, chat, user.id)
-    if not conn == False:
+    if conn:
         chat_id = conn
         chat_name = dispatcher.bot.getChat(conn).title
     else:
@@ -211,7 +219,7 @@ def clear(bot: Bot, update: Update, args: List[str]):
             chat_name = chat.title
 
     if len(args) >= 1:
-        notename = args[0]
+        notename = args[0].lower()
 
         if sql.rm_note(chat_id, notename):
             update.effective_message.reply_text("Note succesfully removed from *{}*.".format(chat_name), parse_mode=ParseMode.MARKDOWN)
@@ -224,7 +232,7 @@ def list_notes(bot: Bot, update: Update):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     conn = connected(bot, update, chat, user.id, need_admin=False)
-    if not conn == False:
+    if conn:
         chat_id = conn
         chat_name = dispatcher.bot.getChat(conn).title
         msg = "*Notes in {}:*\n"
@@ -240,7 +248,7 @@ def list_notes(bot: Bot, update: Update):
     note_list = sql.get_all_chat_notes(chat_id)
 
     for note in note_list:
-        note_name = " • `#{}`\n".format(note.name)
+        note_name = " • `#{}`\n".format(note.name.lower())
         if len(msg) + len(note_name) > MAX_MESSAGE_LENGTH:
             update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
             msg = ""
@@ -353,6 +361,7 @@ def __chat_settings__(chat_id, user_id):
 __help__ = """
 Save data for future users with notes!
 Notes are great to save random tidbits of information; a phone number, a nice gif, a funny picture - anything!
+
 Available commands are:
  - /save <word> <sentence>: Save that sentence to the note called "word". Replying to a message will save that message. Even works on media!
  - /get <word>: get the note registered to that word.
@@ -360,13 +369,17 @@ Available commands are:
  - /clear <word>: delete the note called "word"
  - /notes: List all notes in the current chat
  - /saved: same as /notes
+
 An example of how to save a note would be via:
 /save data This is some data!
 Now, anyone using "/get data", or "#data" will be replied to with "This is some data!".
 If you want to save an image, gif, or sticker, or any other data, do the following:
 /save word while replying to a sticker or whatever data you'd like. Now, the note at "#word" contains a sticker which will be sent as a reply.
+
 Tip: to retrieve a note without the formatting, use /get <notename> noformat
 This will retrieve the note and send it without formatting it; getting you the raw markdown, allowing you to make easy edits
+
+Note: Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
 """
 
 __mod_name__ = "Notes"
