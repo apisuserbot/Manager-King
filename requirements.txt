@@ -18,6 +18,9 @@ Pillow>=4.2.0
 PyLyrics
 #AEX
 hurry.filesize
+#TWRP
+bs4
+lxml
 #translator
 googletrans
 
@@ -27,5 +30,3 @@ pyowm
 wikipedia
 bleach
 markdown2
-bs4
-lxml
