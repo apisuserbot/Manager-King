@@ -122,7 +122,7 @@ def start(bot: Bot, update: Update, args: List[str]):
             send_start(bot, update)
     else:
         try:
-            update.effective_message.reply_text("Hey there! I'm alive :3")
+            update.effective_message.reply_text("Hey there! I'm alive :3 PM me if you have any questions on how to use me!")
         except:
             print("Nut")
 
@@ -177,7 +177,7 @@ def control_panel(bot, update):
         back_match = re.match(r"help_back", query.data)
 
     else:
-        M_match = "Haruka Aya is best bot" #LMAO, don't uncomment
+        M_match = "Ｈｉｔｓｕｋｉ．ＧＩＦ is best bot" #LMAO, don't uncomment
 
     if M_match:
         text = "*Control panel* 🛠"
@@ -384,7 +384,7 @@ def get_help(bot: Bot, update: Update):
     # ONLY send help in PM
     if chat.type != chat.PRIVATE:
 
-        update.effective_message.reply_text("Contact me in PM to get the list of possible commands.",
+        update.effective_message.reply_text("Contact me in PM for help!",
                                             reply_markup=InlineKeyboardMarkup(
                                                 [[InlineKeyboardButton(text="Help",
                                                                        url="t.me/{}?start=help".format(
