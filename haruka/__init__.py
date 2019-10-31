@@ -59,7 +59,10 @@ if ENV:
     BAN_STICKER = os.environ.get('BAN_STICKER', 'CAADAgADEAgAAgi3GQL9YQyT_kBpQwI')
     ALLOW_EXCL = os.environ.get('ALLOW_EXCL', False)
     API_WEATHER = os.environ.get('API_OPENWEATHER', None)
-
+    
+    CAT_API_KEY = os.environ.get('CAT_API_KEY', "")
+    DOG_API_KEY = os.environ.get('DOG_API_KEY', "")
+    
 else:
     from haruka.config import Development as Config
     TOKEN = Config.API_KEY
@@ -101,6 +104,7 @@ else:
     BAN_STICKER = Config.BAN_STICKER
     ALLOW_EXCL = Config.ALLOW_EXCL
     API_WEATHER = Config.API_OPENWEATHER
+    
     CAT_API_KEY = Config.CAT_API_KEY
     DOG_API_KEY = Config.DOG_API_KEY
 
