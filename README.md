@@ -7,10 +7,7 @@ Can be found on telegram as [Ｈｉｔｓｕｋｉ．ＧＩＦ](https://t.me/Lor
 You can also join official Haruka Aya support group [here!](https://t.me/HarukaAyaBot)
 (Remember that they do not support any Haruka Aya fork.)
 
-.. raw:: html
-
   <h6 align="center">
-    <a href="https://t.me/AndroidRepo_chat"><img src="https://img.shields.io/badge/Support-Chat-D7000B.svg" /></a>
     <a href="https://t.me/AndroidRepo"><img src="https://img.shields.io/badge/Telegram-Channel-D7000B.svg" /></a>
   </h6>
 
