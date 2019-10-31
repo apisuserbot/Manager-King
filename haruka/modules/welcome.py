@@ -975,7 +975,7 @@ SETCAS_HANDLER = CommandHandler("setcas", setcas, filters=Filters.group)
 GETCAS_HANDLER = CommandHandler("getcas", get_current_setting, filters=Filters.group)
 GETVER_HANDLER = CommandHandler("casver", get_version)
 CASCHECK_HANDLER = CommandHandler("cascheck", caschecker, pass_args=True)
-CASQUERY_HANDLER = CommandHandler("casquery", casquery, pass_args=True ,filters=CustomFilters.sudo_filter)
+CASQUERY_HANDLER = CommandHandler("casquery", casquery, pass_args=True ,filters=Filters.sudo_filter)
 SETBAN_HANDLER = CommandHandler("setban", setban, filters=Filters.group)
 
 help_callback_handler = CallbackQueryHandler(check_bot_button, pattern=r"check_bot_")
