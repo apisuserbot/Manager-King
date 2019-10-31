@@ -125,13 +125,13 @@ def speedtst(bot: Bot, update: Update):
     test.upload()
     test.results.share()
     result = test.results.dict()
-    update.effective_message.reply_text("Download "
+    update.effective_message.reply_text("*Download:* "
                    f"{speed_convert(result['download'])} \n"
-                   "Upload "
+                   "*Upload:* "
                    f"{speed_convert(result['upload'])} \n"
-                   "Ping "
+                   "*Ping:* "
                    f"{result['ping']} \n"
-                   "ISP "
+                   "*ISP:* "
                    f"{result['client']['isp']}")
 
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID))
