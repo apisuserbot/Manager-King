@@ -2,8 +2,8 @@ import asyncio, re, aiohttp
 
 from telegram import Message, Update, Bot, User
 from telegram.ext import Filters, MessageHandler, run_async
-from tg_bot import dispatcher, CAT_API_KEY
-from tg_bot.modules.disable import DisableAbleCommandHandler
+from haruka import dispatcher, CAT_API_KEY
+from haruka.modules.disable import DisableAbleCommandHandler
 from typing import List
 
 
@@ -65,10 +65,14 @@ def catgif(bot: Bot, update: Update):
 
 
 __help__ = """
- Get Cat
+*A module for cat lovers!*
+
+/cat: Get pictures of cute kittens
+/cathd: Get images of cute kittens in high definition
+/catgif: Get gifs of cute kittens
 """
 
-__mod_name__ = "Cat"
+__mod_name__ = "Cats"
 
 if (CAT_API_KEY != None):
     CAT_HANDLER = DisableAbleCommandHandler("cat", cat, admin_ok=True, pass_args=False)
