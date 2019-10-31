@@ -9,6 +9,7 @@ from haruka.modules.disable import DisableAbleCommandHandler
 
 ABUSE_STRINGS = (
     "Fuck off",
+    "Evolution X is better than Pixel Experience",
     "Stfu go fuck yourself",
     "Ur mum gey",
     "Ur dad lesbo",
@@ -18,10 +19,12 @@ ABUSE_STRINGS = (
     "you noob",
 	"Relax your Rear,ders nothing to fear,The Rape train is finally here",
 	"Stfu bc",
+   "Just accepted, Samsung is the best smartphone maker,"
 	"Stfu and Gtfo U nub",
 	"GTFO bsdk"
     "CUnt",
     " Gay is here",
+    "iPhone sucks",
     "Ur dad gey bc "
 )
 
@@ -219,7 +222,7 @@ def abuse(bot: Bot, update: Update):
 def bluetext(bot: Bot, update: Update):
     # reply to correct message
     reply_text = update.effective_message.reply_to_message.reply_text if update.effective_message.reply_to_message else update.effective_message.reply_text
-    reply_text("BLUE TEXT\n MUST CLICK\n I AM A STUPID ANIMAL THAT IS ATTRACTED TO COLORS")		
+    reply_text(/"BLUE TEXT\n /MUST CLICK\n /I /AM /A /STUPID /ANIMAL /THAT /IS /ATTRACTED /TO /COLORS")		
 
 @run_async
 def rlg(bot: Bot, update: Update):
