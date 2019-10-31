@@ -13,8 +13,6 @@ You can also join official Haruka Aya support group [here!](https://t.me/HarukaA
     <a href="https://t.me/AndroidRepo_chat"><img src="https://img.shields.io/badge/Support-Chat-D7000B.svg" /></a>
     <a href="https://t.me/AndroidRepo"><img src="https://img.shields.io/badge/Telegram-Channel-D7000B.svg" /></a>
   </h6>
-\
-
 
 ## Thanks to
 
