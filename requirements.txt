@@ -32,4 +32,3 @@ bleach
 markdown2
 
 speedtest-cli>=2.0.2
-telegraph
