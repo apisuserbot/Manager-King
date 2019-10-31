@@ -89,7 +89,6 @@ class CombotCASStatus(BASE):
 Welcome.__table__.create(checkfirst=True)
 WelcomeButtons.__table__.create(checkfirst=True)
 GoodbyeButtons.__table__.create(checkfirst=True)
-WelcomeMute.__table__.create(checkfirst=True)
 CombotCASStatus.__table__.create(checkfirst=True)
 
 INSERTION_LOCK = threading.RLock()
