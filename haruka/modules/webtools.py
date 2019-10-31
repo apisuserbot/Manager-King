@@ -11,10 +11,10 @@ from telegram import Message, Chat, Update, Bot, MessageEntity
 from telegram import ParseMode
 from telegram.ext import CommandHandler, run_async, Filters
 from telegram.utils.helpers import escape_markdown, mention_html
-from tg_bot.modules.helper_funcs.extraction import extract_text
+from haruka.modules.helper_funcs.extraction import extract_text
 
-from tg_bot import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, WHITELIST_USERS
-from tg_bot.modules.helper_funcs.filters import CustomFilters
+from haruka import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, WHITELIST_USERS
+from haruka.modules.helper_funcs.filters import CustomFilters
 
 #Kanged from PaperPlane Extended userbot
 def speed_convert(size):
