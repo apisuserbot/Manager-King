@@ -40,6 +40,12 @@ class Config(object):
 
     # MEMES
     DEEPFRY_TOKEN = None
+    
+    # CAT
+    CAT_API_KEY = None
+
+    # DOG
+    DOG_API_KEY = None
 
 class Production(Config):
     LOGGER = False
