@@ -586,13 +586,14 @@ def bootleggers(bot: Bot, update: Update):
 
 
 __help__ = """
-*This module is made with love by* @RealAkito *and code beauty by* @kandnub
-*Useful tools*
+*Here you will have several useful commands for Android users!*
+
+*Useful tools:*
  - /magisk: gets the latest magisk release for Stable/Beta/Canary
  - /device <codename>: gets android device basic info from its codename
  - /twrp <codename>: gets latest twrp for the android device using the codename
 
- *Device Specific Rom*
+ *Device Specific Rom:*
  - /pearl <device>: Get the Pearl Rom
  - /havoc <device>: Get the Havoc Rom
  - /posp <device>: Get the POSP Rom
@@ -604,7 +605,7 @@ __help__ = """
  - /los <device>: Get the LineageOS Rom
  - /bootleggers <device>: Get the Bootleggers Rom
  
- *GSI*
+ *GSIs:*
  - /phh: Get the lastest Phh AOSP Oreo GSI!
  - /descendant: Get the lastest Descendant GSI!
  - /enesrelease: Get the lastest Enes upload
