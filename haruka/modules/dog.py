@@ -67,9 +67,9 @@ def doggif(bot: Bot, update: Update):
 __help__ = """
 *A module for dog lovers!*
 
-/dog: Get pictures of cute kittens
-/doghd: Get images of cute kittens in high definition
-/dogif: Get gifs of cute kittens
+/dog: Get pictures of cute dogs
+/doghd: Get images of cute dogs in high definition
+/dogif: Get gifs of cute dogs
 """
 
 __mod_name__ = "Dogs"
