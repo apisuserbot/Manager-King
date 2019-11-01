@@ -415,9 +415,9 @@ __help__ = """
 
 __mod_name__ = "Memes and etc."
 
-COPYPASTA_HANDLER = CommandHandler("😂", copypasta)
-CLAPMOJI_HANDLER = CommandHandler("👏", clapmoji)
-BMOJI_HANDLER = CommandHandler("🅱", bmoji)
+COPYPASTA_HANDLER = CommandHandler("copypasta", copypasta)
+CLAPMOJI_HANDLER = CommandHandler("clapmoji", clapmoji)
+BMOJI_HANDLER = CommandHandler("bmoji", bmoji)
 OWO_HANDLER = DisableAbleCommandHandler("owo", owo, admin_ok=True)
 STRETCH_HANDLER = DisableAbleCommandHandler("stretch", stretch)
 VAPOR_HANDLER = DisableAbleCommandHandler("vapor", vapor, pass_args=True, admin_ok=True)
