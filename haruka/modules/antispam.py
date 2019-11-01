@@ -371,6 +371,8 @@ __help__ = """
 Antispam are used by the bot owners to ban spammers across all groups. This helps protect \
 you and your groups by removing spam flooders as quickly as possible. They can be disabled for you group by calling \
 /antispam
+
+You can improve your Antispam protection by using the /setcas command to enable new member verification based on the [Combot Anti Spam System](https://combot.org/cas)
 """
 
 __mod_name__ = "Antispam security"
