@@ -3,7 +3,7 @@ from typing import Optional, List
 from random import randint
 from telegram import Message, Update, Bot, User
 from telegram import MessageEntity
-from telegram.ext import Filters, MessageHandler, run_async
+from telegram.ext import Filters, MessageHandler, run_async, MessageHandler, CommandHandler
 
 from haruka import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, LOGGER
 from haruka.modules.helper_funcs.filters import CustomFilters
