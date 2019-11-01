@@ -5,19 +5,23 @@ from typing import Optional, List
 
 import haruka.modules.helper_funcs.cas_api as cas
 
-from telegram import Message, Chat, Update, Bot, User, CallbackQuery
+from telegram import Message, Chat, Update, Bot, User, CallbackQuery, ChatMember, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.error import BadRequest
 from telegram.ext import MessageHandler, Filters, CommandHandler, run_async, CallbackQueryHandler
-from telegram.utils.helpers import mention_html
+from telegram.utils.helpers import mention_markdown, mention_html, escape_markdown
 
-import haruka.modules.sql.antispam_sql as gbansql
 import haruka.modules.sql.welcome_sql as sql
+import haruka.modules.sql.antispam_sql as gbansql
+
 from haruka.modules.sql.antispam_sql import is_user_gbanned
-from haruka import dispatcher, OWNER_ID, LOGGER, MESSAGE_DUMP
+from haruka import dispatcher, OWNER_ID, LOGGER, MESSAGE_DUMP, SUDO_USERS, SUPPORT_USERS
 from haruka.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
-from haruka.modules.helper_funcs.misc import build_keyboard, revert_buttons
+from tg_bot.modules.helper_funcs.extraction import extract_user
+from haruka.modules.helper_funcs.misc import build_keyboard, revert_buttons, send_to_list
 from haruka.modules.helper_funcs.msg_types import get_welcome_type
+from tg_bot.modules.disable import DisableAbleCommandHandler
+from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.helper_funcs.string_handling import markdown_parser, \
     escape_invalid_curly_brackets, extract_time, markdown_to_html
 from haruka.modules.log_channel import loggable
@@ -100,7 +104,7 @@ def new_member(bot: Bot, update: Update):
     msg = update.effective_message # type: Optional[Message]
     chat_name = chat.title or chat.first or chat.username # type: Optional:[chat name]
     should_welc, cust_welcome, welc_type = sql.get_welc_pref(chat.id)
-    welc_mutes = sql.welcome_mutes(chat.id)
+    welcome_security = sql.welcome_mutes(chat.id)
     casPrefs = sql.get_cas_status(str(chat.id)) #check if enabled, obviously
     autoban = sql.get_cas_autoban(str(chat.id))
     if casPrefs and not autoban and cas.banchecker(user.id):
@@ -965,9 +969,9 @@ SECURITY_BUTTONRESET_HANDLER = CommandHandler("resetmutetext", security_text_res
 CLEAN_SERVICE_HANDLER = CommandHandler("cleanservice", cleanservice, pass_args=True, filters=Filters.group)
 SETCAS_HANDLER = CommandHandler("setcas", setcas, filters=Filters.group)
 GETCAS_HANDLER = CommandHandler("getcas", get_current_setting, filters=Filters.group)
-GETVER_HANDLER = CommandHandler("casver", get_version)
+GETVER_HANDLER = DisableAbleCommandHandler("casver", get_version)
 CASCHECK_HANDLER = CommandHandler("cascheck", caschecker, pass_args=True)
-CASQUERY_HANDLER = CommandHandler("casquery", casquery, pass_args=True ,filters=CustomFilters.sudo_filter)
+CASQUERY_HANDLER = CommandHandler("casquery", casquery, pass_args=True, filters=CustomFilters.sudo_filter)
 SETBAN_HANDLER = CommandHandler("setban", setban, filters=Filters.group)
 
 help_callback_handler = CallbackQueryHandler(check_bot_button, pattern=r"check_bot_")
