@@ -103,7 +103,10 @@ def new_member(bot: Bot, update: Update):
     user = update.effective_user  # type: Optional[User]
     msg = update.effective_message # type: Optional[Message]
     chat_name = chat.title or chat.first or chat.username # type: Optional:[chat name]
-    should_welc, cust_welcome, welc_type = sql.get_welc_pref(chat.id)
+
+    should_welc, cust_welcome, cust_content, welc_type = sql.get_welc_pref(chat.id)
+    cust_welcome = markdown_to_html(cust_welcome)
+    
     welcome_security = sql.welcome_mutes(chat.id)
     casPrefs = sql.get_cas_status(str(chat.id)) #check if enabled, obviously
     autoban = sql.get_cas_autoban(str(chat.id))
@@ -124,8 +127,6 @@ def new_member(bot: Bot, update: Update):
         report = "CAS Banned user detected: <code>{}</code>\nGlobally Banned: {}".format(user.id, isUserGbanned)
         send_to_list(bot, SUDO_USERS + SUPPORT_USERS, report, html=True)
 
-    should_welc, cust_welcome, cust_content, welc_type = sql.get_welc_pref(chat.id)
-    cust_welcome = markdown_to_html(cust_welcome)
 
     if should_welc:
         sent = None
