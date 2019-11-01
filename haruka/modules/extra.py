@@ -1,4 +1,5 @@
 import random, re
+from typing import Optional, List
 from random import randint
 from telegram import Message, Update, Bot, User
 from telegram import MessageEntity
