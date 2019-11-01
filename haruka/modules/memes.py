@@ -292,33 +292,6 @@ def chinesememes(bot: Bot, update: Update, args: List[str]):
         message.reply_text("Image not found!")
         print(e)
 
-@run_async
-def forbesify(bot: Bot, update: Update):
-    message = update.effective_message
-    if message.reply_to_message:
-        data = message.reply_to_message.text
-    else:
-        data = ''
-
-    data = data.lower()
-    accidentals = ['VB', 'VBD', 'VBG', 'VBN']
-    reply_text = data.split()
-    offset = 0
-
-    # use NLTK to find out where verbs are
-    tagged = dict(nltk.pos_tag(reply_text))
-
-    # let's go through every word and check if it's a verb
-    # if yes, insert ACCIDENTALLY and increase offset
-    for k in range(len(reply_text)):
-        i = reply_text[k + offset]
-        if tagged.get(i) in accidentals:
-            reply_text.insert(k + offset, 'accidentally')
-            offset += 1
-
-    reply_text = string.capwords(' '.join(reply_text))
-    message.reply_to_message.reply_text(reply_text)
-
 
 @run_async
 def deepfryer(bot: Bot, update: Update):
@@ -402,7 +375,7 @@ __help__ = """
 - /zalgofy: Reply to a message to g̫̞l̼̦i̎͡tͫ͢c̘ͭh̛̗ it out!
 - /deepfry: For when you're hungry for memes
 - /shout <keyword>: Write anything you want to give loud shout
-- /dllm; Some chineses memes
+- /dllm: Some chinese memes
 
 *Emojis:*
 - /clapmoji
@@ -426,7 +399,6 @@ HITLER_HANDLER = DisableAbleCommandHandler("hitler", hitlertext, admin_ok=True)
 ZALGO_HANDLER = DisableAbleCommandHandler("zalgofy", zalgotext)
 DEEPFRY_HANDLER = DisableAbleCommandHandler("deepfry", deepfryer, admin_ok=True)
 SHOUT_HANDLER = DisableAbleCommandHandler("shout", shout, pass_args=True)
-FORBES_HANDLER = CommandHandler("forbes", forbesify)
 DEEPFRY_HANDLER = CommandHandler("deepfry", deepfryer)
 CHINESEMEMES_HANDLER = CommandHandler("dllm", chinesememes,  pass_args=True)
 
@@ -439,7 +411,6 @@ dispatcher.add_handler(VAPOR_HANDLER)
 dispatcher.add_handler(MOCK_HANDLER)
 dispatcher.add_handler(ZALGO_HANDLER)
 dispatcher.add_handler(DEEPFRY_HANDLER)
-dispatcher.add_handler(FORBES_HANDLER)
 dispatcher.add_handler(KIM_HANDLER)
 dispatcher.add_handler(HITLER_HANDLER)
 dispatcher.add_handler(COPYPASTA_HANDLER)
