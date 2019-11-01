@@ -24,6 +24,7 @@ from haruka import DEEPFRY_TOKEN
 from haruka import dispatcher
 from haruka.modules.disable import DisableAbleCommandHandler, DisableAbleRegexHandler
 
+MAXNUMURL = 'https://raw.githubusercontent.com/atanet90/expression-pack/master/meta'
 WIDE_MAP = dict((i, i + 0xFEE0) for i in range(0x21, 0x7F))
 WIDE_MAP[0x20] = 0x3000
 
@@ -85,12 +86,6 @@ def vapor(bot: Bot, update: Update, args: List[str]):
     else:
         message.reply_to_message.reply_text(reply_text)
 
-@run_async
-def me_too(bot: Bot, update: Update):
-    message = update.effective_message
-    if random.randint(0, 100) > 60:
-        reply = random.choice(["Me too thanks", "Haha yes, me too", "Same lol", "Me irl"])
-        message.reply_text(reply)
 
 # D A N K modules by @deletescape ^^^
 # Less D A N K modules by @skittles9823 # holi fugg I did some maymays vvv
@@ -432,7 +427,6 @@ DEEPFRY_HANDLER = DisableAbleCommandHandler("deepfry", deepfryer, admin_ok=True)
 SHOUT_HANDLER = DisableAbleCommandHandler("shout", shout, pass_args=True)
 ORBES_HANDLER = CommandHandler("forbes", forbesify)
 DEEPFRY_HANDLER = CommandHandler("deepfry", deepfryer)
-ME_TOO_THANKS_HANDLER = RegexHandler("me too", me_too)
 CHINESEMEMES_HANDLER = CommandHandler("dllm", chinesememes,  pass_args=True)
 
 dispatcher.add_handler(MAFIA_HANDLER)
@@ -444,10 +438,10 @@ dispatcher.add_handler(VAPOR_HANDLER)
 dispatcher.add_handler(MOCK_HANDLER)
 dispatcher.add_handler(ZALGO_HANDLER)
 dispatcher.add_handler(DEEPFRY_HANDLER)
+dispatcher.add_handler(FORBES_HANDLER)
 dispatcher.add_handler(KIM_HANDLER)
 dispatcher.add_handler(HITLER_HANDLER)
 dispatcher.add_handler(COPYPASTA_HANDLER)
 dispatcher.add_handler(CLAPMOJI_HANDLER)
 dispatcher.add_handler(BMOJI_HANDLER)
-dispatcher.add_handler(ME_TOO_THANKS_HANDLER)
 dispatcher.add_handler(CHINESEMEMES_HANDLER)
