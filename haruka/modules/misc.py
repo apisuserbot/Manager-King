@@ -545,16 +545,15 @@ def wiki(bot: Bot, update: Update):
 
 
 __help__ = """
+*Group tools:*
  - /id: get the current group id. If used by replying to a message, gets that user's id.
- - /runs: reply a random string from an array of replies.
- - /insults: reply a random string from an array of replies.
- - /slap: slap a user, or get slapped if not a reply.
  - /info: get information about a user.
  - /gdpr: deletes your information from the bot's database. Private chats only.
  - /stickerid: reply to a sticker to me to tell you its file ID.
  - /getsticker: reply to a sticker to me to upload its raw PNG file.
  - /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats.
 
+*Useful tools:*
  - /git: Returns info about a GitHub user or organization.
  - /repo: Return the GitHub user or organization repository list (Limited at 40)
  - /lyrics: Find your favorite songs lyrics!
@@ -565,6 +564,11 @@ __help__ = """
  - /removebotkeyboard: Got a nasty bot keyboard stuck in your group?
  - /exec <language> <code> [/stdin <stdin>]: Execute a code in a specified language. Send an empty command to get the supported languages.
  - /wiki <keywords>: Get wikipedia articles just using this bot!
+
+*Other things:*
+ - /runs: reply a random string from an array of replies.
+ - /insults: reply a random string from an array of replies.
+ - /slap: slap a user, or get slapped if not a reply.
 """
 
 __mod_name__ = "Misc"
