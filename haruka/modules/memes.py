@@ -2,12 +2,14 @@ import random, re, string, io, asyncio
 from PIL import Image
 from io import BytesIO
 import base64
+import urllib.request
 from spongemock import spongemock
 from zalgo_text import zalgo
 from deeppyer import deepfry
 import os
 from pathlib import Path
 import glob
+from typing import List, Optional
 
 import nltk # shitty lib, but it does work
 nltk.download('punkt')
@@ -402,10 +404,9 @@ __help__ = """
 - /mock: Does the same as /hitler but spongemock instead
 - /kim: Does the same as /hitler but with Kim Jong Un instead (O no plox dont bomb my house)
 - /pidor: 4pda memes
-- /shout: Write anything that u want it to should
 - /zalgofy: Reply to a message to g̫̞l̼̦i̎͡tͫ͢c̘ͭh̛̗ it out!
 - /deepfry: For when you're hungry for memes
-- /metoo: Haha me too
+- /shout <keyword>: Write anything you want to give loud shout.
 
 *Emojis:*
 - /clapmoji
@@ -431,7 +432,7 @@ DEEPFRY_HANDLER = DisableAbleCommandHandler("deepfry", deepfryer, admin_ok=True)
 SHOUT_HANDLER = DisableAbleCommandHandler("shout", shout, pass_args=True)
 ORBES_HANDLER = CommandHandler("forbes", forbesify)
 DEEPFRY_HANDLER = CommandHandler("deepfry", deepfryer)
-ME_TOO_THANKS_HANDLER = RegexHandler(r"(?i)me too", me_too)
+ME_TOO_THANKS_HANDLER = RegexHandler("me too", me_too)
 CHINESEMEMES_HANDLER = CommandHandler("dllm", chinesememes,  pass_args=True)
 
 dispatcher.add_handler(MAFIA_HANDLER)
