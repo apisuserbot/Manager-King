@@ -66,51 +66,18 @@ def unbanall(bot: Bot, update: Update, args: List[int]):
             continue
 
 
-@run_async
-def snipe(bot: Bot, update: Update, args: List[str]):
-    try:
-        chat_id = str(args[0])
-        del args[0]
-    except TypeError as excp:
-        update.effective_message.reply_text("Please give me a chat to echo to!")
-    to_send = " ".join(args)
-    if len(to_send) >= 2:
-        try:
-            bot.sendMessage(int(chat_id), str(to_send))
-        except TelegramError:
-            LOGGER.warning("Couldn't send to group %s", str(chat_id))
-            update.effective_message.reply_text("Couldn't send the message. Perhaps I'm not part of that group?")
-
-
-@run_async
-@user_admin
-def birthday(bot: Bot, update: Update, args: List[str]):
-    if args:
-        username = str(",".join(args))
-    bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
-    for i in range(5):
-        bdaymessage = random.choice(MESSAGES)
-        update.effective_message.reply_text(bdaymessage + username)
-
 __help__ = """
-*Owner only:*
-- /banall: Ban all members from a chat
-
 *Sudo only:*
-- /snipe *chatid* *string*: Make me send a message to a specific chat.
+- /snipe <chatid> <string>: Make me send a message to a specific chat.
 
-*Admin only:*
-- /birthday *@username*: Spam user with birthday wishes.
+*Owner only:*
+- /banall: Ban all members from a group
 """
 
 __mod_name__ = "Special"
 
 SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True, filters=CustomFilters.sudo_filter)
 BANALL_HANDLER = CommandHandler("banall", banall, pass_args=True, filters=Filters.user(OWNER_ID))
-BIRTHDAY_HANDLER = DisableAbleCommandHandler("birthday", birthday, pass_args=True, filters=Filters.group)
-UNBANALL_HANDLER = CommandHandler("unbanall", unbanall, pass_args=True, filters=Filters.user(OWNER_ID))
 
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)
-dispatcher.add_handler(BIRTHDAY_HANDLER)
-dispatcher.add_handler(UNBANALL_HANDLER)
