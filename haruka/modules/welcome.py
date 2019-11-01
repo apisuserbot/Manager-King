@@ -905,13 +905,7 @@ def casquery(bot: Bot, update: Update, args: List[str]):
 __help__ = """
 Give your members a warm welcome with the greetings module! Or a sad goodbye... Depends!
 
-Thanks to @nunopenim for providing his proprietary Combot Anti Spam System API - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
-
-CAS Commands:
- - /casver: Returns the API version that the bot is currently running
- - /cascheck: Checks you or another user for CAS BAN
-
-*Admin Only:*
+*Available commands are:*
  - /welcome <on/off/yes/no>: enables/disables welcome messages. If no option is given, returns the current welcome message and welcome settings. 
  - /goodbye <on/off/yes/no>: enables/disables goodbye messages. If no option is given, returns  the current goodbye message and goodbye settings.
  - /setwelcome <message>: sets your new welcome message! Markdown and buttons are supported, as well as fillings.
@@ -925,9 +919,6 @@ CAS Commands:
  Note: if you want to reset the mute time to be forever, use /welcomemutetime 0m. 0 == eternal!
  - /setmutetext <new text>: Customise the "click here to prove you're human" button obtained from enabling welcomemutes.
  - /resetmutetext: resets the mute button to the default text.
- - /setcas <on/off/true/false>: Enables/disables CAS Checking on welcome
- - /getcas: Gets the current CAS settings
- - /setban <on/off/true/false>: Enables/disables autoban on CAS banned user detected.
 
 Read /markdownhelp to learn about formatting your text and mentioning new users when the join!
 
