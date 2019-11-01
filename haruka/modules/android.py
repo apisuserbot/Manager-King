@@ -114,7 +114,7 @@ def havoc(bot: Bot, update: Update):
     fetch = get(f'https://raw.githubusercontent.com/Havoc-Devices/android_vendor_OTA/pie/{device}.json')
 
     if device == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/havoc tissot`"
+        reply_text = "Please type your device **codename**!\nFor example, `/havoc tissot`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -146,7 +146,7 @@ def pixys(bot: Bot, update: Update):
     device = message.text[len('/pixys '):]
 
     if device == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/pixys tissot`"
+        reply_text = "Please type your device **codename**!\nFor example, `/pixys tissot`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -181,7 +181,7 @@ def pearl(bot: Bot, update: Update):
     device = message.text[len('/pearl '):]
 
     if device == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/pearl mido`"
+        reply_text = "Please type your device **codename**!\nFor example, `/pearl mido`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -231,7 +231,7 @@ def posp(bot: Bot, update: Update):
     device = message.text[len('/posp '):]
 
     if device == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/posp tissot`"
+        reply_text = "Please type your device **codename**!\nFor example, `/posp tissot`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -264,7 +264,7 @@ def los(bot: Bot, update: Update):
     device = message.text[len('/los '):]
 
     if device == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/los tissot`"
+        reply_text = "Please type your device **codename**!\nFor example, `/los tissot`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -297,7 +297,7 @@ def dotos(bot: Bot, update: Update):
     device = message.text[len('/dotos '):]
 
     if device == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/dotos tissot`"
+        reply_text = "Please type your device **codename**!\nFor example, `/dotos tissot`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -332,7 +332,7 @@ def viper(bot: Bot, update: Update):
     device = message.text[len('/viper '):]
 
     if device == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/viper tissot`"
+        reply_text = "Please type your device **codename**!\nFor example, `/viper tissot`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -364,7 +364,7 @@ def evo(bot: Bot, update: Update):
     message = update.effective_message
     device = message.text[len('/evo '):]
     if device == "example":
-        reply_text = "Why are you trying to execute a example json?"
+        reply_text = "Why are you trying to get the example device?"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -377,14 +377,14 @@ def evo(bot: Bot, update: Update):
     fetch = get(f'https://raw.githubusercontent.com/Evolution-X-Devices/official_devices/master/builds/{device}.json')
 
     if device == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/evo tissot`"
+        reply_text = "Please type your device **codename**!\nFor example, `/evo tissot`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
     if device == 'gsi':
-        reply_text = """
-Please check @expresslukegsi channel! or Click the button down below to download the official GSIs!
-"""
+        reply_text = "Please check Evolution X Updates channel(@EvolutionXUpdates)" \
+                     " or click the button down below to download the GSIs!"
+
         keyboard = [[InlineKeyboardButton(text="Click to Download", url="https://sourceforge.net/projects/evolution-x/files/GSI/")]]
         message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
@@ -469,7 +469,7 @@ def miui(bot: Bot, update: Update):
     device = message.text[len('/miui '):]
 
     if device == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/miui whyred`!"
+        reply_text = "Please type your device **codename**!\nFor example, `/miui whyred`!"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -498,7 +498,7 @@ def getaex(bot: Bot, update: Update, args: List[str]):
     message = update.effective_message
 
     if len(args) != 2:
-        reply_text = "Please type your device **codename** and **Android Version** into it!\nFor example, `/aex jason pie`"
+        reply_text = "Please type your device **codename** and **Android Version**!\nFor example, `/aex jason pie`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -508,7 +508,7 @@ def getaex(bot: Bot, update: Update, args: List[str]):
     if res.status_code == 200:
         apidata = json.loads(res.text)
         if apidata.get('error'):
-            message.reply_text("Sadly there isn't any build available for " + device)
+            message.reply_text("Sorry, but there isn't any build available for " + device)
             return
         else:
             developer = apidata.get('developer')
@@ -537,7 +537,7 @@ def bootleggers(bot: Bot, update: Update):
     codename = message.text[len('/bootleggers '):]
 
     if codename == '':
-        reply_text = "Please type your device **codename** into it!\nFor example, `/bootleggers tissot`"
+        reply_text = "Please type your device **codename**!\nFor example, `/bootleggers tissot`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
@@ -593,22 +593,23 @@ __help__ = """
  - /device <codename>: gets android device basic info from its codename
  - /twrp <codename>: gets latest twrp for the android device using the codename
 
- *Device Specific Rom:*
- - /pearl <device>: Get the Pearl Rom
- - /havoc <device>: Get the Havoc Rom
- - /posp <device>: Get the POSP Rom
- - /viper <device>: Get the Viper Rom
- - /evo <device>: Get the Evolution X Rom
- - /dotos <device>: Get the DotOS Rom
- - /aex <device> <android version>: Get the AEX Rom
- - /pixys <device>: Get the Pixy Rom
- - /los <device>: Get the LineageOS Rom
- - /bootleggers <device>: Get the Bootleggers Rom
+ *Specific ROM for a device*
+ - /pearl <device>: Get the latest Pearl ROM for a device
+ - /havoc <device>: Get the latest Havoc ROM for a device
+ - /posp <device>: Get the latest POSP ROM for a device
+ - /viper <device>: Get the latest Viper ROM for a device
+ - /evo <device>: Get the latest Evolution X ROM for a device
+ - /dotos <device>: Get the latest DotOS ROM for a device
+ - /aex <device> <android version>: Get the latest AEX ROM for a device
+ - /pixys <device>: Get the latest Pixy ROM for a device
+ - /los <device>: Get the latest LineageOS ROM for a device
+ - /bootleggers <device>: Get the latest Bootleggers ROM for a device
+ - /miui <device>: Get the latest MIUI ROM for a device
  
  *GSIs:*
- - /phh: Get the lastest Phh AOSP Oreo GSI!
- - /descendant: Get the lastest Descendant GSI!
- - /enesrelease: Get the lastest Enes upload
+ - /phh: Get the latest Phh AOSP Oreo GSI!
+ - /descendant: Get the latest Descendant GSI!
+ - /enesrelease: Get the latest Enes upload
 """
 
 __mod_name__ = "Android"

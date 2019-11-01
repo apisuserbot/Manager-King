@@ -6,14 +6,13 @@ from telegram.error import BadRequest
 from telegram.ext import run_async, CommandHandler, Filters
 from telegram.utils.helpers import mention_html
 
-from haruka import dispatcher, BAN_STICKER, LOGGER, OWNER_ID
+from haruka import dispatcher, BAN_STICKER, LOGGER
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import bot_admin, user_admin, is_user_ban_protected, can_restrict, \
-    is_user_admin, is_user_in_chat, is_bot_admin
+    is_user_admin, is_user_in_chat
 from haruka.modules.helper_funcs.extraction import extract_user_and_text
 from haruka.modules.helper_funcs.string_handling import extract_time
 from haruka.modules.log_channel import loggable
-from haruka.modules.helper_funcs.filters import CustomFilters
 
 from haruka.modules.translations.strings import tld
 
@@ -53,30 +52,33 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
 
     log = "<b>{}:</b>" \
           "\n#BANNED" \
-          "\n<b>Admin:</b> {}" \
-          "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
-                                                       mention_html(user.id, user.first_name),
-                                                       mention_html(member.user.id, member.user.first_name),
-                                                       member.user.id)
+          "\n<b>• Admin:</b> {}" \
+          "\n<b>• User:</b> {}" \
+          "\n<b>• ID:</b> <code>{}</code>".format(html.escape(chat.title), mention_html(user.id, user.first_name), 
+                                                  mention_html(member.user.id, member.user.first_name), user_id)
+
+    reply = "{} has been banned!".format(mention_html(member.user.id, member.user.first_name))
+
     if reason:
         log += "\n<b>Reason:</b> {}".format(reason)
 
     try:
         chat.kick_member(user_id)
-        bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+        #bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         message.reply_text(tld(chat.id, "Banned!"))
         return log
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
+            #bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
             message.reply_text(tld(chat.id, "Banned!"), quote=False)
             return log
         else:
             LOGGER.warning(update)
             LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text(tld(chat.id, "Banned!"))
+            message.reply_text(tld(chat.id, "Well damn, I can't ban that user."))
 
     return ""
 
@@ -145,24 +147,21 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
 
     try:
         chat.kick_member(user_id, until_date=bantime)
-        keyboard = []
-        bot.send_sticker(update.effective_chat.id, BAN_STICKER)
-        reply = "{} has been temporarily banned for {}!".format(mention_html(member.user.id, member.user.first_name),time_val)
-        message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
+        #bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+        message.reply_text("Banned! User will be banned for {}.".format(time_val))
         return log
-
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+            #bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
             message.reply_text(tld(chat.id, "Banned! User will be banned for {}.").format(time_val), quote=False)
             return log
         else:
             LOGGER.warning(update)
             LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text(tld(chat.id, "Banned!"))
+            message.reply_text(tld(chat.id, "Well damn, I can't ban that user."))
 
     return ""
 
@@ -201,10 +200,8 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
 
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
-        keyboard = []
-        reply = "{} Kicked!".format(mention_html(member.user.id, member.user.first_name))
-        message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
-         
+        #bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+        message.reply_text("Kicked!")
         log = "<b>{}:</b>" \
               "\n#KICKED" \
               "\n<b>Admin:</b> {}" \
@@ -218,7 +215,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
         return log
 
     else:
-        message.reply_text("Kicked!")
+        message.reply_text("Well damn, I can't kick that user.")
 
     return ""
 
@@ -228,10 +225,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
 @can_restrict
 def kickme(bot: Bot, update: Update):
     user_id = update.effective_message.from_user.id
-    if user_id == OWNER_ID:
-        update.effective_message.reply_text("Oof, I can't kick my master.")
-        return
-    elif is_user_admin(update.effective_chat, user_id):
+    if is_user_admin(update.effective_chat, user_id):
         update.effective_message.reply_text("Why would I kick an admin? That sounds like a pretty dumb idea.")
         return
 
@@ -250,10 +244,7 @@ def banme(bot: Bot, update: Update):
     user_id = update.effective_message.from_user.id
     chat = update.effective_chat
     user = update.effective_user
-    if user_id == OWNER_ID:
-        update.effective_message.reply_text("Oof, I can't ban my master.")
-        return
-    elif is_user_admin(update.effective_chat, user_id):
+    if is_user_admin(update.effective_chat, user_id):
         update.effective_message.reply_text("Why would I ban an admin? That sounds like a pretty dumb idea.")
         return
 
