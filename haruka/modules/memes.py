@@ -16,7 +16,7 @@ nltk.download('averaged_perceptron_tagger')
 from typing import Optional, List
 from telegram import Message, Update, Bot, User
 from telegram import MessageEntity
-from telegram.ext import Filters, MessageHandler, run_async, CommandHandler, RegexHandler
+from telegram.ext import Filters, MessageHandler, CommandHandler, RegexHandler, run_async
 
 from haruka import DEEPFRY_TOKEN
 from haruka import dispatcher
