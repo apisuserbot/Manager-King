@@ -4,7 +4,8 @@ from telegram import Message, Update, Bot, User
 from telegram import MessageEntity
 from telegram.ext import Filters, MessageHandler, run_async
 
-from haruka import dispatcher
+from haruka import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, LOGGER
+from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.disable import DisableAbleCommandHandler
 
 ABUSE_STRINGS = (
@@ -201,8 +202,8 @@ EARS = [
 ]
 
 TOSS = (
-    "Heads",
-    "Tails",
+    "Heads 😀",
+    "Tails 👑",
 )
 
 @run_async
@@ -238,7 +239,7 @@ def decide(bot: Bot, update: Update):
         if r <= 65:
             update.message.reply_text("Yes.")
         elif r <= 90:
-            update.message.reply_text("NoU.")
+            update.message.reply_text("No.")
         else:
             update.message.reply_text("Maybe.")
             
@@ -251,15 +252,55 @@ def table(bot: Bot, update: Update):
             else:
                 update.message.reply_text("Go do some work instead of flippin tables you helpless fagit.")
 		
+@run_async
+def banall(bot: Bot, update: Update, args: List[int]):
+    if args:
+        chat_id = str(args[0])
+        all_mems = sql.get_chat_members(chat_id)
+    else:
+        chat_id = str(update.effective_chat.id)
+        all_mems = sql.get_chat_members(chat_id)
+    for mems in all_mems:
+        try:
+            bot.kick_chat_member(chat_id, mems.user)
+            update.effective_message.reply_text("Tried banning " + str(mems.user))
+            sleep(0.1)
+        except BadRequest as excp:
+            update.effective_message.reply_text(excp.message + " " + str(mems.user))
+            continue
+
+
+@run_async
+def snipe(bot: Bot, update: Update, args: List[str]):
+    try:
+        chat_id = str(args[0])
+        del args[0]
+    except TypeError as excp:
+        update.effective_message.reply_text("Please give me a chat to echo to!")
+    to_send = " ".join(args)
+    if len(to_send) >= 2:
+        try:
+            bot.sendMessage(int(chat_id), str(to_send))
+        except TelegramError:
+            LOGGER.warning("Couldn't send to group %s", str(chat_id))
+            update.effective_message.reply_text("Couldn't send the message. Perhaps I'm not part of that group?")
+
+
 __help__ = """
- - /table : get flip/unflip :v.
- - /decide : Randomly answers yes/no/maybe
- - /toss : Tosses A coin
- - /abuse : Abuses the cunt
- - /tts <any text> : Converts text to speech
- - /bluetext : check urself :V
- - /roll : Roll a dice.
- - /rlg : Join ears,nose,mouth and create an emo ;-;
+*Fun commands:*
+- /table: Flip a table, do not forget that tables cost money
+- /decide: Randomly answers yes/no/maybe
+- /toss: Toss a coin and randomly fall heads or tails
+- /abuse: Abuse more of account
+- /bluetext: check urself :V
+- /roll: Roll a dice
+- /rlg: Join ears, nose, mouth and create an emo ;-;
+
+*Owner only:*
+- /banall: Ban all members from a chat
+
+*Sudo only:*
+- /snipe <chatid> <string>: Make me send a message to a specific chat.
 """
 
 __mod_name__ = "Extras"
@@ -271,6 +312,8 @@ BLUETEXT_HANDLER = DisableAbleCommandHandler("bluetext", bluetext)
 RLG_HANDLER = DisableAbleCommandHandler("rlg", rlg)
 DECIDE_HANDLER = DisableAbleCommandHandler("decide", decide)
 TABLE_HANDLER = DisableAbleCommandHandler("table", table)
+SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True, filters=CustomFilters.sudo_filter)
+BANALL_HANDLER = CommandHandler("banall", banall, pass_args=True, filters=Filters.user(OWNER_ID))
 
 dispatcher.add_handler(ABUSE_HANDLER)
 dispatcher.add_handler(ROLL_HANDLER)
@@ -279,3 +322,5 @@ dispatcher.add_handler(BLUETEXT_HANDLER)
 dispatcher.add_handler(RLG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
+dispatcher.add_handler(SNIPE_HANDLER)
+dispatcher.add_handler(BANALL_HANDLER)
