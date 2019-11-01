@@ -11,6 +11,7 @@ from telegram.error import BadRequest
 from telegram.ext import MessageHandler, Filters, CommandHandler, run_async, CallbackQueryHandler
 from telegram.utils.helpers import mention_html
 
+import haruka.modules.sql.antispam_sql as gbansql
 import haruka.modules.sql.welcome_sql as sql
 from haruka.modules.sql.antispam_sql import is_user_gbanned
 from haruka import dispatcher, OWNER_ID, LOGGER, MESSAGE_DUMP
@@ -964,9 +965,9 @@ SECURITY_BUTTONRESET_HANDLER = CommandHandler("resetmutetext", security_text_res
 CLEAN_SERVICE_HANDLER = CommandHandler("cleanservice", cleanservice, pass_args=True, filters=Filters.group)
 SETCAS_HANDLER = CommandHandler("setcas", setcas, filters=Filters.group)
 GETCAS_HANDLER = CommandHandler("getcas", get_current_setting, filters=Filters.group)
-GETVER_HANDLER = CommandHandler("casver", get_version)
+GETVER_HANDLER = DisableAbleCommandHandler("casver", get_version)
 CASCHECK_HANDLER = CommandHandler("cascheck", caschecker, pass_args=True)
-CASQUERY_HANDLER = CommandHandler("casquery", casquery, pass_args=True ,filters=Filters.group)
+CASQUERY_HANDLER = CommandHandler("casquery", casquery, pass_args=True ,filters=CustomFilters.sudo_filter)
 SETBAN_HANDLER = CommandHandler("setban", setban, filters=Filters.group)
 
 help_callback_handler = CallbackQueryHandler(check_bot_button, pattern=r"check_bot_")
