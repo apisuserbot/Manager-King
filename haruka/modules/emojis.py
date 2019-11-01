@@ -97,8 +97,15 @@ def me_too(bot: Bot, update: Update):
         
         
 __help__ = """
-- Reply to a text with /🅱️ or /😂 or /👏
-- You can also use the text version of these : /bmoji or /copypasta or /clapmoji
+- /🅱️
+- /😂
+- /👏
+
+*Or use the commands in text:*
+
+- /bmoji
+- /copypasta
+- /clapmoji
 """
 
 __mod_name__ = "Emojis"
