@@ -52,16 +52,27 @@ def reply_afk(bot: Bot, update: Update):
     message = update.effective_message  # type: Optional[Message]
     if message.entities and message.parse_entities([MessageEntity.TEXT_MENTION, MessageEntity.MENTION]):
         entities = message.parse_entities([MessageEntity.TEXT_MENTION, MessageEntity.MENTION])
+
+        chk_users = []
         for ent in entities:
             if ent.type == MessageEntity.TEXT_MENTION:
                 user_id = ent.user.id
                 fst_name = ent.user.first_name
+
+                if user_id in chk_users:
+                    return
+                chk_users.append(user_id)
 
             elif ent.type == MessageEntity.MENTION:
                 user_id = get_user_id(message.text[ent.offset:ent.offset + ent.length])
                 if not user_id:
                     # Should never happen, since for a user to become AFK they must have spoken. Maybe changed username?
                     return
+
+                if user_id in chk_users:
+                    return
+                chk_users.append(user_id)
+                
                 try:
                     chat = bot.get_chat(user_id)
                 except BadRequest:
@@ -87,15 +98,15 @@ def check_afk(bot, update, user_id, fst_name):
         if not user.reason:
             res = tld(chat.id, f"{fst_name} is AFK!")
         else:
-            res = tld(chat.id, f"{fst_name} is AFK! says its because of:\n{user.reason}")
+            res = tld(chat.id, f"{fst_name} is AFK! Says it's because of:\n{user.reason}")
         update.effective_message.reply_text(res)
 
 
 __help__ = """
- - /afk <reason>: mark yourself as AFK.
- - brb <reason>: same as the afk command - but not a command.
+ - /afk <reason>: Mark yourself as AFK.
+ - brb <reason>: Same as the afk command, but not a command.
 
-When marked as AFK, any mentions will be replied to with a message to say that you're not available!
+When marked as AFK, any mentions will be replied to with a message telling that you're not available!
 """
 
 __mod_name__ = "AFK"
