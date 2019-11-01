@@ -401,7 +401,8 @@ __help__ = """
 - /pidor: 4pda memes
 - /zalgofy: Reply to a message to g̫̞l̼̦i̎͡tͫ͢c̘ͭh̛̗ it out!
 - /deepfry: For when you're hungry for memes
-- /shout <keyword>: Write anything you want to give loud shout.
+- /shout <keyword>: Write anything you want to give loud shout
+- /dllm; Some chineses memes
 
 *Emojis:*
 - /clapmoji
