@@ -7,24 +7,25 @@ psycopg2
 feedparser
 pythonping
 pynewtonmath
-#memes from SkittBot
-spongemock
+
+#Memes from Skitt_Bot
+spongemock>=0.3.4
 zalgo-text
 geopy
 nltk
 aiohttp>=2.2.5
 Pillow>=4.2.0
 #Cool stuff by Peak
-PyLyrics
+PyLyrics>=1.1.0
 #AEX
 hurry.filesize
 #TWRP
 bs4
 lxml
-#translator
-googletrans
-#Speed Teste
-speedtest-cli>=2.0.2
+#Translator
+googletrans>=2.4.0
+#Speed Test
+speedtest-cli>=2.1.2
 
 tldextract
 PyYAML
