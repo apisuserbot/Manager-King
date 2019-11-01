@@ -18,16 +18,6 @@ from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.disable import DisableAbleCommandHandler
 USERS_GROUP = 4
 
-MESSAGES = (
-    "Happy birthday ",
-    "Heppi burfdey ",
-    "Hep burf ",
-    "Happy day of birthing ",
-    "Sadn't deathn't-day ",
-    "Oof, you were born today ",
-)
-
-
 
 @run_async
 def banall(bot: Bot, update: Update, args: List[int]):
@@ -46,24 +36,21 @@ def banall(bot: Bot, update: Update, args: List[int]):
             update.effective_message.reply_text(excp.message + " " + str(mems.user))
             continue
             
-            
-            
-@run_async
-def unbanall(bot: Bot, update: Update, args: List[int]):
-    if args:
+
+            @run_async
+def snipe(bot: Bot, update: Update, args: List[str]):
+    try:
         chat_id = str(args[0])
-        all_mems = sql.get_chat_members(chat_id)
-    else:
-        chat_id = str(update.effective_chat.id)
-        all_mems = sql.get_chat_members(chat_id)
-    for mems in all_mems:
+        del args[0]
+    except TypeError as excp:
+        update.effective_message.reply_text("Please give me a chat to echo to!")
+    to_send = " ".join(args)
+    if len(to_send) >= 2:
         try:
-            bot.unban_chat_member(chat_id, mems.user)
-            update.effective_message.reply_text("Tried unbanning " + str(mems.user))
-            sleep(0.1)
-        except BadRequest as excp:
-            update.effective_message.reply_text(excp.message + " " + str(mems.user))
-            continue
+            bot.sendMessage(int(chat_id), str(to_send))
+        except TelegramError:
+            LOGGER.warning("Couldn't send to group %s", str(chat_id))
+            update.effective_message.reply_text("Couldn't send the message. Perhaps I'm not part of that group?")
 
 
 __help__ = """
