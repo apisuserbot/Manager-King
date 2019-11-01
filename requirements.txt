@@ -23,6 +23,8 @@ bs4
 lxml
 #translator
 googletrans
+#Speed Teste
+speedtest-cli>=2.0.2
 
 tldextract
 PyYAML
@@ -30,5 +32,3 @@ pyowm
 wikipedia
 bleach
 markdown2
-
-speedtest-cli>=2.0.2

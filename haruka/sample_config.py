@@ -39,7 +39,7 @@ class Config(object):
     API_OPENWEATHER = None # OpenWeather API
 
     # MEMES
-    DEEPFRY_TOKEN = None
+    DEEPFRY_TOKEN = None # Used for facial recognition in the deepfry command
     
     # CAT
     CAT_API_KEY = None
