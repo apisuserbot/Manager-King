@@ -17,10 +17,10 @@ import haruka.modules.sql.antispam_sql as gbansql
 from haruka.modules.sql.antispam_sql import is_user_gbanned
 from haruka import dispatcher, OWNER_ID, LOGGER, MESSAGE_DUMP, SUDO_USERS, SUPPORT_USERS
 from haruka.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
-from tg_bot.modules.helper_funcs.extraction import extract_user
+from haruka.modules.helper_funcs.extraction import extract_user
 from haruka.modules.helper_funcs.misc import build_keyboard, revert_buttons, send_to_list
 from haruka.modules.helper_funcs.msg_types import get_welcome_type
-from tg_bot.modules.disable import DisableAbleCommandHandler
+from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.helper_funcs.string_handling import markdown_parser, \
     escape_invalid_curly_brackets, extract_time, markdown_to_html
