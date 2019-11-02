@@ -1,4 +1,7 @@
-import random, re, string, io, asyncio
+import random
+import re
+import asyncio
+import io
 from PIL import Image
 from io import BytesIO
 import base64
@@ -9,20 +12,16 @@ from deeppyer import deepfry
 import os
 from pathlib import Path
 import glob
-from typing import List, Optional
-
-import nltk # shitty lib, but it does work
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-
-from typing import Optional, List
-from telegram import Message, Update, Bot, User
-from telegram import MessageEntity
-from telegram.ext import Filters, MessageHandler, CommandHandler, RegexHandler, run_async
-
+from typing import List
+from telegram import Message, Update, Bot
+from telegram.ext import CommandHandler, run_async
 from haruka import DEEPFRY_TOKEN
 from haruka import dispatcher
-from haruka.modules.disable import DisableAbleCommandHandler, DisableAbleRegexHandler
+from haruka.modules.disable import DisableAbleCommandHandler
+
+import nltk  # shitty lib, but it does work
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
 MAXNUMURL = 'https://raw.githubusercontent.com/atanet90/expression-pack/master/meta'
 WIDE_MAP = dict((i, i + 0xFEE0) for i in range(0x21, 0x7F))
@@ -286,7 +285,7 @@ def chinesememes(bot: Bot, update: Update, args: List[str]):
         IMG = "https://raw.githubusercontent.com/atanet90/expression-pack/master/img/{}.jpg".format(num)
         maxnum = int(maxnum)
         maxnum -= 1
-        bot.send_photo(chat_id=message.chat_id, photo=IMG, caption='Image: {} - (0-{})'.format(num, maxnum), 
+        bot.send_photo(chat_id=message.chat_id, photo=IMG, caption='Image: {} - (0-{})'.format(num, maxnum),
                         reply_to_message_id=message.message_id)
     except BadRequest as e:
         message.reply_text("Image not found!")
@@ -321,6 +320,7 @@ def deepfryer(bot: Bot, update: Update):
     loop = asyncio.new_event_loop()
     loop.run_until_complete(process_deepfry(image, message.reply_to_message, bot))
     loop.close()
+
 
 async def process_deepfry(image: Image, reply: Message, bot: Bot):
     # DEEPFRY IT

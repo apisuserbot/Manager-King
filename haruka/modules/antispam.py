@@ -2,7 +2,7 @@ import html
 from io import BytesIO
 from typing import Optional, List
 
-from telegram import Message, Update, Bot, User, Chat, ParseMode, InlineKeyboardMarkup
+from telegram import Message, Update, Bot, User, Chat, ParseMode
 from telegram.error import BadRequest, TelegramError
 from telegram.ext import run_async, CommandHandler, MessageHandler, Filters
 from telegram.utils.helpers import mention_html
@@ -12,7 +12,6 @@ from haruka import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, MESSAGE_DUMP
 from haruka.modules.helper_funcs.chat_status import user_admin, is_user_admin
 from haruka.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from haruka.modules.helper_funcs.filters import CustomFilters
-#from haruka.modules.helper_funcs.misc import send_to_list
 from haruka.modules.sql.users_sql import get_all_chats
 
 from haruka.modules.translations.strings import tld
@@ -107,8 +106,8 @@ def gban(bot: Bot, update: Update, args: List[str]):
                      "\n<b>ID:</b> <code>{}</code>" \
                      "\n<b>Previous Reason:</b> {}" \
                      "\n<b>New Reason:</b> {}".format(mention_html(banner.id, banner.first_name),
-                                              mention_html(user_chat.id, user_chat.first_name or "Deleted Account"), 
-                                                           user_chat.id, old_reason, new_reason), 
+                                              mention_html(user_chat.id, user_chat.first_name or "Deleted Account"),
+                                                           user_chat.id, old_reason, new_reason),
                 parse_mode=ParseMode.HTML
             )
 
@@ -133,8 +132,8 @@ def gban(bot: Bot, update: Update, args: List[str]):
                      "\n<b>User:</b> {}" \
                      "\n<b>ID:</b> <code>{}</code>" \
                      "\n<b>New Reason:</b> {}".format(mention_html(banner.id, banner.first_name or "Deleted Account"),
-                                              mention_html(user_chat.id, user_chat.first_name), 
-                                                           user_chat.id, new_reason), 
+                                              mention_html(user_chat.id, user_chat.first_name),
+                                                           user_chat.id, new_reason),
                 parse_mode=ParseMode.HTML
             )
             message.reply_text("This user is already gbanned, but had no reason set; I've gone and updated it!")
@@ -168,17 +167,17 @@ def gban(bot: Bot, update: Update, args: List[str]):
     except:
         print("Meh")
 
-    #chats = get_all_chats()
-    #for chat in chats:
+    # chats = get_all_chats()
+    # for chat in chats:
     #    chat_id = chat.chat_id
 
-        #Check if this group has disabled gbans
-        #if not sql.does_chat_gban(chat_id):
+        # Check if this group has disabled gbans
+        # if not sql.does_chat_gban(chat_id):
         #    continue
 
-        #try:
+        # try:
         #    bot.kick_chat_member(chat_id, user_id)
-        #except BadRequest as excp:
+        # except BadRequest as excp:
         #    if excp.message in GBAN_ERRORS:
         #        pass
         #    else:
@@ -187,10 +186,10 @@ def gban(bot: Bot, update: Update, args: List[str]):
         #        sql.ungban_user(user_id)
         #        os.environ['GPROCESS'] = '0'
         #        return
-        #except TelegramError:
+        # except TelegramError:
         #    pass
 
-    #bot.send_message(MESSAGE_DUMP,
+    # bot.send_message(MESSAGE_DUMP,
     #               "{} has been successfully gbanned!".format(mention_html(user_chat.id, user_chat.first_name)),
     #               parse_mode=ParseMode.HTML)
 
@@ -404,7 +403,7 @@ dispatcher.add_handler(ANTISPAM_STATUS)
 
 dispatcher.add_handler(GBAN_HANDLER)
 dispatcher.add_handler(UNGBAN_HANDLER)
-#dispatcher.add_handler(GBAN_LIST)
+# dispatcher.add_handler(GBAN_LIST)
 
 if STRICT_ANTISPAM:  # enforce GBANS if this is set
     dispatcher.add_handler(GBAN_ENFORCER, GBAN_ENFORCE_GROUP)

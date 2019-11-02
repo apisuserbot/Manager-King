@@ -17,7 +17,7 @@ def locale(bot, update, args):
     if len(args) > 0:
         locale = args[0].lower()
         if locale in list_locales:
-            if locale in ('en', 'ru', 'ua', 'es', 'tr', 'id', 'pt'):
+            if locale in ('en', 'ru', 'ua', 'es', 'tr', 'id'):
                 switch_to_locale(chat.id, locale)
                 update.message.reply_text(tld(chat.id, 'Switched to {} successfully!').format(list_locales[locale]))
             else:
@@ -33,12 +33,13 @@ def locale(bot, update, args):
         else:
             update.message.reply_text("Current locale for this chat is: *English*", parse_mode=ParseMode.MARKDOWN)
 
+
 @user_admin
 def locale_button(bot, update):
     chat = update.effective_chat
     user = update.effective_user  # type: Optional[User]
     query = update.callback_query
-    lang_match = re.findall(r"en|ru|ua|es|tr|id|pt", query.data)
+    lang_match = re.findall(r"en|ru|ua|es|tr|id", query.data)
     if lang_match:
         if lang_match[0]:
             switch_to_locale(chat.id, lang_match[0])
@@ -75,9 +76,8 @@ def locale_button(bot, update):
                                             InlineKeyboardButton("Ukrainian 🇺🇦", callback_data="set_lang_ua")]] + [[
                                             InlineKeyboardButton("Spanish 🇪🇸", callback_data="set_lang_es"),
                                             InlineKeyboardButton("Turkish 🇹🇷", callback_data="set_lang_tr")]] + [[
-                                            InlineKeyboardButton("Indonesian 🇮🇩", callback_data="set_lang_id")
-                                            InlineKeyboardButton("Portuguese 🇧🇷", callback_data="set_lang_pt")]] + [[
-                                            InlineKeyboardButton("⬅️ Back", callback_data="bot_start")]]))
+                                            InlineKeyboardButton("Indonesian 🇮🇩", callback_data="set_lang_id")]] + [[
+                                            InlineKeyboardButton("⬅️ Back", callback_data="bot_start")]]
 
     print(lang_match)
     query.message.delete()
