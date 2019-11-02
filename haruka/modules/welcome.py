@@ -113,7 +113,7 @@ def new_member(bot: Bot, update: Update):
     should_welc, cust_welcome, cust_content, welc_type = sql.get_welc_pref(chat.id)
     cust_welcome = markdown_to_html(cust_welcome)
 
-    welcome_security = sql.welcome_sql(chat.id)
+    welcome_security = sql.welcome_security(chat.id)
     casPrefs = sql.get_cas_status(str(chat.id)) #check if enabled, obviously
     autoban = sql.get_cas_autoban(str(chat.id))
     if casPrefs and not autoban and cas.banchecker(user.id):
