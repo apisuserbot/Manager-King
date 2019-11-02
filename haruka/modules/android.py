@@ -382,8 +382,8 @@ def evo(bot: Bot, update: Update):
         return
 
     if device == 'gsi':
-        reply_text = "Please check Evolution X Updates channel(@EvolutionXUpdates)" \
-                     " or click the button down below to download the GSIs!"
+        reply_text = "Please check @expresslukegsi channel for unofficial GSIs" \
+                     " or click the button down below to download official GSIs!"
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url="https://sourceforge.net/projects/evolution-x/files/GSI/")]]
         message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
