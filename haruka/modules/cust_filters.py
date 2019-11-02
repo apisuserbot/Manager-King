@@ -30,7 +30,7 @@ def list_handlers(bot: Bot, update: Update):
     user = update.effective_user  # type: Optional[User]
     
     conn = connected(bot, update, chat, user.id, need_admin=False)
-    if not conn == False:
+    if conn:
         chat_id = conn
         chat_name = dispatcher.bot.getChat(conn).title
         filter_list = tld(chat.id, "*List of filters in {}:*\n")
@@ -68,7 +68,7 @@ def filters(bot: Bot, update: Update):
     args = msg.text.split(None, 1)  # use python's maxsplit to separate Cmd, keyword, and reply_text
 
     conn = connected(bot, update, chat, user.id)
-    if not conn == False:
+    if conn:
         chat_id = conn
         chat_name = dispatcher.bot.getChat(conn).title
     else:
@@ -101,7 +101,7 @@ def filters(bot: Bot, update: Update):
         content, buttons = button_markdown_parser(extracted[1], entities=msg.parse_entities(), offset=offset)
         content = content.strip()
         if not content:
-            msg.reply_text(tld(chat.id, "There is no note message - You can't JUST have buttons, you need a message to go with it!"))
+            msg.reply_text(tld(chat.id, "Note text is missing. You can't ONLY have buttons, you need a message to go with it!"))
             return
 
     elif msg.reply_to_message and msg.reply_to_message.sticker:
@@ -153,7 +153,7 @@ def stop_filter(bot: Bot, update: Update):
     args = update.effective_message.text.split(None, 1)
 
     conn = connected(bot, update, chat, user.id)
-    if not conn == False:
+    if conn:
         chat_id = conn
         chat_name = dispatcher.bot.getChat(conn).title
     else:
@@ -178,7 +178,7 @@ def stop_filter(bot: Bot, update: Update):
             update.effective_message.reply_text(tld(chat.id, "Yep, I'll stop replying to that in *{}*.").format(chat_name), parse_mode=telegram.ParseMode.MARKDOWN)
             raise DispatcherHandlerStop
 
-    update.effective_message.reply_text(tld(chat.id, "That's not a current filter - run /filters for all active filters."))
+    update.effective_message.reply_text(tld(chat.id, "That's not an active filter - run /filters for all active filters."))
 
 
 @run_async
@@ -232,7 +232,7 @@ def reply_filter(bot: Bot, update: Update):
                                          reply_markup=keyboard)
                     else:
                         try:
-                            message.reply_text("This note could not be sent, as it is incorrectly formatted. Ask in @HarukaAyaGroup if you can't figure out why!")
+                            message.reply_text("This filter could not be sent, as it is incorrectly formatted. Ask in @HarukaAyaGroup if you can't figure out why!")
                             LOGGER.warning("Message %s could not be parsed", str(filt.reply))
                             LOGGER.exception("Could not parse filter %s in chat %s", str(filt.keyword), str(chat.id))
                         except:
@@ -277,7 +277,7 @@ Filters are case insensitive; every time someone says your trigger words, {} wil
 A multiword filter could be set via:
 `/filter "hello friend" Hello back! Long time no see!`
 If you want to save an image, gif, or sticker, or any other data, do the following:
-`/filter word while replying to a sticker or whatever data you'd like. Now, every time someone mentions "word", that sticker will be sent as a reply.`
+`/filter word`, while replying to a sticker or whatever data you'd like. Now, every time someone mentions "word", that sticker will be sent as a reply.
 Now, anyone saying "hello" will be replied to with "Hello there! How are you?".
 """
 
