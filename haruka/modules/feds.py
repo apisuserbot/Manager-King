@@ -39,66 +39,65 @@ LOGGER.info("Original federation module by MrYacha, reworked by Mizukito Akito (
 
 
 FBAN_ERRORS = {
-    "User is an administrator of the chat",
-    "Chat not found",
-    "Not enough rights to restrict/unrestrict chat member",
-    "User_not_participant",
-    "Peer_id_invalid",
-    "Group chat was deactivated",
-    "Need to be inviter of a user to kick it from a basic group",
-    "Chat_admin_required",
-    "Only the creator of a basic group can kick group administrators",
-    "Channel_private",
-    "Not in the chat",
-    "Have no rights to send a message"
+	"User is an administrator of the chat",
+	"Chat not found",
+	"Not enough rights to restrict/unrestrict chat member",
+	"User_not_participant",
+	"Peer_id_invalid",
+	"Group chat was deactivated",
+	"Need to be inviter of a user to kick it from a basic group",
+	"Chat_admin_required",
+	"Only the creator of a basic group can kick group administrators",
+	"Channel_private",
+	"Not in the chat",
+	"Have no rights to send a message"
 }
 
 UNFBAN_ERRORS = {
-    "User is an administrator of the chat",
-    "Chat not found",
-    "Not enough rights to restrict/unrestrict chat member",
-    "User_not_participant",
-    "Method is available for supergroup and channel chats only",
-    "Not in the chat",
-    "Channel_private",
-    "Chat_admin_required",
-    "Have no rights to send a message"
+	"User is an administrator of the chat",
+	"Chat not found",
+	"Not enough rights to restrict/unrestrict chat member",
+	"User_not_participant",
+	"Method is available for supergroup and channel chats only",
+	"Not in the chat",
+	"Channel_private",
+	"Chat_admin_required",
+	"Have no rights to send a message"
 }
-
 
 @run_async
 def new_fed(bot: Bot, update: Update):
-    chat = update.effective_chat  # type: Optional[Chat]
-    user = update.effective_user  # type: Optional[User]
-    message = update.effective_message
-    if chat.type != "private":
-    	update.effective_message.reply_text("Do it in PM?")
-    	return
-    fednam = message.text.split(None, 1)[1]
-    if not fednam == '':
-        fed_id = str(uuid.uuid4())
-        fed_name = fednam
-        LOGGER.info(fed_id)
-        if user.id == int(OWNER_ID):
-        	fed_id = fed_name
+	chat = update.effective_chat  # type: Optional[Chat]
+	user = update.effective_user  # type: Optional[User]
+	message = update.effective_message
+	if chat.type != "private":
+		update.effective_message.reply_text("Do it in PM?")
+		return
+	fednam = message.text.split(None, 1)[1]
+	if not fednam == '':
+		fed_id = str(uuid.uuid4())
+		fed_name = fednam
+		LOGGER.info(fed_id)
+		if user.id == int(OWNER_ID):
+			fed_id = fed_name
 
-        x = sql.new_fed(user.id, fed_name, fed_id)
-        if not x:
-        	update.effective_message.reply_text("Federation creation failed! This rarely happens! Ask in @HarukaAyaGroup for help!")
-        	return
+		x = sql.new_fed(user.id, fed_name, fed_id)
+		if not x:
+			update.effective_message.reply_text("Federation creation failed! This rarely happens! Ask in @HarukaAyaGroup for help!")
+			return
 
-    	update.effective_message.reply_text("*You have successfully created a new federation!*"\
-    										"\nName: `{}`"\
-    										"\nID: `{}`"
-    										"\n\nRun the command below in groups to add them to the federation:"
-    										"\n`/joinfed {}`".format(fed_name, fed_id, fed_id), parse_mode=ParseMode.MARKDOWN)
-    	try:
-    		bot.send_message(MESSAGE_DUMP,
-    			"Federation <b>{}</b> have been created with ID: <pre>{}</pre>".format(fed_name, fed_id), parse_mode=ParseMode.HTML)
-    	except:
-    		LOGGER.warning("Cannot send a message to MESSAGE_DUMP")
-    else:
-    	update.effective_message.reply_text("Please write down the name of the federation")
+		update.effective_message.reply_text("*You have successfully created a new federation!*"\
+											"\nName: `{}`"\
+											"\nID: `{}`"
+											"\n\nRun the command below in groups to add them to the federation:"
+											"\n`/joinfed {}`".format(fed_name, fed_id, fed_id), parse_mode=ParseMode.MARKDOWN)
+		try:
+			bot.send_message(MESSAGE_DUMP,
+				"Federation <b>{}</b> have been created with ID: <pre>{}</pre>".format(fed_name, fed_id), parse_mode=ParseMode.HTML)
+		except:
+			LOGGER.warning("Cannot send a message to MESSAGE_DUMP")
+	else:
+		update.effective_message.reply_text("Please write down the name of the federation")
 
 @run_async
 def del_fed(bot: Bot, update: Update, args: List[str]):
