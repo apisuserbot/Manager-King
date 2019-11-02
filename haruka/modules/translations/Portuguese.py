@@ -29,7 +29,7 @@ RUN_STRINGS = (
     "Aqui, pegue este anel e vá para Mordor enquanto estiver nele.",
     "Diz a lenda, eles ainda estão correndo...",
     "Ao contrário de Harry Potter, seus pais não podem proteger você de mim. ",
-    "O medo leva à raiva. A raiva leva ao ódio. O ódio leva ao sofrimento. Se você continuar correndo com medo, poderá"
+    "O medo leva à raiva. A raiva leva ao ódio. O ódio leva ao sofrimento. Se você continuar correndo com medo, poderá",
     "seja o próximo Vader.",
     "Vários cálculos depois, decidi que meu interesse em suas travessuras é exatamente 0.",
     "Diz a lenda, eles ainda estão em execução.",
