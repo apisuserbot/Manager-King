@@ -930,7 +930,6 @@ def whChat(bot: Bot, update: Update, args: List[str]):
         try:
             sql.whitelistChat(chat_id)
             update.effective_message.reply_text("Chat has been successfully whitelisted!")
-            bot.leave_chat(int(chat_id))
         except:
             update.effective_message.reply_text("Error whitelisting chat!")
     else:
@@ -944,6 +943,7 @@ def unwhChat(bot: Bot, update: Update, args: List[str]):
         try:
             sql.unwhitelistChat(chat_id)
             update.effective_message.reply_text("Chat has been successfully un-whitelisted!")
+            bot.leave_chat(int(chat_id))
         except:
             update.effective_message.reply_text("Error un-whitelisting chat!")
     else:
