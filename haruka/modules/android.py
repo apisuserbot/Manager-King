@@ -585,7 +585,7 @@ def bootleggers(bot: Bot, update: Update):
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     
     
-@run_async(timeout=60*60*2)
+@MWT(timeout=60*60*2)
 def load_ofrp_data():
     """
     load latest json file every six hours
@@ -594,7 +594,7 @@ def load_ofrp_data():
     return get("https://files.orangefox.tech/Others/update.json").json()
 
 
-@run_async(timeout=60*60*2)
+@MWT(timeout=60*60*2)
 @check_codename
 def ofrp(device):
     """
