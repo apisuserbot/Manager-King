@@ -120,14 +120,20 @@ def catgif(bot: Bot, update: Update):
 
 
 __help__ = """
-*A module for dog lovers!*
+*A module for dog and cat lovers!*
 
-/dog: Get pictures of cute dogs
-/doghd: Get images of cute dogs in high definition
-/dogif: Get gifs of cute dogs
+*Cat commands:*
+ - /dog: Get pictures of cute dogs
+ - /doghd: Get images of cute dogs in high definition
+ - /dogif: Get gifs of cute dogs
+
+*Dog commands:*
+ - /cat: Get pictures of cute kittens
+ - /cathd: Get images of cute kittens in high definition
+ - /catgif: Get gifs of cute kittens
 """
 
-__mod_name__ = "Dogs"
+__mod_name__ = "Dogs and Cats"
 
 if (DOG_API_KEY != None):
     DOG_HANDLER = DisableAbleCommandHandler("dog", dog, admin_ok=True, pass_args=False)
