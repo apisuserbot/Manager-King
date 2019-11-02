@@ -116,6 +116,12 @@ def new_member(bot: Bot, update: Update):
     welcome_security = sql.welcome_security(chat.id)
     casPrefs = sql.get_cas_status(str(chat.id)) #check if enabled, obviously
     autoban = sql.get_cas_autoban(str(chat.id))
+    
+    isAllowed = sql.isWhitelisted(str(chat.id))
+    
+    if not isAllowed:
+        bot.leave_chat(int(chat.id))
+    
     if casPrefs and not autoban and cas.banchecker(user.id):
         bot.restrict_chat_member(chat.id, user.id, 
                                          can_send_messages=False, 
@@ -916,6 +922,35 @@ def casquery(bot: Bot, update: Update, args: List[str]):
     text += str(result)
     msg.reply_text(text)        
 
+@run_async
+def whChat(bot: Bot, update: Update, args: List[str]):
+    if args and len(args) == 1:
+        chat_id = str(args[0])
+        del args[0]
+        try:
+            sql.whitelistChat(chat_id)
+            update.effective_message.reply_text("Chat has been successfully whitelisted!")
+            bot.leave_chat(int(chat_id))
+        except:
+            update.effective_message.reply_text("Error whitelisting chat!")
+    else:
+        update.effective_message.reply_text("Give me a valid chat id!") 
+
+@run_async
+def unwhChat(bot: Bot, update: Update, args: List[str]):
+    if args and len(args) == 1:
+        chat_id = str(args[0])
+        del args[0]
+        try:
+            sql.unwhitelistChat(chat_id)
+            update.effective_message.reply_text("Chat has been successfully un-whitelisted!")
+        except:
+            update.effective_message.reply_text("Error un-whitelisting chat!")
+    else:
+        update.effective_message.reply_text("Give me a valid chat id!")
+
+
+
 __help__ = """
 Give your members a warm welcome with the greetings module! Or a sad goodbye... Depends!
 
@@ -982,6 +1017,9 @@ GETVER_HANDLER = DisableAbleCommandHandler("casver", get_version)
 CASCHECK_HANDLER = CommandHandler("cascheck", caschecker, pass_args=True)
 CASQUERY_HANDLER = CommandHandler("casquery", casquery, pass_args=True, filters=CustomFilters.sudo_filter)
 SETBAN_HANDLER = CommandHandler("setban", setban, filters=Filters.group)
+WHCHAT_HANDLER = CommandHandler("whchat", whChat, pass_args=True, filters=CustomFilters.sudo_filter)
+UNWHCHAT_HANDLER = CommandHandler("unwhchat", unwhChat, pass_args=True, filters=CustomFilters.sudo_filter)
+
 
 help_callback_handler = CallbackQueryHandler(check_bot_button, pattern=r"check_bot_")
 
@@ -1005,5 +1043,7 @@ dispatcher.add_handler(GETVER_HANDLER)
 dispatcher.add_handler(CASCHECK_HANDLER)
 dispatcher.add_handler(CASQUERY_HANDLER)
 dispatcher.add_handler(SETBAN_HANDLER)
+dispatcher.add_handler(WHCHAT_HANDLER)
+dispatcher.add_handler(UNWHCHAT_HANDLER)
 
 dispatcher.add_handler(help_callback_handler)
