@@ -21,6 +21,7 @@ from haruka.__main__ import STATS, USER_INFO
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.extraction import extract_user
 from haruka.modules.helper_funcs.filters import CustomFilters
+from haruka.modules.helper_funcs.mwt import MWT
 
 from requests import get
 
@@ -594,7 +595,7 @@ def load_ofrp_data():
     return get("https://files.orangefox.tech/Others/update.json").json()
 
 
-@MWT(timeout=60*60*2)
+@NWT(timeout=60*60*2)
 @check_codename
 def ofrp(device):
     """
