@@ -33,7 +33,6 @@ def locale(bot, update, args):
         else:
             update.message.reply_text("Current locale for this chat is: *English*", parse_mode=ParseMode.MARKDOWN)
 
-
 @user_admin
 def locale_button(bot, update):
     chat = update.effective_chat
@@ -59,7 +58,7 @@ def locale_button(bot, update):
 
     conn = connected(bot, update, chat, user.id, need_admin=False)
 
-    if conn:
+    if not conn == False:
         try:
             chatlng = prev_locale(conn).locale_name
             chatlng = list_locales[chatlng]
@@ -77,7 +76,8 @@ def locale_button(bot, update):
                                             InlineKeyboardButton("Spanish 🇪🇸", callback_data="set_lang_es"),
                                             InlineKeyboardButton("Turkish 🇹🇷", callback_data="set_lang_tr")]] + [[
                                             InlineKeyboardButton("Indonesian 🇮🇩", callback_data="set_lang_id")]] + [[
-                                            InlineKeyboardButton("⬅️ Back", callback_data="bot_start")]]
+                                            InlineKeyboardButton("⬅️ Back", callback_data="bot_start")]]))
+
     print(lang_match)
     query.message.delete()
     bot.answer_callback_query(query.id)
