@@ -120,7 +120,7 @@ def ping(bot: Bot, update: Update):
 @run_async
 def speedtst(bot: Bot, update: Update):
     chat = update.effective_chat
-    del_msg = bot.send_message(chat.id, "🔄 `Running speedtest...`")
+    del_msg = bot.send_message(chat.id, "🔄 Running speedtest...")
     test = speedtest.Speedtest()
     test.get_best_server()
     test.download()
@@ -136,7 +136,6 @@ def speedtst(bot: Bot, update: Update):
                    f"{result['ping']} \n"
                    "ISP: "
                    f"{result['client']['isp']}")
-                   parse_mode=ParseMode.MARKDOWN
 
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID))
 RTT_HANDLER = CommandHandler("ping", rtt, filters=CustomFilters.sudo_filter)
