@@ -375,10 +375,8 @@ Antispam is used by the bot owners to ban spammers across all groups. This helps
 you and your groups by removing spam flooders as quickly as possible. This is enabled by \
 default, but you can change this by using the command.
 
-
+*Combot Anti Spam System:*
 You can improve your Antispam protection by using the /setcas command to enable new member verification based on the [Combot Anti Spam System](https://combot.org/cas)
-
-Thanks to @nunopenim for providing his proprietary Combot Anti Spam System API - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
 
 *CAS Commands:*
  - /casver: Returns the API version that the bot is currently running
@@ -388,6 +386,9 @@ Thanks to @nunopenim for providing his proprietary Combot Anti Spam System API -
  - /setcas <on/off/true/false>: Enables/disables CAS Checking on welcome
  - /getcas: Gets the current CAS settings
  - /setban <on/off/true/false>: Enables/disables autoban on CAS banned user detected.
+
+*Credits:*
+Thanks to @nunopenim for providing his proprietary Combot Anti Spam System API - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
 """
 
 __mod_name__ = "Antispam security"
