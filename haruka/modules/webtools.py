@@ -119,6 +119,7 @@ def ping(bot: Bot, update: Update):
 
 @run_async
 def speedtst(bot: Bot, update: Update):
+    update.effective_message.reply_text("Running speedtest")
     test = speedtest.Speedtest()
     test.get_best_server()
     test.download()
