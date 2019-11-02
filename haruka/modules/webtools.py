@@ -136,6 +136,7 @@ def speedtst(bot: Bot, update: Update):
                    f"{result['ping']} \n"
                    "ISP: "
                    f"{result['client']['isp']}")
+                   parse_mode=ParseMode.MARKDOWN
 
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID))
 RTT_HANDLER = CommandHandler("ping", rtt, filters=CustomFilters.sudo_filter)
