@@ -1,231 +1,244 @@
 RUN_STRINGS = (
-    "Dove pensi di andare?",
-    "Huh? cosa? sono riusciti a scappare?",
-    "ZZzzZZzz... Huh? cosa? oh, solo loro di nuovo, non importa.",
-    "Torna qui!",
-    "Non così in fretta...",
-    "Fai attenzione al muro!",
-    "Non lasciarmi sola con loro!!",
-    "Se scappi, muori.",
-    "Scherzo, sono ovunque",
-    "Te ne pentirai...",
-    "Prova /kickme, Dicono sia divertente.",
-    "Vai a disturbare qualcun altro, a nessuno qui importa.",
-    "Puoi correre, ma non puoi nasconderti.",
-    "Solo questo sai fare?",
-    "Sono dietro di te...",
-    "Hai compagnia!",
-    "Possiamo farlo nel modo più semplice, o nel modo più difficile.",
-    "Non capisci, vero?",
-    "Sì, è meglio che corri!",
-    "Per favore, ricordami quanto mi importa?",
-    "Correrei più veloce se fossi in te.",
-    "Questo è sicuramente il droide che stiamo cercando.",
-    "Possa la fortuna essere sempre a tuo favore.",
-    "Le ultime parole famose.",
-    "E fu così che scomparvero per sempre, mai più rivisti.",
-    "\"Oh, guardatemi! Sono così figo che posso scappare da un bot!\" - questa persona",
-    "Sì, ti basta tappare /kickme.",
-    "Tieni, prendi questo anello e vai a Mordor già che ci sei.",
-    "La leggenda narra che stanno ancora correndo...",
-    "A differenza di Harry Potter, i tuoi genitori non possono proteggerti da me.",
-    "La paura porta alla rabbia. La rabbia porta all'odio. L'odio porta alla sofferenza. Se continui a correre nella paura, potresti farcela."
-    "Sii il prossimo Vader.",
-    "Dopo diversi calcoli, ho deciso che il mio interesse per i tuoi shenanigans è esattamente 0.",
-    "Leggenda narra che stanno ancora correndo.",
-    "Continua così, non sono sicuro che ti vogliamo qui.",
-    "Tu sei uno streg- Oh. Aspetta. Non sei Harry, continua a correre.",
-    "NON CORRERE NEI CORRIDOI!",
-    "Arrivederci, bimbo.",
-    "Chi ha fatto uscire i cani?",
-    "È divertente, perché a nessuno importa.",
-    "Ah, che spreco. Mi è piaciuto.",
-    "Francamente cara non me ne importa nulla.",
-    "Il mio frappè porta tutti i ragazzi in cortile... Quindi corri!",
-    "Non puoi sopportare la verità!",
-    "Molto tempo fa, in una galassia molto lontana... A qualcuno sarebbe importato. Ora non più.",
-    "Hey, guardali! Stanno scappando da un inevitabile ban... Furbi.",
-    "Han ha sparato per primo. Anche io.",
-    "Cosa stai inseguendo, un coniglio?",
-    "Come direbbe il dottore... CORRI!",
+    "Onde você pensa que está indo?",
+    "Huh? O quê? Eles fugiram?",
+    "ZZzzZZzz... Hein? o que? oh, apenas eles de novo, deixa pra lá.",
+    "Volte aqui!",
+    "Não tão rápido...",
+    "Olhe para a parede!",
+    "Não me deixe sozinho com eles !!",
+    "Você corre, você morre.",
+    "Piadas com você, eu estou em todo lugar ",
+    "Você vai se arrepender disso... ",
+    "Você também pode tentar /kickme, ouvi dizer que é divertido.",
+    "Vá incomodar alguém, ninguém aqui se importa.",
+    "Você pode correr, mas não pode se esconder.",
+    "É tudo o que você tem?",
+    "Estou atrás de você...",
+    "Você tem companhia!",
+    "Podemos fazer isso da maneira mais fácil ou mais difícil.",
+    "Você simplesmente não entende, não é?",
+    "Sim, é melhor você correr!",
+    "Por favor, lembre-me o quanto eu me importo?",
+    "Eu correria mais rápido se fosse você.",
+    "Esse é definitivamente o dróide que estamos procurando.",
+    "Que as probabilidades estejam sempre a seu favor.",
+    "Últimas palavras famosas.",
+    "E eles desapareceram para sempre, para nunca mais serem vistos.",
+    "\"Oh, olhe para mim! Eu sou tão legal que posso fugir de um bot!\" - essa pessoa",
+    "Sim, sim, basta tocar /kickme já.",
+    "Aqui, pegue este anel e vá para Mordor enquanto estiver nele.",
+    "Diz a lenda, eles ainda estão correndo...",
+    "Ao contrário de Harry Potter, seus pais não podem proteger você de mim. ",
+    "O medo leva à raiva. A raiva leva ao ódio. O ódio leva ao sofrimento. Se você continuar correndo com medo, poderá"
+    "seja o próximo Vader.",
+    "Vários cálculos depois, decidi que meu interesse em suas travessuras é exatamente 0.",
+    "Diz a lenda, eles ainda estão em execução.",
+    "Continue assim, não tenho certeza se queremos você aqui de qualquer maneira.",
+    "Você é uma bruxa... Oh. Esperar. Você não é Harry, continue andando.",
+    "NÃO FUNCIONA NOS CORREDORES!",
+    "Hasta la vista, baby.",
+    "Quem deixou os cães saírem?",
+    "É engraçado, porque ninguém se importa.",
+    "Ah, que desperdício. Eu gostei daquele.",
+    "Francamente, minha querida, eu não dou a mínima.",
+    "Meu batido leva todos os garotos ao quintal... Então corra mais rápido!",
+    "Você não pode lidar com a verdade!",
+    "Há muito tempo, em uma galáxia muito distante... Alguém teria se importado com isso. Não mais embora.",
+    "Ei, olhe para eles! Eles estão fugindo do inevitável banhammer... Bonito.",
+    "Han atirou primeiro. Então eu vou.",
+    "O que você está correndo atrás, um coelho branco?",
+    "Como o médico diria... CORRA!",
 )
 
 INSULTS_STRINGS = (
-    "Owww ... Che stupido idiota.",
-    "Non bere e scrivere.",
-    "Penso che dovresti andare a casa o meglio in un manicomio.",
-    "Comando non trovato. Proprio come il tuo cervello.",
-    "Ti rendi conto che ti stai rendendo ridicolo? Apparentemente no.",
-    "Puoi scrivere meglio di così.",
-    "La regola 544 sezione 9 del bot mi impedisce di rispondere a esseri umani stupidi come te.",
-    "Scusa, non vendiamo cervelli.",
-    "Credimi tu non sei normale.",
-    "Scommetto che il tuo cervello è come nuovo, visto che non lo usi mai.",
-    "Se volessi suicidarmi, scalerei il tuo ego e salterei al tuo QI.",
-    "Gli zombi mangiano cervelli... tu sei al sicuro.",
-    "Non ti sei evoluto dalle scimmie, si sono evoluti da te.",
-    "Torna a parlarmi quando il tuo QI supera la tua età.",
-    "Non sto dicendo che sei stupido, sto solo dicendo che hai sfortuna quando si tratta di pensare.",
-    "Che lingua parli? Perché suona come una stronzata.",
-    "La stupidità non è un crimine, quindi sei libero di andare.",
-    "Sei la prova che l'evoluzione può retrocedere.",
-    "Ti chiederei quanti anni hai, ma so che non puoi contare così tanto.",
-    "Come outsider, cosa ne pensi della razza umana?",
-    "I cervelli non sono tutto. Nel tuo caso non sono nulla.",
-    "Di solito le persone vivono e imparano. Tu vivi e basta.",
-    "Non so cosa ti rende così stupido, ma funziona davvero.",
-    "Continua a parlare, un giorno dirai qualcosa di intelligente! (Ne dubito comunque)",
-    "Scioccami, dì qualcosa di intelligente.",
-    "Il tuo QI è più basso della tua taglia di scarpe.",
-    "Ahimè! I tuoi neurotrasmettitori non funzionano più.",
-    "Sei pazzo, stupido?",
-    "Tutti hanno il diritto di essere stupidi, ma tu stai abusando del privilegio.",
-    "Mi spiace di aver ferito i tuoi sentimenti quando ti ho dato dello stupido. Pensavo lo sapessi già.",
-    "Dovresti provare ad assaggiare il cianuro.",
-    "I tuoi enzimi servono a digerire il veleno per topi.",
-    "Dovresti provare ad assaggiare il cianuro.",
-    "Prendi una pistola e sparati.",
-    "Potresti fare un record mondiale saltando da un aereo senza paracadute.",
-    "Smetti di dire stronzate e salta di fronte a un treno ad alta velocità in corsa",
-    "Prova a fare il bagno con acido cloridrico al posto dell'acqua.",
-    "Prova questo: se trattieni il respiro sott'acqua per un'ora, puoi trattenerlo per sempre.",
-    "Tu vai verde! Smetti di inalare ossigeno.",
-    "Dio ti stava cercando. Dovresti andare a incontrarlo.",
-    "Dai il tuo 100%. Ora, vai a donare il sangue.",
-    "Prova a saltare da un edificio di cento piani, ma puoi farlo solo una volta.",
-    "Dovresti donare il tuo cervello visto che non l'hai mai usato.",
-    "Volontario per bersaglio in un poligono di tiro.",
-    "I colpi alla testa sono divertenti. Prenditene uno.",
-    "Dovresti provare a nuotare con grossi squali bianchi.",
-    "Dovresti dipingerti di rosso e correre in una maratona di tori.",
-    "Puoi restare sott'acqua per il resto della tua vita senza risalire.",
-    "Che ne dici di smettere di respirare per tipo un giorno? Sarà fantastico.",
-    "Prova a provocare una tigre mentre siete in una gabbia",
-    "Hai provato a spararti tanto in alto quanto 100m usando un cannone?",
-    "Dovresti provare a tenere tritolo in bocca e accenderlo.",
-    "Lanciati nello spazio dimenticandoti dell'ossigeno sulla terra.",
-    "Dovresti provare a giocare a serpenti e scale, con veri serpenti e senza scale.",
-    "Balla nudo su un paio di cavi ad alta tensione",
-    "Il vulcano attivo è la migliore piscina per te.",
-    "Dovresti fare il bagno in un vulcano.",
-    "Prova a passare un giorno in una bara e sarà tua per sempre.",
-    "Colpisci Uranio con un neutrone in movimento lento in tua presenza. Sarà un'esperienza utile",
-    "Puoi essere la prima persona a raggiungere il sole. Prova.",
+    "Owww... um idiota tão estúpido.",
+    "Não beba e digite.",
+    "Eu acho que você deveria ir para casa ou melhor um asilo mental.",
+    "Comando não encontrado. Assim como seu cérebro.",
+    "Você percebe que está se fazendo de bobo? Aparentemente não.",
+    "Você pode digitar melhor que isso.",
+    "A regra 9 da seção 544 do bot me impede de responder a seres humanos estúpidos como você.",
+    "Desculpe, nós não vendemos cérebros.",
+    "Acredite, você não é normal.",
+    "Aposto que seu cérebro parece tão bom quanto novo, visto que você nunca o usa.",
+    "Se eu quisesse me matar, escalaria seu ego e pularia para o seu QI.",    "Zombies eat brains... you're safe.",
+    "Você não evoluiu dos macacos, eles evoluíram de você.",
+    "Volte e fale comigo quando o seu QI exceder a sua idade.",
+    "Não estou dizendo que você é estúpido, só estou dizendo que você tem azar quando se trata de pensar.",
+    "Que idioma você está falando? Porque isso soa besteira.",
+    "A estupidez não é um crime, então você está livre para ir.",
+    "Você é a prova de que a evolução PODE ir ao contrário.",
+    "Gostaria de perguntar quantos anos você tem, mas eu sei que você não pode contar tão alto.",
+    "Como alguém de fora, o que você acha da raça humana?",
+    "O cérebro não é tudo. No seu caso, eles não são nada.",
+    "Normalmente, as pessoas vivem e aprendem. Você apenas vive.",
+    "Eu não sei o que o torna tão estúpido, mas realmente funciona.",
+    "Continue falando, um dia você dirá algo inteligente! (Eu duvido)",
+    "Me choque, diga algo inteligente.",
+    "Seu QI é menor que o tamanho do seu sapato.",
+    "Ai! Seus neurotransmissores não estão mais funcionando.",
+    "Você é louco, seu tolo.",
+    "Todo mundo tem o direito de ser estúpido, mas você está abusando do privilégio.",
+    "Me desculpe por magoar seus sentimentos quando te chamei de idiota. Pensei que você já sabia disso.",
+    "Você deve experimentar o cianeto.",
+    "Suas enzimas são destinadas a digerir veneno de rato.",
+    "Você deveria tentar dormir para sempre.",
+    "Pegue uma arma e atire em si mesmo.",
+    "Você poderia fazer um recorde mundial pulando de um avião sem pára-quedas.",
+    "Pare de falar BS e pule na frente de um trem-bala.",
+    "Tente tomar banho com ácido clorídrico em vez de água.",
+    "Tente o seguinte: se você prender a respiração debaixo d'água por uma hora, poderá prendê-la para sempre.",
+    "Fique verde! Pare de inalar oxigênio.",
+    "Deus estava procurando por você. Você deveria sair para encontrá-lo.",
+    "dê 100%. Agora, doe sangue.",
+    "Tente pular de um prédio de cem andares, mas você pode fazer isso apenas uma vez.",
+    "Você deve doar seu cérebro, visto que nunca o usou.",
+    "Voluntário para o alvo em um campo de tiro.",
+    "Tiros na cabeça são divertidos. Compre um.",
+    "Você deve tentar nadar com grandes tubarões brancos.",
+    "Você deve se pintar de vermelho e correr em uma maratona de touros.",
+    "Você pode ficar embaixo da água pelo resto da vida sem voltar.",
+    "Que tal você parar de respirar por um dia? Isso será ótimo.",
+    "Tente provocar um tigre enquanto vocês dois estão em uma gaiola.",
+    "Você já tentou se fotografar a 100 metros de distância usando um canon.",
+    "Você deve tentar manter o TNT na boca e acendê-lo.",
+    "Tente jogar catch and throw com RDX, é divertido.",
+    "Ouvi dizer que o phogine é venenoso, mas acho que você não se importa de inalá-lo por diversão.",
+    "Lance-se no espaço enquanto esquece o oxigênio na Terra.",
+    "Você deve tentar jogar cobra e escadas, com cobras reais e sem escadas.",
+    "Dance nu em alguns fios HT.",
+    "Active Volcano é a melhor piscina para você.",
+    "Você deve tentar um banho quente em um vulcão.",
+    "Tente passar um dia em um caixão e será seu para sempre.",
+    "Atinja o urânio com um nêutron lento na sua presença. Será uma experiência interessante.",
+    "Você pode ser a primeira pessoa a pisar no sol. Experimente.",
 )
 
 SLAP_TEMPLATES = (
-    "{user1} {hits} {user2} con un {item}.",
-    "{user1} {hits} {user2} in faccia con un {item}.",
-    "{user1} {throws} un {item} a {user2}.",
-    "{user1} afferra un {item} e {throws} esso a {user2} in faccia.",
-    "{user1} lancia un {item} nella direzione di {user2}.",
-    "{user1} inizia a schiaffeggiare {user2} con un {item}.",
-    "{user1} blocca {user2} a terra e ripetutamente {hits} con un {item}.",
-    "{user1} afferra un {item} e {hits} {user2} con esso.",
-    "{user1} lega {user2} ad una sedia e {throws} un {item}.",
-    "{user1} ha dato una spinta amichevole per aiutare {user2} a imparare a nuotare nella lava."
+    "{user1} {hits} {user2} com um {item}.",
+    "{user1} {hits} {user2} na cara de um {item}.",
+    "{user1} {hits} {user2} um pouco com um {item}.",
+    "{user1} {throws} um {item} em {user2}.",
+    "{user1} pega um {item} e o joga na cara de {user2}.",
+    "{user1} lança um {item} na direção geral de {user2}.",
+    "{user1} começa a dar um tapa em {user2} com um {item}.",
+    "{user1} fixa {user2} para baixo e os atinge repetidamente com um {item}.",
+    "{user1} pega um {item} e {hits} {user2} com ele.",
+    "{user1} amarra {user2} a uma cadeira e {throws} um {item} nelas.",
+    "{user1} deu um empurrão amigável para ajudar {user2} a aprender a nadar na lava."
 )
 
-ITEMS = (
-    "padella di ferro",
-    "trota grossa",
-    "mazza da baseball",
-    "mazza da cricket",
-    "bastone di legno",
-    "chiodo",
-    "stampante",
-    "badile",
-    "televisore CRT",
-    "libro di fisica",
-    "tostapane",
-    "ritratto di Richard Stallman",
-    "televisore",
-    "camion di cinque tonnellate",
-    "rotolo di nastro adesivo",
-    "libro",
-    "computer portatile",
-    "vecchia televisione",
-    "sacco di sassi",
-    "Trota iridea",
-    "pollo di gomma",
-    "mazza chiodata",
-    "estintore",
-    "roccia pesante",
-    "pezzo di terra",
-    "alveare",
-    "pezzo di carne marcia",
-    "orso",
-    "tonnellate di mattoni",
+ITENS = (
+    "frigideira de ferro fundido",
+    "truta grande",
+    "taco de beisebol",
+    "bastão de cricket",
+    "cana de madeira",
+    "unha",
+    "impressora",
+    "pá",
+    "Monitor CRT",
+    "livro de física",
+    "torradeira",
+    "retrato de Richard Stallman",
+    "televisão",
+    "caminhão de cinco toneladas",
+    "rolo de fita adesiva",
+    "livro",
+    "computador portátil",
+    "televisão antiga",
+    "saco de pedras",
+    "truta arco-íris",
+    "galinha de borracha",
+    "morcego cravado",
+    "extintor de incêndio",
+    "rock pesado",
+    "pedaço de terra",
+    "colméia",
+    "pedaço de carne podre",
+    "Urso",
+    "tonelada de tijolos",
 )
 
 THROW = (
-    "lancia",
-    "sbatte",
-    "getta",
-    "scaraventa",
+    "joga",
+    "arremessos",
+    "mandris"
+    "arremessa",
 )
 
 HIT = (
-    "colpisce",
-    "colpisce con forza",
-    "schiaffeggia",
-    "sfonda",
+    "exitos",
+    "bata"
+    "tapas",
+    "cheira",
+    "golpes",
 )
 
 MARKDOWN_HELP = """
-Markdown è uno strumento di formattazione molto potente supportato da telegram. {} ha alcuni miglioramenti, per assicurarti che \
-le note salvate vengano formattate correttamente e ti permette di creare pulsanti.
-- <code>_corsivo_</code>: se il testo è inserito tra '_' produrrà testo in corsivo
-- <code>*grassetto*</code>: se il testo è inserito tra '*' produrrà testo in grassetto
-- <code>`codice`</code>: se il testo è inserito tra '`' produrrà testo monospazio, conosciuto anche come 'codice'
-- <code>[testo](url)</code>: produrrà un link - il messaggio verrà visualizzato in <code>testo</code>, \
-e cliccando su di esso vi porterà alla pagina che avete inserito in <code>url</code>.
-ES: <code>[testo](esempio.it)</code>
-- <code>[testodelpulsante](buttonurl:url)</code>: questo è un miglioramento speciale che consente agli utenti di \
-avere pulsanti in telegram. <code>testodelpulsante</code> sarà il nome che viene visualizzato sul pulsante, e <code>url</code> \
-sarà la pagina web o l'URL che si aprirà quando si preme il tasto.
-ES: <code>[Questo è un pulsante](buttonurl:esempio.it)</code>
-Se vuoi mettere diversi pulsanti sulla stessa riga, usa :same, come qui:
-<code>[uno](buttonurl://esempio.it)
-[due](buttonurl://google.it:same)</code>
-Questo creerà due pulsanti sulla stessa linea invece di uno su ogni linea.
+O Markdown é uma ferramenta de formatação muito poderosa suportada por telegrama. {} possui algumas melhorias, para garantir que \
+as mensagens salvas são analisadas corretamente e permitem criar botões.
+
+- <code>_italic_</code>: quebrar o texto com '_' produzirá texto em itálico
+- <code>*bold*</code>: quebrar o texto com '*' produzirá texto em negrito
+- <code>`code`</code>: agrupar texto com '`' produzirá texto monoespaçado, também conhecido como 'code'
+- <code>[algumtexto](algumaURL)</code>: isso criará um link - a mensagem mostrará apenas <code>algumtexto</code>, \
+e tocar nele abrirá a página em <code>algumaURL</code>.
+EG: <code>[teste](exemplo.com)</code>
+
+- <code>[buttontext](buttonurl:someURL)</code>: esse é um aprimoramento especial para permitir que os usuários tenham telegrama \
+botões em sua remarcação. <code>buttontext</code> será o que é exibido no botão e <code>someurl</code> \
+será o URL que é aberto.
+EG: <code>[Este é um botão](buttonurl:example.com)</code>
+
+Se você quiser vários botões na mesma linha, use: same, como tal:
+<code>[um](buttonurl://example.com)
+[dois](buttonurl://google.com:same)</code>
+Isso criará dois botões em uma única linha, em vez de um botão por linha.
 """
 
-ItalianStrings = {
-    "send-start": """Ciao {}, il mio nome è {}! Se avete domande su come usarmi, leggete /help - e poi unitevi al nostro gruppo: @HarukaAyaGroup .
-Posso aiutarti a gestire i tuoi gruppi. Sono sostenuta da [questa persona](tg://user?id={654839744}) e sono un fork di [Marie](https://github.com/PaulSonOfLars/tgbot) .
-Sono realizzata in python3, usando \
-python-telegram-bot library, e sono completamente opensource - puoi trovare il mio codice sorgente\
-[qui](https://github.com/peaktogoo/HarukaAya))!
-Puoi inviare richieste di pull su github, scrivere nel mio gruppo di supporto, @HarukaAyaGroup, segnalando bugs oppure fare domande \
-e richiedere di nuove funzioni. :)
+EnglishStrings = {
+    "send-start": """Oi meu nome é {}! Se você tiver alguma dúvida sobre como me usar, leia o /help - e vá para @HarukaAyaGroup.
+
+Eu sou um bot de administração de grupos mantido por [essa pessoa](tg://user?Id={654839744}). Eu sou um fork da [Marie](https://github.com/PaulSonOfLars/tgbot).
+Eu sou construído em python3, usando a \
+biblioteca python-telegram-bot e sou totalmente de código aberto - você pode encontrar o que me faz viver\
+[aqui](https://github.com/peaktogoo/HarukaAya))!
+
+Sinta-se à vontade para enviar solicitações de recebimento no github ou entrar em contato com meu grupo de suporte, @EchelonTeam, com quaisquer bugs, perguntas \
+ou solicitações de recursos que você possa ter :)
+
+Se você gosta de me usar e/ou gostaria de me ajudar a sobreviver na natureza, pressione /donate para ajudar a financiar/atualizar meu VPS!
 """,
 
-    "send-help": """Hey ciao! Il mio nome è *{}*.
-Posso aiutarti a gestire i tuoi gruppi con alcune funzioni divertenti! Dai un'occhiata alle mie funzioni per avere un'idea di come posso aiutarti.
-Comandi principali disponibili:
- - /start: Verifica se il bot funziona oppure no.
- - /help: Vedi tutti i miei comandi.
- - /help <nome del modulo>: Ottieni informazioni su questo modulo.
- - /donate: Informazioni su come donare!
- - /lang: Cambia lingua al bot
+    "send-help": """Olá! Meu nome é *{}*.
+Sou um bot modular de gerenciamento de grupo com alguns extras divertidos! Dê uma olhada no seguinte para ter uma idéia de algumas das coisas em que posso ajudá-lo.
+
+Principais comandos disponíveis:
+ - /start: Comando legal para verificar se o bot está ativo ou não
+ - /help: PM é você esta mensagem.
+ - /help <nome do módulo>: informações de PM sobre esse módulo.
+ - /donate: informações sobre como doar!
+ - /lang: Alterar o idioma do bot
+ - /source: Informações sobre meu código fonte
  - /settings:
-   - in privato: Ti invierò le impostazioni per tutti i moduli supportati
-   - nel gruppo: Ti reindirizzerò in privato con tutte le impostazioni della chat.
+   - no PM: enviará suas configurações para todos os módulos suportados.
+   - em um grupo: o redirecionará para pm, com todas as configurações desse bate-papo.
    {}
    """,
 
-    "send-group-settings": """Hey ciao! Ci sono molti settaggi per *{}* - tappa il bottone impostazioni e seleziona ciò che ti interessa.""",
+    "send-group-settings": """Olá! Existem algumas configurações para *{}* - vá em frente e escolha o que
+você está interessado.""",
 
 
-   "Disabled connections to this chat for users": "Connessioni disabilitate a questa chat per gli utenti",
-    "Enabled connections to this chat for users": "Connessioni abilitate a questa chat per gli utenti",
-    "Please enter on/yes/off/no in group!": "Per favore scrivi on/yes/off/no nel gruppo!",
-    "Successfully connected to *{}*": "Connesso a *{}*",
-    "Connection failed!": "Connessione fallita!",
-    "Connections to this chat not allowed!": "Connessioni non permesse a questa chat!",
-    "Write chat ID to connect!": "Scrivi l'ID della chat per connetterti!",
-    "Usage limited to PMs only!": "Utilizzo limitato in privato!",
+   "Disabled connections to this chat for users": "Conexões desativadas para este bate-papo para usuários",
+    "Enabled connections to this chat for users": "Conexões ativadas para este bate-papo para usuários",
+    "Please enter on/yes/off/no in group!": "Digite on/yes/off/no no grupo!",
+    "Successfully connected to *{}*": "Conectado com sucesso a *{}*",
+    "Connection failed!": "Falha na conexão!",
+    "Connections to this chat not allowed!": "Conexões para este bate-papo não permitidas!",
+    "Write chat ID to connect!": "Escreva o ID do chat para conectar-se!",
+    "Usage limited to PMs only!": "Uso limitado apenas a PVs!",
 
 
 #Misc
@@ -241,175 +254,175 @@ Comandi principali disponibili:
 
 
     "The original sender, {}, has an ID of `{}`.\nThe forwarder, {}, has an ID of `{}`.":
-        "Il mittente, {}, ha l'ID `{}`.\nL'utente che ha inoltrato il messaggio, {}, ha l'ID `{}`.",
-    "{}'s id is `{}`.": "{} l'ID è `{}`.",
-    "Your id is `{}`.": "Il tuo ID è `{}`.",
-    "This group's id is `{}`.": "L'ID di questo gruppo è `{}`.",
+        "O remetente original, {}, tem o ID `{}`. \nO encaminhador, {}, tem o ID `{}`.",
+    "{}'s id is `{}`.": "O ID de {} é `{}`.",
+    "Your id is `{}`.": "Seu id é `{}`.",
+    "This group's id is `{}`.": "O ID deste grupo é `{}`.",
 
-    "I can't extract a user from this.": "Non posso estrarre un utente da questo.",
-    "<b>User info</b>:": "<b>Informazioni utente</b>:",
-    "\nFirst Name: {}": "\nNome: {}",
-    "\nLast Name: {}": "\nCognome: {}",
-    "\nUsername: @{}": "\nNome utente: @{}",
-    "\nPermanent user link: {}": "\nLink permanente dell'utente: {}",
+    "I can't extract a user from this.": "Não consigo extrair um usuário disso.",
+    "<b>User info</b>:": "<b>Informações do usuário</b>:",
+    "\nFirst Name: {}": "\nPrimeiro nome: {}",
+    "\nLast Name: {}": "\nÚltimo nome: {}",
+    "\nUsername: @{}": "\nNome de usuário: @{}",
+    "\nPermanent user link: {}": "\nLink permanente do usuário: {}",
     "\n\nThis person is my owner - I would never do anything against them!":
-        "\n\nQuesta persona è il mio proprietario - Non farei mai nulla contro di lui!",
+        "\n\nEssa pessoa é meu dono - eu nunca faria nada contra ela!",
     "\nThis person is one of my sudo users! Nearly as powerful as my owner - so watch it.":
-        "\nQuesta persona fa parte degli utenti sudo! è potente quasi come il mio proprietario - quindi fai attenzione.",
+        "\nEssa pessoa é um dos meus usuários do sudo! Quase tão poderoso quanto meu dono - então assista.",
     "\nThis person is one of my support users! Not quite a sudo user, but can still gban you off the map.":
-        "\nQuesta persona fa parte degli utenti di supporto! Non è potente quanto un utente sudo, ma può bannarti da tutti i miei gruppi.",
+        "\nEssa pessoa é um dos meus usuários de suporte! Não é um usuário sudo, mas ainda pode tirar você do mapa.",
     "\nThis person has been whitelisted! That means I'm not allowed to ban/kick them.":
-        "\nQuesta persona è stata inserita nella lista bianca! Questo significa che non mi e' permesso espellerli o bannarli.",
+        "\nEsta pessoa foi incluída na lista de permissões! Isso significa que não tenho permissão para banir/chutá-la.",
 
-    "Its always banhammer time for me!": "È sempre tempo di ban per me!",
+    "Its always banhammer time for me!": "É sempre hora de banhammer para mim!",
 
-    "It's {} in {}": "Sono le {} in {}",
+    "It's {} in {}": "Está {} no {}",
 
-    "Please reply to a sticker to get its ID.": "Rispondi ad uno sticker per ottenere il suo ID.",
-    "Please reply to a sticker for me to upload its PNG.": "Rispondi ad uno sticker per ottenere il suo PNG.",
+    "Please reply to a sticker to get its ID.": "Responda a um adesivo para obter seu ID.",
+    "Please reply to a sticker for me to upload its PNG.": "Responda a um adesivo para que eu faça o upload do PNG.",
 
-    "Write a location to check the weather.": "Scrivi una luogo per controllare il meteo.",
-    "I will keep an eye on both happy and sad times!": "Terrò d'occhio sia i tempi felici che quelli tristi!",
-    "Today in {} is being {}, around {}°C.\n": "Oggi in {} è {}, attorno ai {}°C.\n",
-    "Sorry, location not found.": "Luogo non trovato.",
+    "Write a location to check the weather.": "Escreva um local para verificar o clima.",
+    "I will keep an eye on both happy and sad times!": "Vou ficar de olho nos momentos felizes e tristes!",
+    "Today in {} is being {}, around {}°C.\n": "Hoje em {} está {}, fazendo cerca de {}°C.\n",
+    "Sorry, location not found.": "Desculpe, local não encontrado.",
 
-    "Deleting identifiable data...": "Eliminazione di dati personali...",
+    "Deleting identifiable data...": "Excluindo dados identificáveis ​​...",
 
     "Try forwarding the following message to me, and you'll see!":
-        "Prova a inoltrarmi il seguente messaggio, e vedrai!",
+        "Tente encaminhar a seguinte mensagem para mim e você verá!",
     "/save test This is a markdown test. _italics_, *bold*, `code`, [URL](example.com) [button](buttonurl:github.com) [button2](buttonurl://google.com:same)":
-    """/save test Questo è un test markdown. _corsivo_, *grassetto*, `codice`, \
-[URL](example.it)
-[Pulsante](buttonurl:github.com)
-[Pulsante2](buttonurl://google.it:same)""",
+    """/save teste Este é um teste de markdown. _italics_, *bold*, `código`, \
+[URL](example.com)
+[Botão1](buttonurl:github.com)
+[Botão2](buttonurl://google.com:same)""",
 
 #Admin
-"How am I meant to promote someone that's already an admin?": "Come promuovo qualcuno che è già un amministratore?",
-"I can't promote myself! Get an admin to do it for me.": "Non posso promuovere me stessa! Chiedi a un amministratore di farlo per me.",
-"Successfully promoted in *{}*!": "Promosso con successo in *{}*!",
+"How am I meant to promote someone that's already an admin?": "Como pretendo promover alguém que já é administrador?",
+"I can't promote myself! Get an admin to do it for me.": "Eu não posso me promover! Obtenha um administrador para fazer isso por mim.",
+"Successfully promoted in *{}*!": "Promovido com sucesso em *{}*!",
 
-"This person CREATED the chat, how would I demote them?": "Questa persona ha CREATO la chat, come potrei delegittimarla?",
-"Can't demote what wasn't promoted!": "Non posso delegittimare chi non è stato promosso!",
-"I can't demote myself!": "Non posso delegittimarmi!",
-"Successfully demoted in *{}*!": "Delegittimato con successo in *{}*!",
+"This person CREATED the chat, how would I demote them?": "Esta pessoa CRIOU o grupo, como eu iria rebaixá-la?",
+"Can't demote what wasn't promoted!": "Não é possível rebaixar o que não foi promovido!",
+"I can't demote myself!": "Eu não posso me rebaixar!",
+"Successfully demoted in *{}*!": "Rebaixado com êxito em *{}*!",
 "Could not demote. I might not be admin, or the admin status was appointed by another user, so I can't act upon them!": 
-"Non posso delegittimarlo. Potrei non essere amministratore, o lo stato di amministrazione è stato delegittimato da un altro utente, quindi non posso farci nulla!",
+"Não foi possível rebaixar. Talvez eu não seja administrador ou o status de administrador tenha sido indicado por outro usuário, portanto não posso agir de acordo!",
 
-"I don't have access to the invite link, try changing my permissions!": "Non ho accesso al link di invito, prova a cambiare i miei permessi!",
-"I can only give you invite links for supergroups and channels, sorry!": "Posso solo darti dei link di invito per supergruppi e canali, mi dispiace!",
+"I don't have access to the invite link, try changing my permissions!": "Não tenho acesso ao link do convite, tente alterar minhas permissões!",
+"I can only give you invite links for supergroups and channels, sorry!": "Só posso lhe dar links de convite para supergrupos e canais, desculpe!",
 
-"Admins in": "Amministratori in",
-"this chat": "Questa chat",
-" (Creator)": " (Creatore)",
+"Admins in": "Administradores em",
+"this chat": "este chat",
+" (Creator)": " (O Criador)",
 
 #AFK
-"{} is now AFK!": "{} è ora inattivo!",
-"{} is no longer AFK!": "{} non è più inattivo!",
-"{} is AFK!": "{} è inattivo!",
-"{} is AFK! says its because of: \n{}": "{} è inattivo perchè: \n{}",
+"{} is now AFK!": "{} agora esta AFK!",
+"{} is no longer AFK!": "{} não é esta mais AFK!",
+"{} is AFK!": "{} esta AFK!",
+"{} is AFK! says its because of: \n{}": "{} esta AFK! disse que é por causa de: \n{}",
 
 #Antiflood
 "I like to leave the flooding to natural disasters. But you, you were just a disappointment. Get out.":
-     "Mi piace lasciare il flood a disastri naturali. Ma tu sei solo una delusione. Vattene.",
+     "Eu gosto de deixar as inundações para os desastres naturais. Mas você, você foi apenas uma decepção. Saia.",
 "I can't kick people here, give me permissions first! Until then, I'll disable antiflood.":
-    "Non posso espellere le persone qui se non mi concedi le autorizzazioni! Fino ad allora, disabiliterò l'anti-flood.",
-"Antiflood has been disabled.": "L'antiflood è stato disabilitato.",
+    "Não posso chutar pessoas aqui, me dê permissões primeiro! Até lá, desabilitarei o antiflood.",
+"Antiflood has been disabled.": "O antiflood foi desativado.",
 "Antiflood has to be either 0 (disabled), or a number bigger than 3 (enabled)!":
-    "Antiflood deve essere impostato tra lo 0 ( per disabilitato), o un numero maggiore di 3 (per abilitarlo)!",
-"Antiflood has been updated and set to {}": "L'antiflood è stato aggiornato e impostato su {}",
+    "O antiflood deve ser 0 (desativado) ou um número maior que 3 (ativado)!",
+"Antiflood has been updated and set to {}": "O antiflood foi atualizado e definido como {}",
 "Unrecognised argument - please use a number, 'off', or 'no'.":
-    "Argomento non riconosciuto: si prega di utilizzare un numero, 'off', or 'no'.",
-"I'm not currently enforcing flood control!": "Al momento non sto imponendo il controllo del flood!",
+    "Argumento não reconhecido - use um número, 'off' ou 'no'.",
+"I'm not currently enforcing flood control!": "Atualmente, não estou aplicando o controle de flood!",
 "I'm currently banning users if they send more than {} consecutive messages.":
-     "Attualmente sto vietando agli utenti di inviare più di {} messaggi consecutivi.",
+     "No momento, estou banindo usuários se eles enviarem mais de {} mensagens consecutivas.",
 
 #Antispam
 "I've enabled antispam security in this group. This will help protect you from spammers, unsavoury characters, and the biggest trolls.":
- "Ho attivato la sicurezza antispam in questo gruppo. Questo ti aiuterà a proteggerti dagli spammer, dai troll e da utenti sgradevoli.",
+ "Eu ativei a segurança antispam neste grupo. Isso ajudará a protegê-lo contra spammers, personagens desagradáveis ​​e os maiores trolls.",
 
 "I've disabled antispam security in this group. GBans wont affect your users anymore. You'll be less protected from any trolls and spammers though!":
-    "Ho disabilitato la sicurezza antispam in questo gruppo. I GBan non influenzeranno più i tuoi utenti. Sarai comunque meno protetto da troll e spammer!",
+    "I've disabled antispam security in this group. GBans wont affect your users anymore. You'll be less protected from any trolls and spammers though!",
 
 "Give me some arguments to choose a setting! on/off, yes/no!\n\nYour current setting is: {}\nWhen True, any gbans that happen will also happen in your group. When False, they won't, leaving you at the possible mercy of spammers.":
-    "Scegli un'impostazione! on/off, yes/no!\n\nLe impostazioni correnti sono: {}\nSe impostato su True, tutti i gban eseguiti verranno applicati a tutti i miei gruppi. Se impostato su False, non succederà, lasciandoti in balia di spammer.",
+    "Give me some arguments to choose a setting! on/off, yes/no!\n\nYour current setting is: {}\nWhen True, any gbans that happen will also happen in your group. When False, they won't, leaving you at the possible mercy of spammers.",
 
-"Globally banned: <b>{}</b>": "Bannati ovunque: <b>{}</b>",
-"\nGlobally muted: <b>{}</b>": "\nMutati ovunque: <b>{}</b>",
-"\nReason: {}": "\nMotivo: {}",
+"Globally banned: <b>{}</b>": "Globally banned: <b>{}</b>",
+"\nGlobally muted: <b>{}</b>": "\nGlobally muted: <b>{}</b>",
+"\nReason: {}": "\nReason: {}",
 
 #Bans
-    "I really wish I could ban admins...": "Mi piacerebbe davvero poter bannare amministratori...",
-    "I'm not gonna BAN myself, are you crazy?": "Non bannerò me stessa, sei pazzo?",
-    "Banned!": "Bannato!",
-    "Well damn, I can't ban that user.": "Maledizione, non posso bannare questo utente.",
+    "I really wish I could ban admins...": "I really wish I could ban admins...",
+    "I'm not gonna BAN myself, are you crazy?": "I'm not gonna BAN myself, are you crazy?",
+    "Banned!": "Banned!",
+    "Well damn, I can't ban that user.": "Well damn, I can't ban that user.",
     "You haven't specified a time to ban this user for!":
-        "Non hai specificato il tempo per bannare questo utente!",
-    "Banned! User will be banned for {}.": "Bannato! L'utente sarà bannato per {}.",
+        "You haven't specified a time to ban this user for!",
+    "Banned! User will be banned for {}.": "Banned! User will be banned for {}.",
 
 #Blacklist
-    "<b>Current blacklisted words in {}:</b>\n": "<b>Parole sulla lista nera {}:</b>\n",
-    "There are no blacklisted messages in <b>{}</b>!": "Non ci sono messaggi sulla lista nera <b>{}</b>!",
+    "<b>Current blacklisted words in {}:</b>\n": "<b>Current blacklisted words in {}:</b>\n",
+    "There are no blacklisted messages in <b>{}</b>!": "There are no blacklisted messages in <b>{}</b>!",
     "Added <code>{}</code> to the blacklist in <b>{}</b>!":
-        "Aggiunto <code>{}</code> alla lista nera in <b>{}</b>!",
+        "Added <code>{}</code> to the blacklist in <b>{}</b>!",
     "Tell me which words you would like to add to the blacklist.":
-        "Dimmi quali parole vorresti aggiungere alla lista nera.",
+        "Tell me which words you would like to add to the blacklist.",
     "Removed <code>{}</code> from the blacklist in <b>{}</b>!":
-        "Rimosso <code>{}</code> dalla lista nera in <b>{}</b>!",
-    "This isn't a blacklisted trigger...!": "Questo non è un trigger nella lista nera...!",
+        "Removed <code>{}</code> from the blacklist in <b>{}</b>!",
+    "This isn't a blacklisted trigger...!": "This isn't a blacklisted trigger...!",
     "None of these triggers exist, so they weren't removed.":
-        "Nessuno di questi trigger esiste, quindi non sono stati rimossi.",
+        "None of these triggers exist, so they weren't removed.",
     "Removed <code>{}</code> triggers from the blacklist in <b>{}</b>! {} did not exist, so were not removed.":
-        "Rimossi <code>{}</code> trigger dalla blacklist in <b>{}</b>! {} non esistevano, quindi non sono stati rimossi.",
+        "Removed <code>{}</code> triggers from the blacklist in <b>{}</b>! {} did not exist, so were not removed.",
     "Tell me which words you would like to remove from the blacklist.":
-        "Dimmi quali parole vorresti rimuovere dalla lista nera.",
+        "Tell me which words you would like to remove from the blacklist.",
 
     #Filters
-    "*Filters in {}:*\n": "*Filtri in {}:*\n",
-    "local filters": "Filtri locali",
-    "*local filters:*\n": "*filtri locali:*\n",
-    "No filters in {}!": "Nessun filtro in {}!",
+    "*Filters in {}:*\n": "*Filters in {}:*\n",
+    "local filters": "local filters",
+    "*local filters:*\n": "*local filters:*\n",
+    "No filters in {}!": "No filters in {}!",
     "There is no note message - You can't JUST have buttons, you need a message to go with it!":
-        "Non c'è nessun messaggio nelle note salvate - Non puoi avere SOLO pulsanti, hai bisogno di un messaggio per farlo!",
-    "You didn't specify what to reply with!": "Non hai specificato cosa rispondere!",
-    "Handler '{}' added in *{}*!": "Handler '{}' aggiunto in *{}*!",
-    "No filters are active in {}!": "Nessun filtro attivo in {}!",
-    "Yep, I'll stop replying to that in *{}*." : "Sì, non risponderò a questo in *{}*.",
+        "There is no note message - You can't JUST have buttons, you need a message to go with it!",
+    "You didn't specify what to reply with!": "You didn't specify what to reply with!",
+    "Handler '{}' added in *{}*!": "Handler '{}' added in *{}*!",
+    "No filters are active in {}!": "No filters are active in {}!",
+    "Yep, I'll stop replying to that in *{}*." : "Yep, I'll stop replying to that in *{}*.",
     "That's not a current filter - run /filters for all active filters.":
-        "Questo attualmente non è un filtro - esegui /filters per vedere tutti i filtri attivi.",
+        "That's not a current filter - run /filters for all active filters.",
 
     #Disable
-    "Disabled the use of `{}` in *{}*": "Disabilitato l'uso di `{}` in *{}*",
-    "That command can't be disabled": "Questo comando non può essere disabilitato",
-    "What should I disable?": "Cosa dovrei disabilitare?",
+    "Disabled the use of `{}` in *{}*": "Disabled the use of `{}` in *{}*",
+    "That command can't be disabled": "That command can't be disabled",
+    "What should I disable?": "What should I disable?",
 
-    "Enabled the use of `{}` in *{}*": "Abilita l'uso di `{}` in *{}*",
-    "Is that even disabled?": "È disabilitato?",
-    "What should I enable?": "Cosa dovrei abilitare?",
+    "Enabled the use of `{}` in *{}*": "Enabled the use of `{}` in *{}*",
+    "Is that even disabled?": "Is that even disabled?",
+    "What should I enable?": "What should I enable?",
 
-    "The following commands are toggleable:\n{}": "I seguenti comandi sono modificabili:\n{}",
-    "No commands can be disabled.": "Nessun comando può essere disabilitato.",
-    "No commands are disabled in *{}*!": "Nessun comando è stato disabilitato in *{}*!",
-    "No commands are disabled!": "Nessun comando è stato disabilitato!",
+    "The following commands are toggleable:\n{}": "The following commands are toggleable:\n{}",
+    "No commands can be disabled.": "No commands can be disabled.",
+    "No commands are disabled in *{}*!": "No commands are disabled in *{}*!",
+    "No commands are disabled!": "No commands are disabled!",
     "The following commands are currently restricted in *{}*:\n{}":
-        "I seguenti comandi sono attualmente limitati in *{}*:\n{}",
+        "The following commands are currently restricted in *{}*:\n{}",
 
 #Locks
-    "Locked {} messages for all non-admins!": "Bloccati messaggi {} per tutti i non amministratori!",
+    "Locked {} messages for all non-admins!": "Locked {} messages for all non-admins!",
     "What are you trying to lock...? Try /locktypes for the list of lockables":
-        "Cosa stai cercando di bloccare...? Prova /locktypes per avere la lista dei bloccabili",
+        "What are you trying to lock...? Try /locktypes for the list of lockables",
     "I'm not an administrator, or haven't got delete rights.":
-        "Non sono un amministratore o non ho i permessi per eliminarli.",
-    "Unlocked {} for everyone!": "Sbloccato {} per tutti!",
+        "I'm not an administrator, or haven't got delete rights.",
+    "Unlocked {} for everyone!": "Unlocked {} for everyone!",
     "What are you trying to unlock...? Try /locktypes for the list of lockables":
-        "What are you trying to unlock...? Prova /locktypes per avere la lista dei bloccabili",
-    "What are you trying to unlock...?": "Cosa stai cercando di sbloccare...?",
+        "What are you trying to unlock...? Try /locktypes for the list of lockables",
+    "What are you trying to unlock...?": "What are you trying to unlock...?",
     "I see a bot, and I've been told to stop them joining... but I'm not admin!":
-        "Ho visto un bot e mi è stato detto di impedire a loro di unirsi al gruppo... ma non sono un amministratore!",
+        "I see a bot, and I've been told to stop them joining... but I'm not admin!",
     "Only admins are allowed to add bots to this chat! Get outta here.":
-        "Solo gli amministratori possono aggiungere bot a questa chat! Vattene.",
-    "There are no current locks in *{}*.": "Attualmente non ci stanno restrizioni in *{}*.",
-    "These are the locks in *{}*:": "Non ci sono restrizioni in *{}*:",
-    "this chat": "questa chat",
+        "Only admins are allowed to add bots to this chat! Get outta here.",
+    "There are no current locks in *{}*.": "There are no current locks in *{}*.",
+    "These are the locks in *{}*:": "These are the locks in *{}*:",
+    "this chat": "this chat",
 
 #Log channel
     "Now, forward the /setlog to the group you want to tie this channel to!":
