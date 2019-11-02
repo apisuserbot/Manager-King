@@ -78,7 +78,6 @@ def locale_button(bot, update):
                                             InlineKeyboardButton("Turkish 🇹🇷", callback_data="set_lang_tr")]] + [[
                                             InlineKeyboardButton("Indonesian 🇮🇩", callback_data="set_lang_id")]] + [[
                                             InlineKeyboardButton("⬅️ Back", callback_data="bot_start")]]
-
     print(lang_match)
     query.message.delete()
     bot.answer_callback_query(query.id)
