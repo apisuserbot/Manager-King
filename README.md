@@ -20,4 +20,4 @@ You can also join official Haruka Aya support group [here!](https://t.me/HarukaA
 * Paul Larsen - marie creator, inspiration to do many things
 * FFBot - for translations functions
 And much more that we couldn't list it here!
-* Nuno Penim - For providing his proprietary Combot Anti Spam System API - (pyCombotCAS_API)
+* Nuno Penim - For providing his proprietary Combot Anti Spam System API - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
