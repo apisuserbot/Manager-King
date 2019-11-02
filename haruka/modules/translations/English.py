@@ -219,11 +219,12 @@ Main commands available:
  - /start: Cool command to check if the bot is alive or not
  - /help: PM's you this message.
  - /help <module name>: PM's you info about that module.
- - /donate: information about how to donate!
+ - /donate: Information about how to donate!
  - /lang: Change bot language
+- /source: Info about my sourcecode
  - /settings:
-   - in PM: will send you your settings for all supported modules.
-   - in a group: will redirect you to pm, with all that chat's settings.
+   - in PM: Will send you your settings for all supported modules.
+   - in a group: Will redirect you to pm, with all that chat's settings.
    {}
    """,
 
