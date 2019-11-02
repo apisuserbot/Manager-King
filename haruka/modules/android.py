@@ -21,7 +21,6 @@ from haruka.__main__ import STATS, USER_INFO
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.extraction import extract_user
 from haruka.modules.helper_funcs.filters import CustomFilters
-from haruka.modules.helper_funcs.mwt import MWT
 
 from requests import get
 
@@ -584,65 +583,8 @@ def bootleggers(bot: Bot, update: Update):
     elif fetch.status_code == 404:
         reply_text="Couldn't reach Bootleggers API."
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
-    
-    
-@MWT(timeout=60*60*2)
-def load_ofrp_data():
-    """
-    load latest json file every six hours
-    :returns data
-    """
-    return get("https://files.orangefox.tech/Others/update.json").json()
 
 
-@NWT(timeout=60*60*2)
-@check_codename
-def ofrp(device):
-    """
-    fetch latest ofrp links for a device
-    :argument device - Xiaomi device codename
-    :returns message - telegram message string
-    :returns status - Boolean for device status whether found or not
-    """
-    data = load_ofrp_data()
-    stable = data['stable']
-    beta = data['beta']
-    stable_info = {key: value for key, value in stable.items() if device in key}
-    beta_info = {key: value for key, value in beta.items() if device in key}
-    message = ''
-    if not stable_info and not beta_info:
-        message = f"Can't find downloads for {device}!"
-        status = False
-        return message, status
-    builds = {}
-    if stable_info:
-        builds.update({'stable': stable_info})
-    if beta_info:
-        builds.update({'beta': beta_info})
-    for build, data in builds.items():
-        name = data[device]['fullname']
-        file = data[device]['ver']
-        maintainer = data[device]['maintainer']
-        notes = data[device]['msg']
-        readme = data[device]['readme']
-        if build == 'stable':
-            branch = 'Stable'
-        else:
-            branch = 'Beta'
-        url = f'https://files.orangefox.tech/OrangeFox-{branch}'
-        link = f'{url}/{device}/{file}'
-        if not message:
-            message += f'Latest {name} (`{device}`) OrangeFox Builds:\n' \
-                f'_Maintainer:_ {maintainer}\n'
-        message += f'*{branch}:* [{file}]({link})\n'
-        if notes:
-            message += f'_Notes:_ {notes}\n'
-        if readme:
-            message += f'README: [Here]({url}/{device}/{readme})\n'
-    status = True
-    return message, status
-
-    
 __help__ = """
 *Here you will have several useful commands for Android users!*
 
@@ -689,7 +631,6 @@ DOTOS_HANDLER = DisableAbleCommandHandler("dotos", dotos, admin_ok=True)
 PIXYS_HANDLER = DisableAbleCommandHandler("pixys", pixys, admin_ok=True)
 LOS_HANDLER = DisableAbleCommandHandler("los", los, admin_ok=True)
 BOOTLEGGERS_HANDLER = DisableAbleCommandHandler("bootleggers", bootleggers, admin_ok=True)
-TWRP_HANDLER = DisableAbleCommandHandler("of", ofrp, pass_args=True)
 
 dispatcher.add_handler(MAGISK_HANDLER)
 dispatcher.add_handler(DEVICE_HANDLER)
@@ -708,4 +649,3 @@ dispatcher.add_handler(DOTOS_HANDLER)
 dispatcher.add_handler(PIXYS_HANDLER)
 dispatcher.add_handler(LOS_HANDLER)
 dispatcher.add_handler(BOOTLEGGERS_HANDLER)
-dispatcher.add_handler(OFRP_HANDLER)
