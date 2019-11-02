@@ -119,13 +119,15 @@ def ping(bot: Bot, update: Update):
 
 @run_async
 def speedtst(bot: Bot, update: Update):
-    update.effective_message.reply_text("Running speedtest")
+    chat = update.effective_chat
+    del_msg = bot.send_message(chat.id, "Running speedtest.")
     test = speedtest.Speedtest()
     test.get_best_server()
     test.download()
     test.upload()
     test.results.share()
     result = test.results.dict()
+    del_msg.delete()
     update.effective_message.reply_text("Download: "
                    f"{speed_convert(result['download'])} \n"
                    "Upload: "
