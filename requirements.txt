@@ -33,4 +33,3 @@ pyowm
 wikipedia
 bleach
 markdown2
-numpy>=1.16.3
