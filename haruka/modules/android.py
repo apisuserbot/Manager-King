@@ -6,9 +6,10 @@ from datetime import datetime
 from typing import List
 from hurry.filesize import size as sizee
 
-from telegram import Update, Bot
+from telegram import Message, Chat, Update, Bot, MessageEntity
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
-from telegram.ext import run_async
+from telegram.ext import CommandHandler, run_async, Filters
+from telegram.utils.helpers import escape_markdown, mention_html
 
 from haruka import dispatcher, LOGGER
 from haruka.modules.disable import DisableAbleCommandHandler
