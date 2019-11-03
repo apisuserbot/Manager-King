@@ -33,3 +33,5 @@ pyowm
 wikipedia
 bleach
 markdown2
+opencv-python>=4.1.0.25
+numpy>=1.16.3
