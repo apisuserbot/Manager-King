@@ -1,9 +1,8 @@
 # deeppyer
-[![PyPI](https://img.shields.io/pypi/v/deeppyer.svg)](https://pypi.org/project/deeppyer/)  
-![banner image](https://raw.githubusercontent.com/Ovyerus/deeppyer/master/banner.jpg)
+![banner image](./banner.jpg)
 
-deeppyer is an image deepfryer written in Python using [Pillow](https://python-pillow.org/)
-and [OpenCV](https://pypi.org/project/opencv-python/).
+deeppyer is an image deepfryer written in Python using [Pillow](https://python-pillow.org/
+) and using the [Microsoft Facial Recognition API](https://azure.microsoft.com/services/cognitive-services/face/).
 
 NOTE: This *requires* at least Python v3.6 in order to run.
 
@@ -14,9 +13,9 @@ You can either use deeppyer as a module, or straight from the command line.
 ```
 $ python deeppyer.py -h
 
-usage: deeppyer.py [-h] [-v] [-o OUTPUT] [-f] FILE
+usage: deeppyer.py [-h] [-v] [-t TOKEN] [-o OUTPUT] FILE
 
-Deepfry an image.
+Deepfry an image, optionally adding lens flares for eyes.
 
 positional arguments:
   FILE                  File to deepfry.
@@ -24,13 +23,13 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -v, --version         Display program version.
+  -t TOKEN, --token TOKEN
+                        Token to use for facial recognition API.
   -o OUTPUT, --output OUTPUT
                         Filename to output to.
-  -f, --flares          Try and detected faces for adding lens flares.
 ```
 
-By default, flares will try to be added to the image, unless you're using the CLI script,
-in which case it is off by default.
+When a token is supplied, the script will automatically try to add lens flares for the eyes, otherwise it won't.
 
 ### Program usage
 ```py
@@ -39,7 +38,7 @@ import deeppyer, asyncio
 
 async def main():
     img = Image.open('./foo.jpg')
-    img = await deeppyer.deepfry(img)
+    img = await deeppyer.deepfry(img, token='optional token')
     img.save('./bar.jpg')
 
 loop = asyncio.get_event_loop()
@@ -47,13 +46,14 @@ loop.run_until_complete(main())
 ```
 
 ## API Documentation
-#### `async deepfry(img: Image, type=DeepfryTypes.RED, *, flares: bool = True)`
+#### `async deeppyer.deepfry(img: PIL.Image, *, token: str=None, url_base: str='westcentralus', session: aiohttp.ClientSession=None)`
 Deepfry a given image.
 
 **Arguments**
  - *img* (PIL.Image) - Image to apply the deepfry effect on.
- - *[type]* (DeepfryTypes) - Colours to apply on the image.
- - *[flares] (bool) - Whether or not to try and detect faces for applying lens flares.
+ - *[token]* (str) - Token to use for the facial recognition API. Defining this will add lens flares to the eyes of a face in the image.
+ - *[url_base]* (str='westcentralus') - URL base to use for the facial recognition API. Can either be `westus`, `eastus2`, `westcentralus`, `westeurope` or `southeastasia`.
+ - *[session]* (aiohttp.ClientSession) - Optional session to use when making the request to the API. May make it a tad faster if you already have a created session, and allows you to give it your own options.
 
 Returns:
   `PIL.Image` - Deepfried image.
@@ -62,7 +62,17 @@ Returns:
 ¯\\\_(ツ)_/¯ Why not
 
 ## Contributing
-If you wish to contribute something to this, go ahead! Just please make sure to format it with flake8 + isort, and that the test(s) pass fine.
+If you wish to contribute something to this, go ahead! Just please try to keep your code similar-ish to mine, and make sure that it works with the tests.
 
 ## Testing
-Simply run `tests/test.py` and make sure that all the images output properly.
+Create a file in [tests](./tests) called `token.json` with the following format:
+```json
+{
+    "token": "",
+    "url_base": ""
+}
+```
+`token` is your token for the facial recognition API.
+`url_base` is optional, and is for if your token is from a different region.
+
+After that, simply run `test.py` and make sure that all the images output as you want.
