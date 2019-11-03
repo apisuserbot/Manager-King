@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import List
 from hurry.filesize import size as sizee
 
-from telegram import update, Bot
+from telegram import Message, Update, Bot
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import run_async
 
