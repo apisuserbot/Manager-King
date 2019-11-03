@@ -21,3 +21,4 @@ You can also join official Haruka Aya support group [here!](https://t.me/HarukaA
 * FFBot - for translations functions
 And much more that we couldn't list it here!
 * Nuno Penim - For providing his proprietary Combot Anti Spam System API - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
+* Alisson - Helped clean up the code and countless other things!
