@@ -36,8 +36,8 @@ def magisk(bot, update):
                     f'[Uninstaller]({data["uninstaller"]["link"]})\n'
 
 
-Update.message.reply_text("*Latest Magisk Releases:*\n{}".format(releases),
-                            parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+    Update.message.reply_text("*Latest Magisk Releases:*\n{}".format(releases),
+                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
 @run_async
