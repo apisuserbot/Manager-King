@@ -404,7 +404,7 @@ dispatcher.add_handler(ANTISPAM_STATUS)
 
 dispatcher.add_handler(GBAN_HANDLER)
 dispatcher.add_handler(UNGBAN_HANDLER)
-# dispatcher.add_handler(GBAN_LIST)
+dispatcher.add_handler(GBAN_LIST)
 
 if STRICT_ANTISPAM:  # enforce GBANS if this is set
     dispatcher.add_handler(GBAN_ENFORCER, GBAN_ENFORCE_GROUP)
