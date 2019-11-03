@@ -1,11 +1,10 @@
-import random, re
-from typing import Optional, List
+import random
+from typing import List
 from random import randint
-from telegram import Message, Update, Bot, User
-from telegram import MessageEntity
-from telegram.ext import Filters, MessageHandler, run_async, MessageHandler, CommandHandler
+from telegram import Update, Bot
+from telegram.ext import Filters, run_async, CommandHandler
 
-from haruka import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, LOGGER
+from haruka import dispatcher, OWNER_ID, LOGGER
 from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.disable import DisableAbleCommandHandler
 
@@ -19,11 +18,11 @@ ABUSE_STRINGS = (
     "Nigga",
     "Ur granny tranny",
     "you noob",
-	"Relax your Rear,ders nothing to fear,The Rape train is finally here",
-	"Stfu bc",
-   "Just accepted, Samsung is the best smartphone maker,"
-	"Stfu and Gtfo U nub",
-	"GTFO bsdk"
+    "Relax your Rear,ders nothing to fear,The Rape train is finally here",
+    "Stfu bc",
+    "Just accepted, Samsung is the best smartphone maker,"
+    "Stfu and Gtfo U nub",
+    "GTFO bsdk"
     "CUnt",
     " Gay is here",
     "iPhone sucks",
@@ -207,24 +206,29 @@ TOSS = (
     "Tails 👑",
 )
 
+
 @run_async
 def roll(bot: Bot, update: Update):
     update.message.reply_text(random.choice(range(1, 7)))
-	
+
+
 def toss(bot: Bot, update: Update):
     update.message.reply_text(random.choice(TOSS))
+
 
 @run_async
 def abuse(bot: Bot, update: Update):
     # reply to correct message
     reply_text = update.effective_message.reply_to_message.reply_text if update.effective_message.reply_to_message else update.effective_message.reply_text
     reply_text(random.choice(ABUSE_STRINGS))
-	
+
+
 @run_async
 def bluetext(bot: Bot, update: Update):
     # reply to correct message
     reply_text = update.effective_message.reply_to_message.reply_text if update.effective_message.reply_to_message else update.effective_message.reply_text
-    reply_text("BLUE TEXT\n MUST CLICK\n I AM A STUPID ANIMAL THAT IS ATTRACTED TO COLORS")		
+    reply_text("BLUE TEXT\n MUST CLICK\n I AM A STUPID ANIMAL THAT IS ATTRACTED TO COLORS")
+
 
 @run_async
 def rlg(bot: Bot, update: Update):
@@ -234,7 +238,8 @@ def rlg(bot: Bot, update: Update):
     ears = random.choice(EARS)
     repl = format(ears + eyes + mouth + eyes + ears)
     update.message.reply_text(repl)
-	
+
+
 def decide(bot: Bot, update: Update):
         r = randint(1, 100)
         if r <= 65:
@@ -243,7 +248,8 @@ def decide(bot: Bot, update: Update):
             update.message.reply_text("No.")
         else:
             update.message.reply_text("Maybe.")
-            
+
+
 def table(bot: Bot, update: Update):
             r = randint(1, 100)
             if r <= 45:
@@ -252,7 +258,8 @@ def table(bot: Bot, update: Update):
                 update.message.reply_text("Send money bsdk to buy new table to flip")
             else:
                 update.message.reply_text("Go do some work instead of flippin tables you helpless fagit.")
-		
+
+
 @run_async
 def banall(bot: Bot, update: Update, args: List[int]):
     if args:
@@ -289,19 +296,22 @@ def snipe(bot: Bot, update: Update, args: List[str]):
 
 __help__ = """
 *Fun commands:*
-- /table: Flip a table, do not forget that tables cost money
-- /decide: Randomly answers yes/no/maybe
-- /toss: Toss a coin and randomly fall heads or tails
-- /abuse: Abuse more of account
-- /bluetext: check urself :V
-- /roll: Roll a dice
-- /rlg: Join ears, nose, mouth and create an emo ;-;
+ - /table: Flip a table, do not forget that tables cost money.
+ - /decide: Randomly answers yes/no/maybe.
+ - /toss: Toss a coin and randomly fall heads or tails.
+ - /abuse: Abuse more of account.
+ - /bluetext: check urself. :V
+ - /roll: Roll a dice.
+ - /rlg: Join ears, nose, mouth and create an emo. ;-;
 
 *Owner only:*
-- /banall: Ban all members from a chat
+ - /banall: Ban all members from a chat.
 
 *Sudo only:*
-- /snipe <chatid> <string>: Make me send a message to a specific chat.
+ - /snipe <chatid> <string>: Make me send a message to a specific chat.
+ - /broadcasts: Sends a broadcast to all groups using the bot.
+ - /chatlist: Send complete list of all groups using the bot.
+ - /gbanlist: Send complete list with all users who are banned globally.
 """
 
 __mod_name__ = "Extras"

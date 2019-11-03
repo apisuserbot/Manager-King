@@ -3,7 +3,7 @@ from io import BytesIO
 from time import sleep
 from typing import Optional
 
-from typing import Optional, List
+from typing import  List
 from telegram import TelegramError, Chat, Message
 from telegram import Update, Bot
 from telegram import ParseMode
@@ -268,4 +268,3 @@ dispatcher.add_handler(SLIST_HANDLER)
 dispatcher.add_handler(USER_HANDLER, USERS_GROUP)
 dispatcher.add_handler(BROADCAST_HANDLER)
 dispatcher.add_handler(CHATLIST_HANDLER)
-

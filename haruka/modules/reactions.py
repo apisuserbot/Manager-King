@@ -1,6 +1,6 @@
 import random
-from telegram.ext import run_async, Filters
-from telegram import Message, Chat, Update, Bot, MessageEntity
+from telegram.ext import run_async
+from telegram import Update, Bot
 from haruka import dispatcher
 from haruka.modules.disable import DisableAbleCommandHandler
 

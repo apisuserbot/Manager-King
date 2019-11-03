@@ -267,7 +267,7 @@ def gbanlist(bot: Bot, update: Update):
 
     with BytesIO(str.encode(banfile)) as output:
         output.name = "gbanlist.txt"
-        update.effective_message.reply_document(document=output, filename="gbanlist.txt",
+        update.effective_message.reply_document(document=output, filename="gbanlist@LordHitsuki_BOT.txt",
                                                 caption="Here is the list of currently gbanned users.")
 
 
@@ -386,6 +386,9 @@ You can improve your Antispam protection by using the /setcas command to enable 
  - /setcas <on/off/true/false>: Enables/disables CAS Checking on welcome
  - /getcas: Gets the current CAS settings
  - /setban <on/off/true/false>: Enables/disables autoban on CAS banned user detected.
+
+*Sudo Only:*
+ - /gbanlist: Will give you the complete list of globally banned users
 
 *Credits:*
 Thanks to @nunopenim for providing his proprietary Combot Anti Spam System API - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
