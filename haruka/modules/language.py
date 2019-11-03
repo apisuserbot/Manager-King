@@ -29,14 +29,15 @@ def locale(bot, update, args):
         if LANGUAGE:
             locale = LANGUAGE.locale_name
             native_lang = list_locales[locale]
-            update.message.reply_text("Current locale for this chat is: *{}*".format(native_lang), parse_mode = ParseMode.MARKDOWN)
+            update.message.reply_text("Current locale for this chat is: *{}*".format(native_lang), parse_mode=ParseMode.MARKDOWN)
         else:
             update.message.reply_text("Current locale for this chat is: *English*", parse_mode=ParseMode.MARKDOWN)
+
 
 @user_admin
 def locale_button(bot, update):
     chat = update.effective_chat
-    user = update.effective_user  # type: Optional[User]
+    user = update.effective_user  # type: optional[User]
     query = update.callback_query
     lang_match = re.findall(r"en|ru|ua|es|tr|id", query.data)
     if lang_match:
@@ -71,6 +72,7 @@ def locale_button(bot, update):
     query.message.reply_text(text, parse_mode=ParseMode.MARKDOWN,
                                             reply_markup=InlineKeyboardMarkup([[
                                             InlineKeyboardButton("English 🇺🇸", callback_data="set_lang_en")]] + [[
+                                            InlineKeyboardButton("⬅️ Back", callback_data="bot_start")]]))
 
     print(lang_match)
     query.message.delete()
