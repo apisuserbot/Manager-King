@@ -1,10 +1,13 @@
 import random
 from random import randint
+from time import sleep
 from typing import List
 
 from telegram import Update, Bot
+from telegram.error import TelegramError, BadRequest
 from telegram.ext import Filters, run_async, CommandHandler
 
+import haruka.modules.sql.users_sql as sql
 from haruka import dispatcher, OWNER_ID, LOGGER
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.filters import CustomFilters
@@ -284,7 +287,7 @@ def snipe(bot: Bot, update: Update, args: List[str]):
     try:
         chat_id = str(args[0])
         del args[0]
-    except TypeError as excp:
+    except TypeError:
         update.effective_message.reply_text("Please give me a chat to echo to!")
     to_send = " ".join(args)
     if len(to_send) >= 2:

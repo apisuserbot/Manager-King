@@ -3,7 +3,7 @@ import re
 from html import escape
 from typing import Optional, List
 
-from telegram import Message, Chat, Update, Bot, User, CallbackQuery
+from telegram import Message, Chat, Update, Bot, User, CallbackQuery, MessageEntity
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.error import BadRequest
 from telegram.ext import MessageHandler, Filters, CommandHandler, run_async, CallbackQueryHandler
@@ -107,12 +107,10 @@ def new_member(bot: Bot, update: Update):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     msg = update.effective_message  # type: Optional[Message]
-    chat_name = chat.title or chat.first or chat.username  # type: Optional:[chat name]
 
     should_welc, cust_welcome, cust_content, welc_type = sql.get_welc_pref(chat.id)
     cust_welcome = markdown_to_html(cust_welcome)
 
-    welcome_security = sql.welcome_security(chat.id)
     casPrefs = sql.get_cas_status(str(chat.id))  # check if enabled, obviously
     autoban = sql.get_cas_autoban(str(chat.id))
 

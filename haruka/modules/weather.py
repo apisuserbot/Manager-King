@@ -1,7 +1,7 @@
 import pyowm
 from telegram.ext import run_async
 
-from haruka import dispatcher, API_WEATHER
+from haruka import dispatcher, API_WEATHER, BAN_STICKER
 from haruka.modules.disable import DisableAbleCommandHandler
 
 

@@ -14,6 +14,7 @@ import nltk  # shitty lib, but it does work
 from PIL import Image
 from spongemock import spongemock
 from telegram import Message, Update, Bot
+from telegram.error import BadRequest
 from telegram.ext import CommandHandler, run_async
 from zalgo_text import zalgo
 

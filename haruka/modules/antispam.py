@@ -156,7 +156,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
                                   reason or "No reason given"),
             parse_mode=ParseMode.HTML
         )
-    except:
+    except TelegramError:
         print("nut")
 
     sql.gban_user(user_id, user_chat.username or user_chat.first_name, reason)
@@ -165,7 +165,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
         if int(bannerid) in [172811422, 214416808]:
             return
         chat.kick_member(user_chat.id)
-    except:
+    except TelegramError:
         print("Meh")
 
     # chats = get_all_chats()

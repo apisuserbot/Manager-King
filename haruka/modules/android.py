@@ -540,11 +540,9 @@ def viper(bot: Bot, update: Update):
         keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
         message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
                            disable_web_page_preview=True)
-        return
 
     elif fetch.status_code == 404:
-        reply_text = "Device not found"
-    message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        message.reply_text("Device not found")
 
 
 def descendant(bot: Bot, update: Update, args: List[str]):

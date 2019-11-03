@@ -890,7 +890,7 @@ def fed_chats(bot: Bot, update: Update, args: List[str]):
 
     try:
         update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
-    except:
+    except TelegramError:
         cleanr = re.compile('<.*?>')
         cleantext = re.sub(cleanr, '', text)
         with BytesIO(str.encode(cleantext)) as output:
@@ -913,7 +913,7 @@ def fed_import_bans(bot: Bot, update: Update, chat_data):
         update.effective_message.reply_text("This group is not a part of any federation!")
         return
 
-    if is_user_fed_owner(fed_id, user.id) == False:
+    if not is_user_fed_owner(fed_id, user.id):
         update.effective_message.reply_text("Only Federation owners can do this!")
         return
 
@@ -972,10 +972,10 @@ def fed_import_bans(bot: Bot, update: Update, chat_data):
                     if int(import_userid) == bot.id:
                         failed += 1
                         continue
-                    if is_user_fed_owner(fed_id, import_userid) == True:
+                    if is_user_fed_owner(fed_id, import_userid):
                         failed += 1
                         continue
-                    if is_user_fed_admin(fed_id, import_userid) == True:
+                    if is_user_fed_admin(fed_id, import_userid):
                         failed += 1
                         continue
                     if str(import_userid) == str(OWNER_ID):

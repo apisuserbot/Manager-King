@@ -4,7 +4,7 @@ from telegram import Update, Bot
 from telegram.error import BadRequest
 from telegram.ext import run_async, CommandHandler
 
-from haruka import dispatcher
+from haruka import dispatcher, LOGGER
 from haruka.modules.helper_funcs.chat_status import bot_admin, is_user_ban_protected, is_user_in_chat, is_bot_admin
 from haruka.modules.helper_funcs.extraction import extract_user_and_text
 from haruka.modules.helper_funcs.filters import CustomFilters
