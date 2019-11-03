@@ -97,7 +97,6 @@ else:
     DEEPFRY_TOKEN = Config.DEEPFRY_TOKEN
 
     DB_URI = Config.SQLALCHEMY_DATABASE_URI
-    DONATION_LINK = Config.DONATION_LINK
     LOAD = Config.LOAD
     NO_LOAD = Config.NO_LOAD
     DEL_CMDS = Config.DEL_CMDS
