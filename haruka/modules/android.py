@@ -1,9 +1,13 @@
+import html
 import json
+import time
 import yaml
+import re
+import html
 from requests import get
 from bs4 import BeautifulSoup
 from datetime import datetime
-from typing import List
+from typing import Optional, List
 from hurry.filesize import size as sizee
 
 from telegram import Message, Chat, Update, Bot, MessageEntity
@@ -12,18 +16,23 @@ from telegram.ext import CommandHandler, run_async, Filters
 from telegram.utils.helpers import escape_markdown, mention_html
 
 from haruka import dispatcher, LOGGER
+from haruka.__main__ import GDPR
+from haruka.__main__ import STATS, USER_INFO
 from haruka.modules.disable import DisableAbleCommandHandler
+from haruka.modules.helper_funcs.extraction import extract_user
+from haruka.modules.helper_funcs.filters import CustomFilters
+
+from requests import get
 
 # DO NOT DELETE THIS, PLEASE.
 # Made by @RealAkito on GitHub and Telegram.
 # This module was inspired by Android Helper Bot by Vachounet.
 # None of the code is taken from the bot itself, to avoid any more confusion.
 
-LOGGER.info("Original Android Modules by @RealAkito on Telegram / and edited by @HitaloKun on Telegram")
+LOGGER.info("Original Android Modules by @RealAkito on Telegram")
 
 GITHUB = 'https://github.com'
 DEVICES_DATA = 'https://raw.githubusercontent.com/androidtrackers/certified-android-devices/master/devices.json'
-
 
 @run_async
 def magisk(bot, update):
@@ -34,11 +43,10 @@ def magisk(bot, update):
         releases += f'{type}: [ZIP v{data["magisk"]["version"]}]({data["magisk"]["link"]}) | ' \
                     f'[APP v{data["app"]["version"]}]({data["app"]["link"]}) | ' \
                     f'[Uninstaller]({data["uninstaller"]["link"]})\n'
+                        
 
-
-    Update.message.reply_text("*Latest Magisk Releases:*\n{}".format(releases),
+    update.message.reply_text("*Latest Magisk Releases:*\n{}".format(releases),
                                parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
-
 
 @run_async
 def device(bot, update, args):
@@ -59,13 +67,13 @@ def device(bot, update, args):
             model = item['model']
             reply += f'<b>{brand} {name}</b>\n' \
                 f'Model: <code>{model}</code>\n' \
-                f'Codename: <code>{codename}</code>\n\n'
+                f'Codename: <code>{codename}</code>\n\n'                
     else:
         reply = f"Couldn't find info about {device}!\n"
     update.message.reply_text("{}".format(reply),
                                parse_mode=ParseMode.HTML, disable_web_page_preview=True)
-
-
+        
+        
 def twrp(bot, update, args):
     if len(args) == 0:
         update.effective_message.reply_text("No codename provided, write a codename for fetching informations.")
@@ -75,7 +83,7 @@ def twrp(bot, update, args):
     if url.status_code == 404:
         reply = f"Couldn't find twrp downloads for {device}!\n"
         return
-    reply = f'*Latest Official TWRP for {device}*\n'
+    reply = f'*Latest Official TWRP for {device}*\n'            
     db = get(DEVICES_DATA).json()
     newdevice = device.strip('lte') if device.startswith('beyond') else device
     for dev in db:
@@ -98,7 +106,6 @@ def twrp(bot, update, args):
 
     update.message.reply_text("{}".format(reply),
                                parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
-
 
 @run_async
 def havoc(bot: Bot, update: Update):
@@ -247,7 +254,7 @@ def posp(bot: Bot, update: Update):
         return
 
     else:
-        reply_text = "Device not found"
+        reply_text="Device not found"
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
@@ -280,7 +287,7 @@ def los(bot: Bot, update: Update):
         return
 
     else:
-        reply_text = "Device not found"
+        reply_text="Device not found"
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
@@ -315,7 +322,7 @@ def dotos(bot: Bot, update: Update):
         return
 
     elif fetch.status_code == 404:
-        reply_text = "Device not found"
+        reply_text="Device not found"
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
@@ -348,7 +355,7 @@ def viper(bot: Bot, update: Update):
         return
 
     elif fetch.status_code == 404:
-        reply_text = "Device not found"
+        reply_text="Device not found"
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
@@ -375,8 +382,8 @@ def evo(bot: Bot, update: Update):
         return
 
     if device == 'gsi':
-        reply_text = "Please check @expresslukegsi or @ZJRDroidGSI for unofficial GSIs" \
-                     " or click the button down below to download official GSIs!"
+        reply_text = "Please check Evolution X Updates channel(@EvolutionXUpdates)" \
+                     " or click the button down below to download the GSIs!"
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url="https://sourceforge.net/projects/evolution-x/files/GSI/")]]
         message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
@@ -574,7 +581,7 @@ def bootleggers(bot: Bot, update: Update):
             reply_text = 'Device not found.'
 
     elif fetch.status_code == 404:
-        reply_text = "Couldn't reach Bootleggers API."
+        reply_text="Couldn't reach Bootleggers API."
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
@@ -598,7 +605,7 @@ __help__ = """
  - /los <device>: Get the latest LineageOS ROM for a device
  - /bootleggers <device>: Get the latest Bootleggers ROM for a device
  - /miui <device>: Get the latest MIUI ROM for a device
-
+ 
  *GSIs:*
  - /phh: Get the latest Phh AOSP Oreo GSI!
  - /descendant: Get the latest Descendant GSI!
