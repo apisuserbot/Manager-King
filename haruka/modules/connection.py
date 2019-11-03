@@ -1,21 +1,15 @@
 from typing import Optional, List
 
+from telegram import Chat, Update, Bot, User
 from telegram import ParseMode
-from telegram import Message, Chat, Update, Bot, User
-from telegram.error import BadRequest
-from telegram.ext import CommandHandler, Filters
+from telegram.ext import CommandHandler
 from telegram.ext.dispatcher import run_async
-from telegram.utils.helpers import mention_html
 
 import haruka.modules.sql.connection_sql as sql
-from haruka import dispatcher, LOGGER, SUDO_USERS
-from haruka.modules.helper_funcs.chat_status import bot_admin, user_admin, is_user_admin, can_restrict
-from haruka.modules.helper_funcs.extraction import extract_user, extract_user_and_text
-from haruka.modules.helper_funcs.string_handling import extract_time
-
-from haruka.modules.translations.strings import tld
-
+from haruka import dispatcher, SUDO_USERS
+from haruka.modules.helper_funcs.chat_status import user_admin
 from haruka.modules.keyboard import keyboard
+from haruka.modules.translations.strings import tld
 
 
 @user_admin
@@ -51,20 +45,22 @@ def connect_chat(bot, update, args):
             except ValueError:
                 update.effective_message.reply_text(tld(chat.id, "Invalid Chat ID provided!"))
                 return
-            if (bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in ('administrator', 'creator') or 
-                                     (sql.allow_connect_to_chat(connect_chat) == True) and 
-                                     bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in ('member')) or (
-                                     user.id in SUDO_USERS):
+            if (bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in (
+            'administrator', 'creator') or
+                (sql.allow_connect_to_chat(connect_chat) == True) and
+                bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in ('member')) or (
+                    user.id in SUDO_USERS):
 
                 connection_status = sql.connect(update.effective_message.from_user.id, connect_chat)
                 if connection_status:
                     chat_name = dispatcher.bot.getChat(connected(bot, update, chat, user.id, need_admin=False)).title
-                    update.effective_message.reply_text(tld(chat.id, "Successfully connected to *{}*").format(chat_name), parse_mode=ParseMode.MARKDOWN)
+                    update.effective_message.reply_text(
+                        tld(chat.id, "Successfully connected to *{}*").format(chat_name), parse_mode=ParseMode.MARKDOWN)
 
-                    #Add chat to connection history
+                    # Add chat to connection history
                     history = sql.get_history(user.id)
                     if history:
-                        #Vars
+                        # Vars
                         if history.chat_id1:
                             history1 = int(history.chat_id1)
                         if history.chat_id2:
@@ -107,7 +103,9 @@ def connect_chat(bot, update, args):
 
     elif update.effective_chat.type == 'supergroup':
         connect_chat = chat.id
-        if (bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in ('administrator', 'creator') or (sql.allow_connect_to_chat(connect_chat) == True) and bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in'member') or (user.id in SUDO_USERS):
+        if (bot.get_chat_member(connect_chat, update.effective_message.from_user.id).status in (
+        'administrator', 'creator') or (sql.allow_connect_to_chat(connect_chat) == True) and bot.get_chat_member(
+                connect_chat, update.effective_message.from_user.id).status in 'member') or (user.id in SUDO_USERS):
 
             connection_status = sql.connect(update.effective_message.from_user.id, connect_chat)
             if connection_status:
@@ -128,10 +126,10 @@ def disconnect_chat(bot, update):
         disconnection_status = sql.disconnect(update.effective_message.from_user.id)
         if disconnection_status:
             sql.disconnected_chat = update.effective_message.reply_text("Disconnected from chat!")
-            #Rebuild user's keyboard
+            # Rebuild user's keyboard
             keyboard(bot, update)
         else:
-           update.effective_message.reply_text("Disconnection unsuccessfull!")
+            update.effective_message.reply_text("Disconnection unsuccessfull!")
     elif update.effective_chat.type == 'supergroup':
         disconnection_status = sql.disconnect(update.effective_message.from_user.id)
         if disconnection_status:
@@ -147,12 +145,13 @@ def disconnect_chat(bot, update):
 def connected(bot, update, chat, user_id, need_admin=True):
     if chat.type == chat.PRIVATE and sql.get_connected_chat(user_id):
         conn_id = sql.get_connected_chat(user_id).chat_id
-        if (bot.get_chat_member(conn_id, user_id).status in ('administrator', 'creator') or 
-                                     (sql.allow_connect_to_chat(connect_chat) == True) and 
-                                     bot.get_chat_member(user_id, update.effective_message.from_user.id).status in ('member')) or (
-                                     user_id in SUDO_USERS):
+        if (bot.get_chat_member(conn_id, user_id).status in ('administrator', 'creator') or
+            (sql.allow_connect_to_chat(connect_chat) == True) and
+            bot.get_chat_member(user_id, update.effective_message.from_user.id).status in ('member')) or (
+                user_id in SUDO_USERS):
             if need_admin:
-                if bot.get_chat_member(conn_id, update.effective_message.from_user.id).status in ('administrator', 'creator') or user_id in SUDO_USERS:
+                if bot.get_chat_member(conn_id, update.effective_message.from_user.id).status in (
+                'administrator', 'creator') or user_id in SUDO_USERS:
                     return conn_id
                 else:
                     update.effective_message.reply_text("You need to be a admin in a connected group!")
@@ -160,7 +159,8 @@ def connected(bot, update, chat, user_id, need_admin=True):
             else:
                 return conn_id
         else:
-            update.effective_message.reply_text("Group changed rights connection or you are not admin anymore.\nI'll disconnect you.")
+            update.effective_message.reply_text(
+                "Group changed rights connection or you are not admin anymore.\nI'll disconnect you.")
             disconnect_chat(bot, update)
             exit(1)
     else:

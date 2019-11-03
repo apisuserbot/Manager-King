@@ -24,7 +24,7 @@ def purge(bot: Bot, update: Update, args: List[str]) -> str:
             message_id = msg.reply_to_message.message_id
             if args and args[0].isdigit():
                 if int(args[0]) < int(1):
-                     return
+                    return
 
                 delete_to = message_id + int(args[0])
             else:

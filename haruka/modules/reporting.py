@@ -1,6 +1,7 @@
 import html
-from typing import Optional, List
 import re
+from typing import Optional, List
+
 from telegram import Message, Chat, Update, Bot, User, ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import CommandHandler, RegexHandler, run_async, Filters, CallbackQueryHandler
@@ -61,10 +62,10 @@ def report(bot: Bot, update: Update) -> str:
         chat_name = chat.title or chat.first or chat.username
         admin_list = chat.get_administrators()
 
-        #if reported_user == "483808054":
+        # if reported_user == "483808054":
         #    continue
-       # 
-        #if user.id == "435606081":
+        #
+        # if user.id == "435606081":
         #    continue
 
         if chat.username and chat.type == Chat.SUPERGROUP:
@@ -127,7 +128,8 @@ def report(bot: Bot, update: Update) -> str:
                                 message.forward(admin.user.id)
 
                     if chat.username and chat.type == Chat.SUPERGROUP:
-                        bot.send_message(admin.user.id, msg + link, parse_mode=ParseMode.HTML, reply_markup=reply_markup)
+                        bot.send_message(admin.user.id, msg + link, parse_mode=ParseMode.HTML,
+                                         reply_markup=reply_markup)
 
                         if should_forward:
                             message.reply_to_message.forward(admin.user.id)
@@ -167,7 +169,7 @@ def __user_settings__(bot, update, user):
 
     return text, keyboard
 
-    
+
 def control_panel_user(bot, update):
     user = update.effective_user  # type: Optional[User]
     chat = update.effective_chat
@@ -186,7 +188,8 @@ def control_panel_user(bot, update):
 
     keyboard = [[InlineKeyboardButton(text="⬅️ Back", callback_data="cntrl_panel_U(1)")]]
 
-    update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN)
+    update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(keyboard),
+                                        parse_mode=ParseMode.MARKDOWN)
 
 
 def buttons(bot: Bot, update):
@@ -221,8 +224,8 @@ def buttons(bot: Bot, update):
             return ""
         except Exception as err:
             bot.sendMessage(text="Error: {}".format(err),
-                                  chat_id=query.message.chat_id,
-                                  parse_mode=ParseMode.HTML)
+                            chat_id=query.message.chat_id,
+                            parse_mode=ParseMode.HTML)
             query.answer("❎ Failed to delete message!")
 
 

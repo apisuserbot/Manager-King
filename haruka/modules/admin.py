@@ -6,17 +6,17 @@ from telegram import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CommandHandler, Filters
 from telegram.ext.dispatcher import run_async
-from telegram.utils.helpers import escape_markdown, mention_html
+from telegram.utils.helpers import mention_html
 
-from haruka import dispatcher, updater
+from haruka import dispatcher
+from haruka.modules.connection import connected
 from haruka.modules.disable import DisableAbleCommandHandler
-from haruka.modules.helper_funcs.chat_status import bot_admin, can_promote, user_admin, can_pin
+from haruka.modules.helper_funcs.chat_status import bot_admin, user_admin, can_pin
 from haruka.modules.helper_funcs.extraction import extract_user
 from haruka.modules.log_channel import loggable
 from haruka.modules.sql import admin_sql as sql
 from haruka.modules.translations.strings import tld
 
-from haruka.modules.connection import connected
 
 @run_async
 @bot_admin
@@ -61,14 +61,14 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
                           can_post_messages=bot_member.can_post_messages,
                           can_edit_messages=bot_member.can_edit_messages,
                           can_delete_messages=bot_member.can_delete_messages,
-                          #can_invite_users=bot_member.can_invite_users,
+                          # can_invite_users=bot_member.can_invite_users,
                           can_restrict_members=bot_member.can_restrict_members,
                           can_pin_messages=bot_member.can_pin_messages,
                           can_promote_members=bot_member.can_promote_members)
 
     message.reply_text(tld(chat.id, f"Successfully promoted in *{chatD.title}*!"), parse_mode=ParseMode.MARKDOWN)
     return f"<b>{html.escape(chatD.title)}:</b>" \
-            "\n#PROMOTED" \
+           "\n#PROMOTED" \
            f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}" \
            f"\n<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
 
@@ -124,14 +124,15 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
                               can_promote_members=False)
         message.reply_text(tld(chat.id, f"Successfully demoted in *{chatD.title}*!"), parse_mode=ParseMode.MARKDOWN)
         return f"<b>{html.escape(chatD.title)}:</b>" \
-                "\n#DEMOTED" \
+               "\n#DEMOTED" \
                f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}" \
                f"\n<b>User:</b> {mention_html(user_member.user.id, user_member.user.first_name)}"
 
     except BadRequest:
         message.reply_text(
-            tld(chat.id, "Could not demote. I might not be admin, or the admin status was appointed by another user, so I can't act upon them!")
-            )
+            tld(chat.id,
+                "Could not demote. I might not be admin, or the admin status was appointed by another user, so I can't act upon them!")
+        )
         return ""
 
 
@@ -161,7 +162,7 @@ def pin(bot: Bot, update: Update, args: List[str]) -> str:
             else:
                 raise
         return f"<b>{html.escape(chat.title)}:</b>" \
-                "\n#PINNED" \
+               "\n#PINNED" \
                f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}"
 
     return ""
@@ -209,15 +210,17 @@ def invite(bot: Bot, update: Update):
         bot_member = chatP.get_member(bot.id)
         if bot_member.can_invite_users:
             invitelink = chatP.invite_link
-            #print(invitelink)
+            # print(invitelink)
             if not invitelink:
                 invitelink = bot.exportChatInviteLink(chatP.id)
 
             update.effective_message.reply_text(invitelink)
         else:
-            update.effective_message.reply_text(tld(chat.id, "I don't have access to the invite link, try changing my permissions!"))
+            update.effective_message.reply_text(
+                tld(chat.id, "I don't have access to the invite link, try changing my permissions!"))
     else:
-        update.effective_message.reply_text(tld(chat.id, "Sorry, but I can give invite links only for supergroups and channels!"))
+        update.effective_message.reply_text(
+            tld(chat.id, "Sorry, but I can give invite links only for supergroups and channels!"))
 
 
 @run_async
@@ -231,7 +234,7 @@ def adminlist(bot, update):
         chatP = update.effective_chat
         if chat.type == "private":
             exit(1)
-    
+
     administrators = chatP.get_administrators()
 
     text = tld(chat.id, "Admins in") + " *{}*:".format(chatP.title or tld(chat.id, "this chat"))
@@ -267,10 +270,10 @@ def reaction(bot: Bot, update: Update, args: List[str]) -> str:
         status = sql.command_reaction(chat.id)
         update.effective_message.reply_text(
             "Response for user-triggered admin commands is currently "
-            f"`{'enabled' if status==True else 'disabled'}`!",
+            f"`{'enabled' if status == True else 'disabled'}`!",
             parse_mode=ParseMode.MARKDOWN
         )
-        
+
 
 __help__ = """
  - /adminlist | /admins: Lists the admins in the chat

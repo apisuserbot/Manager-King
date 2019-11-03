@@ -1,5 +1,6 @@
 import telegram.ext as tg
 from telegram import Update
+
 import haruka.modules.sql.antispam_sql as sql
 
 CMD_STARTERS = ('/', '!')
@@ -38,9 +39,11 @@ class CustomRegexHandler(tg.RegexHandler):
     def __init__(self, pattern, callback, friendly="", **kwargs):
         super().__init__(pattern, callback, **kwargs)
 
+
 class GbanLockHandler(tg.CommandHandler):
     def __init__(self, command, callback, **kwargs):
         super().__init__(command, callback, **kwargs)
+
     def check_update(self, update):
         if (isinstance(update, Update) and (update.message or update.edited_message and self.allow_edited)):
             message = update.message or update.edited_message

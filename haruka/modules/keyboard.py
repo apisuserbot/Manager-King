@@ -1,14 +1,8 @@
-from math import ceil
-from typing import List, Dict
-
-from telegram import Bot, ParseMode, ReplyKeyboardMarkup, KeyboardButton
-from telegram.error import TelegramError
-
-from haruka import dispatcher
-from haruka.modules.translations.strings import tld
-from telegram.ext import CommandHandler, Filters, MessageHandler, CallbackQueryHandler
+from telegram import ReplyKeyboardMarkup, KeyboardButton
+from telegram.ext import CommandHandler
 
 import haruka.modules.sql.connection_sql as con_sql
+from haruka import dispatcher
 
 
 def keyboard(bot, update):
@@ -49,16 +43,16 @@ def keyboard(bot, update):
         else:
             btn3 = ""
 
-        #TODO: Remove except garbage
+        # TODO: Remove except garbage
 
     update.effective_message.reply_text("Keyboard Updated",
-                                            reply_markup=ReplyKeyboardMarkup([[
-                                                KeyboardButton("/help - Bot Help"), 
-                                                KeyboardButton("/notes - Notes")],
-                                             [KeyboardButton(btn1)], 
-                                             [KeyboardButton(btn2)],
-                                             [KeyboardButton(btn3)]]))
-    
+                                        reply_markup=ReplyKeyboardMarkup([[
+                                            KeyboardButton("/help - Bot Help"),
+                                            KeyboardButton("/notes - Notes")],
+                                            [KeyboardButton(btn1)],
+                                            [KeyboardButton(btn2)],
+                                            [KeyboardButton(btn3)]]))
+
 
 KEYBOARD_HANDLER = CommandHandler(["keyboard"], keyboard)
 dispatcher.add_handler(KEYBOARD_HANDLER)

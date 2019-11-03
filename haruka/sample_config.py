@@ -36,16 +36,17 @@ class Config(object):
     STRICT_GBAN = False
     STRICT_GMUTE = False
     ALLOW_EXCL = True  # Allow ! commands as well as /
-    API_OPENWEATHER = None # OpenWeather API
+    API_OPENWEATHER = None  # OpenWeather API
 
     # MEMES
-    DEEPFRY_TOKEN = None # Used for facial recognition in the deepfry command
-    
+    DEEPFRY_TOKEN = None  # Used for facial recognition in the deepfry command
+
     # CAT
     CAT_API_KEY = None
 
     # DOG
     DOG_API_KEY = None
+
 
 class Production(Config):
     LOGGER = False

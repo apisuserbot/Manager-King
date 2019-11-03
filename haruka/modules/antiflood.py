@@ -10,7 +10,6 @@ from haruka import dispatcher
 from haruka.modules.helper_funcs.chat_status import is_user_admin, user_admin, can_restrict
 from haruka.modules.log_channel import loggable
 from haruka.modules.sql import antiflood_sql as sql
-
 from haruka.modules.translations.strings import tld
 
 FLOOD_GROUP = 3
@@ -38,7 +37,7 @@ def check_flood(bot: Bot, update: Update) -> str:
     try:
         bot.restrict_chat_member(chat.id, user.id, can_send_messages=False)
         msg.reply_text(tld(chat.id, "I like to leave the flooding to natural disasters. But you, you were just a "
-                       "disappointment. *Muted*!"))
+                                    "disappointment. *Muted*!"))
 
         return "<b>{}:</b>" \
                "\n#MUTED" \
@@ -47,7 +46,8 @@ def check_flood(bot: Bot, update: Update) -> str:
                                              mention_html(user.id, user.first_name))
 
     except BadRequest:
-        msg.reply_text(tld(chat.id, "I can't mute people here, give me permissions first! Until then, I'll disable antiflood."))
+        msg.reply_text(
+            tld(chat.id, "I can't mute people here, give me permissions first! Until then, I'll disable antiflood."))
         sql.set_flood(chat.id, 0)
         return "<b>{}:</b>" \
                "\n#INFO" \
@@ -73,14 +73,15 @@ def set_flood(bot: Bot, update: Update, args: List[str]) -> str:
             amount = int(val)
             if amount <= 0:
                 sql.set_flood(chat.id, 0)
-                message.reply_text(tld(chat.id,  "Antiflood has been disabled."))
+                message.reply_text(tld(chat.id, "Antiflood has been disabled."))
                 return "<b>{}:</b>" \
                        "\n#SETFLOOD" \
                        "\n<b>Admin:</b> {}" \
                        "\nDisabled antiflood.".format(html.escape(chat.title), mention_html(user.id, user.first_name))
 
             elif amount < 3:
-                message.reply_text(tld(chat.id, "Antiflood has to be either 0 (disabled), or a number bigger than 3 (enabled)!"))
+                message.reply_text(
+                    tld(chat.id, "Antiflood has to be either 0 (disabled), or a number bigger than 3 (enabled)!"))
                 return ""
 
             else:
@@ -107,7 +108,8 @@ def flood(bot: Bot, update: Update):
         update.effective_message.reply_text(tld(chat.id, "I'm not currently enforcing flood control!"))
     else:
         update.effective_message.reply_text(tld(chat.id,
-            "I'm currently muting users if they send more than {} consecutive messages.").format(limit))
+                                                "I'm currently muting users if they send more than {} consecutive messages.").format(
+            limit))
 
 
 def __migrate__(old_chat_id, new_chat_id):

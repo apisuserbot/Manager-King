@@ -1,7 +1,7 @@
 import threading
 from typing import Union
 
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, String, Boolean
 
 from haruka.modules.sql import SESSION, BASE
 
@@ -17,9 +17,11 @@ class CommandReactionChatSettings(BASE):
     def __repr__(self):
         return "<Chat report settings ({})>".format(self.chat_id)
 
+
 CommandReactionChatSettings.__table__.create(checkfirst=True)
 
 CHAT_LOCK = threading.RLock()
+
 
 def command_reaction(chat_id: Union[str, int]) -> bool:
     try:

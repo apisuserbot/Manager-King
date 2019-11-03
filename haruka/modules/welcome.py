@@ -1,31 +1,28 @@
-from html import escape
-import time
 import html
 import re
+from html import escape
 from typing import Optional, List
 
-import haruka.modules.helper_funcs.cas_api as cas
-
-from telegram import Message, Chat, Update, Bot, User, CallbackQuery, ChatMember, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import Message, Chat, Update, Bot, User, CallbackQuery
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.error import BadRequest
 from telegram.ext import MessageHandler, Filters, CommandHandler, run_async, CallbackQueryHandler
-from telegram.utils.helpers import mention_markdown, mention_html, escape_markdown
+from telegram.utils.helpers import mention_html
 
-import haruka.modules.sql.welcome_sql as sql
+import haruka.modules.helper_funcs.cas_api as cas
 import haruka.modules.sql.antispam_sql as gbansql
-
-from haruka.modules.sql.antispam_sql import is_user_gbanned
+import haruka.modules.sql.welcome_sql as sql
 from haruka import dispatcher, OWNER_ID, LOGGER, MESSAGE_DUMP, SUDO_USERS, SUPPORT_USERS
+from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
 from haruka.modules.helper_funcs.extraction import extract_user
+from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.helper_funcs.misc import build_keyboard, revert_buttons, send_to_list
 from haruka.modules.helper_funcs.msg_types import get_welcome_type
-from haruka.modules.disable import DisableAbleCommandHandler
-from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.helper_funcs.string_handling import markdown_parser, \
     escape_invalid_curly_brackets, extract_time, markdown_to_html
 from haruka.modules.log_channel import loggable
+from haruka.modules.sql.antispam_sql import is_user_gbanned
 
 VALID_WELCOME_FORMATTERS = ['first', 'last', 'fullname', 'username', 'id', 'count', 'chatname', 'mention']
 
@@ -54,7 +51,8 @@ def send(update, message, keyboard, backup_message):
             pass
         reply = False
     try:
-        msg = update.effective_message.reply_text(message, parse_mode=ParseMode.HTML, reply_markup=keyboard, reply_to_message_id=reply, disable_web_page_preview=True)
+        msg = update.effective_message.reply_text(message, parse_mode=ParseMode.HTML, reply_markup=keyboard,
+                                                  reply_to_message_id=reply, disable_web_page_preview=True)
     except IndexError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                   "\nNote: the current message was "
@@ -74,60 +72,61 @@ def send(update, message, keyboard, backup_message):
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\nNote: the current message has an invalid url "
                                                                       "in one of its buttons. Please update."),
-                                                  parse_mode=ParseMode.MARKDOWN,
-                                                  reply_to_message_id=reply)
+                                                      parse_mode=ParseMode.MARKDOWN,
+                                                      reply_to_message_id=reply)
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\nNote: the current message has buttons which "
                                                                       "use url protocols that are unsupported by "
                                                                       "telegram. Please update."),
-                                                  parse_mode=ParseMode.MARKDOWN,
-                                                  reply_to_message_id=reply)
+                                                      parse_mode=ParseMode.MARKDOWN,
+                                                      reply_to_message_id=reply)
         elif excp.message == "Wrong url host":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
                                                                       "\nNote: the current message has some bad urls. "
                                                                       "Please update."),
-                                                  parse_mode=ParseMode.MARKDOWN,
-                                                  reply_to_message_id=reply)
+                                                      parse_mode=ParseMode.MARKDOWN,
+                                                      reply_to_message_id=reply)
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
             LOGGER.exception("Could not parse! got invalid url host errors")
         else:
             try:
                 msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: An error occured when sending the "
-                                                                      "custom message. Please update."),
-                                                      reply_to_message_id=reply, 
-                                                      parse_mode=ParseMode.MARKDOWN)
+                                                                          "\nNote: An error occured when sending the "
+                                                                          "custom message. Please update."),
+                                                          reply_to_message_id=reply,
+                                                          parse_mode=ParseMode.MARKDOWN)
             except BadRequest:
                 return ""
     return msg
+
 
 @run_async
 def new_member(bot: Bot, update: Update):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
-    msg = update.effective_message # type: Optional[Message]
-    chat_name = chat.title or chat.first or chat.username # type: Optional:[chat name]
+    msg = update.effective_message  # type: Optional[Message]
+    chat_name = chat.title or chat.first or chat.username  # type: Optional:[chat name]
 
     should_welc, cust_welcome, cust_content, welc_type = sql.get_welc_pref(chat.id)
     cust_welcome = markdown_to_html(cust_welcome)
 
     welcome_security = sql.welcome_security(chat.id)
-    casPrefs = sql.get_cas_status(str(chat.id)) #check if enabled, obviously
+    casPrefs = sql.get_cas_status(str(chat.id))  # check if enabled, obviously
     autoban = sql.get_cas_autoban(str(chat.id))
-    
+
     isAllowed = sql.isWhitelisted(str(chat.id))
-    
+
     if not isAllowed:
         bot.leave_chat(int(chat.id))
-    
+
     if casPrefs and not autoban and cas.banchecker(user.id):
-        bot.restrict_chat_member(chat.id, user.id, 
-                                         can_send_messages=False, 
-                                         can_send_media_messages=False, 
-                                         can_send_other_messages=False, 
-                                         can_add_web_page_previews=False)
+        bot.restrict_chat_member(chat.id, user.id,
+                                 can_send_messages=False,
+                                 can_send_media_messages=False,
+                                 can_send_other_messages=False,
+                                 can_add_web_page_previews=False)
         msg.reply_text("Warning! This user is CAS Banned. I have muted them to avoid spam. Ban is adviced.")
         isUserGbanned = gbansql.is_user_gbanned(user.id)
         report = "CAS Banned user detected: <code>{}</code>\nGlobally Banned: {}".format(user.id, isUserGbanned)
@@ -138,7 +137,6 @@ def new_member(bot: Bot, update: Update):
         isUserGbanned = gbansql.is_user_gbanned(user.id)
         report = "CAS Banned user detected: <code>{}</code>\nGlobally Banned: {}".format(user.id, isUserGbanned)
         send_to_list(bot, SUDO_USERS + SUPPORT_USERS, report, html=True)
-
 
     if should_welc:
         sent = None
@@ -155,7 +153,8 @@ def new_member(bot: Bot, update: Update):
                     "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id),
                     parse_mode=ParseMode.HTML
                 )
-                bot.send_message(chat.id, "Thanks for adding me into your group! Don't forgot to checkout the HitaloKun's channel (@AndroidRepo)!")
+                bot.send_message(chat.id,
+                                 "Thanks for adding me into your group! Don't forgot to checkout the HitaloKun's channel (@AndroidRepo)!")
 
             else:
                 if is_user_gbanned(new_mem.id):
@@ -184,9 +183,9 @@ def new_member(bot: Bot, update: Update):
                     else:
                         username = mention
                     formatted_text = cust_welcome.format(first=escape(first_name),
-                                              last=escape(new_mem.last_name or first_name),
-                                              fullname=escape(fullname), username=username, mention=mention,
-                                              count=count, chatname=escape(chat.title), id=new_mem.id)
+                                                         last=escape(new_mem.last_name or first_name),
+                                                         fullname=escape(fullname), username=username, mention=mention,
+                                                         count=count, chatname=escape(chat.title), id=new_mem.id)
                     # Build keyboard
                     buttons = sql.get_welc_buttons(chat.id)
                     keyb = build_keyboard(buttons)
@@ -202,10 +201,10 @@ def new_member(bot: Bot, update: Update):
                             if mutetime[:1] == "0":
                                 if member.can_send_messages is None or member.can_send_messages:
                                     try:
-                                       bot.restrict_chat_member(chat.id, new_mem.id, can_send_messages=False)
-                                       canrest = True
+                                        bot.restrict_chat_member(chat.id, new_mem.id, can_send_messages=False)
+                                        canrest = True
                                     except BadRequest:
-                                       canrest = False
+                                        canrest = False
                                 else:
                                     canrest = False
 
@@ -215,21 +214,23 @@ def new_member(bot: Bot, update: Update):
 
                                 if member.can_send_messages is None or member.can_send_messages:
                                     try:
-                                        bot.restrict_chat_member(chat.id, new_mem.id, until_date=mutetime, can_send_messages=False)
+                                        bot.restrict_chat_member(chat.id, new_mem.id, until_date=mutetime,
+                                                                 can_send_messages=False)
                                         canrest = True
                                     except BadRequest:
                                         canrest = False
                                 else:
                                     canrest = False
 
-
                         # If security welcome is turned on
                         if canrest:
                             sql.add_to_userlist(chat.id, new_mem.id)
-                            keyb.append([InlineKeyboardButton(text=str(custom_text), callback_data="check_bot_({})".format(new_mem.id))])
+                            keyb.append([InlineKeyboardButton(text=str(custom_text),
+                                                              callback_data="check_bot_({})".format(new_mem.id))])
                     keyboard = InlineKeyboardMarkup(keyb)
                     # Send message
-                    ENUM_FUNC_MAP[welc_type](chat.id, cust_content, caption=formatted_text, reply_markup=keyboard, parse_mode="markdown", reply_to_message_id=reply)
+                    ENUM_FUNC_MAP[welc_type](chat.id, cust_content, caption=formatted_text, reply_markup=keyboard,
+                                             parse_mode="markdown", reply_to_message_id=reply)
                     return
                 # else, move on
                 first_name = new_mem.first_name or "PersonWithNoName"  # edge case of empty name - occurs for some bugs.
@@ -280,7 +281,8 @@ def new_member(bot: Bot, update: Update):
 
                             if member.can_send_messages is None or member.can_send_messages:
                                 try:
-                                    bot.restrict_chat_member(chat.id, new_mem.id, until_date=mutetime, can_send_messages=False)
+                                    bot.restrict_chat_member(chat.id, new_mem.id, until_date=mutetime,
+                                                             can_send_messages=False)
                                     canrest = True
                                 except BadRequest:
                                     canrest = False
@@ -289,19 +291,19 @@ def new_member(bot: Bot, update: Update):
 
                     if canrest:
                         sql.add_to_userlist(chat.id, new_mem.id)
-                        keyb.append([InlineKeyboardButton(text=str(custom_text), callback_data="check_bot_({})".format(new_mem.id))])
+                        keyb.append([InlineKeyboardButton(text=str(custom_text),
+                                                          callback_data="check_bot_({})".format(new_mem.id))])
                 keyboard = InlineKeyboardMarkup(keyb)
 
                 sent = send(update, res, keyboard,
                             sql.DEFAULT_WELCOME.format(first=first_name))  # type: Optional[Message]
-
 
             prev_welc = sql.get_clean_pref(chat.id)
             if prev_welc:
                 try:
                     bot.delete_message(chat.id, prev_welc)
                 except BadRequest as excp:
-                   pass
+                    pass
 
             if sent:
                 sql.set_clean_welcome(chat.id, sent.message_id)
@@ -319,13 +321,15 @@ def check_bot_button(bot: Bot, update: Update):
     if user.id in getalluser:
         query.answer(text="Unmuted! You may now type!")
         # Unmute user
-        bot.restrict_chat_member(chat.id, user.id, can_send_messages=True, can_send_media_messages=True, can_send_other_messages=True, can_add_web_page_previews=True)
+        bot.restrict_chat_member(chat.id, user.id, can_send_messages=True, can_send_media_messages=True,
+                                 can_send_other_messages=True, can_add_web_page_previews=True)
         sql.rm_from_userlist(chat.id, user.id)
     else:
         try:
             query.answer(text="You're not a new user!")
         except:
             print("Nut")
+
 
 @run_async
 def left_member(bot: Bot, update: Update):
@@ -372,15 +376,16 @@ def left_member(bot: Bot, update: Update):
                 else:
                     username = mention
                 formatted_text = cust_goodbye.format(first=escape(first_name),
-                                              last=escape(left_mem.last_name or first_name),
-                                              fullname=escape(fullname), username=username, mention=mention,
-                                              count=count, chatname=escape(chat.title), id=left_mem.id)
+                                                     last=escape(left_mem.last_name or first_name),
+                                                     fullname=escape(fullname), username=username, mention=mention,
+                                                     count=count, chatname=escape(chat.title), id=left_mem.id)
                 # Build keyboard
                 buttons = sql.get_gdbye_buttons(chat.id)
                 keyb = build_keyboard(buttons)
                 keyboard = InlineKeyboardMarkup(keyb)
                 # Send message
-                ENUM_FUNC_MAP[goodbye_type](chat.id, cust_content, caption=cust_goodbye, reply_markup=keyboard, parse_mode="markdown", reply_to_message_id=reply)
+                ENUM_FUNC_MAP[goodbye_type](chat.id, cust_content, caption=cust_goodbye, reply_markup=keyboard,
+                                            parse_mode="markdown", reply_to_message_id=reply)
                 return
 
             first_name = left_mem.first_name or "PersonWithNoName"  # edge case of empty name - occurs for some bugs.
@@ -427,10 +432,12 @@ def security(bot: Bot, update: Update, args: List[str]) -> str:
                 update.effective_message.reply_text(text, parse_mode="markdown")
                 return ""
             sql.set_welcome_security(chat.id, True, str(cur_value), cust_text)
-            update.effective_message.reply_text("Welcomemute have been enabled! New members will be muted until they clicked the button!")
+            update.effective_message.reply_text(
+                "Welcomemute have been enabled! New members will be muted until they clicked the button!")
         elif (var == "no" or var == "n" or var == "off"):
             sql.set_welcome_security(chat.id, False, str(cur_value), cust_text)
-            update.effective_message.reply_text("Welcomemute have been disabled! New members will not be muted anymore!")
+            update.effective_message.reply_text(
+                "Welcomemute have been disabled! New members will not be muted anymore!")
         else:
             update.effective_message.reply_text("Please type `on`/`yes` or `off`/`no`!", parse_mode=ParseMode.MARKDOWN)
     else:
@@ -441,7 +448,8 @@ def security(bot: Bot, update: Update, args: List[str]) -> str:
             getcur = "False"
         if cur_value[:1] == "0":
             cur_value = "None"
-        text = "Current setting is::\nWelcome security: `{}`\nMember will be muted for: `{}`\nCustom Text for Unmute button: `{}`".format(getcur, cur_value, cust_text)
+        text = "Current setting is::\nWelcome security: `{}`\nMember will be muted for: `{}`\nCustom Text for Unmute button: `{}`".format(
+            getcur, cur_value, cust_text)
         update.effective_message.reply_text(text, parse_mode="markdown")
 
 
@@ -466,9 +474,11 @@ def security_mute(bot: Bot, update: Update, args: List[str]) -> str:
         update.effective_message.reply_text(text)
     else:
         if str(cur_value) == "0":
-            update.effective_message.reply_text("Current settings: New members will be mute forever until they press the button!")
+            update.effective_message.reply_text(
+                "Current settings: New members will be mute forever until they press the button!")
         else:
-            update.effective_message.reply_text("Current settings: New members will be mute for {} until they press the button!".format(cur_value))
+            update.effective_message.reply_text(
+                "Current settings: New members will be mute for {} until they press the button!".format(cur_value))
 
 
 @run_async
@@ -483,7 +493,8 @@ def security_text(bot: Bot, update: Update, args: List[str]) -> str:
         text = "The text of button have been changed to: `{}`".format(text)
         update.effective_message.reply_text(text, parse_mode="markdown")
     else:
-        update.effective_message.reply_text("The current security button text is: `{}`".format(cust_text), parse_mode="markdown")
+        update.effective_message.reply_text("The current security button text is: `{}`".format(cust_text),
+                                            parse_mode="markdown")
 
 
 @run_async
@@ -493,7 +504,8 @@ def security_text_reset(bot: Bot, update: Update):
     message = update.effective_message  # type: Optional[Message]
     getcur, cur_value, cust_text = sql.welcome_security(chat.id)
     sql.set_welcome_security(chat.id, getcur, cur_value, "Click here to prove you're human!")
-    update.effective_message.reply_text(" The text of security button has been reset to: `Click here to prove you're human!`", parse_mode="markdown")
+    update.effective_message.reply_text(
+        " The text of security button has been reset to: `Click here to prove you're human!`", parse_mode="markdown")
 
 
 @run_async
@@ -506,7 +518,7 @@ def cleanservice(bot: Bot, update: Update, args: List[str]) -> str:
             if (var == "no" or var == "off"):
                 sql.set_clean_service(chat.id, False)
                 update.effective_message.reply_text("I'll leave service messages")
-            elif(var == "yes" or var == "on"):
+            elif (var == "yes" or var == "on"):
                 sql.set_clean_service(chat.id, True)
                 update.effective_message.reply_text("I will clean service messages")
             else:
@@ -516,10 +528,11 @@ def cleanservice(bot: Bot, update: Update, args: List[str]) -> str:
     else:
         curr = sql.clean_service(chat.id)
         if curr:
-            update.effective_message.reply_text("I will now clean `x joined the group` message!", parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text("I will now clean `x joined the group` message!",
+                                                parse_mode=ParseMode.MARKDOWN)
         else:
-            update.effective_message.reply_text("I will no longer clean `x joined the group` message!", parse_mode=ParseMode.MARKDOWN)
-
+            update.effective_message.reply_text("I will no longer clean `x joined the group` message!",
+                                                parse_mode=ParseMode.MARKDOWN)
 
 
 @run_async
@@ -552,7 +565,7 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         text += "Mute button text: `{}`\n".format(cust_text)
         text += "\n*The welcome message (not filling the {}) is:*"
         update.effective_message.reply_text(text,
-            parse_mode=ParseMode.MARKDOWN)
+                                            parse_mode=ParseMode.MARKDOWN)
 
         if welcome_type == sql.Types.BUTTON_TEXT or welcome_type == sql.Types.TEXT:
             buttons = sql.get_welc_buttons(chat.id)
@@ -575,7 +588,8 @@ def welcome(bot: Bot, update: Update, args: List[str]):
             else:
                 keyb = build_keyboard(buttons)
                 keyboard = InlineKeyboardMarkup(keyb)
-                ENUM_FUNC_MAP[welcome_type](chat.id, cust_content, caption=welcome_m, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+                ENUM_FUNC_MAP[welcome_type](chat.id, cust_content, caption=welcome_m, reply_markup=keyboard,
+                                            parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
@@ -625,7 +639,8 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
             else:
                 keyb = build_keyboard(buttons)
                 keyboard = InlineKeyboardMarkup(keyb)
-                ENUM_FUNC_MAP[goodbye_type](chat.id, cust_content, caption=goodbye_m, reply_markup=keyboard, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+                ENUM_FUNC_MAP[goodbye_type](chat.id, cust_content, caption=goodbye_m, reply_markup=keyboard,
+                                            parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
@@ -655,7 +670,9 @@ def set_welcome(bot: Bot, update: Update) -> str:
     # If user is not set text and not reply a message
     if not msg.reply_to_message:
         if len(msg.text.split()) == 1:
-            msg.reply_text("You must provide the contents in a welcome message! Type `/help greetings` for some help at welcome in my PM! You can also `/markdownhelp` in my PM for markdown help!", parse_mode="markdown")
+            msg.reply_text(
+                "You must provide the contents in a welcome message! Type `/help greetings` for some help at welcome in my PM! You can also `/markdownhelp` in my PM for markdown help!",
+                parse_mode="markdown")
             return ""
 
     text, data_type, content, buttons = get_welcome_type(msg)
@@ -701,7 +718,9 @@ def set_goodbye(bot: Bot, update: Update) -> str:
     # If user is not set text and not reply a message
     if not msg.reply_to_message:
         if len(msg.text.split()) == 1:
-            msg.reply_text("You must provide the contents in a welcome message!/n Type `/welcomehelp` for some help at welcome!", parse_mode="markdown")
+            msg.reply_text(
+                "You must provide the contents in a welcome message!/n Type `/welcomehelp` for some help at welcome!",
+                parse_mode="markdown")
             return ""
 
     if data_type is None:
@@ -762,7 +781,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
                "\n#CLEAN_WELCOME" \
                "\n<b>Admin:</b> {}" \
                "\nHas toggled clean welcomes to <code>OFF</code>.".format(escape(chat.title),
-                                                                                   mention_html(user.id, user.first_name))
+                                                                          mention_html(user.id, user.first_name))
     else:
         # idek what you're writing, say yes or no
         update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
@@ -795,7 +814,6 @@ def __migrate__(old_chat_id, new_chat_id):
     sql.migrate_chat(old_chat_id, new_chat_id)
 
 
-
 def __chat_settings__(bot, update, chat, chatP, user):
     chat_id = chat.id
     welcome_pref, _, _, _ = sql.get_welc_pref(chat_id)
@@ -803,13 +821,14 @@ def __chat_settings__(bot, update, chat, chatP, user):
     return "This chat has it's welcome preference set to `{}`.\n" \
            "It's goodbye preference is `{}`.".format(welcome_pref, goodbye_pref)
 
+
 @run_async
 @user_admin
 def setcas(bot: Bot, update: Update):
     chat = update.effective_chat
     msg = update.effective_message
     split_msg = msg.text.split(' ')
-    if len(split_msg)!= 2:
+    if len(split_msg) != 2:
         msg.reply_text("Invalid arguments!")
         return
     param = split_msg[1]
@@ -822,8 +841,9 @@ def setcas(bot: Bot, update: Update):
         msg.reply_text("Successfully updated configuration.")
         return
     else:
-        msg.reply_text("Invalid status to set!") #on or off ffs
+        msg.reply_text("Invalid status to set!")  # on or off ffs
         return
+
 
 @run_async
 @user_admin
@@ -831,7 +851,7 @@ def setban(bot: Bot, update: Update):
     chat = update.effective_chat
     msg = update.effective_message
     split_msg = msg.text.split(' ')
-    if len(split_msg)!= 2:
+    if len(split_msg) != 2:
         msg.reply_text("Invalid arguments!")
         return
     param = split_msg[1]
@@ -844,8 +864,9 @@ def setban(bot: Bot, update: Update):
         msg.reply_text("Successfully updated configuration.")
         return
     else:
-        msg.reply_text("Invalid autoban definition to set!") #on or off ffs
+        msg.reply_text("Invalid autoban definition to set!")  # on or off ffs
         return
+
 
 @run_async
 @user_admin
@@ -858,22 +879,25 @@ def get_current_setting(bot: Bot, update: Update):
     msg.reply_text(rtext, parse_mode=ParseMode.HTML)
     return
 
+
 @run_async
 def get_version(bot: Bot, update: Update):
     msg = update.effective_message
     ver = cas.vercheck()
-    msg.reply_text("CAS API version: "+ver)
+    msg.reply_text("CAS API version: " + ver)
     return
+
 
 @run_async
 def caschecker(bot: Bot, update: Update, args: List[str]):
-    #/info logic
+    # /info logic
     msg = update.effective_message  # type: Optional[Message]
     user_id = extract_user(update.effective_message, args)
     if user_id and int(user_id) != 777000:
         user = bot.get_chat(user_id)
     elif user_id and int(user_id) == 777000:
-        msg.reply_text("This is Telegram. Unless you manually entered this reserved account's ID, it is likely a broadcast from a linked channel.")
+        msg.reply_text(
+            "This is Telegram. Unless you manually entered this reserved account's ID, it is likely a broadcast from a linked channel.")
         return
     elif not msg.reply_to_message and not args:
         user = msg.from_user
@@ -907,8 +931,9 @@ def caschecker(bot: Bot, update: Update, args: List[str]):
             text += "\n\nAll times are in UTC"
     update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
-#this sends direct request to combot server. Will return true if user is banned, false if
-#id invalid or user not banned
+
+# this sends direct request to combot server. Will return true if user is banned, false if
+# id invalid or user not banned
 @run_async
 def casquery(bot: Bot, update: Update, args: List[str]):
     msg = update.effective_message  # type: Optional[Message]
@@ -920,7 +945,8 @@ def casquery(bot: Bot, update: Update, args: List[str]):
     text = "Your query returned: "
     result = cas.banchecker(user_id)
     text += str(result)
-    msg.reply_text(text)        
+    msg.reply_text(text)
+
 
 @run_async
 def whChat(bot: Bot, update: Update, args: List[str]):
@@ -933,7 +959,8 @@ def whChat(bot: Bot, update: Update, args: List[str]):
         except:
             update.effective_message.reply_text("Error whitelisting chat!")
     else:
-        update.effective_message.reply_text("Give me a valid chat id!") 
+        update.effective_message.reply_text("Give me a valid chat id!")
+
 
 @run_async
 def unwhChat(bot: Bot, update: Update, args: List[str]):
@@ -948,7 +975,6 @@ def unwhChat(bot: Bot, update: Update, args: List[str]):
             update.effective_message.reply_text("Error un-whitelisting chat!")
     else:
         update.effective_message.reply_text("Give me a valid chat id!")
-
 
 
 __help__ = """
@@ -1019,7 +1045,6 @@ CASQUERY_HANDLER = CommandHandler("casquery", casquery, pass_args=True, filters=
 SETBAN_HANDLER = CommandHandler("setban", setban, filters=Filters.group)
 WHCHAT_HANDLER = CommandHandler("whchat", whChat, pass_args=True, filters=CustomFilters.sudo_filter)
 UNWHCHAT_HANDLER = CommandHandler("unwhchat", unwhChat, pass_args=True, filters=CustomFilters.sudo_filter)
-
 
 help_callback_handler = CallbackQueryHandler(check_bot_button, pattern=r"check_bot_")
 

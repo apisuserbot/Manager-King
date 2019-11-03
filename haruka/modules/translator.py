@@ -1,18 +1,16 @@
 from typing import Optional, List
 
-from telegram import Message, Update, Bot, User
-from telegram import MessageEntity
-from telegram.ext import Filters, MessageHandler, run_async
-
-from haruka import dispatcher, LOGGER
-from haruka.modules.disable import DisableAbleCommandHandler
-
 from googletrans import Translator
+from telegram import Message, Update, Bot
+from telegram.ext import run_async
+
+from haruka import dispatcher
+from haruka.modules.disable import DisableAbleCommandHandler
 
 
 @run_async
 def do_translate(bot: Bot, update: Update, args: List[str]):
-    msg = update.effective_message # type: Optional[Message]
+    msg = update.effective_message  # type: Optional[Message]
     lan = " ".join(args)
     try:
         to_translate_text = msg.reply_to_message.text
@@ -24,7 +22,7 @@ def do_translate(bot: Bot, update: Update, args: List[str]):
         src_lang = translated.src
         translated_text = translated.text
         msg.reply_text("Translated from {} to {}.\n {}".format(src_lang, lan, translated_text))
-    except :
+    except:
         msg.reply_text("Error")
 
 

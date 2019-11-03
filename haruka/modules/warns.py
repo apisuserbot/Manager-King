@@ -11,7 +11,7 @@ from telegram.utils.helpers import mention_html
 
 from haruka import dispatcher, BAN_STICKER
 from haruka.modules.disable import DisableAbleCommandHandler
-from haruka.modules.helper_funcs.chat_status import is_user_admin, bot_admin, user_admin_no_reply, user_admin, \
+from haruka.modules.helper_funcs.chat_status import is_user_admin, bot_admin, user_admin, \
     can_restrict
 from haruka.modules.helper_funcs.extraction import extract_text, extract_user_and_text, extract_user
 from haruka.modules.helper_funcs.filters import CustomFilters
@@ -56,7 +56,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
                      "\n#WARN_BAN" \
                      "\n<b>Admin:</b> {}" \
                      "\n<b>User:</b> {} (<code>{}</code>)" \
-                     "\n<b>Reason:</b> {}"\
+                     "\n<b>Reason:</b> {}" \
                      "\n<b>Counts:</b> <code>{}/{}</code>".format(html.escape(chat.title),
                                                                   warner_tag,
                                                                   mention_html(user.id, user.first_name),
@@ -75,7 +75,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
                      "\n#WARN" \
                      "\n<b>Admin:</b> {}" \
                      "\n<b>User:</b> {} (<code>{}</code>)" \
-                     "\n<b>Reason:</b> {}"\
+                     "\n<b>Reason:</b> {}" \
                      "\n<b>Counts:</b> <code>{}/{}</code>".format(html.escape(chat.title),
                                                                   warner_tag,
                                                                   mention_html(user.id, user.first_name),
@@ -103,7 +103,8 @@ def button(bot: Bot, update: Update) -> str:
         user_id = match.group(1)
         chat = update.effective_chat  # type: Optional[Chat]
         if not is_user_admin(chat, int(user.id)):
-            query.answer(text="You are not authorized to remove this warn! Only administrators may remove warns.", show_alert=True)
+            query.answer(text="You are not authorized to remove this warn! Only administrators may remove warns.",
+                         show_alert=True)
             return ""
         res = sql.remove_warn(user_id, chat.id)
         if res:
@@ -116,7 +117,8 @@ def button(bot: Bot, update: Update) -> str:
                    "\n<b>Admin:</b> {}" \
                    "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                                 mention_html(user.id, user.first_name),
-                                                                mention_html(user_member.user.id, user_member.user.first_name),
+                                                                mention_html(user_member.user.id,
+                                                                             user_member.user.first_name),
                                                                 user_member.user.id)
         else:
             update.effective_message.edit_text(
@@ -418,7 +420,8 @@ CALLBACK_QUERY_HANDLER = CallbackQueryHandler(button, pattern=r"rm_warn")
 MYWARNS_HANDLER = DisableAbleCommandHandler("warns", warns, pass_args=True, filters=Filters.group)
 ADD_WARN_HANDLER = CommandHandler("addwarn", add_warn_filter, filters=Filters.group)
 RM_WARN_HANDLER = CommandHandler(["nowarn", "stopwarn"], remove_warn_filter, filters=Filters.group)
-LIST_WARN_HANDLER = DisableAbleCommandHandler(["warnlist", "warnfilters"], list_warn_filters, filters=Filters.group, admin_ok=True)
+LIST_WARN_HANDLER = DisableAbleCommandHandler(["warnlist", "warnfilters"], list_warn_filters, filters=Filters.group,
+                                              admin_ok=True)
 WARN_FILTER_HANDLER = MessageHandler(CustomFilters.has_text & Filters.group, reply_filter)
 WARN_LIMIT_HANDLER = CommandHandler("warnlimit", set_warn_limit, pass_args=True, filters=Filters.group)
 WARN_STRENGTH_HANDLER = CommandHandler("strongwarn", set_warn_strength, pass_args=True, filters=Filters.group)

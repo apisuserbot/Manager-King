@@ -178,7 +178,8 @@ def __load_gban_stat_list():
     finally:
         SESSION.close()
 
-#Gmute
+
+# Gmute
 
 def gmute_user(user_id, name, reason=None):
     with GMUTED_USERS_LOCK:
@@ -257,7 +258,6 @@ def __load_gmute_stat_list():
         GMUTESTAT_LIST = {x.chat_id for x in SESSION.query(AntispamSettings).all() if not x.setting}
     finally:
         SESSION.close()
-
 
 
 def migrate_chat(old_chat_id, new_chat_id):

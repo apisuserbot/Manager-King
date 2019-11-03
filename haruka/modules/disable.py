@@ -22,6 +22,7 @@ if is_module_loaded(FILENAME):
     DISABLE_OTHER = []
     ADMIN_CMDS = []
 
+
     class DisableAbleCommandHandler(CommandHandler):
         def __init__(self, command, callback, admin_ok=False, **kwargs):
             super().__init__(command, callback, **kwargs)

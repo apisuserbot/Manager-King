@@ -9,6 +9,7 @@ from haruka.modules.sql import SESSION, BASE
 DEFAULT_WELCOME = "Hey {first}, how are you?"
 DEFAULT_GOODBYE = "Nice knowing ya!"
 
+
 class Welcome(BASE):
     __tablename__ = "welcome_pref"
     chat_id = Column(String(14), primary_key=True)
@@ -75,16 +76,18 @@ class CleanServiceSetting(BASE):
     def __repr__(self):
         return "<Chat used clean service ({})>".format(self.chat_id)
 
+
 class CombotCASStatus(BASE):
     __tablename__ = "cas_stats"
     chat_id = Column(String(14), primary_key=True)
     status = Column(Boolean, default=True)
     autoban = Column(Boolean, default=False)
-    
+
     def __init__(self, chat_id, status, autoban):
-        self.chat_id = str(chat_id) #chat_id is int, make sure it's string
+        self.chat_id = str(chat_id)  # chat_id is int, make sure it's string
         self.status = status
         self.autoban = autoban
+
 
 Welcome.__table__.create(checkfirst=True)
 WelcomeButtons.__table__.create(checkfirst=True)
@@ -97,6 +100,7 @@ LEAVE_BTN_LOCK = threading.RLock()
 WM_LOCK = threading.RLock()
 CAS_LOCK = threading.RLock()
 
+
 class WelcomeSecurity(BASE):
     __tablename__ = "welcome_security"
     chat_id = Column(String(14), primary_key=True)
@@ -105,10 +109,11 @@ class WelcomeSecurity(BASE):
     custom_text = Column(UnicodeText, default="Klik disini untuk mensuarakan")
 
     def __init__(self, chat_id, security=False, mute_time="0", custom_text="Klik disini untuk mensuarakan"):
-        self.chat_id = str(chat_id) # ensure string
+        self.chat_id = str(chat_id)  # ensure string
         self.security = security
         self.mute_time = mute_time
         self.custom_text = custom_text
+
 
 class UserRestirect(BASE):
     __tablename__ = "welcome_restirectlist"
@@ -127,13 +132,13 @@ class UserRestirect(BASE):
                     and self.chat_id == other.chat_id
                     and self.user_id == other.user_id)
 
+
 class AllowedChat(BASE):
     __tablename__ = "chat_whitelist"
     chat_id = Column(String(14), primary_key=True)
-    
-    def __init__(self, chat_id):
-        self.chat_id = str(chat_id) #chat_id is int, make sure it is string
 
+    def __init__(self, chat_id):
+        self.chat_id = str(chat_id)  # chat_id is int, make sure it is string
 
 
 Welcome.__table__.create(checkfirst=True)
@@ -155,6 +160,7 @@ ALLOWCHATLOCK = threading.RLock()
 CHAT_USERRESTIRECT = {}
 
 WHITELIST = set()
+
 
 def add_to_userlist(chat_id, user_id):
     with UR_LOCK:
@@ -182,6 +188,7 @@ def rm_from_userlist(chat_id, user_id):
 
         SESSION.close()
         return False
+
 
 def get_chat_userlist(chat_id):
     return CHAT_USERRESTIRECT.get(str(chat_id), set())
@@ -398,6 +405,7 @@ def get_gdbye_buttons(chat_id):
     finally:
         SESSION.close()
 
+
 def get_cas_status(chat_id):
     try:
         resultObj = SESSION.query(CombotCASStatus).get(str(chat_id))
@@ -406,6 +414,7 @@ def get_cas_status(chat_id):
         return True
     finally:
         SESSION.close()
+
 
 def set_cas_status(chat_id, status):
     with CAS_LOCK:
@@ -418,6 +427,7 @@ def set_cas_status(chat_id, status):
         SESSION.add(newObj)
         SESSION.commit()
 
+
 def get_cas_autoban(chat_id):
     try:
         resultObj = SESSION.query(CombotCASStatus).get(str(chat_id))
@@ -426,7 +436,8 @@ def get_cas_autoban(chat_id):
         return False
     finally:
         SESSION.close()
-        
+
+
 def set_cas_autoban(chat_id, autoban):
     with CAS_LOCK:
         status = True
@@ -437,6 +448,7 @@ def set_cas_autoban(chat_id, autoban):
         newObj = CombotCASStatus(str(chat_id), status, autoban)
         SESSION.add(newObj)
         SESSION.commit()
+
 
 def migrate_chat(old_chat_id, new_chat_id):
     with INSERTION_LOCK:
@@ -456,6 +468,7 @@ def migrate_chat(old_chat_id, new_chat_id):
 
         SESSION.commit()
 
+
 def __load_chat_userrestirect():
     global CHAT_USERRESTIRECT
     try:
@@ -472,12 +485,14 @@ def __load_chat_userrestirect():
     finally:
         SESSION.close()
 
-def __load_whitelisted_chats_list(): #load shit to memory to be faster, and reduce disk access 
+
+def __load_whitelisted_chats_list():  # load shit to memory to be faster, and reduce disk access
     global WHITELIST
     try:
         WHITELIST = {x.chat_id for x in SESSION.query(AllowedChat).all()}
     finally:
         SESSION.close()
+
 
 def whitelistChat(chat_id):
     with ALLOWCHATLOCK:
@@ -487,7 +502,8 @@ def whitelistChat(chat_id):
             SESSION.merge(chat)
         SESSION.commit()
         __load_whitelisted_chats_list()
-    
+
+
 def unwhitelistChat(chat_id):
     with ALLOWCHATLOCK:
         chat = SESSION.query(AllowedChat).get(chat_id)
@@ -496,10 +512,11 @@ def unwhitelistChat(chat_id):
         SESSION.commit()
         __load_whitelisted_chats_list()
 
+
 def isWhitelisted(chat_id):
     return chat_id in WHITELIST
 
-__load_whitelisted_chats_list()
 
+__load_whitelisted_chats_list()
 
 __load_chat_userrestirect()

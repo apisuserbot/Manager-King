@@ -8,13 +8,11 @@ from telegram.ext import CommandHandler, MessageHandler, Filters, run_async
 
 import haruka.modules.sql.blacklist_sql as sql
 from haruka import dispatcher, LOGGER
+from haruka.modules.connection import connected
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import user_admin, user_not_admin
 from haruka.modules.helper_funcs.extraction import extract_text
 from haruka.modules.helper_funcs.misc import split_message
-
-from haruka.modules.connection import connected
-
 from haruka.modules.translations.strings import tld
 
 BLACKLIST_GROUP = 11
@@ -25,7 +23,7 @@ def blacklist(bot: Bot, update: Update, args: List[str]):
     msg = update.effective_message  # type: Optional[Message]
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
-    
+
     conn = connected(bot, update, chat, user.id, need_admin=False)
     if conn:
         chat_id = conn
@@ -36,7 +34,7 @@ def blacklist(bot: Bot, update: Update, args: List[str]):
         else:
             chat_id = update.effective_chat.id
             chat_name = chat.title
-    
+
     filter_list = tld(chat.id, "<b>Blacklist filters active in {}:</b>\n").format(chat_name)
 
     all_blacklisted = sql.get_chat_blacklist(chat_id)
@@ -50,8 +48,10 @@ def blacklist(bot: Bot, update: Update, args: List[str]):
 
     split_text = split_message(filter_list)
     for text in split_text:
-        if filter_list == tld(chat.id, "<b>Blacklist filters active in {}:</b>\n").format(chat_name): #We need to translate
-            msg.reply_text(tld(chat.id, "There are no blacklist filters in <b>{}</b>!").format(chat_name), parse_mode=ParseMode.HTML)
+        if filter_list == tld(chat.id, "<b>Blacklist filters active in {}:</b>\n").format(
+                chat_name):  # We need to translate
+            msg.reply_text(tld(chat.id, "There are no blacklist filters in <b>{}</b>!").format(chat_name),
+                           parse_mode=ParseMode.HTML)
             return
         msg.reply_text(text, parse_mode=ParseMode.HTML)
 
@@ -82,12 +82,14 @@ def add_blacklist(bot: Bot, update: Update):
             sql.add_to_blacklist(chat_id, trigger.lower())
 
         if len(to_blacklist) == 1:
-            msg.reply_text(tld(chat.id, "Added <code>{}</code> to the blacklist in <b>{}</b>!").format(html.escape(to_blacklist[0]), chat_name),
+            msg.reply_text(tld(chat.id, "Added <code>{}</code> to the blacklist in <b>{}</b>!").format(
+                html.escape(to_blacklist[0]), chat_name),
                            parse_mode=ParseMode.HTML)
 
         else:
-            msg.reply_text(tld(chat.id, 
-             "Added <code>{}</code> to the blacklist in <b>{}</b>!").format(len(to_blacklist)), chat_name, parse_mode=ParseMode.HTML)
+            msg.reply_text(tld(chat.id,
+                               "Added <code>{}</code> to the blacklist in <b>{}</b>!").format(len(to_blacklist)),
+                           chat_name, parse_mode=ParseMode.HTML)
 
     else:
         msg.reply_text(tld(chat.id, "Tell me what words you would like to add to the blacklist."))
@@ -123,26 +125,27 @@ def unblacklist(bot: Bot, update: Update):
 
         if len(to_unblacklist) == 1:
             if successful:
-                msg.reply_text(tld(chat.id, "Removed <code>{}</code> from the blacklist in <b>{}</b>!").format(html.escape(to_unblacklist[0]), chat_name),
+                msg.reply_text(tld(chat.id, "Removed <code>{}</code> from the blacklist in <b>{}</b>!").format(
+                    html.escape(to_unblacklist[0]), chat_name),
                                parse_mode=ParseMode.HTML)
             else:
                 msg.reply_text(tld(chat.id, "This isn't a blacklisted trigger...!"))
 
         elif successful == len(to_unblacklist):
-            msg.reply_text(tld(chat.id, 
-                "Removed <code>{}</code> triggers from the blacklist in <b>{}</b>!").format(
-                    successful, chat_name), parse_mode=ParseMode.HTML)
+            msg.reply_text(tld(chat.id,
+                               "Removed <code>{}</code> triggers from the blacklist in <b>{}</b>!").format(
+                successful, chat_name), parse_mode=ParseMode.HTML)
 
         elif not successful:
-            msg.reply_text(tld(chat.id, 
-                "None of those trigger existed, so nothing was removed from blacklist.").format(
-                    successful, len(to_unblacklist) - successful), parse_mode=ParseMode.HTML)
+            msg.reply_text(tld(chat.id,
+                               "None of those trigger existed, so nothing was removed from blacklist.").format(
+                successful, len(to_unblacklist) - successful), parse_mode=ParseMode.HTML)
 
         else:
-            msg.reply_text(tld(chat.id, 
-                "Removed <code>{}</code> triggers from the blacklist in <b>{}</b>! {} did not exist, "
-                "so were not removed.").format(successful, chat_name, len(to_unblacklist) - successful),
-                parse_mode=ParseMode.HTML)
+            msg.reply_text(tld(chat.id,
+                               "Removed <code>{}</code> triggers from the blacklist in <b>{}</b>! {} did not exist, "
+                               "so were not removed.").format(successful, chat_name, len(to_unblacklist) - successful),
+                           parse_mode=ParseMode.HTML)
     else:
         msg.reply_text(tld(chat.id, "Tell me what words you would like to remove from the blacklist."))
 
@@ -183,6 +186,7 @@ def __stats__():
     return "{} blacklist triggers, across {} chats.".format(sql.num_blacklist_filters(),
                                                             sql.num_blacklist_filter_chats())
 
+
 def __import_data__(chat_id, data):
     # set chat blacklist
     blacklist = data.get('blacklist', {})
@@ -212,13 +216,14 @@ If you want to only match bit.ly/ links followed by three characters, you could 
 This would match bit.ly/abc, but not bit.ly/abcd.
 """
 
-#TODO: Add blacklist alternative modes: warn, ban, kick, or mute.
+# TODO: Add blacklist alternative modes: warn, ban, kick, or mute.
 
 BLACKLIST_HANDLER = DisableAbleCommandHandler("blacklist", blacklist, pass_args=True, admin_ok=True)
 ADD_BLACKLIST_HANDLER = CommandHandler("addblacklist", add_blacklist)
 UNBLACKLIST_HANDLER = CommandHandler(["unblacklist", "rmblacklist"], unblacklist)
 BLACKLIST_DEL_HANDLER = MessageHandler(
-    (Filters.text | Filters.command | Filters.sticker | Filters.photo) & Filters.group, del_blacklist, edited_updates=True)
+    (Filters.text | Filters.command | Filters.sticker | Filters.photo) & Filters.group, del_blacklist,
+    edited_updates=True)
 
 dispatcher.add_handler(BLACKLIST_HANDLER)
 dispatcher.add_handler(ADD_BLACKLIST_HANDLER)

@@ -3,11 +3,10 @@ from typing import Optional
 
 from telegram import User, Chat, ChatMember, Update, Bot
 
-from haruka import DEL_CMDS, SUDO_USERS, WHITELIST_USERS
 import haruka.modules.sql.admin_sql as admin_sql
-from haruka.modules.translations.strings import tld
-
 import haruka.modules.sql.antispam_sql as sql
+from haruka import DEL_CMDS, SUDO_USERS, WHITELIST_USERS
+
 
 def can_delete(chat: Chat, bot_id: int) -> bool:
     return chat.get_member(bot_id).can_delete_messages
@@ -163,5 +162,5 @@ def user_is_gbanned(func):
             return func(bot, update, *args, **kwargs)
         else:
             pass
-    return is_user_gbanned
 
+    return is_user_gbanned

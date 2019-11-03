@@ -1,22 +1,21 @@
 import re
 from io import BytesIO
 from time import sleep
+from typing import List
 from typing import Optional
 
-from typing import  List
+from telegram import ParseMode
 from telegram import TelegramError, Chat, Message
 from telegram import Update, Bot
-from telegram import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import MessageHandler, Filters, CommandHandler
 from telegram.ext.dispatcher import run_async
+from telegram.utils.helpers import escape_markdown
 
 import haruka.modules.sql.users_sql as sql
 from haruka import dispatcher, OWNER_ID, LOGGER, SUDO_USERS, SUPPORT_USERS
-from telegram.utils.helpers import escape_markdown
+from haruka.modules.helper_funcs.chat_status import bot_admin
 from haruka.modules.helper_funcs.filters import CustomFilters
-from haruka.modules.helper_funcs.chat_status import is_user_ban_protected, bot_admin
-
 from haruka.modules.translations.strings import tld
 
 USERS_GROUP = 4
@@ -171,9 +170,9 @@ def getlink(bot: Bot, update: Update, args: List[int]):
             else:
                 links += str(chat_id) + ":\nI don't have access to the invite link." + "\n"
         except BadRequest as excp:
-                links += str(chat_id) + ":\n" + excp.message + "\n"
+            links += str(chat_id) + ":\n" + excp.message + "\n"
         except TelegramError as excp:
-                links += str(chat_id) + ":\n" + excp.message + "\n"
+            links += str(chat_id) + ":\n" + excp.message + "\n"
 
     message.reply_text(links)
 
@@ -224,12 +223,13 @@ def slist(bot: Bot, update: Update):
             if excp.message == 'Chat not found':
                 text2 += "\n - ({}) - not found".format(user_id)
     message.reply_text(text1 + "\n" + text2 + "\n", parse_mode=ParseMode.MARKDOWN)
-    #message.reply_text(text2 + "\n", parse_mode=ParseMode.MARKDOWN)
+    # message.reply_text(text2 + "\n", parse_mode=ParseMode.MARKDOWN)
 
 
 def __user_info__(user_id, chat_id):
     if user_id == dispatcher.bot.id:
-        return tld(chat_id, "I've seen them in... Wow. Are they stalking me? They're in all the same places I am... oh. It's me.")
+        return tld(chat_id,
+                   "I've seen them in... Wow. Are they stalking me? They're in all the same places I am... oh. It's me.")
     num_chats = sql.get_user_num_chats(user_id)
     return tld(chat_id, "I've seen them in <code>{}</code> chats in total.").format(num_chats)
 
@@ -258,7 +258,7 @@ BANALL_HANDLER = CommandHandler("banall", banall, pass_args=True, filters=Filter
 GETLINK_HANDLER = CommandHandler("getlink", getlink, pass_args=True, filters=Filters.user(OWNER_ID))
 LEAVECHAT_HANDLER = CommandHandler("leavechat", leavechat, pass_args=True, filters=Filters.user(OWNER_ID))
 SLIST_HANDLER = CommandHandler("slist", slist,
-                           filters=CustomFilters.sudo_filter | CustomFilters.support_filter)
+                               filters=CustomFilters.sudo_filter | CustomFilters.support_filter)
 
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)

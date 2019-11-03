@@ -1,16 +1,12 @@
-import html
-from typing import Optional, List
+from typing import List
 
-from telegram import Message, Chat, Update, Bot, User
+from telegram import Update, Bot
 from telegram.error import BadRequest
-from telegram.ext import run_async, CommandHandler, Filters
-from telegram.utils.helpers import mention_html
+from telegram.ext import run_async, CommandHandler
 
 from haruka import dispatcher
-from haruka.modules.helper_funcs.chat_status import bot_admin, user_admin, is_user_ban_protected, can_restrict, \
-    is_user_admin, is_user_in_chat, is_bot_admin
+from haruka.modules.helper_funcs.chat_status import bot_admin, is_user_ban_protected, is_user_in_chat, is_bot_admin
 from haruka.modules.helper_funcs.extraction import extract_user_and_text
-from haruka.modules.helper_funcs.string_handling import extract_time
 from haruka.modules.helper_funcs.filters import CustomFilters
 
 RBAN_ERRORS = {
@@ -84,6 +80,7 @@ RUNMUTE_ERRORS = {
     "Not in the chat"
 }
 
+
 @run_async
 @bot_admin
 def rban(bot: Bot, update: Update, args: List[str]):
@@ -151,6 +148,7 @@ def rban(bot: Bot, update: Update, args: List[str]):
                              excp.message)
             message.reply_text("Well damn, I can't ban that user.")
 
+
 @run_async
 @bot_admin
 def runban(bot: Bot, update: Update, args: List[str]):
@@ -194,7 +192,7 @@ def runban(bot: Bot, update: Update, args: List[str]):
             return
         else:
             raise
-            
+
     if is_user_in_chat(chat, user_id):
         message.reply_text("Why are you trying to remotely unban someone that's already in that chat?")
         return
@@ -217,6 +215,7 @@ def runban(bot: Bot, update: Update, args: List[str]):
             LOGGER.exception("ERROR unbanning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
             message.reply_text("Well damn, I can't unban that user.")
+
 
 @run_async
 @bot_admin
@@ -285,6 +284,7 @@ def rkick(bot: Bot, update: Update, args: List[str]):
                              excp.message)
             message.reply_text("Well damn, I can't kick that user.")
 
+
 @run_async
 @bot_admin
 def rmute(bot: Bot, update: Update, args: List[str]):
@@ -352,6 +352,7 @@ def rmute(bot: Bot, update: Update, args: List[str]):
                              excp.message)
             message.reply_text("Well damn, I can't mute that user.")
 
+
 @run_async
 @bot_admin
 def runmute(bot: Bot, update: Update, args: List[str]):
@@ -395,12 +396,12 @@ def runmute(bot: Bot, update: Update, args: List[str]):
             return
         else:
             raise
-            
+
     if is_user_in_chat(chat, user_id):
-       if member.can_send_messages and member.can_send_media_messages \
-          and member.can_send_other_messages and member.can_add_web_page_previews:
-        message.reply_text("This user already has the right to speak in that chat.")
-        return
+        if member.can_send_messages and member.can_send_media_messages \
+                and member.can_send_other_messages and member.can_add_web_page_previews:
+            message.reply_text("This user already has the right to speak in that chat.")
+            return
 
     if user_id == bot.id:
         message.reply_text("I'm not gonna UNMUTE myself, I'm an admin there!")
@@ -408,10 +409,10 @@ def runmute(bot: Bot, update: Update, args: List[str]):
 
     try:
         bot.restrict_chat_member(chat.id, int(user_id),
-                                     can_send_messages=True,
-                                     can_send_media_messages=True,
-                                     can_send_other_messages=True,
-                                     can_add_web_page_previews=True)
+                                 can_send_messages=True,
+                                 can_send_media_messages=True,
+                                 can_send_other_messages=True,
+                                 can_add_web_page_previews=True)
         message.reply_text("Yep, this user can talk in that chat!")
     except BadRequest as excp:
         if excp.message == "Reply message not found":
@@ -424,6 +425,7 @@ def runmute(bot: Bot, update: Update, args: List[str]):
             LOGGER.exception("ERROR unmnuting user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
             message.reply_text("Well damn, I can't unmute that user.")
+
 
 __help__ = ""
 

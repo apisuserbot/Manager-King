@@ -1,28 +1,17 @@
-import html
 import json
-import time
-import yaml
-import re
-import html
-from requests import get
-from bs4 import BeautifulSoup
 from datetime import datetime
-from typing import Optional, List
-from hurry.filesize import size as sizee
+from typing import List
 
-from telegram import Message, Chat, Update, Bot, MessageEntity
+import yaml
+from bs4 import BeautifulSoup
+from hurry.filesize import size as sizee
+from requests import get
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
-from telegram.ext import CommandHandler, run_async, Filters
-from telegram.utils.helpers import escape_markdown, mention_html
+from telegram import Update, Bot
+from telegram.ext import run_async
 
 from haruka import dispatcher, LOGGER
-from haruka.__main__ import GDPR
-from haruka.__main__ import STATS, USER_INFO
 from haruka.modules.disable import DisableAbleCommandHandler
-from haruka.modules.helper_funcs.extraction import extract_user
-from haruka.modules.helper_funcs.filters import CustomFilters
-
-from requests import get
 
 # DO NOT DELETE THIS, PLEASE.
 # Made by @RealAkito on GitHub and Telegram.
@@ -34,19 +23,20 @@ LOGGER.info("Original Android Modules by @RealAkito on Telegram")
 GITHUB = 'https://github.com'
 DEVICES_DATA = 'https://raw.githubusercontent.com/androidtrackers/certified-android-devices/master/devices.json'
 
+
 @run_async
 def magisk(bot, update):
     url = 'https://raw.githubusercontent.com/topjohnwu/magisk_files/'
     releases = ""
-    for type, path  in {"Stable":"master/stable", "Beta":"master/beta", "Canary":"canary/release"}.items():
+    for type, path in {"Stable": "master/stable", "Beta": "master/beta", "Canary": "canary/release"}.items():
         data = get(url + path + '.json').json()
         releases += f'{type}: [ZIP v{data["magisk"]["version"]}]({data["magisk"]["link"]}) | ' \
                     f'[APP v{data["app"]["version"]}]({data["app"]["link"]}) | ' \
                     f'[Uninstaller]({data["uninstaller"]["link"]})\n'
-                        
 
     update.message.reply_text("*Latest Magisk Releases:*\n{}".format(releases),
-                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+                              parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+
 
 @run_async
 def device(bot, update, args):
@@ -66,14 +56,14 @@ def device(bot, update, args):
             codename = item['device']
             model = item['model']
             reply += f'<b>{brand} {name}</b>\n' \
-                f'Model: <code>{model}</code>\n' \
-                f'Codename: <code>{codename}</code>\n\n'                
+                     f'Model: <code>{model}</code>\n' \
+                     f'Codename: <code>{codename}</code>\n\n'
     else:
         reply = f"Couldn't find info about {device}!\n"
     update.message.reply_text("{}".format(reply),
-                               parse_mode=ParseMode.HTML, disable_web_page_preview=True)
-        
-        
+                              parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+
+
 def twrp(bot, update, args):
     if len(args) == 0:
         update.effective_message.reply_text("No codename provided, write a codename for fetching informations.")
@@ -83,7 +73,7 @@ def twrp(bot, update, args):
     if url.status_code == 404:
         reply = f"Couldn't find twrp downloads for {device}!\n"
         return
-    reply = f'*Latest Official TWRP for {device}*\n'            
+    reply = f'*Latest Official TWRP for {device}*\n'
     db = get(DEVICES_DATA).json()
     newdevice = device.strip('lte') if device.startswith('beyond') else device
     for dev in db:
@@ -105,7 +95,8 @@ def twrp(bot, update, args):
         reply += f'[{dl_file}]({dl_link}) - {size}\n'
 
     update.message.reply_text("{}".format(reply),
-                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+                              parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+
 
 @run_async
 def havoc(bot: Bot, update: Update):
@@ -132,7 +123,8 @@ def havoc(bot: Bot, update: Update):
                       f"*Version:* `{version}`")
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
-        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                           disable_web_page_preview=True)
         return
 
     elif fetch.status_code == 404:
@@ -167,7 +159,8 @@ def pixys(bot: Bot, update: Update):
                       f"*Rom Type:* `{romtype}`")
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
-        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                           disable_web_page_preview=True)
         return
 
     elif fetch.status_code == 404:
@@ -206,7 +199,8 @@ def pearl(bot: Bot, update: Update):
                           f"*ROM Type:* `{romtype}`")
 
             keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
-            message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+            message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                               disable_web_page_preview=True)
             return
 
         reply_text = (f"*Download:* [{filename}]({url})\n"
@@ -217,7 +211,8 @@ def pearl(bot: Bot, update: Update):
                       f"*XDA Thread:* [Link]({xda})")
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
-        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                           disable_web_page_preview=True)
         return
 
     elif fetch.status_code == 404:
@@ -250,11 +245,12 @@ def posp(bot: Bot, update: Update):
                       f"*Version:* `{version}`")
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
-        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                           disable_web_page_preview=True)
         return
 
     else:
-        reply_text="Device not found"
+        reply_text = "Device not found"
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
@@ -283,11 +279,12 @@ def los(bot: Bot, update: Update):
                       f"*Version:* `{version}`")
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
-        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                           disable_web_page_preview=True)
         return
 
     else:
-        reply_text="Device not found"
+        reply_text = "Device not found"
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
@@ -318,11 +315,12 @@ def dotos(bot: Bot, update: Update):
                       f"*Device Changelog:* `{changelog}`")
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
-        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                           disable_web_page_preview=True)
         return
 
     elif fetch.status_code == 404:
-        reply_text="Device not found"
+        reply_text = "Device not found"
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
@@ -351,11 +349,12 @@ def viper(bot: Bot, update: Update):
                       f"*Version:* `{version}`")
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
-        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                           disable_web_page_preview=True)
         return
 
     elif fetch.status_code == 404:
-        reply_text="Device not found"
+        reply_text = "Device not found"
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
@@ -385,8 +384,10 @@ def evo(bot: Bot, update: Update):
         reply_text = "Please check Evolution X Updates channel(@EvolutionXUpdates)" \
                      " or click the button down below to download the GSIs!"
 
-        keyboard = [[InlineKeyboardButton(text="Click to Download", url="https://sourceforge.net/projects/evolution-x/files/GSI/")]]
-        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        keyboard = [[InlineKeyboardButton(text="Click to Download",
+                                          url="https://sourceforge.net/projects/evolution-x/files/GSI/")]]
+        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                           disable_web_page_preview=True)
         return
 
     if fetch.status_code == 200:
@@ -406,7 +407,8 @@ def evo(bot: Bot, update: Update):
                           f"*Maintainer:* [{maintainer}](https://t.me/{maintainer_url})\n")
 
             keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
-            message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+            message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                               disable_web_page_preview=True)
             return
 
         except ValueError:
@@ -515,7 +517,8 @@ def getaex(bot: Bot, update: Update, args: List[str]):
             developer_url = apidata.get('developer_url')
             xda = apidata.get('forum_url')
             filename = apidata.get('filename')
-            url = "https://downloads.aospextended.com/download/" + device + "/" + version + "/" + apidata.get('filename')
+            url = "https://downloads.aospextended.com/download/" + device + "/" + version + "/" + apidata.get(
+                'filename')
             builddate = datetime.strptime(apidata.get('build_date'), "%Y%m%d-%H%M").strftime("%d %B %Y")
             buildsize = sizee(int(apidata.get('filesize')))
 
@@ -525,7 +528,8 @@ def getaex(bot: Bot, update: Update, args: List[str]):
                        f"*By:* [{developer}]({developer_url})\n")
 
             keyboard = [[InlineKeyboardButton(text="Click here to download", url=f"{url}")]]
-            update.effective_message.reply_text(message, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+            update.effective_message.reply_text(message, reply_markup=InlineKeyboardMarkup(keyboard),
+                                                parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
             return
     else:
         message.reply_text("No builds found for the provided device-version combo.")
@@ -560,7 +564,8 @@ def bootleggers(bot: Bot, update: Update):
             for oh, baby in devices[devicetoget].items():
                 dontneedlist = ['id', 'filename', 'download', 'xdathread']
                 peaksmod = {'fullname': 'Device name', 'buildate': 'Build date', 'buildsize': 'Build size',
-                            'downloadfolder': 'SourceForge folder', 'mirrorlink': 'Mirror link', 'xdathread': 'XDA thread'}
+                            'downloadfolder': 'SourceForge folder', 'mirrorlink': 'Mirror link',
+                            'xdathread': 'XDA thread'}
                 if baby and oh not in dontneedlist:
                     if oh in peaksmod:
                         oh = peaksmod[oh]
@@ -581,7 +586,7 @@ def bootleggers(bot: Bot, update: Update):
             reply_text = 'Device not found.'
 
     elif fetch.status_code == 404:
-        reply_text="Couldn't reach Bootleggers API."
+        reply_text = "Couldn't reach Bootleggers API."
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 

@@ -6,7 +6,6 @@ from telegram.error import TelegramError
 
 from haruka import LOAD, NO_LOAD
 from haruka.modules.translations.strings import tld
-from telegram.ext import CommandHandler, Filters, MessageHandler, CallbackQueryHandler
 
 
 class EqInlineKeyboardButton(InlineKeyboardButton):
@@ -70,7 +69,6 @@ def paginate_modules(chat_id, page_n: int, module_dict: Dict, prefix, chat=None)
     else:
         pairs += [[EqInlineKeyboardButton("⬅️ Back", callback_data="bot_start")]]
 
-
     return pairs
 
 
@@ -123,4 +121,5 @@ def user_bot_owner(func):
             return func(bot, update, *args, **kwargs)
         else:
             pass
+
     return is_user_bot_owner

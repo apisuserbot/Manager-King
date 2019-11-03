@@ -1,10 +1,10 @@
 import html
 
+import tldextract
 from telegram import Bot, ParseMode, Update
 from telegram.error import BadRequest
 from telegram.ext import CommandHandler, Filters, MessageHandler, run_async
 
-import tldextract
 from haruka import LOGGER, dispatcher
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import user_admin, user_not_admin
@@ -156,7 +156,6 @@ URL_DELETE_HANDLER = MessageHandler(
     Filters.entity("url"),
     del_blacklist_url,
     edited_updates=True)
-
 
 __mod_name__ = "Domain Blacklists"
 

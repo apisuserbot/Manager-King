@@ -1,11 +1,11 @@
 import asyncio
-import aiohttp
 
+import aiohttp
 from telegram import Update, Bot
 from telegram.ext import run_async
+
 from haruka import dispatcher, DOG_API_KEY, CAT_API_KEY
 from haruka.modules.disable import DisableAbleCommandHandler
-
 
 DOG_URL = 'http://api.thedogapi.com/v1/images/search'
 CAT_URL = 'http://api.thecatapi.com/v1/images/search'

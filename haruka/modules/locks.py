@@ -16,7 +16,6 @@ from haruka.modules.helper_funcs.chat_status import can_delete, is_user_admin, u
     bot_can_delete, is_bot_admin
 from haruka.modules.log_channel import loggable
 from haruka.modules.sql import users_sql
-
 from haruka.modules.translations.strings import tld
 
 LOCK_TYPES = {'sticker': Filters.sticker,
@@ -130,10 +129,12 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                                                           mention_html(user.id, user.first_name), args[0])
 
             else:
-                message.reply_text(tld(chat.id, "What are you trying to lock...? Try /locktypes for the list of lockables"))
+                message.reply_text(
+                    tld(chat.id, "What are you trying to lock...? Try /locktypes for the list of lockables"))
 
     else:
-        message.reply_text(tld(chat.id, "Make sure I'm a group administrator and have permission to delete messages, then try again."))
+        message.reply_text(
+            tld(chat.id, "Make sure I'm a group administrator and have permission to delete messages, then try again."))
 
     return ""
 
@@ -183,7 +184,8 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                        "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text(tld(chat.id, "What are you trying to unlock...? Try /locktypes for the list of lockables"))
+                message.reply_text(
+                    tld(chat.id, "What are you trying to unlock...? Try /locktypes for the list of lockables"))
 
         else:
             bot.sendMessage(chat.id, tld(chat.id, "What are you trying to unlock...?"))
@@ -204,11 +206,13 @@ def del_lockables(bot: Bot, update: Update):
                 for new_mem in new_members:
                     if new_mem.is_bot:
                         if not is_bot_admin(chat, bot.id):
-                            message.reply_text(tld(chat.id, "I see a bot, and I've been told to stop them joining... but I'm not admin!"))
+                            message.reply_text(tld(chat.id,
+                                                   "I see a bot, and I've been told to stop them joining... but I'm not admin!"))
                             return
 
                         chat.kick_member(new_mem.id)
-                        message.reply_text(tld(chat.id, "Only admins are allowed to add bots to this chat! Get outta here."))
+                        message.reply_text(
+                            tld(chat.id, "Only admins are allowed to add bots to this chat! Get outta here."))
             else:
                 try:
                     message.delete()
@@ -260,7 +264,8 @@ def build_lock_message(chat, chatP, user, chatname):
                    "\n - forward = `{}`" \
                    "\n - game = `{}`" \
                    "\n - location = `{}`".format(locks.sticker, locks.audio, locks.voice, locks.document,
-                                                 locks.video, locks.videonote, locks.contact, locks.photo, locks.gif, locks.url,
+                                                 locks.video, locks.videonote, locks.contact, locks.photo, locks.gif,
+                                                 locks.url,
                                                  locks.bots, locks.forward, locks.game, locks.location)
         if restr:
             res += "\n - messages = `{}`" \
@@ -298,11 +303,11 @@ def __import_data__(chat_id, data):
     locks = data.get('locks', {})
     for itemlock in locks:
         if itemlock in LOCK_TYPES:
-          sql.update_lock(chat_id, itemlock, locked=True)
+            sql.update_lock(chat_id, itemlock, locked=True)
         elif itemlock in RESTRICTION_TYPES:
-          sql.update_restriction(chat_id, itemlock, locked=True)
+            sql.update_restriction(chat_id, itemlock, locked=True)
         else:
-          pass
+            pass
 
 
 __help__ = """

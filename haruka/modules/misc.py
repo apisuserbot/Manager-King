@@ -1,27 +1,22 @@
-import subprocess
 import html
-import json
+import html
 import random
-import time
-import pyowm
-import wikipedia
 import re
-from pyowm import timeutils, exceptions
 from datetime import datetime
 from typing import Optional, List
-from pythonping import ping as ping3
-from typing import Optional, List
-from PyLyrics import *
-from hurry.filesize import size
 
 import requests
+import wikipedia
+from PyLyrics import *
+from pythonping import ping as ping3
+from requests import get
 from telegram import Message, Chat, Update, Bot, MessageEntity
-from telegram import ParseMode, ReplyKeyboardRemove, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import ParseMode, ReplyKeyboardRemove, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.error import BadRequest
 from telegram.ext import CommandHandler, run_async, Filters
 from telegram.utils.helpers import escape_markdown, mention_html
-from telegram.error import BadRequest
 
-from haruka import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, WHITELIST_USERS, BAN_STICKER
+from haruka import dispatcher, OWNER_ID, SUDO_USERS, SUPPORT_USERS, WHITELIST_USERS
 from haruka.__main__ import GDPR
 from haruka.__main__ import STATS, USER_INFO
 from haruka.modules.disable import DisableAbleCommandHandler
@@ -30,12 +25,7 @@ from haruka.modules.helper_funcs.extraction import extract_user
 from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.rextester.api import Rextester, CompilerError
 from haruka.modules.rextester.langs import languages
-
-from haruka.modules.sql.translation import prev_locale
-
 from haruka.modules.translations.strings import tld
-
-from requests import get
 
 
 @user_is_gbanned
@@ -91,7 +81,7 @@ def slap(bot: Bot, update: Update, args: List[str]):
     itemr = random.choice(tld(chat.id, "ITEMR-K"))
 
     repl = temp.format(user1=user1, user2=user2, item=item, hits=hit, throws=throw, itemp=itemp, itemr=itemr)
-    #user1=user1, user2=user2, item=item_ru, hits=hit_ru, throws=throw_ru, itemp=itemp_ru, itemr=itemr_ru
+    # user1=user1, user2=user2, item=item_ru, hits=hit_ru, throws=throw_ru, itemp=itemp_ru, itemr=itemr_ru
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
 
@@ -115,16 +105,17 @@ def get_id(bot: Bot, update: Update, args: List[str]):
             user1 = update.effective_message.reply_to_message.from_user
             user2 = update.effective_message.reply_to_message.forward_from
             update.effective_message.reply_text(tld(chat.id,
-                "The original sender, {}, has an ID of `{}`.\nThe forwarder, {}, has an ID of `{}`.").format(
-                    escape_markdown(user2.first_name),
-                    user2.id,
-                    escape_markdown(user1.first_name),
-                    user1.id),
+                                                    "The original sender, {}, has an ID of `{}`.\nThe forwarder, {}, has an ID of `{}`.").format(
+                escape_markdown(user2.first_name),
+                user2.id,
+                escape_markdown(user1.first_name),
+                user1.id),
                 parse_mode=ParseMode.MARKDOWN)
         else:
             user = bot.get_chat(user_id)
-            update.effective_message.reply_text(tld(chat.id, "{}'s id is `{}`.").format(escape_markdown(user.first_name), user.id),
-                                                parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text(
+                tld(chat.id, "{}'s id is `{}`.").format(escape_markdown(user.first_name), user.id),
+                parse_mode=ParseMode.MARKDOWN)
     else:
         chat = update.effective_chat  # type: Optional[Chat]
         if chat.type == "private":
@@ -158,7 +149,7 @@ def info(bot: Bot, update: Update, args: List[str]):
     else:
         return
 
-    text =  tld(chat.id, "<b>User info</b>:")
+    text = tld(chat.id, "<b>User info</b>:")
     text += "\nID: <code>{}</code>".format(user.id)
     text += tld(chat.id, "\nFirst Name: {}").format(html.escape(user.first_name))
 
@@ -178,15 +169,15 @@ def info(bot: Bot, update: Update, args: List[str]):
 
         if user.id in SUDO_USERS:
             text += tld(chat.id, "\nThis person is one of my sudo users! " \
-            "Nearly as powerful as my owner - so watch it.")
+                                 "Nearly as powerful as my owner - so watch it.")
         else:
             if user.id in SUPPORT_USERS:
                 text += tld(chat.id, "\nThis person is one of my support users! " \
-                        "Not quite a sudo user, but can still gban you off the map.")
+                                     "Not quite a sudo user, but can still gban you off the map.")
 
             if user.id in WHITELIST_USERS:
                 text += tld(chat.id, "\nThis person has been whitelisted! " \
-                        "That means I'm not allowed to ban/kick them.")
+                                     "That means I'm not allowed to ban/kick them.")
 
     for mod in USER_INFO:
         mod_info = mod.__user_info__(user.id, chat.id).strip()
@@ -247,8 +238,8 @@ def markdown_help(bot: Bot, update: Update):
     update.effective_message.reply_text(tld(chat.id, "MARKDOWN_HELP-K"), parse_mode=ParseMode.HTML)
     update.effective_message.reply_text(tld(chat.id, "Try forwarding the following message to me, and you'll see!"))
     update.effective_message.reply_text(tld(chat.id, "/save test This is a markdown test. _italics_, *bold*, `code`, "
-                                        "[URL](example.com) [button](buttonurl:github.com) "
-                                        "[button2](buttonurl://google.com:same)"))
+                                                     "[URL](example.com) [button](buttonurl:github.com) "
+                                                     "[button2](buttonurl://google.com:same)"))
 
 
 @run_async
@@ -271,7 +262,8 @@ def ping(bot: Bot, update: Update):
     text += "Average speed to Google - `{}` ms".format(gspeed)
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
-#def google(bot: Bot, update: Update):
+
+# def google(bot: Bot, update: Update):
 #        query = update.effective_message.text.split(" ",1)
 #        result_ = subprocess.run(['gsearch', str(query[1])], stdout=subprocess.PIPE)
 #        result = str(result_.stdout.decode())
@@ -342,7 +334,7 @@ def lyrics(bot: Bot, update: Update, args: List[str]):
     text = message.text[len('/lyrics '):]
     song = " ".join(args).split("- ")
     reply_text = f'Looks up for lyrics'
-    
+
     if len(song) == 2:
         while song[1].startswith(" "):
             song[1] = song[1][1:]
@@ -362,7 +354,8 @@ def lyrics(bot: Bot, update: Update, args: List[str]):
                 " ", "_"), song[1].replace(" ", "_"))
             return update.effective_message.reply_text(lyrics + lyricstext, parse_mode="MARKDOWN")
     else:
-        return update.effective_message.reply_text("Invalid syntax! Try Artist - Song name .For example, Luis Fonsi - Despacito", failed=True)
+        return update.effective_message.reply_text(
+            "Invalid syntax! Try Artist - Song name .For example, Luis Fonsi - Despacito", failed=True)
 
 
 BASE_URL = 'https://del.dog'
@@ -478,24 +471,24 @@ def get_paste_stats(bot: Bot, update: Update, args: List[str]):
 @user_is_gbanned
 @run_async
 def ud(bot: Bot, update: Update):
-  message = update.effective_message
-  text = message.text[len('/ud '):]
-  results = get(f'http://api.urbandictionary.com/v0/define?term={text}').json()
-  reply_text = f'Word: {text}\nDefinition: {results["list"][0]["definition"]}'
-  message.reply_text(reply_text)
+    message = update.effective_message
+    text = message.text[len('/ud '):]
+    results = get(f'http://api.urbandictionary.com/v0/define?term={text}').json()
+    reply_text = f'Word: {text}\nDefinition: {results["list"][0]["definition"]}'
+    message.reply_text(reply_text)
 
 
 @user_is_gbanned
 @run_async
 def execute(bot: Bot, update: Update, args: List[str]):
-
     message = update.effective_message
     text = ' '.join(args)
     regex = re.search('^([\w.#+]+)\s+([\s\S]+?)(?:\s+\/stdin\s+([\s\S]+))?$', text, re.IGNORECASE)
 
     if not regex:
         available_languages = ', '.join(languages.keys())
-        message.reply_text('*The availale languages are:*\n`{}`'.format(available_languages), parse_mode=ParseMode.MARKDOWN)
+        message.reply_text('*The availale languages are:*\n`{}`'.format(available_languages),
+                           parse_mode=ParseMode.MARKDOWN)
         return
 
     language = regex.group(1)
@@ -504,7 +497,7 @@ def execute(bot: Bot, update: Update, args: List[str]):
 
     try:
         regexter = Rextester(language, code, stdin)
-    except CompilerError as exc: # Exception on empy code or missing output
+    except CompilerError as exc:  # Exception on empy code or missing output
         message.reply_text(exc)
         return
 
@@ -534,14 +527,17 @@ def wiki(bot: Bot, update: Update):
     else:
         try:
             pertama = update.effective_message.reply_text("🔄 Loading...")
-            keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="🔧 More Info...", url=wikipedia.page(kueri).url)]])
-            bot.editMessageText(chat_id=update.effective_chat.id, message_id=pertama.message_id, text=wikipedia.summary(kueri, sentences=10), reply_markup=keyboard)
+            keyboard = InlineKeyboardMarkup(
+                [[InlineKeyboardButton(text="🔧 More Info...", url=wikipedia.page(kueri).url)]])
+            bot.editMessageText(chat_id=update.effective_chat.id, message_id=pertama.message_id,
+                                text=wikipedia.summary(kueri, sentences=10), reply_markup=keyboard)
         except wikipedia.PageError as e:
             update.effective_message.reply_text(f"⚠ Error: {e}")
-        except BadRequest as et :
+        except BadRequest as et:
             update.effective_message.reply_text(f"⚠ Error: {et}")
         except wikipedia.exceptions.DisambiguationError as eet:
-            update.effective_message.reply_text(f"⚠ Error\n There are too many query! Express it more!\nPossible query result:\n{eet}")
+            update.effective_message.reply_text(
+                f"⚠ Error\n There are too many query! Express it more!\nPossible query result:\n{eet}")
 
 
 __help__ = """
@@ -576,9 +572,8 @@ __mod_name__ = "Misc"
 ID_HANDLER = DisableAbleCommandHandler("id", get_id, pass_args=True, admin_ok=True)
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID), admin_ok=True)
 PING_HANDLER = DisableAbleCommandHandler("ping", ping, admin_ok=True)
-#GOOGLE_HANDLER = DisableAbleCommandHandler("google", google)
+# GOOGLE_HANDLER = DisableAbleCommandHandler("google", google)
 LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, pass_args=True, admin_ok=True)
-
 
 INSULTS_HANDLER = DisableAbleCommandHandler("insults", insults, admin_ok=True)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs, admin_ok=True)
@@ -600,7 +595,6 @@ PASTE_STATS_HANDLER = DisableAbleCommandHandler("pastestats", get_paste_stats, p
 UD_HANDLER = DisableAbleCommandHandler("ud", ud)
 WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
 
-
 dispatcher.add_handler(UD_HANDLER)
 dispatcher.add_handler(PASTE_HANDLER)
 dispatcher.add_handler(GET_PASTE_HANDLER)
@@ -616,7 +610,7 @@ dispatcher.add_handler(MD_HELP_HANDLER)
 dispatcher.add_handler(STATS_HANDLER)
 dispatcher.add_handler(GDPR_HANDLER)
 dispatcher.add_handler(PING_HANDLER)
-#dispatcher.add_handler(GOOGLE_HANDLER)
+# dispatcher.add_handler(GOOGLE_HANDLER)
 dispatcher.add_handler(GITHUB_HANDLER)
 dispatcher.add_handler(LYRICS_HANDLER)
 dispatcher.add_handler(REPO_HANDLER)

@@ -2,7 +2,6 @@ from functools import wraps
 from typing import Optional
 
 from haruka.modules.helper_funcs.misc import is_module_loaded
-
 from haruka.modules.translations.strings import tld
 
 FILENAME = __name__.rsplit(".", 1)[-1]
@@ -96,9 +95,9 @@ if is_module_loaded(FILENAME):
                     LOGGER.exception("Error deleting message in log channel. Should work anyway though.")
 
             try:
-                bot.send_message(message.forward_from_chat.id, tld(chat.id, 
-                                 "This channel has been set as the log channel for {}.").format(
-                                     chat.title or chat.first_name))
+                bot.send_message(message.forward_from_chat.id, tld(chat.id,
+                                                                   "This channel has been set as the log channel for {}.").format(
+                    chat.title or chat.first_name))
             except Unauthorized as excp:
                 if excp.message == "Forbidden: bot is not a member of the channel chat":
                     bot.send_message(chat.id, tld(chat.id, "Successfully set log channel!"))
@@ -109,9 +108,9 @@ if is_module_loaded(FILENAME):
 
         else:
             message.reply_text(tld(chat.id, "*The steps to set a log channel are:*\n"
-                               " • add bot to the desired channel\n"
-                               " • send /setlog to the channel\n"
-                               " • forward the /setlog to the group\n"), ParseMode.MARKDOWN)
+                                            " • add bot to the desired channel\n"
+                                            " • send /setlog to the channel\n"
+                                            " • forward the /setlog to the group\n"), ParseMode.MARKDOWN)
 
 
     @run_async

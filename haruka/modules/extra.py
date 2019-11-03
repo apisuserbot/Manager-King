@@ -1,12 +1,13 @@
 import random
-from typing import List
 from random import randint
+from typing import List
+
 from telegram import Update, Bot
 from telegram.ext import Filters, run_async, CommandHandler
 
 from haruka import dispatcher, OWNER_ID, LOGGER
-from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.disable import DisableAbleCommandHandler
+from haruka.modules.helper_funcs.filters import CustomFilters
 
 ABUSE_STRINGS = (
     "Fuck off",
@@ -241,23 +242,23 @@ def rlg(bot: Bot, update: Update):
 
 
 def decide(bot: Bot, update: Update):
-        r = randint(1, 100)
-        if r <= 65:
-            update.message.reply_text("Yes.")
-        elif r <= 90:
-            update.message.reply_text("No.")
-        else:
-            update.message.reply_text("Maybe.")
+    r = randint(1, 100)
+    if r <= 65:
+        update.message.reply_text("Yes.")
+    elif r <= 90:
+        update.message.reply_text("No.")
+    else:
+        update.message.reply_text("Maybe.")
 
 
 def table(bot: Bot, update: Update):
-            r = randint(1, 100)
-            if r <= 45:
-                update.message.reply_text("(╯°□°）╯彡 ┻━┻")
-            elif r <= 90:
-                update.message.reply_text("Send money bsdk to buy new table to flip")
-            else:
-                update.message.reply_text("Go do some work instead of flippin tables you helpless fagit.")
+    r = randint(1, 100)
+    if r <= 45:
+        update.message.reply_text("(╯°□°）╯彡 ┻━┻")
+    elif r <= 90:
+        update.message.reply_text("Send money bsdk to buy new table to flip")
+    else:
+        update.message.reply_text("Go do some work instead of flippin tables you helpless fagit.")
 
 
 @run_async

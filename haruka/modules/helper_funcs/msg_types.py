@@ -156,6 +156,7 @@ def get_welcome_type(msg: Message):
 
     return text, data_type, content, buttons
 
+
 def get_message_type(msg: Message):
     data_type = None
     content = None

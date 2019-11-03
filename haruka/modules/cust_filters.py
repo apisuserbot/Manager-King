@@ -5,10 +5,11 @@ import telegram
 from telegram import ParseMode, InlineKeyboardMarkup, Message, Chat
 from telegram import Update, Bot
 from telegram.error import BadRequest
-from telegram.ext import CommandHandler, MessageHandler, DispatcherHandlerStop, run_async
+from telegram.ext import MessageHandler, DispatcherHandlerStop, run_async
 from telegram.utils.helpers import escape_markdown
 
 from haruka import dispatcher, LOGGER
+from haruka.modules.connection import connected
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import user_admin
 from haruka.modules.helper_funcs.extraction import extract_text
@@ -16,10 +17,7 @@ from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.helper_funcs.misc import build_keyboard
 from haruka.modules.helper_funcs.string_handling import split_quotes, button_markdown_parser
 from haruka.modules.sql import cust_filters_sql as sql
-
 from haruka.modules.translations.strings import tld
-
-from haruka.modules.connection import connected
 
 HANDLER_GROUP = 10
 
@@ -28,7 +26,7 @@ HANDLER_GROUP = 10
 def list_handlers(bot: Bot, update: Update):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
-    
+
     conn = connected(bot, update, chat, user.id, need_admin=False)
     if conn:
         chat_id = conn
@@ -58,6 +56,7 @@ def list_handlers(bot: Bot, update: Update):
             filter_list += entry
 
     update.effective_message.reply_text(filter_list.format(chat_name), parse_mode=telegram.ParseMode.MARKDOWN)
+
 
 # NOT ASYNC BECAUSE DISPATCHER HANDLER RAISED
 @user_admin
@@ -101,7 +100,8 @@ def filters(bot: Bot, update: Update):
         content, buttons = button_markdown_parser(extracted[1], entities=msg.parse_entities(), offset=offset)
         content = content.strip()
         if not content:
-            msg.reply_text(tld(chat.id, "Note text is missing. You can't ONLY have buttons, you need a message to go with it!"))
+            msg.reply_text(
+                tld(chat.id, "Note text is missing. You can't ONLY have buttons, you need a message to go with it!"))
             return
 
     elif msg.reply_to_message and msg.reply_to_message.sticker:
@@ -141,7 +141,8 @@ def filters(bot: Bot, update: Update):
     sql.add_filter(chat_id, keyword, content, is_sticker, is_document, is_image, is_audio, is_voice, is_video,
                    buttons)
 
-    msg.reply_text(tld(chat.id, "Handler '{}' added in *{}*!").format(keyword, chat_name), parse_mode=telegram.ParseMode.MARKDOWN)
+    msg.reply_text(tld(chat.id, "Handler '{}' added in *{}*!").format(keyword, chat_name),
+                   parse_mode=telegram.ParseMode.MARKDOWN)
     raise DispatcherHandlerStop
 
 
@@ -175,10 +176,13 @@ def stop_filter(bot: Bot, update: Update):
     for keyword in chat_filters:
         if keyword == args[1]:
             sql.remove_filter(chat_id, args[1])
-            update.effective_message.reply_text(tld(chat.id, "Yep, I'll stop replying to that in *{}*.").format(chat_name), parse_mode=telegram.ParseMode.MARKDOWN)
+            update.effective_message.reply_text(
+                tld(chat.id, "Yep, I'll stop replying to that in *{}*.").format(chat_name),
+                parse_mode=telegram.ParseMode.MARKDOWN)
             raise DispatcherHandlerStop
 
-    update.effective_message.reply_text(tld(chat.id, "That's not an active filter - run /filters for all active filters."))
+    update.effective_message.reply_text(
+        tld(chat.id, "That's not an active filter - run /filters for all active filters."))
 
 
 @run_async
@@ -232,7 +236,8 @@ def reply_filter(bot: Bot, update: Update):
                                          reply_markup=keyboard)
                     else:
                         try:
-                            message.reply_text("This filter could not be sent, as it is incorrectly formatted. Ask in @HarukaAyaGroup if you can't figure out why!")
+                            message.reply_text(
+                                "This filter could not be sent, as it is incorrectly formatted. Ask in @HarukaAyaGroup if you can't figure out why!")
                             LOGGER.warning("Message %s could not be parsed", str(filt.reply))
                             LOGGER.exception("Could not parse filter %s in chat %s", str(filt.keyword), str(chat.id))
                         except:

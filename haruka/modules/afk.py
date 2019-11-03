@@ -8,9 +8,8 @@ from telegram.ext import Filters, MessageHandler, run_async
 from haruka import dispatcher
 from haruka.modules.disable import DisableAbleCommandHandler, DisableAbleRegexHandler
 from haruka.modules.sql import afk_sql as sql
-from haruka.modules.users import get_user_id
-
 from haruka.modules.translations.strings import tld
+from haruka.modules.users import get_user_id
 
 AFK_GROUP = 7
 AFK_REPLY_GROUP = 8
