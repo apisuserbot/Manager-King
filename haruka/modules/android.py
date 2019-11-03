@@ -382,7 +382,7 @@ def evo(bot: Bot, update: Update):
         return
 
     if device == 'gsi':
-        reply_text = "Please check @expresslukegsi channel for unofficial GSIs" \
+        reply_text = "Please check @expresslukegsi or @ZJRDroidGSI for unofficial GSIs" \
                      " or click the button down below to download official GSIs!"
 
         keyboard = [[InlineKeyboardButton(text="Click to Download", url="https://sourceforge.net/projects/evolution-x/files/GSI/")]]
