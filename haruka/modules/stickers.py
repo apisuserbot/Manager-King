@@ -1,16 +1,14 @@
-import hashlib
 import os
 import math
 import urllib.request as urllib
 
-from io import BytesIO
 from PIL import Image
 
 from typing import Optional, List
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError
 from telegram import Update, Bot
-from telegram.ext import CommandHandler, run_async
+from telegram.ext import run_async
 from telegram.utils.helpers import escape_markdown
 
 from haruka import dispatcher
@@ -205,7 +203,7 @@ def makepack_internal(msg, user, png_sticker, emoji, bot, packname, packnum):
         extra_version = ""
         if packnum > 0:
             extra_version = " " + str(packnum)
-        success = bot.create_new_sticker_set(user.id, packname, f"{name}s haruka pack" + extra_version,
+        success = bot.create_new_sticker_set(user.id, packname, f"{name}s Hitsuki Kang Pack" + extra_version,
                                              png_sticker=png_sticker,
                                              emojis=emoji)
     except TelegramError as e:
