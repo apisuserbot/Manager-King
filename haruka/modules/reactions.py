@@ -67,15 +67,18 @@ def rangry(bot: Bot, update: Update):
 
 
 __help__ = """
-- Reply to a text with /react for normal reactions
-- You can also use /happy and /amgery for happy and angry emotions
+*Use these commands to let the bot express reactions for you!*
+
+ - /react: reacts with normal reactions.
+ - /happy: reacts with happiness.
+ - /angry: reacts angrily.
 """
 
 __mod_name__ = "Reactions"
 
 REACT_HANDLER = DisableAbleCommandHandler("react", react)
 RHAPPY_HANDLER = DisableAbleCommandHandler("happy", rhappy)
-RANGRY_HANDLER = DisableAbleCommandHandler("amgery", rangry)
+RANGRY_HANDLER = DisableAbleCommandHandler("angry", rangry)
 
 dispatcher.add_handler(REACT_HANDLER)
 dispatcher.add_handler(RHAPPY_HANDLER)
