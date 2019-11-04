@@ -234,16 +234,9 @@ def dotos(bot: Bot, update: Update):
 def evo(bot: Bot, update: Update):
     message = update.effective_message
     device = message.text[len('/evo '):]
-    if device == "example":
-        reply_text = "Why are you trying to get the example device?"
-        message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
-        return
 
-    if device == "x00t":
-        device = "X00T"
-
-    if device == "x01bd":
-        device = "X01BD"
+    if device == "x00t" or device == "x01bd":
+        device = device.upper()
 
     fetch = get(f'https://raw.githubusercontent.com/Evolution-X-Devices/official_devices/master/builds/{device}.json')
 
