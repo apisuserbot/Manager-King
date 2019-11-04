@@ -13,12 +13,13 @@ You can also join official Haruka Aya support group [here!](https://t.me/HarukaA
 
 ## Thanks to
 
-* MrYacha - For pYanaBot :3
-* Skittle - for memes and sticker stuff
-* 1mavarick1 - gmutes, etc 
-* AyraHikari - weather
-* Paul Larsen - marie creator, inspiration to do many things
-* FFBot - for translations functions
+- MrYacha - For pYanaBot :3
+- Skittle - for memes and sticker stuff
+- 1mavarick1 - gmutes, etc 
+- AyraHikari - weather
+- Paul Larsen - marie creator, inspiration to do many things
+- FFBot - for translations functions
+- Nuno Penim - For providing his proprietary Combot Anti Spam System API - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
+- Alisson - Helped clean up the code and countless other things!
+
 And much more that we couldn't list it here!
-* Nuno Penim - For providing his proprietary Combot Anti Spam System API - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
-* Alisson - Helped clean up the code and countless other things!
