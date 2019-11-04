@@ -4,7 +4,7 @@ import subprocess
 
 import requests
 import speedtest
-from telegram import Update, Bot
+from telegram import Update, Bot, ParseMode
 from telegram.ext import CommandHandler, run_async, Filters
 
 from haruka import dispatcher, OWNER_ID
@@ -118,7 +118,8 @@ def ping(bot: Bot, update: Update):
 @run_async
 def speedtst(bot: Bot, update: Update):
     chat = update.effective_chat
-    del_msg = bot.send_message(chat.id, "🔄 Running speedtest...")
+    del_msg = bot.send_message(chat.id, "<code>🔄 Running speedtest...</code>",
+                               parse_mode=ParseMode.HTML)
     test = speedtest.Speedtest()
     test.get_best_server()
     test.download()
@@ -126,14 +127,17 @@ def speedtst(bot: Bot, update: Update):
     test.results.share()
     result = test.results.dict()
     del_msg.delete()
-    update.effective_message.reply_text("Download: "
+    update.effective_message.reply_text("<code>"
+                                        "Download: "
                                         f"{speed_convert(result['download'])} \n"
                                         "Upload: "
                                         f"{speed_convert(result['upload'])} \n"
                                         "Ping: "
                                         f"{result['ping']} \n"
                                         "ISP: "
-                                        f"{result['client']['isp']}")
+                                        f"{result['client']['isp']}"
+                                        "</code>",
+                                        parse_mode=ParseMode.HTML)
 
 
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID))
