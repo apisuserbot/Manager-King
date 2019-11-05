@@ -385,6 +385,48 @@ def miui(bot: Bot, update: Update):
 
 
 @run_async
+def pe(bot: Bot, update: Update):
+    message = update.effective_message
+    cmd = message.text.split()[0]
+    device = message.text[len(cmd)+1:]
+
+    if device == '':
+        reply_text = f"Please type your device **codename**!\nFor example, `{cmd} tissot`"
+        message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        return
+
+    if cmd.startswith("/peplus"):
+        variant = "pie_plus"
+    elif cmd.startswith("/pe10"):
+        variant = "ten"
+    else:
+        variant = "pie"
+
+    fetch = get(f'https://download.pixelexperience.org/ota_v3/{device}/{variant}')
+    if not fetch.json()['error']:
+        usr = fetch.json()
+        filename = usr['filename']
+        url = usr['url']
+        buildsize_a = usr['size']
+        buildsize_b = sizee(int(buildsize_a))
+        version = usr['version']
+
+        reply_text = (f"🔍 *PixelExperience build for {device}*\n"
+                      f"*Download:* [{filename}]({url})\n"
+                      f"*Build size:* `{buildsize_b}`\n"
+                      f"*Version:* `{version}`")
+
+        keyboard = [[InlineKeyboardButton(text="Click to Download", url=url)]]
+        message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                           disable_web_page_preview=True)
+        return
+
+    else:
+        reply_text = "Device not found"
+    message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+
+
+@run_async
 def pearl(bot: Bot, update: Update):
     message = update.effective_message
     device = message.text[len('/pearl '):]
@@ -597,6 +639,9 @@ __help__ = """
  - /havoc <device>: Get the latest Havoc ROM for a device
  - /los <device>: Get the latest LineageOS ROM for a device
  - /miui <device>: Get the latest MIUI ROM for a device
+ - /pe <device>: Get the latest PixelExperience ROM for a device
+ - /pe10 <device>: Get the latest PixelExperience 10 ROM for a device
+ - /peplus <device>: Get the latest PixelExperience Plus ROM for a device
  - /pearl <device>: Get the latest Pearl ROM for a device
  - /pixys <device>: Get the latest Pixys ROM for a device
  - /posp <device>: Get the latest POSP ROM for a device
@@ -620,6 +665,9 @@ EVO_HANDLER = DisableAbleCommandHandler("evo", evo, admin_ok=True)
 HAVOC_HANDLER = DisableAbleCommandHandler("havoc", havoc, admin_ok=True)
 LOS_HANDLER = DisableAbleCommandHandler("los", los, admin_ok=True)
 MIUI_HANDLER = DisableAbleCommandHandler("miui", miui, admin_ok=True)
+PE_HANDLER = DisableAbleCommandHandler("pe", pe, admin_ok=True)
+PE10_HANDLER = DisableAbleCommandHandler("pe10", pe, admin_ok=True)
+PEPLUS_HANDLER = DisableAbleCommandHandler("peplus", pe, admin_ok=True)
 PEARL_HANDLER = DisableAbleCommandHandler("pearl", pearl, admin_ok=True)
 PIXYS_HANDLER = DisableAbleCommandHandler("pixys", pixys, admin_ok=True)
 POSP_HANDLER = DisableAbleCommandHandler("posp", posp, admin_ok=True)
@@ -638,6 +686,9 @@ dispatcher.add_handler(EVO_HANDLER)
 dispatcher.add_handler(HAVOC_HANDLER)
 dispatcher.add_handler(LOS_HANDLER)
 dispatcher.add_handler(MIUI_HANDLER)
+dispatcher.add_handler(PE_HANDLER)
+dispatcher.add_handler(PE10_HANDLER)
+dispatcher.add_handler(PEPLUS_HANDLER)
 dispatcher.add_handler(PEARL_HANDLER)
 dispatcher.add_handler(PIXYS_HANDLER)
 dispatcher.add_handler(POSP_HANDLER)
