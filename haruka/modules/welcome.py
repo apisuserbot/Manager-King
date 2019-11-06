@@ -116,8 +116,12 @@ def new_member(bot: Bot, update: Update):
 
     isAllowed = sql.isWhitelisted(str(chat.id))
 
-    if not isAllowed:
+    if isAllowed or user.id in SUDO_USERS:
+        sql.whitelistChat(str(chat.id))
+    else:
+        msg.reply_text("This group is not whitelisted to use the bot, sorry.")
         bot.leave_chat(int(chat.id))
+        return
 
     if casPrefs and not autoban and cas.banchecker(user.id):
         bot.restrict_chat_member(chat.id, user.id,
