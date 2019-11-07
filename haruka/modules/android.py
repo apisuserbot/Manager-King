@@ -9,6 +9,7 @@ from requests import get
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import Update, Bot
 from telegram.ext import run_async
+from telegram.ext import CommandHandler
 
 from haruka import dispatcher, LOGGER
 from haruka.modules.disable import DisableAbleCommandHandler
