@@ -3,6 +3,7 @@ from typing import Optional, List
 from googletrans import Translator
 from telegram import Message, Update, Bot
 from telegram.ext import run_async
+from telegram.ext import CommandHandler
 
 from haruka import dispatcher
 from haruka.modules.disable import DisableAbleCommandHandler
