@@ -347,12 +347,10 @@ def useragent():
 __help__ = """
 *This module allows you to generate direct links from various websites.*
 
-/direct <url>: Reply to a link or paste a URL to\n"
-generate a direct download link
+/direct <url>: Reply to a link or paste a URL to generate a direct download link.
 
 *List of supported URLs:*
-Google Drive - MEGA.nz - Cloud Mail - Yandex.Disk - AFH - 
-ZippyShare - MediaFire - SourceForge - OSDN - GitHub
+Google Drive - MEGA.nz - Cloud Mail - Yandex.Disk - AFH - ZippyShare - MediaFire - SourceForge - OSDN - GitHub
 """
 
 __mod_name__ = "Direct Links"
