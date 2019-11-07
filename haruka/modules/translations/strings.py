@@ -1,10 +1,5 @@
 from haruka.modules.sql.translation import prev_locale
 from haruka.modules.translations.English import EnglishStrings
-from haruka.modules.translations.Russian import RussianStrings
-from haruka.modules.translations.Ukraine import UkrainianStrings
-from haruka.modules.translations.Spanish import SpanishStrings
-from haruka.modules.translations.Turkish import TurkishStrings
-from haruka.modules.translations.Indonesian import IndonesianStrings
 
 
 def tld(chat_id, t, show_none=True):
