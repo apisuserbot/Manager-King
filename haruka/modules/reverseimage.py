@@ -191,6 +191,6 @@ __help__ = """
 
 __mod_name__ = "Image Lookup"
 
-REVERSE_HANDLER = DisableAbleCommandHandler("reverse", reverse, pass_args=True, admin_ok=True)
+REVERSE_HANDLER = CommandHandler("reverse", reverse, pass_args=True, admin_ok=True)
 
 dispatcher.add_handler(REVERSE_HANDLER)

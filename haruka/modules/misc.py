@@ -540,6 +540,32 @@ def wiki(bot: Bot, update: Update):
                 f"⚠ Error\n There are too many query! Express it more!\nPossible query result:\n{eet}")
 
 
+@run_async
+def snipe(bot: Bot, update: Update, args: List[str]):
+    try:
+        chat_id = str(args[0])
+        del args[0]
+    except TypeError:
+        update.effective_message.reply_text("Please give me a chat to echo to!")
+    to_send = " ".join(args)
+    if len(to_send) >= 2:
+        try:
+            bot.sendMessage(int(chat_id), str(to_send))
+        except TelegramError:
+            LOGGER.warning("Couldn't send to group %s", str(chat_id))
+            update.effective_message.reply_text("Couldn't send the message. Perhaps I'm not part of that group?")
+
+
+def decide(bot: Bot, update: Update):
+    r = randint(1, 100)
+    if r <= 65:
+        update.message.reply_text("Yes.")
+    elif r <= 90:
+        update.message.reply_text("No.")
+    else:
+        update.message.reply_text("Maybe.")
+
+
 __help__ = """
 *Group tools:*
  - /id: get the current group id. If used by replying to a message, gets that user's id.
@@ -565,22 +591,28 @@ __help__ = """
  - /runs: reply a random string from an array of replies.
  - /insults: reply a random string from an array of replies.
  - /slap: slap a user, or get slapped if not a reply.
+ - /decide: Randomly answers yes/no/maybe.
+*Sudo only:*
+ - /snipe <chatid> <string>: Make me send a message to a specific chat.
+ - /broadcasts: Sends a broadcast to all groups using the bot.
+ - /chatlist: Send complete list of all groups using the bot.
+ - /gbanlist: Send complete list with all users who are banned globally.
 """
 
 __mod_name__ = "Misc"
 
-ID_HANDLER = DisableAbleCommandHandler("id", get_id, pass_args=True, admin_ok=True)
+ID_HANDLER = CommandHandler("id", get_id, pass_args=True, admin_ok=True)
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID), admin_ok=True)
-PING_HANDLER = DisableAbleCommandHandler("ping", ping, admin_ok=True)
+PING_HANDLER = CommandHandler("ping", ping, admin_ok=True)
 # GOOGLE_HANDLER = DisableAbleCommandHandler("google", google)
 LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, pass_args=True, admin_ok=True)
 
 INSULTS_HANDLER = DisableAbleCommandHandler("insults", insults, admin_ok=True)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs, admin_ok=True)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True, admin_ok=True)
-INFO_HANDLER = DisableAbleCommandHandler("info", info, pass_args=True, admin_ok=True)
-GITHUB_HANDLER = DisableAbleCommandHandler("git", github, admin_ok=True)
-REPO_HANDLER = DisableAbleCommandHandler("repo", repo, pass_args=True, admin_ok=True)
+INFO_HANDLER = CommandHandler("info", info, pass_args=True, admin_ok=True)
+GITHUB_HANDLER = CommandHandler("git", github, admin_ok=True)
+REPO_HANDLER = CommandHandler("repo", repo, pass_args=True, admin_ok=True)
 
 ECHO_HANDLER = CommandHandler("echo", echo, filters=Filters.user(OWNER_ID))
 MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, filters=Filters.private)
@@ -589,11 +621,15 @@ STATS_HANDLER = CommandHandler("stats", stats, filters=Filters.user(OWNER_ID))
 GDPR_HANDLER = CommandHandler("gdpr", gdpr, filters=Filters.private)
 EXECUTE_HANDLER = CommandHandler("exec", execute, pass_args=True, filters=CustomFilters.sudo_filter)
 
-PASTE_HANDLER = DisableAbleCommandHandler("paste", paste, pass_args=True)
-GET_PASTE_HANDLER = DisableAbleCommandHandler("getpaste", get_paste_content, pass_args=True)
-PASTE_STATS_HANDLER = DisableAbleCommandHandler("pastestats", get_paste_stats, pass_args=True)
-UD_HANDLER = DisableAbleCommandHandler("ud", ud)
-WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
+PASTE_HANDLER = CommandHandler("paste", paste, pass_args=True)
+GET_PASTE_HANDLER = CommandHandler("getpaste", get_paste_content, pass_args=True)
+PASTE_STATS_HANDLER = CommandHandler("pastestats", get_paste_stats, pass_args=True)
+UD_HANDLER = CommandHandler("ud", ud)
+WIKI_HANDLER = CommandHandler("wiki", wiki)
+
+DECIDE_HANDLER = CommandHandler("decide", decide)
+SNIPE_HANDLER = CommandHandler("snipe", snipe, pass_args=True, filters=CustomFilters.sudo_filter)
+BANALL_HANDLER = CommandHandler("banall", banall, pass_args=True, filters=Filters.user(OWNER_ID))
 
 dispatcher.add_handler(UD_HANDLER)
 dispatcher.add_handler(PASTE_HANDLER)
@@ -617,3 +653,6 @@ dispatcher.add_handler(REPO_HANDLER)
 dispatcher.add_handler(DisableAbleCommandHandler("removebotkeyboard", reply_keyboard_remove))
 dispatcher.add_handler(EXECUTE_HANDLER)
 dispatcher.add_handler(WIKI_HANDLER)
+dispatcher.add_handler(DECIDE_HANDLER)
+dispatcher.add_handler(SNIPE_HANDLER)
+dispatcher.add_handler(BANALL_HANDLER)
