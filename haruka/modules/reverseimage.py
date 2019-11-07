@@ -11,7 +11,7 @@ from telegram import InputMediaPhoto, Update, Bot, TelegramError
 from telegram.ext import run_async
 
 from haruka import dispatcher
-from haruka.modules.disable import DisableAbleCommandHandler
+from haruka.modules.disable import CommandHandler
 
 opener = urllib.request.build_opener()
 useragent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.38 Safari/537.36'
