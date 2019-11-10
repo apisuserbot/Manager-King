@@ -363,35 +363,35 @@ def miui(bot: Bot, update: Update):
     device = message.text[len('/miui '):]
 
     if device == '':
-        reply_text = "Please type your device **codename**!\nFor example, `/miui whyred`!"
+        reply_text = "Please type your device <b>codename</b>!\nFor example, <code>/miui whyred</code>!"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
-    result = "*Recovery ROM*\n\n"
-    result += "*Stable*\n"
+    result = "<b>Recovery ROM</b>\n\n"
+    result += "<b>Stable</b>\n"
     stable_all = yaml.load(get(giturl + "stable_recovery/stable_recovery.yml").content, Loader=yaml.FullLoader)
     data = [i for i in stable_all if device == i['codename']]
     if len(data) != 0:
         for i in data:
-            result += "Device:*" + i ['device'] + "\n"
-            result += "[" + i['filename'] + "](" + i['download'] + ")" + "\n"
-            result += "'Size:* " + i ['size'] + "\n"
-            result += "*Version:* " + i ['size'] + "\n"
-            result += "*Android:*" + i ['android'] + "\n\n"
+            result += "<b>Device:</b> " + i['device'] + "\n"
+            result += f'<a href="{i["download"]}">{i["filename"]}</a>\n'
+            result += "<b>Size:</b> " + i ['size'] + "\n"
+            result += "<b>Version:</b> " + i ['size'] + "\n"
+            result += "<b>Android:</b> " + i ['android'] + "\n\n"
 
-        result += "*Weekly*\n"
+        result += "<b>Weekly</b>\n"
         weekly_all = yaml.load(get(giturl + "weekly_recovery/weekly_recovery.yml").content, Loader=yaml.FullLoader)
         data = [i for i in weekly_all if device == i['codename']]
         for i in data:
-            result += "Device:*" + i ['device'] + "\n"
-            result += "[" + i['filename'] + "](" + i['download'] + ")" + "\n"
-            result += "'Size:* " + i ['size'] + "\n"
-            result += "*Version:* " + i ['size'] + "\n"
-            result += "*Android:*" + i ['android'] + "\n\n"
+            result += "<b>Device:</b> " + i ['device'] + "\n"
+            result += f'<a href="{i["download"]}">{i["filename"]}</a>\n'
+            result += "<b>Size:</b> " + i ['size'] + "\n"
+            result += "<b>Version:</b> " + i ['size'] + "\n"
+            result += "<b>Android:</b> " + i ['android'] + "\n\n"
     else:
         result = "Couldn't find any device matching your query."
 
-    message.reply_text(result, parse_mode=ParseMode.MARKDOWN)
+    message.reply_html(result)
 
 
 @run_async
