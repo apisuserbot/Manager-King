@@ -376,7 +376,7 @@ def miui(bot: Bot, update: Update):
             result += "<b>Device:</b> " + i['device'] + "\n"
             result += f'<a href="{i["download"]}">{i["filename"]}</a>\n'
             result += "<b>Size:</b> " + i ['size'] + "\n"
-            result += "<b>Version:</b> " + i ['size'] + "\n"
+            result += "<b>Version:</b> " + i ['version'] + "\n"
             result += "<b>Android:</b> " + i ['android'] + "\n\n"
 
         result += "<b>Weekly</b>\n"
@@ -386,7 +386,7 @@ def miui(bot: Bot, update: Update):
             result += "<b>Device:</b> " + i ['device'] + "\n"
             result += f'<a href="{i["download"]}">{i["filename"]}</a>\n'
             result += "<b>Size:</b> " + i ['size'] + "\n"
-            result += "<b>Version:</b> " + i ['size'] + "\n"
+            result += "<b>Version:</b> " + i ['version'] + "\n"
             result += "<b>Android:</b> " + i ['android'] + "\n\n"
     else:
         result = "Couldn't find any device matching your query."
