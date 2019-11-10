@@ -374,7 +374,7 @@ def miui(bot: Bot, update: Update):
     if len(data) != 0:
         for i in data:
             result += "[" + i['filename'] + "](" + i['download'] + ")"
-            result += "Size:" + i []'size']
+            result += "Size:" + i ['size']
             result += "Version:" + i ['size']
 
         result += "*Weekly*\n"
