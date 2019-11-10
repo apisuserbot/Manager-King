@@ -94,11 +94,13 @@ def __chat_settings__(bot, update, chat, chatP, user):
 
 
 __help__ = """
- - /rules: get the rules for this chat.
+*Set rules for making your group organized, just don't make it a dictatorship!*
+
+ - /rules: Get the rules from a group.
 
 *Admin only:*
- - /setrules <your rules here>: set the rules for this chat.
- - /clearrules: clear the rules for this chat.
+ - /setrules <rules>: Defines the rules for a group.
+ - /clearrules: clear the rules of a group.
 """
 
 __mod_name__ = "Rules"

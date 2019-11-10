@@ -130,6 +130,7 @@ def aex(bot: Bot, update: Update, args: List[str]):
             message = (f"*Download:* [{filename}]({url})\n"
                        f"*Build date:* `{builddate}`\n"
                        f"*Build size:* `{buildsize}`\n"
+                       f"*XDA Thread:* [Here]({xda})"
                        f"*By:* [{developer}]({developer_url})\n")
 
             keyboard = [[InlineKeyboardButton(text="Click here to download", url=f"{url}")]]

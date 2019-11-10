@@ -319,12 +319,11 @@ __mod_name__ = "Backups"
 __help__ = """
 *Only for chat administrator:*
 
- - /import: reply to the backup file for the butler / emilia group to import as much as possible, making transfers very easy! \
- Note that files / photos cannot be imported due to telegram restrictions.
+ - /import: reply to the backup file for the butler / emilia group to import as much as possible, making transfers very easy!  Note that files / photos cannot be imported due to telegram restrictions.
 
- - /export: export group data, which will be exported are: rules, notes (documents, images, music, video, audio, voice, text, text buttons) \
+ - /export: export group data. Exported data will include rules, notes (documents, images, music, video, audio, voice, text, text buttons), blacklists, disabled commands and locks. More will come gradually!
 
-This module is still in beta! Report bugs in @HarukaAyaGroup !
+*This module is still in beta!*
 """
 
 IMPORT_HANDLER = CommandHandler("import", import_data)

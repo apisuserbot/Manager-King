@@ -186,6 +186,8 @@ def scam(imgspage, lim):
 
 
 __help__ = """
+*This module uses Google Images to do a reverse image search.*
+
 - /reverse: Does a reverse image search of the media which it was replied to.
 """
 
