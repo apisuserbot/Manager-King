@@ -373,9 +373,9 @@ def miui(bot: Bot, update: Update):
     data = [i for i in stable_all if device == i['codename']]
     if len(data) != 0:
         for i in data:
-            result += "[" + i['filename'] + "](" + i['download'] + ")" "\n"
-            result += "Size:" + i ['size'] "\n" 
-            result += "Version:" + i ['size'] "\n\n"
+            result += "[" + i['filename'] + "](" + i['download'] + ")" + "\n"
+            result += "Size:" + i ['size'] + "\n"
+            result += "Version:" + i ['size'] + "\n\n"
 
         result += "*Weekly*\n"
         weekly_all = yaml.load(get(giturl + "weekly_recovery/weekly_recovery.yml").content, Loader=yaml.FullLoader)
