@@ -120,7 +120,7 @@ def aex(bot: Bot, update: Update, args: List[str]):
         else:
             developer = apidata.get('developer')
             developer_url = apidata.get('developer_url')
-            xda = apidata.get('forum_url')
+            forum_url = apidata.get('forum_url')
             filename = apidata.get('filename')
             url = "https://downloads.aospextended.com/download/" + device + "/" + version + "/" + apidata.get(
                 'filename')
@@ -130,7 +130,7 @@ def aex(bot: Bot, update: Update, args: List[str]):
             message = (f"*Download:* [{filename}]({url})\n"
                        f"*Build date:* `{builddate}`\n"
                        f"*Build size:* `{buildsize}`\n"
-                       f"*XDA Thread:* [Here]({xda})"
+                       f"*XDA Thread:* [Here]({forum_url})"
                        f"*By:* [{developer}]({developer_url})\n")
 
             keyboard = [[InlineKeyboardButton(text="Click here to download", url=f"{url}")]]
