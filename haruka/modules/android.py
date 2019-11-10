@@ -373,7 +373,7 @@ def miui(bot: Bot, update: Update):
     data = [i for i in stable_all if device == i['codename']]
     if len(data) != 0:
         for i in data:
-        	result += "Device:*" + i ['device'] + "\n"
+            result += "Device:*" + i ['device'] + "\n"
             result += "[" + i['filename'] + "](" + i['download'] + ")" + "\n"
             result += "'Size:* " + i ['size'] + "\n"
             result += "*Version:* " + i ['size'] + "\n"
