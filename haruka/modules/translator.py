@@ -22,15 +22,15 @@ def do_translate(bot: Bot, update: Update, args: List[str]):
         translated = translator.translate(to_translate_text, dest=lan)
         src_lang = translated.src
         translated_text = translated.text
-        msg.reply_html("<b>Translated from<\b> {} <b>to<\b> <code>{}<code>.\n {}".format(src_lang, lan, translated_text))
+        msg.reply_text("*Translated from* '{}' *to* '{}'.\n {}".format(src_lang, lan, translated_text))
     except:
-        msg.reply_html("<code>Error! Could not do the translation.<\code>")
+        msg.reply_text("'Error! Could not do the translation.'")
 
 
 __help__ = """ 
 *This module uses Google Translate to do the translations.*
 
- - /tr (language code): as reply to a long message.
+ - /tr <language code>: as reply to a long message.
 """
 __mod_name__ = "Translator"
 
