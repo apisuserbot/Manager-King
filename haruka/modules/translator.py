@@ -1,7 +1,7 @@
 from typing import Optional, List
 
 from googletrans import Translator
-from telegram import Message, Update, Bot
+from telegram import message, Update, Bot
 from telegram.ext import run_async
 from telegram.ext import CommandHandler
 
@@ -22,7 +22,7 @@ def do_translate(bot: Bot, update: Update, args: List[str]):
         translated = translator.translate(to_translate_text, dest=lan)
         src_lang = translated.src
         translated_text = translated.text
-        message.reply_html("<b>Translated from<\b> {} <b>to<\b> <code>{}<code>.\n {}".format(src_lang, lan, translated_text))
+        msg.reply_html("<b>Translated from<\b> {} <b>to<\b> <code>{}<code>.\n {}".format(src_lang, lan, translated_text))
     except:
         msg.reply_html("<code>Error! Could not do the translation.<\code>")
 
