@@ -633,6 +633,58 @@ def phh(bot: Bot, update: Update, args: List[str]):
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
 
 
+# Android Specs Module for Hitsuki Bot
+@run_async
+def specs(bot, update, args):
+    if len(args) == 0:
+        update.effective_message.reply_text("Please type your device **brand** and **name**!\
+        \nFor example, `/specs Xiaomi Redmi Note 7`")
+        return
+    brand = args[0]
+    device = " ".join(args[1:])
+    if brand and device:
+        pass
+    all_brands = BeautifulSoup(
+        get('https://www.devicespecifications.com/en/brand-more').content,
+        'lxml').find('div', {
+            'class': 'brand-listing-container-news'
+        }).findAll('a')
+    brand_page_url = None
+    try:
+        brand_page_url = [
+            i['href'] for i in all_brands if brand == i.text.strip().lower()
+        ][0]
+    except IndexError:
+        update.effective_message.reply_text(f'`{brand}` is unknown brand!')
+        return
+    devices = BeautifulSoup(get(brand_page_url).content, 'lxml') \
+        .findAll('div', {'class': 'model-listing-container-80'})
+    device_page_url = None
+    try:
+        device_page_url = [
+            i.a['href']
+            for i in BeautifulSoup(str(devices), 'lxml').findAll('h3')
+            if device in i.text.strip().lower()
+        ]
+    except IndexError:
+        update.effective_message.reply_text(f"Can't find `{device}`!")
+        return
+    if len(device_page_url) > 2:
+        device_page_url = device_page_url[:2]
+    reply = ''
+    for url in device_page_url:
+        info = BeautifulSoup(get(url).content, 'lxml')
+        reply = '\n**' + info.title.text.split('-')[0].strip() + '**\n\n'
+        info = info.find('div', {'id': 'model-brief-specifications'})
+        specifications = re.findall(r'<b>.*?<br/>', str(info))
+        for item in specifications:
+            title = re.findall(r'<b>(.*?)</b>', item)[0].strip()
+            data = re.findall(r'</b>: (.*?)<br/>', item)[0]\
+                .replace('<b>', '').replace('</b>', '').strip()
+            reply += f'**{title}**: {data}\n'
+    update.effective_message.reply_text(reply)
+
+
 __help__ = """
 *Here you will have several useful commands for Android users!*
 
@@ -640,6 +692,7 @@ __help__ = """
  - /device <codename>: gets android device basic info from its codename
  - /magisk: gets the latest magisk release for Stable/Beta/Canary
  - /twrp <codename>: gets latest twrp for the android device using the codename
+ - /specs <brand. <device name>: will give you the complete specifications of a device
 
  *Specific ROM for a device*
  - /aex <device> <android version>: Get the latest AEX ROM for a device
@@ -685,6 +738,7 @@ VIPER_HANDLER = CommandHandler("viper", viper, admin_ok=True)
 DESCENDANT_HANDLER = CommandHandler("descendant", descendant, pass_args=True, admin_ok=True)
 ENES_HANDLER = CommandHandler("enesrelease", enesrelease, pass_args=True, admin_ok=True)
 PHH_HANDLER = CommandHandler("phh", phh, pass_args=True, admin_ok=True)
+SPECS_HANDLER = CommandHandler("specs", specs, pass_args=True)
 
 dispatcher.add_handler(DEVICE_HANDLER)
 dispatcher.add_handler(MAGISK_HANDLER)
@@ -706,3 +760,4 @@ dispatcher.add_handler(VIPER_HANDLER)
 dispatcher.add_handler(DESCENDANT_HANDLER)
 dispatcher.add_handler(ENES_HANDLER)
 dispatcher.add_handler(PHH_HANDLER)
+dispatcher.add_handler(SPECS_HANDLER)
