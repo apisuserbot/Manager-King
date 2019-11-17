@@ -41,10 +41,8 @@ class Config(object):
     # MEMES
     DEEPFRY_TOKEN = None  # Used for facial recognition in the deepfry command
 
-    # CAT
+    # DOGS AND CATS
     CAT_API_KEY = None
-
-    # DOG
     DOG_API_KEY = None
 
 

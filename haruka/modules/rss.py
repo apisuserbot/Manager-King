@@ -218,12 +218,12 @@ def rss_set(bot, job):
 __help__ = """
 *Add multiple RSS feeds in your groups!*
 
-/addrss <link>: Add an RSS link to the subscriptions.
-/removerss <link>: Removes the RSS link from the subscriptions.
-/rss <link>: Shows the link's data and the last entry, for testing purposes.
-/listrss: Shows the list of rss feeds that the chat is currently subscribed to.
+ - /addrss <link>: Add an RSS link to the subscriptions.
+ - /removerss <link>: Removes the RSS link from the subscriptions.
+ - /rss <link>: Shows the link's data and the last entry, for testing purposes.
+ - /listrss: Shows the list of RSS feeds that the chat is currently subscribed to.
 
-NOTE: In groups, only admins can add/remove RSS links to the group's subscription
+*NOTE:* In groups, only admins can add/remove RSS links to the group's subscription.
 """
 
 __mod_name__ = "RSS Feed"
