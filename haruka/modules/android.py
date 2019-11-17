@@ -692,7 +692,7 @@ __help__ = """
  - /device <codename>: gets android device basic info from its codename
  - /magisk: gets the latest magisk release for Stable/Beta/Canary
  - /twrp <codename>: gets latest twrp for the android device using the codename
- - /specs <brand. <device name>: will give you the complete specifications of a device
+ - /specs <brand> <device name>: will give you the complete specifications of a device
 
  *Specific ROM for a device*
  - /aex <device> <android version>: Get the latest AEX ROM for a device
