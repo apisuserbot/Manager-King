@@ -65,12 +65,13 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
     else:
         keyboard = InlineKeyboardMarkup(
             [[InlineKeyboardButton("Remove warn (Admin Only)", callback_data="rm_warn({})".format(user.id))]])
-
-        reply = "{} has {}/{} warnings... watch out!".format(mention_html(user.id, user.first_name), num_warns,
+ 
+        reply = "{} <b>has been warned!</b>\nTotal warn that this user have {}/{}".format(mention_html(user.id, user.first_name), num_warns,
                                                              limit)
         if reason:
-            reply += "\nReason for last warn:\n{}".format(html.escape(reason))
-
+            reply += "\nReason for the warn:\n<code>{}</code>".format(html.escape(reason))
+ e(reason))
+ 
         log_reason = "<b>{}:</b>" \
                      "\n#WARN" \
                      "\n<b>Admin:</b> {}" \
