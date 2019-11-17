@@ -70,7 +70,6 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
                                                              limit)
         if reason:
             reply += "\nReason for the warn:\n<code>{}</code>".format(html.escape(reason))
- e(reason))
  
         log_reason = "<b>{}:</b>" \
                      "\n#WARN" \
