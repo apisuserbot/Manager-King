@@ -9,7 +9,7 @@ from haruka.modules.connection import connected
 from haruka.modules.helper_funcs.chat_status import user_admin
 from haruka.modules.sql.translation import switch_to_locale, prev_locale
 from haruka.modules.translations.list_locale import list_locales
-from haruka.modules.translations.strings import tld
+# from haruka.modules.translations.strings import tld
 
 
 @user_admin
