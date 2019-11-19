@@ -6,7 +6,7 @@ from telegram.error import BadRequest
 from telegram.ext import run_async, Filters
 from telegram.utils.helpers import mention_html
 
-from haruka import dispatcher, LOGGER
+from haruka import dispatcher, LOGGER, BAN_STICKER
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import bot_admin, user_admin, is_user_ban_protected, can_restrict, \
     is_user_admin, is_user_in_chat
@@ -70,7 +70,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+            bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
             message.reply_text(tld(chat.id, "Banned!"), quote=False)
             return log
         else:
@@ -146,14 +146,14 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
 
     try:
         chat.kick_member(user_id, until_date=bantime)
-        # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+        bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         message.reply_text("Banned! User will be banned for {}.".format(time_val))
         return log
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+            bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
             message.reply_text(tld(chat.id, "Banned! User will be banned for {}.").format(time_val), quote=False)
             return log
         else:
@@ -199,7 +199,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
 
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
-        # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+        bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         message.reply_text("Kicked!")
         log = "<b>{}:</b>" \
               "\n#KICKED" \
