@@ -12,7 +12,7 @@ from telegram.utils.helpers import mention_html
 import haruka.modules.helper_funcs.cas_api as cas
 import haruka.modules.sql.antispam_sql as gbansql
 import haruka.modules.sql.welcome_sql as sql
-import tg_bot.modules.sql.users_sql as userssql
+import haruka.modules.sql.users_sql as userssql
 from haruka import dispatcher, OWNER_ID, LOGGER, MESSAGE_DUMP, SUDO_USERS, SUPPORT_USERS
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
