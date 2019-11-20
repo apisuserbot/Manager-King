@@ -145,7 +145,7 @@ Click Help button to find out more about how to use me to my full potential.\n\n
 
     text += "This Bot Is Managed By @HitaloKun\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)\n\nYou can find my source using the /source command here at PM"
 
-    keyboard = [[InlineKeyboardButton(text="📃 HitaloKun's Docs", url="https://telegra.ph/HitaloKun-doc-07-15")]]
+    keyboard = [[InlineKeyboardButton(text="📃 HitaloSama's Docs", url="https://telegra.ph/HitaloKun-doc-07-15")]]
     keyboard += [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
     keyboard += [[InlineKeyboardButton(text="🇺🇸 Language", callback_data="set_lang_"),
                   InlineKeyboardButton(text="❔ Help", callback_data="help_back")]]
