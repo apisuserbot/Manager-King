@@ -12,6 +12,7 @@ from telegram.utils.helpers import mention_html
 import haruka.modules.helper_funcs.cas_api as cas
 import haruka.modules.sql.antispam_sql as gbansql
 import haruka.modules.sql.welcome_sql as sql
+import tg_bot.modules.sql.users_sql as userssql
 from haruka import dispatcher, OWNER_ID, LOGGER, MESSAGE_DUMP, SUDO_USERS, SUPPORT_USERS
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
@@ -927,8 +928,11 @@ def caschecker(bot: Bot, update: Update, args: List[str]):
             text += str(parsing)
         parsing = cas.timeadded(user.id)
         if parsing:
-            text += "\nAdded: "
-            text += str(parsing)
+            parseArray=str(parsing).split(", ")
+            text += "\nDay added: "
+            text += str(parseArray[1])
+            text += "\nTime added: "
+            text += str(parseArray[0])
             text += "\n\nAll times are in UTC"
     update.effective_message.reply_text(text, parse_mode=ParseMode.HTML)
 
@@ -955,6 +959,14 @@ def whChat(bot: Bot, update: Update, args: List[str]):
         chat_id = str(args[0])
         del args[0]
         try:
+            banner = update.effective_user
+            send_to_list(bot, SUDO_USERS,
+                     "<b>Chat WhiteList</b>" \
+                     "\n#WHCHAT" \
+                     "\n<b>Status:</b> <code>Whitelisted</code>" \
+                     "\n<b>Sudo Admin:</b> {}" \
+                     "\n<b>Chat Name:</b> {}" \
+                     "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),userssql.get_chat_name(chat_id),chat_id), html=True)
             sql.whitelistChat(chat_id)
             update.effective_message.reply_text("Chat has been successfully whitelisted!")
         except:
@@ -969,9 +981,21 @@ def unwhChat(bot: Bot, update: Update, args: List[str]):
         chat_id = str(args[0])
         del args[0]
         try:
+            banner = update.effective_user
+            send_to_list(bot, SUDO_USERS,
+                     "<b>Regression of Chat WhiteList</b>" \
+                     "\n#UNWHCHAT" \
+                     "\n<b>Status:</b> <code>Un-Whitelisted</code>" \
+                     "\n<b>Sudo Admin:</b> {}" \
+                     "\n<b>Chat Name:</b> {}" \
+                     "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),userssql.get_chat_name(chat_id),chat_id), html=True)
             sql.unwhitelistChat(chat_id)
             update.effective_message.reply_text("Chat has been successfully un-whitelisted!")
             bot.leave_chat(int(chat_id))
+            try:
+                bot.leave_chat(int(chat_id))
+            except:
+                pass
         except:
             update.effective_message.reply_text("Error un-whitelisting chat!")
     else:
