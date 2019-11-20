@@ -1,4 +1,5 @@
 import json
+import re
 from datetime import datetime
 from typing import List
 
@@ -8,11 +9,10 @@ from hurry.filesize import size as sizee
 from requests import get
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import Update, Bot
-from telegram.ext import run_async
 from telegram.ext import CommandHandler
+from telegram.ext import run_async
 
 from haruka import dispatcher, LOGGER
-from haruka.modules.disable import DisableAbleCommandHandler
 
 # DO NOT DELETE THIS, PLEASE.
 # Made by @RealAkito on GitHub and Telegram.
@@ -637,11 +637,11 @@ def phh(bot: Bot, update: Update, args: List[str]):
 @run_async
 def specs(bot, update, args):
     if len(args) == 0:
-        update.effective_message.reply_text("Please type your device **brand** and **name**!\
-        \nFor example, `/specs Xiaomi Redmi Note 7`")
+        update.effective_message.reply_html("Please type your device <b>brand</b> and <b>name</b>!\
+        \nFor example, <code>/specs Xiaomi Redmi Note 7</code>")
         return
-    brand = args[0]
-    device = " ".join(args[1:])
+    brand = args[0].lower()
+    device = " ".join(args[1:]).lower()
     if brand and device:
         pass
     all_brands = BeautifulSoup(
@@ -649,40 +649,36 @@ def specs(bot, update, args):
         'lxml').find('div', {
             'class': 'brand-listing-container-news'
         }).findAll('a')
-    brand_page_url = None
     try:
         brand_page_url = [
             i['href'] for i in all_brands if brand == i.text.strip().lower()
         ][0]
     except IndexError:
-        update.effective_message.reply_text(f'`{brand}` is unknown brand!')
+        update.effective_message.reply_html(f'<code>{brand}</code> is unknown brand!')
         return
     devices = BeautifulSoup(get(brand_page_url).content, 'lxml') \
         .findAll('div', {'class': 'model-listing-container-80'})
-    device_page_url = None
-    try:
-        device_page_url = [
-            i.a['href']
-            for i in BeautifulSoup(str(devices), 'lxml').findAll('h3')
-            if device in i.text.strip().lower()
-        ]
-    except IndexError:
-        update.effective_message.reply_text(f"Can't find `{device}`!")
+    device_page_url = [
+        i.a['href']
+        for i in BeautifulSoup(str(devices), 'lxml').findAll('h3')
+        if device in i.text.strip().lower()
+    ]
+    if not device_page_url:
+        update.effective_message.reply_html(f"Can't find <code>{device}</code>!")
         return
     if len(device_page_url) > 2:
         device_page_url = device_page_url[:2]
     reply = ''
     for url in device_page_url:
         info = BeautifulSoup(get(url).content, 'lxml')
-        reply = '\n**' + info.title.text.split('-')[0].strip() + '**\n\n'
+        reply = '\n<b>' + info.title.text.split('-')[0].strip() + '</b>\n\n'
         info = info.find('div', {'id': 'model-brief-specifications'})
         specifications = re.findall(r'<b>.*?<br/>', str(info))
         for item in specifications:
             title = re.findall(r'<b>(.*?)</b>', item)[0].strip()
-            data = re.findall(r'</b>: (.*?)<br/>', item)[0]\
-                .replace('<b>', '').replace('</b>', '').strip()
-            reply += f'**{title}**: {data}\n'
-    update.effective_message.reply_text(reply)
+            data = re.findall(r'</b>: (.*?)<br/>', item)[0].strip()
+            reply += f'<b>{title}</b>: {data}\n'
+    update.effective_message.reply_html(reply)
 
 
 __help__ = """
