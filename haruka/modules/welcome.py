@@ -991,7 +991,6 @@ def unwhChat(bot: Bot, update: Update, args: List[str]):
                      "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),userssql.get_chat_name(chat_id),chat_id), html=True)
             sql.unwhitelistChat(chat_id)
             update.effective_message.reply_text("Chat has been successfully un-whitelisted!")
-            bot.leave_chat(int(chat_id))
             try:
                 bot.leave_chat(int(chat_id))
             except:
