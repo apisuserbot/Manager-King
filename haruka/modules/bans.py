@@ -71,7 +71,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
         if excp.message == "Reply message not found":
             # Do not reply
             bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-            message.reply_text(tld(chat.id, "There is no light, no hope, only despair. Get out of here, {} banned!")).format(mention_html(user.id, user.first_name)), quote=False)
+            message.reply_text(tld(chat.id, "There is no light, no hope, only despair. Get out of here, {} banned!")).format(mention_html(user.id, user.first_name))
             return log
         else:
             LOGGER.warning(update)
