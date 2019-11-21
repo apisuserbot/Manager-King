@@ -1,7 +1,7 @@
 import html
 from typing import Optional, List
 
-from telegram import Message, Chat, Update, Bot, User, ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Message, Chat, Update, Bot, User
 from telegram.error import BadRequest
 from telegram.ext import run_async, Filters
 from telegram.utils.helpers import mention_html
@@ -55,14 +55,16 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
           "\n<b>• User:</b> {}" \
           "\n<b>• ID:</b> <code>{}</code>".format(html.escape(chat.title), mention_html(user.id, user.first_name),
                                                   mention_html(member.user.id, member.user.first_name), user_id)
+
+    reply = "{} has been banned!".format(mention_html(member.user.id, member.user.first_name))
+
     if reason:
         log += "\n<b>Reason:</b> {}".format(reason)
 
     try:
         chat.kick_member(user_id)
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        reply = "{} has been banned!".format(mention_html(member.user.id, member.user.first_name))
-        message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
+        message.reply_text(tld(chat.id, "Banned!"))
         return log
 
     except BadRequest as excp:
@@ -199,9 +201,7 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
     if res:
         bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         keyboard = []
-        reply = "{} has been kicked!".format(mention_html(member.user.id, member.user.first_name))
-        message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
-        
+        message.reply_text("Kicked!")
         log = "<b>{}:</b>" \
               "\n#KICKED" \
               "\n<b>Admin:</b> {}" \
