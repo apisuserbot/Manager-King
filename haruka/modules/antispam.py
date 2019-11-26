@@ -81,7 +81,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
     if sql.is_user_gbanned(user_id):
         if not reason:
-            message.reply_text("This user is already gbanned; I'd change the reason, but you haven't given me one...")
+            message.reply_text("This user is already gbanned. I'd change the reason, but you haven't given me one...")
             return
 
         old_reason = sql.update_gban_reason(user_id, user_chat.username or user_chat.first_name, reason)
@@ -95,11 +95,11 @@ def gban(bot: Bot, update: Update, args: List[str]):
                 return
 
             bannername = banner.first_name
-            new_reason = f"{new_reason} // GBanned by {bannername} id {bannerid}"
+            new_reason = f"{new_reason}"
 
             bot.send_message(
                 MESSAGE_DUMP,
-                "<b>New Reason of Global Ban</b>" \
+                "#GBAN <b>Reason update</b>" \
                 "\n<b>Sudo Admin:</b> {}" \
                 "\n<b>User:</b> {}" \
                 "\n<b>ID:</b> <code>{}</code>" \
@@ -122,11 +122,11 @@ def gban(bot: Bot, update: Update, args: List[str]):
                 return
 
             bannername = banner.first_name
-            new_reason = f"{new_reason} // GBanned by {bannername} id {bannerid}"
+            new_reason = f"{new_reason}"
 
             bot.send_message(
                 MESSAGE_DUMP,
-                "<b>New reason of Global Ban</b>" \
+                "#GBAN <b>Reason update</b>" \
                 "\n<b>Sudo Admin:</b> {}" \
                 "\n<b>User:</b> {}" \
                 "\n<b>ID:</b> <code>{}</code>" \
@@ -150,8 +150,8 @@ def gban(bot: Bot, update: Update, args: List[str]):
     try:
         bot.send_message(
             MESSAGE_DUMP,
-            "#GBAN\nSudo Admin: {}\nUser: {}\nID: <code>{}</code> "
-            "\nReason:\n{}".format(mention_html(banner.id, banner.first_name),
+            "#GBAN\n<b>Sudo Admin:</b> {}\n<b>User:</b> {}\n<b>ID:</b> <code>{}</code> "
+            "\n<b>Reason:</b> {}".format(mention_html(banner.id, banner.first_name),
                                   mention_html(user_chat.id, user_chat.first_name), user_chat.id,
                                   reason or "No reason given"),
             parse_mode=ParseMode.HTML
