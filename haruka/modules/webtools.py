@@ -127,16 +127,15 @@ def speedtst(bot: Bot, update: Update):
     test.results.share()
     result = test.results.dict()
     del_msg.delete()
-    update.effective_message.reply_text("<code>"
-                                        "Download: "
-                                        f"{speed_convert(result['download'])} \n"
-                                        "Upload: "
-                                        f"{speed_convert(result['upload'])} \n"
-                                        "Ping: "
-                                        f"{result['ping']} \n"
-                                        "ISP: "
-                                        f"{result['client']['isp']}"
-                                        "</code>",
+    update.effective_message.reply_text("<b>SpeedTest Results</b>"
+                                        "<b>Download:</b> "
+                                        f"<code>{speed_convert(result['download'])}</code> \n"
+                                        "<b>Upload:</b> "
+                                        f"<code>{speed_convert(result['upload'])}</code> \n"
+                                        "<b>Ping:</b> "
+                                        f"<code>{result['ping']}</code> \n"
+                                        "<b>ISP:</b> "
+                                        f"<code>{result['client']['isp']}</code>",
                                         parse_mode=ParseMode.HTML)
 
 
