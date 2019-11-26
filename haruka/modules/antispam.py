@@ -146,12 +146,12 @@ def gban(bot: Bot, update: Update, args: List[str]):
     banner = update.effective_user  # type: Optional[User]
     bannerid = banner.id
     bannername = banner.first_name
-    reason = f"{reason} // GBanned by {bannername} id {bannerid}"
+    reason = f"{reason}"
     try:
         bot.send_message(
             MESSAGE_DUMP,
-            "{} is gbanning user {} with the id <code>{}</code> "
-            "because:\n{}".format(mention_html(banner.id, banner.first_name),
+            "#GBAN\nSudo Admin: {}\nUser: {}\nID: <code>{}</code> "
+            "\nReason:\n{}".format(mention_html(banner.id, banner.first_name),
                                   mention_html(user_chat.id, user_chat.first_name), user_chat.id,
                                   reason or "No reason given"),
             parse_mode=ParseMode.HTML
