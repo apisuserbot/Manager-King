@@ -127,7 +127,7 @@ def speedtst(bot: Bot, update: Update):
     test.results.share()
     result = test.results.dict()
     del_msg.delete()
-    update.effective_message.reply_text("<b>SpeedTest Results</b>"
+    update.effective_message.reply_text("<b>SpeedTest Results</b> \n\n"
                                         "<b>Download:</b> "
                                         f"<code>{speed_convert(result['download'])}</code> \n"
                                         "<b>Upload:</b> "
