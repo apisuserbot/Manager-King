@@ -7,7 +7,7 @@ from telegram.ext import CommandHandler, run_async, Filters
 from telegram.utils.helpers import escape_markdown, mention_html
 
 from haruka import dispatcher, OWNER_ID
-from emilia.__main__ import STATS, USER_INFO
+from haruka.__main__ import STATS, USER_INFO
 from haruka.modules.disable import DisableAbleCommandHandler, DisableAbleRegexHandler
 from haruka.modules.helper_funcs.extraction import extract_user
 from haruka.modules.helper_funcs.filters import CustomFilters
