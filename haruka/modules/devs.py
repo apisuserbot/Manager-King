@@ -12,6 +12,7 @@ from haruka.modules.disable import DisableAbleCommandHandler, DisableAbleRegexHa
 from haruka.modules.helper_funcs.extraction import extract_user
 from haruka.modules.helper_funcs.filters import CustomFilters
 
+# This module was picked up from Emilia Hikari
 
 @run_async
 def reboot(bot: Bot, update: Update):
@@ -19,7 +20,7 @@ def reboot(bot: Bot, update: Update):
 	chat_id = update.effective_chat.id
 	update.effective_message.reply_text("Rebooting...", parse_mode=ParseMode.MARKDOWN)
 	try:
-		os.system("cd /home/ayra/emilia/ && python3.6 -m emilia &")
+		os.system("cd /home/ayra/emilia/ && python3.8 -m haruka &")
 		os.system('kill %d' % os.getpid())
 		update.effective_message.reply_text("Reboot successful!", parse_mode=ParseMode.MARKDOWN)
 	except:
