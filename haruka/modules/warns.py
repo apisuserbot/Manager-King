@@ -66,7 +66,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
                                                                   user.id, reason, num_warns, limit)
     else:
         keyboard = [[
-            InlineKeyboardButton("Remove warn", callback_data="rm_warn({})".format(user.id))
+            InlineKeyboardButton("⚠️ Remove warn", callback_data="rm_warn({})".format(user.id))
         ]]
         rules = rules_sql.get_rules(chat.id)
 
