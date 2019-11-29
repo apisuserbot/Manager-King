@@ -71,7 +71,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         rules = rules_sql.get_rules(chat.id)
 
         if rules:
-            keyboard[0].append(InlineKeyboardButton("Rules", url="t.me/{}?start={}".format(bot.username, chat.id)))
+            keyboard[0].append(InlineKeyboardButton("📝 Rules", url="t.me/{}?start={}".format(bot.username, chat.id)))
 
         reply = "{} <b>has been warned!</b>\nThey have {}/{} warnings.".format(mention_html(user.id, user.first_name), num_warns,
                                                              limit)
@@ -439,7 +439,8 @@ __mod_name__ = "Warnings"
 
 WARN_HANDLER = CommandHandler("warn", warn_user, pass_args=True, filters=Filters.group)
 RESET_WARN_HANDLER = CommandHandler(["resetwarn", "resetwarns"], reset_warns, pass_args=True, filters=Filters.group)
-CALLBACK_QUERY_HANDLER = CallbackQueryHandler(button, pattern=r"rm_warn")
+RMWARN_QUERY_HANDLER = CallbackQueryHandler(rmwarn_handler, pattern=r"rm_warn")
+SENDRULES_QUERY_HANDLER = CallbackQueryHandler(sendrules_handler, pattern=r"send_rules")
 MYWARNS_HANDLER = DisableAbleCommandHandler("warns", warns, pass_args=True, filters=Filters.group)
 ADD_WARN_HANDLER = CommandHandler("addwarn", add_warn_filter, filters=Filters.group)
 RM_WARN_HANDLER = CommandHandler(["nowarn", "stopwarn"], remove_warn_filter, filters=Filters.group)
