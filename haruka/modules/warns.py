@@ -19,6 +19,7 @@ from haruka.modules.helper_funcs.misc import split_message
 from haruka.modules.helper_funcs.string_handling import split_quotes
 from haruka.modules.log_channel import loggable
 from haruka.modules.sql import warns_sql as sql
+import haruka.modules.sql.rules_sql as rules_sql
 
 WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
@@ -26,14 +27,16 @@ CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
 
 # Not async
 def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = None) -> str:
+    bot = dispatcher.bot
+
     if is_user_admin(chat, user.id):
-        message.reply_text("Damn admins, can't even be warned!")
+        message.reply_text("I'm not going to warn an admin!")
         return ""
 
     if warner:
         warner_tag = mention_html(warner.id, warner.first_name)
     else:
-        warner_tag = "Automated warn filter."
+        warner_tag =  "Automated warn filter."
 
     limit, soft_warn = sql.get_warn_setting(chat.id)
     num_warns, reasons = sql.warn_user(user.id, chat.id, reason)
@@ -62,15 +65,19 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
                                                                   mention_html(user.id, user.first_name),
                                                                   user.id, reason, num_warns, limit)
 
-    else:
-        keyboard = InlineKeyboardMarkup(
-            [[InlineKeyboardButton("⚠️ Remove warn", callback_data="rm_warn({})".format(user.id))]])
- 
-        reply = "{} <b>has been warned!</b>\nTotal warn that this user have {}/{}".format(mention_html(user.id, user.first_name), num_warns,
+        keyboard = [[
+            InlineKeyboardButton("Remove warn", callback_data="rm_warn({})".format(user.id))
+        ]]
+        rules = rules_sql.get_rules(chat.id)
+
+        if rules:
+            keyboard[0].append(InlineKeyboardButton("Rules", url="t.me/{}?start={}".format(bot.username, chat.id)))
+
+        reply = "{} <b>has been warned!</b>\nThey have {}/{} warnings.".format(mention_html(user.id, user.first_name), num_warns,
                                                              limit)
         if reason:
-            reply += "\nReason for the warn:\n<code>{}</code>".format(html.escape(reason))
- 
+            reply += "\nThe latest warning was because:\n<code>{}</code>".format(html.escape(reason))
+
         log_reason = "<b>{}:</b>" \
                      "\n#WARN" \
                      "\n<b>Admin:</b> {}" \
@@ -82,11 +89,11 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
                                                                   user.id, reason, num_warns, limit)
 
     try:
-        message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
+        message.reply_text(reply, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.HTML)
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML, quote=False)
+            message.reply_text(reply, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.HTML, quote=False)
         else:
             raise
     return log_reason
@@ -95,7 +102,7 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
 @run_async
 @bot_admin
 @loggable
-def button(bot: Bot, update: Update) -> str:
+def rmwarn_handler(bot: Bot, update: Update) -> str:
     query = update.callback_query  # type: Optional[CallbackQuery]
     user = update.effective_user  # type: Optional[User]
     match = re.match(r"rm_warn\((.+?)\)", query.data)
@@ -124,6 +131,22 @@ def button(bot: Bot, update: Update) -> str:
             update.effective_message.edit_text(
                 "User has already has no warns.".format(mention_html(user.id, user.first_name)),
                 parse_mode=ParseMode.HTML)
+
+    return ""
+
+
+@run_async
+@bot_admin
+@loggable
+def sendrules_handler(bot: Bot, update: Update) -> str:
+    query = update.callback_query  # type: Optional[CallbackQuery]
+    user = update.effective_user  # type: Optional[User]
+    print(query)
+    print(query.data)
+    match = re.match(r"send_rules\((.+?)\)", query.data)
+    if match:
+        chat_id = match.group(1)
+        send_rules(update, chat_id, True)
 
     return ""
 
@@ -406,7 +429,7 @@ __help__ = """
  - /warn <userhandle>: warn a user. After 3 warns, the user will be banned from the group. Can also be used as a reply.
  - /resetwarn <userhandle>: reset the warnings for a user. Can also be used as a reply.
  - /addwarn <keyword> <reply message>: set a warning filter on a certain keyword. If you want your keyword to \
-be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`. 
+be a sentence, encompass it with quotes, as such: `/addwarn "very angry" This is an angry user`.
  - /nowarn <keyword>: stop a warning filter
  - /warnlimit <num>: set the warning limit
  - /strongwarn <on/yes/off/no>: If set to on, exceeding the warn limit will result in a ban. Else, will just kick.
@@ -427,7 +450,8 @@ WARN_LIMIT_HANDLER = CommandHandler("warnlimit", set_warn_limit, pass_args=True,
 WARN_STRENGTH_HANDLER = CommandHandler("strongwarn", set_warn_strength, pass_args=True, filters=Filters.group)
 
 dispatcher.add_handler(WARN_HANDLER)
-dispatcher.add_handler(CALLBACK_QUERY_HANDLER)
+dispatcher.add_handler(RMWARN_QUERY_HANDLER)
+dispatcher.add_handler(SENDRULES_QUERY_HANDLER)
 dispatcher.add_handler(RESET_WARN_HANDLER)
 dispatcher.add_handler(MYWARNS_HANDLER)
 dispatcher.add_handler(ADD_WARN_HANDLER)
