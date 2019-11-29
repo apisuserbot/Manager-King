@@ -140,10 +140,10 @@ def send_start(bot, update):
         pass
 
     # chat = update.effective_chat  # type: Optional[Chat] and unused variable
-    text = "Hey there! My name is *Ｈｉｔｓｕｋｉ．ＧＩＦ* - I'm here to help you manage your groups!\n\
-Click Help button to find out more about how to use me to my full potential.\n\n"
+    text = "Hey there! My name is *Ｈｉｔｓｕｋｉ* - I'm here to help you manage your groups!\n\
+Click Help button to find out more about how to use me to my full potential.\n\n Follow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n"
 
-    text += "This Bot Is Managed By @HitaloKun\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)\n\nYou can find my source using the /source command here at PM"
+    text += "This bot is managed by @HitaloSama\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)"
 
     keyboard = [[InlineKeyboardButton(text="📃 HitaloSama's Docs", url="https://telegra.ph/HitaloKun-doc-07-15")]]
     keyboard += [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]
