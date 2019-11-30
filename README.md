@@ -1,14 +1,13 @@
-# Hitsuki.GIF
+# Hitsuki-Bot
 
 Hello i'm based on [Haruka Aya](https://t.me/HarukaAyaBot), a modular Telegram Python bot running on python3 with an sqlalchemy database.
 
-Can be found on telegram as [Ｈｉｔｓｕｋｉ](https://t.me/LordHitsuki_BOT).
+I can be found on telegram as [Hitsuki](https://t.me/LordHitsuki_BOT).
 
-You can also join official Haruka Aya support group [here!](https://t.me/HarukaAyaBot)
-(Remember that they do not support any Haruka Aya fork.)
+Join the [Hitsuki News](https://t.me/HitsukiNews) if you just want to stay in the loop about new features or announcements.
 
   <h6 align="center">
-    <a href="https://t.me/AndroidRepo"><img src="https://img.shields.io/badge/Telegram-Channel-D7000B.svg" /></a>
+    <a href="https://t.me/HitsukiNews"><img src="https://img.shields.io/badge/Telegram-Channel-D7000B.svg" /></a>
   </h6>
 
 ## Thanks to
