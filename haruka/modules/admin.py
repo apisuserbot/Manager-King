@@ -264,26 +264,26 @@ def permanent_pin_set(bot: Bot, update: Update, args: List[str]) -> str:
         chat_name = dispatcher.bot.getChat(conn).title
         if not args:
             get_permapin = sql.get_permapin(chat_id)
-            text_maker = (update.effective_message, "Permanent pin is currently set: `{}`").format(bool(int(get_permapin)))
+            text_maker = "Permanent pin is currently set: `{}`".format(bool(int(get_permapin)))
             if get_permapin:
                 if chat.username:
                     old_pin = "https://t.me/{}/{}".format(chat.username, get_permapin)
                 else:
                     old_pin = "https://t.me/c/{}/{}".format(str(chat.id)[4:], get_permapin)
-                text_maker += (update.effective_message, "\nTo disable a permanent pin: `/permanentpin off`")
-                text_maker += (update.effective_message, "\n\n[The permanent pin message is here]({})").format(old_pin)
-            update.effective_message.reply_text(tl(update.effective_message, text_maker), parse_mode="markdown")
+                text_maker += "\nTo disable a permanent pin: `/permanentpin off`"
+                text_maker += "\n\n[The permanent pin message is here]({})".format(old_pin)
+            update.effective_message.reply_text(text_maker, parse_mode="markdown")
             return ""
         prev_message = args[0]
         if prev_message == "off":
             sql.set_permapin(chat_id, 0)
-            update.effective_message.reply_text(tl(update.effective_message, "The permanent pin has been disabled!"))
+            update.effective_message.reply_text("The permanent pin has been disabled!")
             return
         if "/" in prev_message:
             prev_message = prev_message.split("/")[-1]
     else:
         if update.effective_message.chat.type == "private":
-            update.effective_message.reply_text(tl(update.effective_message, "You can do this command in the group, not in PM"))
+            update.effective_message.reply_text("You can do this command in the group, not in PM")
             return ""
         chat = update.effective_chat
         chat_id = update.effective_chat.id
@@ -292,18 +292,18 @@ def permanent_pin_set(bot: Bot, update: Update, args: List[str]) -> str:
             prev_message = update.effective_message.reply_to_message.message_id
         elif len(args) >= 1 and args[0] == "off":
             sql.set_permapin(chat.id, 0)
-            update.effective_message.reply_text(tl(update.effective_message, "The permanent pin has been disabled!"))
+            update.effective_message.reply_text("The permanent pin has been disabled!")
             return
         else:
             get_permapin = sql.get_permapin(chat_id)
-            text_maker = tl(update.effective_message, "Permanent pin is currently set: `{}`").format(bool(int(get_permapin)))
+            text_maker = "Permanent pin is currently set: `{}`".format(bool(int(get_permapin)))
             if get_permapin:
                 if chat.username:
                     old_pin = "https://t.me/{}/{}".format(chat.username, get_permapin)
                 else:
                     old_pin = "https://t.me/c/{}/{}".format(str(chat.id)[4:], get_permapin)
-                text_maker += (update.effective_message, "\nTo disable the permanent pin: `/permanentpin off`")
-                text_maker += (update.effective_message, "\n\n[The permanent pin message is here]({})").format(old_pin)
+                text_maker += "\nTo disable the permanent pin: `/permanentpin off`"
+                text_maker += "\n\n[The permanent pin message is here]({})".format(old_pin)
             update.effective_message.reply_text(text_maker, parse_mode="markdown")
             return ""
 
@@ -311,7 +311,7 @@ def permanent_pin_set(bot: Bot, update: Update, args: List[str]) -> str:
 
     if prev_message and is_group:
         sql.set_permapin(chat.id, prev_message)
-        update.effective_message.reply_text(update.effective_message, "Permanent pin successfully set!")
+        update.effective_message.reply_text("Permanent pin successfully set!")
         return "<b>{}:</b>" \
                "\n#PERMANENT_PIN" \
                "\n<b>Admin:</b> {}".format(html.escape(chat.title), mention_html(user.id, user.first_name))
@@ -335,7 +335,7 @@ def permanent_pin(bot: Bot, update: Update):
                 old_pin = "https://t.me/{}/{}".format(chat.username, get_permapin)
             else:
                 old_pin = "https://t.me/c/{}/{}".format(str(chat.id)[4:], get_permapin)
-            message.reply_text((update.effective_message, "*Permanent pin error:*\nI can't pin messages here!\nMake sure I am an admin and can pin messages.\n\nPin permanently disabled, [old permanent pin message is here]({})").format(old_pin), parse_mode="markdown")
+            message.reply_text("*Permanent pin error:*\nI can't pin messages here!\nMake sure I am an admin and can pin messages.\n\nPin permanently disabled, [old permanent pin message is here]({})".format(old_pin), parse_mode="markdown")
             return
 
         if to_del:
