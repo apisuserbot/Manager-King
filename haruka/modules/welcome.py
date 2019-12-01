@@ -7,7 +7,7 @@ from telegram import Message, Chat, Update, Bot, User, CallbackQuery, MessageEnt
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.error import BadRequest
 from telegram.ext import MessageHandler, Filters, CommandHandler, run_async, CallbackQueryHandler
-from telegram.utils.helpers import mention_html
+from telegram.utils.helpers import mention_markdown, mention_html, escape_markdown
 
 import haruka.modules.helper_funcs.cas_api as cas
 import haruka.modules.sql.antispam_sql as gbansql
@@ -129,13 +129,13 @@ def new_member(bot: Bot, update: Update):
                                  can_send_media_messages=False,
                                  can_send_other_messages=False,
                                  can_add_web_page_previews=False)
-        msg.reply_text("Warning! This user is CAS Banned. I have muted them to avoid spam. Ban is adviced.")
+        msg.reply_text("⚠️ *Attention!*\n{} has been muted. Reason [CAS Banned](https://combot.org/cas/query?u={})".format(mention_markdown(user.id, user.first_name), user.id), parse_mode="markdown", disable_web_page_preview=True)
         isUserGbanned = gbansql.is_user_gbanned(user.id)
         report = "CAS Banned user detected: <code>{}</code>\nGlobally Banned: {}".format(user.id, isUserGbanned)
         send_to_list(bot, SUDO_USERS + SUPPORT_USERS, report, html=True)
     elif casPrefs and autoban and cas.banchecker(user.id):
         chat.kick_member(user.id)
-        msg.reply_text("CAS banned user detected! User has been automatically banned!")
+        msg.reply_text("⚠️ *Attention!*\n{} has been banned. Reason [CAS Banned](https://combot.org/cas/query?u={})".format(mention_markdown(user.id, user.first_name), user.id), parse_mode="markdown", disable_web_page_preview=True)
         isUserGbanned = gbansql.is_user_gbanned(user.id)
         report = "CAS Banned user detected: <code>{}</code>\nGlobally Banned: {}".format(user.id, isUserGbanned)
         send_to_list(bot, SUDO_USERS + SUPPORT_USERS, report, html=True)
