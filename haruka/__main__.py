@@ -403,7 +403,7 @@ def get_help(bot: Bot, update: Update):
 
         update.effective_message.reply_text("Contact me in PM for help!",
                                             reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="Help",
+                                                [[InlineKeyboardButton(text="Click me for help!",
                                                                        url="t.me/{}?start=help".format(
                                                                            bot.username))]]))
         return

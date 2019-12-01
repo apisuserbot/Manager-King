@@ -14,7 +14,6 @@ import haruka.modules.sql.antispam_sql as gbansql
 import haruka.modules.sql.welcome_sql as sql
 import haruka.modules.sql.users_sql as userssql
 from haruka import dispatcher, OWNER_ID, LOGGER, MESSAGE_DUMP, SUDO_USERS, SUPPORT_USERS
-from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import user_admin, is_user_ban_protected
 from haruka.modules.helper_funcs.extraction import extract_user
 from haruka.modules.helper_funcs.filters import CustomFilters
@@ -120,7 +119,7 @@ def new_member(bot: Bot, update: Update):
     if isAllowed or user.id in SUDO_USERS:
         sql.whitelistChat(str(chat.id))
     else:
-        msg.reply_text("This group is not whitelisted to use the bot, sorry.")
+        msg.reply_text("Thanks for adding me to your group! But this group is not whitelisted to use the bot, sorry.\n\nFollow my news channel. @HitsukiNews")
         bot.leave_chat(int(chat.id))
         return
 
@@ -157,7 +156,7 @@ def new_member(bot: Bot, update: Update):
                     parse_mode=ParseMode.HTML
                 )
                 bot.send_message(chat.id,
-                                 "Thanks for adding me into your group! Don't forgot to checkout the HitaloKun's channel (@AndroidRepo)!")
+                                 "Thanks for adding me into your group! Don't forgot to checkout the HitaloSama's channel (@AndroidRepo)! And follow my news channel @HitsukiNews.")
 
             else:
                 if is_user_gbanned(new_mem.id):
@@ -377,7 +376,7 @@ def left_member(bot: Bot, update: Update):
                     username = "@" + escape(left_mem.username)
                 else:
                     username = mention
-                    
+
                 formatted_text = cust_goodbye.format(first=escape(first_name),
                                                      last=escape(left_mem.last_name or first_name),
                                                      fullname=escape(fullname), username=username, mention=mention,

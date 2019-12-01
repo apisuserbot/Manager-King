@@ -222,7 +222,6 @@ I'm a modular group management bot with a few fun extras! Have a look at the fol
  - /lang: Change bot language
  - /source: Info about my sourcecode
  - /settings:
-   - in PM: Will send you your settings for all supported modules.
    - in a group: Will redirect you to pm, with all that chat's settings.
    {}
    """,

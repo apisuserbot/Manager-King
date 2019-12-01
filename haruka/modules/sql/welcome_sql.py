@@ -6,8 +6,8 @@ from sqlalchemy import Column, String, Boolean, UnicodeText, Integer, BigInteger
 from haruka.modules.helper_funcs.msg_types import Types
 from haruka.modules.sql import SESSION, BASE
 
-DEFAULT_WELCOME = "Hey {first}, how are you?"
-DEFAULT_GOODBYE = "Nice knowing ya!"
+DEFAULT_WELCOME = "Hey *{first}* (*ID:* `{id}`), how are you? Welcome to *{chatname}*!"
+DEFAULT_GOODBYE = "Was a pleasure to meet you!"
 
 
 class Welcome(BASE):
@@ -106,9 +106,9 @@ class WelcomeSecurity(BASE):
     chat_id = Column(String(14), primary_key=True)
     security = Column(Boolean, default=False)
     mute_time = Column(UnicodeText, default="0")
-    custom_text = Column(UnicodeText, default="Klik disini untuk mensuarakan")
+    custom_text = Column(UnicodeText, default="Click here to voice")
 
-    def __init__(self, chat_id, security=False, mute_time="0", custom_text="Klik disini untuk mensuarakan"):
+    def __init__(self, chat_id, security=False, mute_time="0", custom_text="Click here to voice"):
         self.chat_id = str(chat_id)  # ensure string
         self.security = security
         self.mute_time = mute_time
