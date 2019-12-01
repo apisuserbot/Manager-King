@@ -72,7 +72,7 @@ def cuaca(bot, update, args):
 def accuweather(bot, update, args):
     chat_id = update.effective_chat.id
     message = update.effective_message
-    spam = spamfilters(update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
+    spam = (update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
     if spam == True:
         return
     if args == []:
