@@ -4,13 +4,13 @@ import requests
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import run_async
 
-from haruka import dispatcher, API_WEATHER, API_ACCUWEATHER, spamfilters
+from haruka import dispatcher, API_WEATHER, API_ACCUWEATHER
 from haruka.modules.disable import DisableAbleCommandHandler
 
 
 @run_async
 def weather(bot, update, args):
-    spam = spamfilters(update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
+    spam = (update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
     if spam == True:
         return
     location = " ".join(args)
@@ -27,7 +27,6 @@ def weather(bot, update, args):
         lokasi = obs.get_location()
         lokasinya = lokasi.get_name()
         temperatur = cuacanya.get_temperature(unit='celsius')['temp']
-        fc = owm.three_hours_forecast(location)
 
         # Weather symbol
         statusnya = ""
@@ -53,10 +52,8 @@ def weather(bot, update, args):
         statusnya += cuacanya._detailed_status
 
 
-        cuacabsk = besok.get_weather_code()
-
-        update.message.reply_text(tl(update.effective_message, "{} today is {}, around {}°C.\n").format(lokasinya,
-                statusnya, temperatur))
+        update.message.reply_text(update.effective_message, "{} today is {}, around {}°C.\n").format(lokasinya,
+                statusnya, temperatur)
 
     except pyowm.exceptions.api_call_error.APICallError:
         update.effective_message.reply_text(update.effective_message, "Write the location to check the weather")
@@ -69,7 +66,7 @@ def weather(bot, update, args):
 def accuweather(bot, update, args):
     chat_id = update.effective_chat.id
     message = update.effective_message
-    spam = spamfilters(update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
+    spam = (update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
     if spam == True:
         return
     if args == []:
