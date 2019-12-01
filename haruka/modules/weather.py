@@ -9,7 +9,7 @@ from haruka.modules.disable import DisableAbleCommandHandler
 
 
 @run_async
-def weather(bot, update, args):
+def cuaca(bot, update, args):
     spam = (update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
     if spam == True:
         return
@@ -166,7 +166,9 @@ __help__ = """
 
 __mod_name__ = "Weather"
 
-WEATHER_HANDLER = DisableAbleCommandHandler(["weather"], accuweather, pass_args=True)
+CUACA_HANDLER = DisableAbleCommandHandler(["cuaca", "weather"], accuweather, pass_args=True)
+# ACCUWEATHER_HANDLER = DisableAbleCommandHandler("accuweather", accuweather, pass_args=True)
 
 
-dispatcher.add_handler(WEATHER_HANDLER)
+dispatcher.add_handler(CUACA_HANDLER)
+# dispatcher.add_handler(ACCUWEATHER_HANDLER)
