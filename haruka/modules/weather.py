@@ -76,10 +76,10 @@ def accuweather(bot, update, args):
     if spam == True:
         return
     if args == []:
-        return update.effective_message.reply_text(tl(update.effective_message, "Masukan nama lokasinya untuk mengecek cuacanya!"))
+        return update.effective_message.reply_text(update.effective_message, "Masukan nama lokasinya untuk mengecek cuacanya!")
     location = " ".join(args)
     if location.lower() == bot.first_name.lower():
-        update.effective_message.reply_text(tl(update.effective_message, "Saya akan terus mengawasi di saat senang maupun sedih!"))
+        update.effective_message.reply_text(update.effective_message, "Saya akan terus mengawasi di saat senang maupun sedih!")
         bot.send_sticker(update.effective_chat.id, BAN_STICKER)
         return
 
@@ -90,9 +90,9 @@ def accuweather(bot, update, args):
         try:
             data = r.json()[0]
         except:
-            return update.effective_message.reply_text(tl(update.effective_message, "Maaf, lokasi tidak ditemukan 😞"))
+            return update.effective_message.reply_text(update.effective_message, "Maaf, lokasi tidak ditemukan 😞")
         locid = data.get('Key')
-        weatherlang = tl(update.effective_message, "weather_lang")
+        weatherlang = (update.effective_message, "weather_lang")
         urls = "http://api.accuweather.com/currentconditions/v1/{}.json?apikey={}&language={}&details=true&getphotos=true".format(locid, API_ACCUWEATHER, weatherlang)
         rs = requests.get(urls, headers=headers)
         datas = rs.json()[0]
@@ -143,13 +143,13 @@ def accuweather(bot, update, args):
             icweather = ""
 
         cuaca = "*{} {}*\n".format(icweather, datas.get('WeatherText'))
-        cuaca += tl(update.effective_message, "*Suhu:* `{}°C`/`{}°F`\n").format(datas.get('Temperature').get('Metric').get('Value'), datas.get('Temperature').get('Imperial').get('Value'))
-        cuaca += tl(update.effective_message, "*Kelembapan:* `{}`\n").format(datas.get('RelativeHumidity'))
+        cuaca += (update.effective_message, "*Suhu:* `{}°C`/`{}°F`\n").format(datas.get('Temperature').get('Metric').get('Value'), datas.get('Temperature').get('Imperial').get('Value'))
+        cuaca += (update.effective_message, "*Kelembapan:* `{}`\n").format(datas.get('RelativeHumidity'))
         direct = "{}".format(datas.get('Wind').get('Direction').get('English'))
         direct = direct.replace("N", "↑").replace("E", "→").replace("S", "↓").replace("W", "←")
-        cuaca += tl(update.effective_message, "*Angin:* `{} {} km/h` | `{} mi/h`\n").format(direct, datas.get('Wind').get('Speed').get('Metric').get('Value'), datas.get('Wind').get('Speed').get('Imperial').get('Value'))
-        cuaca += tl(update.effective_message, "*Tingkat UV:* `{}`\n").format(datas.get('UVIndexText'))
-        cuaca += tl(update.effective_message, "*Tekanan:* `{}` (`{} mb`)\n").format(datas.get('PressureTendency').get('LocalizedText'), datas.get('Pressure').get('Metric').get('Value'))
+        cuaca += (update.effective_message, "*Angin:* `{} {} km/h` | `{} mi/h`\n").format(direct, datas.get('Wind').get('Speed').get('Metric').get('Value'), datas.get('Wind').get('Speed').get('Imperial').get('Value'))
+        cuaca += (update.effective_message, "*Tingkat UV:* `{}`\n").format(datas.get('UVIndexText'))
+        cuaca += (update.effective_message, "*Tekanan:* `{}` (`{} mb`)\n").format(datas.get('PressureTendency').get('LocalizedText'), datas.get('Pressure').get('Metric').get('Value'))
 
         lok = []
         lok.append(data.get('LocalizedName'))
@@ -157,9 +157,9 @@ def accuweather(bot, update, args):
         for x in reversed(range(len(data.get('SupplementalAdminAreas')))):
             lok.append(data.get('SupplementalAdminAreas')[x].get('LocalizedName'))
         lok.append(data.get('Country').get('LocalizedName'))
-        teks = tl(update.effective_message, "*Cuaca di {} saat ini*\n").format(data.get('LocalizedName'))
+        teks = (update.effective_message, "*Cuaca di {} saat ini*\n").format(data.get('LocalizedName'))
         teks += "{}\n".format(cuaca)
-        teks += tl(update.effective_message, "*Lokasi:* `{}`\n\n").format(", ".join(lok))
+        teks += (update.effective_message, "*Lokasi:* `{}`\n\n").format(", ".join(lok))
 
         # try:
         #     bot.send_photo(chat_id, photo=datas.get('Photos')[0].get('LandscapeLink'), caption=teks, parse_mode="markdown", reply_to_message_id=message.message_id, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="More info", url=datas.get('Link'))]]))
