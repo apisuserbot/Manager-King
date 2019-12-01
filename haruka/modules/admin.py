@@ -376,6 +376,7 @@ __help__ = """
 *Admin only:*
  - /pin: Silently pins the message replied to. Add 'loud','notify' or 'violent' to send a notification to users.
  - /unpin: Unpins the currently pinned message
+ - /permanentpin: Set a permanent pin for supergroup chat, when an admin or telegram channel change pinned message, bot will change pinned message immediatelly
  - /invitelink: Gets the invite link of the group
  - /promote: Promotes a user Reply to the user or use their username.
  - /demote: Demotes a user. Reply to the user or use their username.
