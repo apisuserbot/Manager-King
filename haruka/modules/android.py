@@ -70,7 +70,7 @@ def twrp(bot, update, args):
         update.effective_message.reply_text("No codename provided, write a codename for fetching informations.")
         return
     device = " ".join(args)
-    url = get(f'https://eu.dl.twrp.me/{device}/')
+    url = get(f'https://dl.twrp.me/{device}/')
     if url.status_code == 404:
         reply = f"Couldn't find twrp downloads for {device}!\n"
         return
@@ -90,7 +90,7 @@ def twrp(bot, update, args):
     row = 2 if trs[0].find('a').text.endswith('tar') else 1
     for i in range(row):
         download = trs[i].find('a')
-        dl_link = f"https://eu.dl.twrp.me{download['href']}"
+        dl_link = f"https://dl.twrp.me{download['href']}"
         dl_file = download.text
         size = trs[i].find("span", {"class": "filesize"}).text
         reply += f'[{dl_file}]({dl_link}) - {size}\n'
