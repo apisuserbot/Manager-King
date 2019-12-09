@@ -25,7 +25,7 @@ def show_url(bot, update, args):
 
             feed_message = update.effective_message, "<b>Feed Title:</b> \n{}" \
                            "\n\n<b>Feed Description:</b> \n{}" \
-                           "\n\n<b>Feed Link:</b> \n{}").format(html.escape(feed_title),
+                           "\n\n<b>Feed Link:</b> \n{}".format(html.escape(feed_title),
                                                                feed_description,
                                                                html.escape(feed_link))
 
