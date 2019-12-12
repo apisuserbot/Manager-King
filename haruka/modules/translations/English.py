@@ -179,34 +179,34 @@ HIT = (
 MARKDOWN_HELP = """
 You can use markdown to make your messages more expressive. This is the markdown currently supported:
 
-``code words`` backticks allow you to wrap your words in monospace fonts. Shows as: code words
-`*bold words*` asterixes are used for bold font. Shows as: bold words
-`_italic words_` underscores are used for italics. Shows as: italic words
-`[hyperlink](example.com)` this is used for [hyperlinks](http://example.com/), and will show as such: hyperlink. Make sure not to add any extra spaces between the ] and the ( or it won't be valid markdown.
+<code>`code words`</code> backticks allow you to wrap your words in monospace fonts. Shows as: code words
+<code>*bold words*</code> asterixes are used for bold font. Shows as: bold words
+<code>_italic words_</code> underscores are used for italics. Shows as: italic words
+<code>[hyperlink](example.com)</code> this is used for <a href="hyperlink">http://example.com/</a>, and will show as such: hyperlink. Make sure not to add any extra spaces between the ] and the ( or it won't be valid markdown.
 
 Now, if you wanted to have buttons on your message, you could use this special syntax:
-`[button](buttonurl://example.com)`
+<code>[button](buttonurl://example.com)</code>
 This will create a button named "button" which redirects the user to example.com upon clicking.
 If you would like to add two buttons on the same row, add :same at the end of your link; it'll set it on the same line as the other one. For example:
-`[button](buttonurl://example.com)
+<code>[button](buttonurl://example.com)
 [button 2](buttonurl://example.com:same)
-[button 3](buttonurl://example.com)`
+[button 3](buttonurl://example.com)</code>
 will create two buttons on the same line (buttons 1 and 2), and a last one (button 3) on a second line.
 
 Fillings:
 You can also use certain tags to fill your message with user or chat info; the options are:
-`{first}`: The user's first name.
-`{last}`: The user's last name.
-`{fullname}`: The user's full name.
-`{username}`: The user's username; if none is available, mentions the user.
-`{mention}`: Mentions the user, using their firstname.
-`{id}`: The user's id.
-`{chatname}`: The chat's name.
-`{rules}`: Adds a link to the chat's rules.
-`{preview}`: Enables link previews for this message. Can be useful when using links to Instant View pages.
+<code>{first}</code>: The user's first name.
+<code>{last}</code>: The user's last name.
+<code>{fullname}</code>: The user's full name.
+<code>{username}</code<: The user's username; if none is available, mentions the user.
+<code>{mention}</code>: Mentions the user, using their firstname.
+<code>{id}</code>: The user's id.
+<code>{chatname}</code>: The chat's name.
+<cide>{rules}</code>: Adds a link to the chat's rules.
+<code>{preview}</code>: Enables link previews for this message. Can be useful when using links to Instant View pages.
 
 An example of how to use fillings would be to set your welcome, via:
-`/setwelcome Hey there {first}! Welcome to {chatname}.`
+<code>/setwelcome Hey there {first}! Welcome to {chatname}.</code>
 
 Try these out on notes, filters, welcome messages or even rules!
 """
