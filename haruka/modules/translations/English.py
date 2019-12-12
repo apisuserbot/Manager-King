@@ -198,11 +198,11 @@ You can also use certain tags to fill your message with user or chat info; the o
 <code>{first}</code>: The user's first name.
 <code>{last}</code>: The user's last name.
 <code>{fullname}</code>: The user's full name.
-<code>{username}</code<: The user's username; if none is available, mentions the user.
+<code>{username}</code>: The user's username; if none is available, mentions the user.
 <code>{mention}</code>: Mentions the user, using their firstname.
 <code>{id}</code>: The user's id.
 <code>{chatname}</code>: The chat's name.
-<cide>{rules}</code>: Adds a link to the chat's rules.
+<code>{rules}</code>: Adds a link to the chat's rules.
 <code>{preview}</code>: Enables link previews for this message. Can be useful when using links to Instant View pages.
 
 An example of how to use fillings would be to set your welcome, via:
