@@ -177,25 +177,38 @@ HIT = (
 )
 
 MARKDOWN_HELP = """
-Markdown is a very powerful formatting tool supported by telegram. Haruka Aya has some enhancements, to make sure that \
-saved messages are correctly parsed, and to allow you to create buttons.
+You can use markdown to make your messages more expressive. This is the markdown currently supported:
 
-- <code>_italic_</code>: wrapping text with '_' will produce italic text
-- <code>*bold*</code>: wrapping text with '*' will produce bold text
-- <code>`code`</code>: wrapping text with '`' will produce monospaced text, also known as 'code'
-- <code>[sometext](someURL)</code>: this will create a link - the message will just show <code>sometext</code>, \
-and tapping on it will open the page at <code>someURL</code>.
-EG: <code>[test](example.com)</code>
+``code words`` backticks allow you to wrap your words in monospace fonts. Shows as: code words
+`*bold words*` asterixes are used for bold font. Shows as: bold words
+`_italic words_` underscores are used for italics. Shows as: italic words
+`[hyperlink](example.com)` this is used for [hyperlinks](http://example.com/), and will show as such: hyperlink. Make sure not to add any extra spaces between the ] and the ( or it won't be valid markdown.
 
-- <code>[buttontext](buttonurl:someURL)</code>: this is a special enhancement to allow users to have telegram \
-buttons in their markdown. <code>buttontext</code> will be what is displayed on the button, and <code>someurl</code> \
-will be the url which is opened.
-EG: <code>[This is a button](buttonurl:example.com)</code>
+Now, if you wanted to have buttons on your message, you could use this special syntax:
+`[button](buttonurl://example.com)`
+This will create a button named "button" which redirects the user to example.com upon clicking.
+If you would like to add two buttons on the same row, add :same at the end of your link; it'll set it on the same line as the other one. For example:
+`[button](buttonurl://example.com)
+[button 2](buttonurl://example.com:same)
+[button 3](buttonurl://example.com)`
+will create two buttons on the same line (buttons 1 and 2), and a last one (button 3) on a second line.
 
-If you want multiple buttons on the same line, use :same, as such:
-<code>[one](buttonurl://example.com)
-[two](buttonurl://google.com:same)</code>
-This will create two buttons on a single line, instead of one button per line.
+Fillings:
+You can also use certain tags to fill your message with user or chat info; the options are:
+`{first}`: The user's first name.
+`{last}`: The user's last name.
+`{fullname}`: The user's full name.
+`{username}`: The user's username; if none is available, mentions the user.
+`{mention}`: Mentions the user, using their firstname.
+`{id}`: The user's id.
+`{chatname}`: The chat's name.
+`{rules}`: Adds a link to the chat's rules.
+`{preview}`: Enables link previews for this message. Can be useful when using links to Instant View pages.
+
+An example of how to use fillings would be to set your welcome, via:
+`/setwelcome Hey there {first}! Welcome to {chatname}.`
+
+Try these out on notes, filters, welcome messages or even rules!
 """
 
 EnglishStrings = {
