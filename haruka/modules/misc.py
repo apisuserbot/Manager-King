@@ -592,11 +592,6 @@ __help__ = """
  - /insults: reply a random string from an array of replies.
  - /slap: slap a user, or get slapped if not a reply.
  - /decide: Randomly answers yes/no/maybe.
-*Sudo only:*
- - /snipe <chatid> <string>: Make me send a message to a specific chat.
- - /broadcasts: Sends a broadcast to all groups using the bot.
- - /chatlist: Send complete list of all groups using the bot.
- - /gbanlist: Send complete list with all users who are banned globally.
 """
 
 __mod_name__ = "Misc"
