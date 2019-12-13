@@ -227,10 +227,10 @@ el caso de los datos mencionados anteriormente.""",
 " (Creator)": " (Creador)",
 
 #AFK
-"{} is now AFK!": "Agora {} está ausente!",
-"{} is no longer AFK!": "{} Não está ausente!",
-"{} is AFK!": "{} está ausente!",
-"{} is AFK! says its because of: \n{}": "{} está ausente! Dice que es porque: \n{}",
+"{} is now AFK!": "Agora {} está AFK!",
+"{} is no longer AFK!": "{} Não está AFK!",
+"{} is AFK!": "{} está AFK!",
+"{} is AFK! says its because of: \n{}": "{} está AFK! Disse que é por causa: \n{}",
 
 #Antiflood
 "I like to leave the flooding to natural disasters. But you, you were just a disappointment. Get out.":
@@ -257,17 +257,17 @@ el caso de los datos mencionados anteriormente.""",
 "Give me some arguments to choose a setting! on/off, yes/no!\n\nYour current setting is: {}\nWhen True, any gbans that happen will also happen in your group. When False, they won't, leaving you at the possible mercy of spammers.":
     "Dame algún comando para establecer la configuración! on/off, yes/no!\n\nTu configuración actual es: {}\nCuando sea True, cualquier Ban Global que ocurra tambien ocurrirá en tu grupo. Cuando sea False, los Ban Globales no afectarán en tu grupo, dejandolo a merced de posibles spammers.",
 
-"Globally banned: <b>{}</b>": "Baneado globalmente: <b>{}</b>",
+"Globally banned: <b>{}</b>": "Banido globalmente: <b>{}</b>",
 "\nGlobally muted: <b>{}</b>": "\nSilenciado globalmente: <b>{}</b>",
-"\nReason: {}": "\nRazón: {}",
+"\nReason: {}": "\nMotivo: {}",
 
 #Bans
     "I really wish I could ban admins...": "eu gostaria de poder banir administradores porem...",
-    "I'm not gonna BAN myself, are you crazy?": "Não vou banir eu mesmo, estás loco?",
+    "I'm not gonna BAN myself, are you crazy?": "Não vou banir eu mesmo, está ficando loco?",
     "Banned!": "Banido!",
-    "Well damn, I can't ban that user.": "Shit, não banir este usuario!.",
+    "Well damn, I can't ban that user.": "Merda, não consigo banir este usuário!.",
     "You haven't specified a time to ban this user for!": 
-        "No foi especificado o tempo para banir este usuario!",
+        "No foi especificado o tempo para deixar este usuários banido este usuario!",
     "Banned! User will be banned for {}.": "Banido! O usuario foi banido por {}.",
 
 #Blacklist
@@ -441,7 +441,11 @@ el caso de los datos mencionados anteriormente.""",
         "Connections": "Conexões",
         "Bios and Abouts": "Biografia",
         "Warnings": "Advertências",
-        "Welcomes/Goodbyes": "Boas vindas/Despedidas",
+        "Greetings": "saudações",
+        "Image Lookup": "Pesquisa de imagens",
+        "Direct Links": "Links diretos",
+        "Dos and Cats": "Cachorros e Gatos",
+        "Translator": "Tradutor",
 
 #Some main stuff
 "Here is the help for the *{}* module:\n{}": "Aqui está a ajuda para o módulo *{}*:\n{}",
@@ -463,7 +467,7 @@ Si te gusta usarme, y/o me quieres ayudar a sobrevivir a las tempestades, presio
     "send-help": """Olá! Meu nome é *{}*.
 Eu sou um bot para administração de grupos modular com alguns extras divertidos! Confira o seguinte para ter uma idéia de algumas das coisas em que posso ajudá-lo.
 
-Principais comandos disponíveis:
+Principais comandos:
  - /start: inicia o bot
  - /help: te envia uma mensagem privada com as informações.
  - /help <module name>: te envia uma mensagem privada com as informações deste comando.
