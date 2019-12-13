@@ -1,5 +1,6 @@
 from haruka.modules.sql.translation import prev_locale
 from haruka.modules.translations.English import EnglishStrings
+from haruka.modules.translations.PortugueseBr import PortugueseBrStrings
 
 
 def tld(chat_id, t, show_none=True):
@@ -7,16 +8,8 @@ def tld(chat_id, t, show_none=True):
     print(chat_id, t)
     if LANGUAGE:
         LOCALE = LANGUAGE.locale_name
-        if LOCALE in ('ru') and t in RussianStrings:
-            return RussianStrings[t]
-        elif LOCALE in ('ua') and t in UkrainianStrings:
-            return UkrainianStrings[t]
-        elif LOCALE in ('es') and t in SpanishStrings:
-            return SpanishStrings[t]
-        elif LOCALE in ('tr') and t in TurkishStrings:
-            return TurkishStrings[t]
-        elif LOCALE in ('id') and t in IndonesianStrings:
-            return IndonesianStrings[t]
+        if LOCALE in ('pt-br') and t in PortugueseBrStrings:
+            return PortugueseBrStrings[t]
         else:
             if t in EnglishStrings:
                 return EnglishStrings[t]
@@ -39,16 +32,8 @@ def tld_help(chat_id, t):
 
         print("Test2", t)
 
-        if LOCALE in ('ru') and t in RussianStrings:
-            return RussianStrings[t]
-        elif LOCALE in ('ua') and t in UkrainianStrings:
-            return UkrainianStrings[t]
-        elif LOCALE in ('es') and t in SpanishStrings:
-            return SpanishStrings[t]
-        elif LOCALE in ('tr') and t in TurkishStrings:
-            return TurkishStrings[t]
-        elif LOCALE in ('id') and t in IndonesianStrings:
-            return IndonesianStrings[t]
+        if LOCALE in ('pt-br') and t in PortugueseBrStrings:
+            return PortugueseBrStrings[t]
         else:
             return False
     else:
