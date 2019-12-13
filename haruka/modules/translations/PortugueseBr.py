@@ -1,114 +1,114 @@
 RUN_STRINGS = (
-    "¿A dónde crees que vas?",
-    "Eh? qué? ¿Se han ido?",
-    "ZZzzZZzz... Eh? Qué? oh, otra vez, no importa.",
-    "Vuelve aquí!",
-    "No tan rápido...",
-    "Cuidado con la pared!",
-    "No me dejes sola con ellos!!",
-    "Si corres, mueres.",
-    "Te jodes, estoy en todas partes",
-    "Te vas a arrepentir de eso...",
-    "Tambien puedes probar con /kickme, Creo que es divertido.",
-    "Vete a quejarte a otro lado, no le importa a nadie aquí.",
-    "Puedes correr, pero no puedes esconderte.",
-    "¿Es todo lo que tienes?",
-    "Estoy detras de ti...",
-    "Tienes compañia!",
-    "Podemos hacer esto por las buenas o por las malas.",
-    "No lo has entendido, no?",
-    "Si eso, mejor corre.",
-    "Por favor, recuerdame lo mucho que me importa.",
-    "Yo correría más rápido si fuese tú.",
-    "Ese es definitivamente el androide que estamos buscando.",
-    "Que la suerte esté de tu parte.",
-    "Famosas últimas palabras.",
-    "Y desaparecieron para siempre, para nunca volver a ser vistos.",
-    "\"Oh, mírame! Qué guay soy, puedo escaparme de un bot!\" - esta persona",
-    "Si, si, escribe /kickme a ver.",
-    "Toma, toma este anillo y dirígete a Mordor mientras estás en ello.",
-    "Las leyendas lo tienen, aún están funcionando...",
-    "A diferencia de Harry Potter, tus padres no pueden protegerte de mí.",
-    "El miedo lleva a la ira. La ira lleva al odio. El odio conduce al sufrimiento. Si sigues corriendo con miedo, podrías "
-    "ser el próximo Vader.",
-    "Después de muchos cálculos, he llegado a la conclusión de que mi interés en tus mierdas es 0.",
-    "Las leyendas lo cuentan, aun siguen funcionando.",
-    "Sigue así, no estoy segura de que te queramos aquí de todos modos.",
-    "Eres un mag- Oh. Espera. No eres Harry, prosigue.",
-    "NO SE CORRE EN LOS PASILLOS",
+    "Para onde você pensa que está indo?",
+    "Hein? o que? Foram embora?",
+    "ZZzzZZzz... Eh? O que? Ohh, novamente, isso não importa.",
+    "Volte aqui!",
+    "Não tão rápido...",
+    "Cuidado com a parede!",
+    "Não me deixe sozinho com eles!",
+    "Se você correr, você morre.",
+    "Você me fode, eu estou em todo lugar",
+    "Você vai se arrepender disso ...",
+    "Você também pode tentar /kickme, acho divertido.",
+    "Vá reclamar em outro lugar, ninguém se importa aqui.",
+    "Você pode correr, mas não pode se esconder.",
+    "É tudo o que você tem?",
+    "Estou atras de você...",
+    "Você tem companhia!",
+    "Podemos fazer isso por bem ou mal.",
+    "Você não entendeu, certo?",
+    "Se isso, melhor correr.",
+    "Se correr o bicho pega se ficar o bicho come.",
+    "Eu correria mais rápido se fosse você.",
+    "Esse é definitivamente o androide que estamos procurando.",
+    "Que a sorte esteja do seu lado.",
+    "Famosas últimas palavras.",
+    "E eles desapareceram para sempre, para nunca mais serem vistos.",
+    "\"Oh olha! Como sou legal, posso escapar de um bot!\" - essa pessoa",
+    "Sim, sim, escreva /kickme para ver.",
+    "Pegue, pegue este anel e converse com Mordor enquanto estiver com ele.",
+    "As lendas têm, eles ainda estão trabalhando...",
+    "Ao contrário de Harry Potter, seus pais não podem se proteger de mim.",
+    "O medo leva à raiva. A raiva leva ao ódio. O ódio leva ao sofrimento. Se você continuar correndo com medo, poderá "
+    "Seja o próximo Vader.",
+    "Após muitos cálculos, concluí que meu interesse pelas suas merdas é 0.",
+    "Lendas são contadas, elas ainda funcionam.",
+    "Continue assim, não tenho certeza se queremos você aqui de qualquer maneira.",
+    "Você é um mag- Oh. Espera Você não é o Harry, continue.",
+    "NÃO FUNCIONA NOS CORREDORES",
     "Hasta la vista, baby.",
-    "Who let the dogs out?",
-    "Es gracioso porque a nadie le importa.",
-    "Ah, qué desperdicio. Este me gustaba.",
-    "Frankly, cariño, Me importa una mierda.",
-    "Mi batido trae a todos los niños al patio ... Así que corre más rápido!",
-    "No puedes soportar la verdad!",
-    "Hace mucho tiempo, en una galaxia muy lejana ... A alguien le habría importado eso. Aunque ya no.",
-    "Hey, míralos! Se están escapando del inevitable ban... Qué monos.",
-    "Han dispara primero. Yo también.",
-    "¿De que te escapas?¿De un conejo blanco?",
-    "Como diria El Doctor...Corre!",
+    "Quem deixou os cães saírem?",
+    "É engraçado porque ninguém se importa.",
+    "Ah, que desperdício. Eu gostei desse.",
+    "Francamente, querida, eu não dou a mínima.",
+    "Meu milk-shake traz todas as crianças para o parquinho... Então corra mais rápido!",
+    "Você não suporta a verdade!",
+    "Há muito tempo, em uma galáxia distante... Alguém teria se importado com isso. Embora não seja mais.",
+    "Ei, olhe para eles! Eles estão escapando do ban inevitável... Que animais.",
+    "Han atira primeiro. Eu também.",
+    "Do que você está fugindo, de um coelho branco?",
+    "Como diria o Doutor... Corre!",
 )
 
 SLAP_TEMPLATES = (
-    "{user1} {hits} a {user2} con {item}.",
-    "{user1} {hits} a {user2} en la cara con {item}.",
-    "{user1} {hits} a {user2} en el pecho con {item}.",
+    "{user1} {hits} {user2} com {item}.",
+    "{user1} {hits} {user2} na cara com {item}.",
+    "{user1} {hits} {user2} no peito com {item}.",
     "{user1} {throws} {item} a {user2}.",
-    "{user1} {throws} a la cara {item} a {user2} .",
-    "{user1} lanza a la cabeza {item} a {user2}.",
-    "{user1} empieza a abofetear a {user2} con {item}.",
-    "{user1} derriba a {user2} y repetidas veces le {hits} con {item}.",
-    "{user1} coge {item} y {hits} a {user2}.",
-    "{user1} ata a {user2} a una silla y {throws} {item}.",
-    "{user1} le ha dado un amistoso empujón a {user2} para que aprenda a nadar en lava."
+    "{user1} {throws} {item} na cara do {user2} .",
+    "{user1} joga na cabeça a {item} no {user2}.",
+    "{user1} pensa em bater no {user2} com {item}.",
+    "{user1} derruba {user2} e repetidamente {hits} com {item}.",
+    "{user1} pega {item} e {hits} no {user2}.",
+    "{user1} amarra {user2} em uma cadeira e {throws} {item}.",
+    "{user1} deu um empurrão amigável no {user2} para que ele aprenda a nadar na lava"
 )
 
 ITEMS = (
-    "una sartén de metal",
-    "una trucha",
-    "un bate de béisbol",
-    "un bate de cricket",
-    "un bastón de madera",
-    "una uña",
-    "una impresora",
-    "una pala",
-    "un proyector",
-    "un libro de física",
-    "una tostadora",
-    "un retrato del Fary",
-    "una televisión",
-    "un camión de 5 toneladas",
-    "un tubo lleno de heces",
-    "un libro",
-    "un portátil",
-    "una tortuga muerta",
-    "un saco de piedras",
-    "un calzoncillo usado",
-    "un pollo de goma",
-    "un consolador gigante",
+    "uma panela de metal",
+    "uma truta",
+    "um taco de beisebol",
+    "um taco de críquete",
+    "uma bengala de madeira",
+    "uma unha",
+    "um Nokia 3310",
+    "uma impressora",
+    "um projetor",
+    "um livro de física",
+    "uma torradeira",
+    "um Play Station 2 Fat",
+    "uma televisão",
+    "um caminhão de 5 toneladas",
+    "um tubo cheio de fezes",
+    "um livro",
+    "um Xbox",
+    "uma tartaruga morta",
+    "um saco de pedras",
+    "uma cueca usada",
+    "uma galinha de borracha",
+    "um vibrador gigante",
     "un extintor",
-    "un trozo de mierda petrificado",
-    "una batidora",
-    "un papel en llamas",
-    "un trozo de carne",
-    "un oso",
-    "una vaca",
+    "um pedaço de merda petrificada",
+    "um liquidificador",
+    "um papel queimado",
+    "um pedaço de carne",
+    "um osso",
+    "uma vaca",
 )
 
 THROW = (
-    "le tira",
-    "le lanza",
-    "le arroja",
-    "le tira",
+    "joga",
+    "arremessar",
+    "mandris",
+    "arremessa",
 )
 
 HIT = (
-    "golpea",
-    "abofetea",
-    "atiza",
-    "casca",
-    "sacude",
+    "soca",
+    "bate",
+    "tapas",
+    "cheira",
+    "golpes",
 )
 
 MARKDOWN_HELP = """
@@ -423,29 +423,29 @@ el caso de los datos mencionados anteriormente.""",
     #Module names
         "Admin": "Administrador",
         "AFK": "Ausente (AFK)",
-        "AntiFlood": "Antiflood",
-        "Bans": "Bans",
+        "AntiFlood": "Anti-Flood",
+        "Bans": "Banimentos",
         "Word Blacklists": "Lista negra",
         "Filters": "Filtros",
-        "Command disabling": "Desactivar comandos",
-        "Antispam security": "Seguridad antispam",
-        "Locks": "Bloqueos",
-        "Log Channels": "Registro de canales",
-        "Misc": "Misceláncea",
-        "Purges": "Purgas",
-        "Muting & Restricting": "Silenciar y Restringir",
+        "Command disabling": "Desativar comandos",
+        "Antispam security": "Segurança Anti-Spam",
+        "Locks": "Bloqueios",
+        "Log Channels": "Canais de registro",
+        "Misc": "Diversos",
+        "Purges": "Expurgor",
+        "Muting & Restricting": "Silenciar e restringir",
         "Notes": "Notas",
         "Reporting": "Reportar",
         "RSS Feed": "Feed RSS",
-        "Rules": "Reglas",
-        "Connections": "Conexiones",
-        "Bios and Abouts": "Biografía",
-        "Warnings": "Advertencias",
-        "Welcomes/Goodbyes": "Bienvenidas/Despedidas",
+        "Rules": "Regras",
+        "Connections": "Conexões",
+        "Bios and Abouts": "Biografia",
+        "Warnings": "Advertências",
+        "Welcomes/Goodbyes": "Boas vindas/Despedidas",
 
 #Some main stuff
-"Here is the help for the *{}* module:\n{}": "Aquí está la ayuda para el módulo de *{}*:\n{}",
-"Back": "Atrás",
+"Here is the help for the *{}* module:\n{}": "Aqui está a ajuda para o módulo *{}*:\n{}",
+"Back": "Voltar",
 
 "send-start": """Hola {}, me llamo {}! Si tienes alguna pregunta sobre como usarme, lee /help - y después ve a @NotAvaibleYet.
 
@@ -460,23 +460,21 @@ o propuestas defunciones que puedas tener :)
 Si te gusta usarme, y/o me quieres ayudar a sobrevivir a las tempestades, presiona /donate para ayudar a pagar/actualizar mi VPS!
 """,
 
-    "send-help": """Hola! Mi nombre es *{}*.
-Soy un bot de gestión de grupos modular con algunos extras divertidos! Echa un vistazo a lo siguiente para tener una idea de algunas de las cosas en las que puedo ayudarte.
+    "send-help": """Olá! Meu nome é *{}*.
+Eu sou um bot para administração de grupos modular com alguns extras divertidos! Confira o seguinte para ter uma idéia de algumas das coisas em que posso ajudá-lo.
 
-Comandos principales disponibles:
- - /start: inicia el bot
- - /help: te envia un mensaje privado con la información.
- - /help <module name>: te envía un mensaje privado con la información de este comando.
- - /donate: información sobre como donar!
- - /lang: Cambia el idioma del bot
+Principais comandos disponíveis:
+ - /start: inicia o bot
+ - /help: te envia uma mensagem privada com as informações.
+ - /help <module name>: te envia uma mensagem privada com as informações deste comando.
+ - /lang: altera o idioma do bot
  - /settings:
-   - en mensaje privado: te enviará la configuración de todos los módulos disponibles.
-   - en un grupo: te redirecciona a un mensaje privado, con toda la configuración del grupo.
+   - em mensagem privada: enviará a configuração de todos os módulos disponíveis.
    {}
    """,
 
-    "send-group-settings": """Hola! Hay algunas configuraciones disponibles para *{}* - entra y selecciona aquello en lo que
-estés interesado.""",
+    "send-group-settings": """Oi! Existem algumas configurações disponíveis para *{}* - entre e selecione o que
+você tem interesse""",
 
 #Misc
 "RUNS-K": RUN_STRINGS,
@@ -500,9 +498,9 @@ el caso de los datos mencionados anteriormente.""",
 
 #Help modules
 "Admin_help": """
- - /adminlist | /admins: lista de los administradores de este chat
+ - /adminlist | /admins: lista os administradores de este chat
 
-*Solo administradores:*
+*Apenas administradores*
  - /pin: Ancla silenciosamente el mensaje respondido: agrega 'loud' o 'notify' para notificar a los usuarios.
  - /unpin: Desancla en mensaje anclado
  - /invitelink: Genera el link de invitación al grupo
@@ -511,10 +509,10 @@ el caso de los datos mencionados anteriormente.""",
 """,
 
 "AFK_help": """
- - /afk <motivo>: Te marca como ausente.
- - brb <motivo>: Hace lo mismo que el comando AFK pero sin ser un comando.
+ - /afk <motivo>: isso marca você como ausente.
+ - brb <motivo>: Faz o mesmo que o comando AFK, mas sem ser um comando.
 
-Quando estás ausente (AFK), qualquer menção será respondida com uma mensage que diz que no estás disponível.
+Quando você estiver ausente (AFK), qualquer menção será respondida com uma mensagem informando que você não está disponível.
 """,
 
 "AntiFlood_help": """
