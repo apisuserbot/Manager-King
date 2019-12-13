@@ -133,7 +133,7 @@ Si quieres poner varios botones en la misma línea, usa :same, como aquí:
 Esto creará dos botones en la misma línea en vez de uno en cada línea.
 """
 
-PortugueseStrings = {
+PortugueseBrStrings = {
 
 #Connections
     "Disabled connections to this chat for users": "Conexiones deshabilitadas en este chat para los usuarios",
