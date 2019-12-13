@@ -444,8 +444,10 @@ el caso de los datos mencionados anteriormente.""",
         "Greetings": "saudações",
         "Image Lookup": "Pesquisa de imagens",
         "Direct Links": "Links diretos",
-        "Dos and Cats": "Cachorros e Gatos",
+        "Dogs and Cats": "Cachorros e Gatos",
         "Translator": "Tradutor",
+        "Domain Blacklists": "Lista negra de domínios",
+        "Federation": "Federações",
 
 #Some main stuff
 "Here is the help for the *{}* module:\n{}": "Aqui está a ajuda para o módulo *{}*:\n{}",
@@ -520,25 +522,25 @@ Quando você estiver ausente (AFK), qualquer menção será respondida com uma m
 """,
 
 "AntiFlood_help": """
- - /flood: Te muetra el control antiflood actual.
+ - /flood: te mostra as atuais configurações do controle anti-flood.
 
-*Solo administradores:*
- - /setflood <int/'no'/'off'>: Activa o desactiva el control de flood
+*Apenas administradores:*
+ - /setflood <int/'no'/'off'>: ativa e desativa o controle anti-flood
 """,
 
 "Antispam security_help": """
-*Solo administradores:*
- - /antispam <on/off/yes/no>: Deshabilitará la seguridad antispam en grupo o te dará su configuración actual.
+*Apenas administradores:*
+ - /antispam <on/off/yes/no>: desative ou ative a segurança antispam do grupo ou ele fornecerá suas configurações atuais.
 
-Los propietarios del bot suelen utilizar el antispam para prohibir a los spammers en todos los grupos. Esto ayuda a protegerte \
-a ti y a tus grupos mediante la eliminación de los spammers lo más rápido posible. Se pueden desactivar en tu grupo escribiendo  \
+Os proprietários do bot costumam usar antispam para proibir spammers em todos os grupos. Isso ajuda a manter seu grupo seguro. \
+eliminando spammers o mais rápido possível. O Anti-Spam pode ser desativado no seu grupo digitando  \
 /antispam
 """,
 
 "Bans_help": """
- - /kickme: Expulsa al usuario que escribe este comando
+ - /kickme: remove a pessoa que usa o comando
 
-*Solo administradores:*
+*Apenas administradores:*
  - /ban <userhandle>: banea a un usuario. (via nombre de usuario, o respondiendo a un mensaje suyo)
  - /tban <userhandle> x(m/h/d): banea a un usuario durante x tiempo. (via nombre de usuario, o respondiendo a un mensaje suyo). m = minutos, h = horas, d = días.
  - /unban <userhandle>: desbanea a un usuario. (via nombre de usuario, o respondiendo a un mensaje suyo)
