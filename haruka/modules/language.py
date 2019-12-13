@@ -41,7 +41,7 @@ def locale_button(bot, update):
     chat = update.effective_chat
     user = update.effective_user  # type: optional[User]
     query = update.callback_query
-    lang_match = re.findall(r"en", query.data)
+    lang_match = re.findall(r"en|pt-br", query.data)
     if lang_match:
         if lang_match[0]:
             switch_to_locale(chat.id, lang_match[0])
