@@ -461,20 +461,7 @@ o caso dos dados mencionados acima.""",
 
 #Some main stuff
 "Here is the help for the *{}* module:\n{}": "Aqui está a ajuda para o módulo *{}*:\n{}",
-"Back": "Voltar",
-
-"send-start": """Hola {}, me llamo {}! Si tienes alguna pregunta sobre como usarme, lee /help - y después ve a @NotAvaibleYet.
-
-Soy un bot para administrar grupos mantenido por [esta maravillosa persona](tg://user?id={}). Soy parecida a [Marie](https://github.com/PaulSonOfLars/tgbot) 
-Estoy hecha python3, usando la librería de \
-python-telegram-bot, y soy totalmente de codigo abierto - puedes ver lo que me hace funcionar \
-[aquí](https://gitlab.com/MrYacha/pYanaBot-2.0)!
-
-Siéntete libre para enviar propuestas en GitHub, o contactar con mi creador en mi grupo de soporte, @YanaBotGroup, con los bugs, preguntas \
-o propuestas defunciones que puedas tener :)
-
-Si te gusta usarme, y/o me quieres ayudar a sobrevivir a las tempestades, presiona /donate para ayudar a pagar/actualizar mi VPS!
-""",
+"Back": "⬅️ Voltar",
 
     "send-help": """Olá! Meu nome é *{}*.
 Eu sou um bot para administração de grupos modular com alguns extras divertidos! Confira o seguinte para ter uma idéia de algumas das coisas em que posso ajudá-lo.
@@ -490,7 +477,7 @@ Principais comandos:
    """,
 
     "send-group-settings": """Oi! Existem algumas configurações disponíveis para *{}* - entre e selecione o que
-você tem interesse""",
+você tiver interesse""",
 
 #Misc
 "RUNS-K": RUN_STRINGS,
@@ -514,14 +501,15 @@ el caso de los datos mencionados anteriormente.""",
 
 #Help modules
 "Admin_help": """
- - /adminlist | /admins: lista os administradores de este chat
+ - /adminlist | /admins: Lista os administradores do grupo
 
-*Apenas administradores*
- - /pin: Ancla silenciosamente el mensaje respondido: agrega 'loud' o 'notify' para notificar a los usuarios.
- - /unpin: Desancla en mensaje anclado
- - /invitelink: Genera el link de invitación al grupo
- - /promote: Asciende a administrador al usuario al que se le responde
- - /demote: Quita el administrador al usuario al que se le responde
+*Apenas administradores:*
+ - /pin: Afixa silenciosamente a mensagem respondida. Adicione 'loud', 'notify' ou 'violent' para enviar uma notificação aos usuários.
+ - /unpin: Desafixa a mensagem atualmente afixada
+ - /permanentpin: Defina um PIN permanente para um supergrupo. Quando um canal de administrador ou Telegram altera a mensagem fixada, o bot altera a mensagem fixada imediatamente
+ - /invitelink: Obtém o link de convite do grupo
+ - /promote: Promove um usuário. Responda ao usuário ou use seu nome de usuário.
+ - /demote: Rebaixa um usuário. Responda ao usuário ou use seu nome de usuário.
 """,
 
 "AFK_help": """
@@ -530,6 +518,60 @@ el caso de los datos mencionados anteriormente.""",
 
 Quando você estiver ausente (AFK), qualquer menção será respondida com uma mensagem informando que você não está disponível.
 """,
+
+"Translator_help": """
+Este módulo usa o Google Tradutor para fazer as traduções.
+
+ - /tr <language code>: como resposta a uma mensagem longa.
+"""
+
+"Federation_help": """
+Ah, gerenciamento de grupo. Tudo é divertido, até que os spammers comecem a entrar no seu grupo e você precise bloqueá-los. Então você precisa começar a banir mais e mais, e dói.
+Mas então você tem muitos grupos e não deseja que esses spammers estejam em um de seus grupos - como você pode lidar? Você precisa bloqueá-los manualmente em todos os seus grupos?
+
+Já não! Com as Federações, você pode banir uma pessoa em todos os outros grupos que estão na federação.
+Você pode até designar administradores para sua federação, para que seu administrador confiável possa banir pessoa de todos os chats que você deseja proteger.
+
+Ainda na fase experimental, fazer federações só pode ser feito pelo meu criador
+
+*Comandos:*
+ - /newfed <nome da fed>: crie uma nova Federação com o nome fornecido. Os usuários só podem ter uma federação. Este método também pode ser usado para renomear a Federação. (máx. 64 caracteres)
+ - /delfed: exclua sua Federação e qualquer informação relacionada a ela. Não removerá usuários banidos.
+ - /fedinfo <FedID>: informações sobre a Federação especificada.
+ - /joinfed <FedID>: coloque seu grupo na Federação. Somente os proprietários de grupos podem fazer isso. Todo grupo pode estar apenas em uma federação.
+ - /leavefed <FedID>: saia da Federação dada. Somente os proprietários de grupos podem fazer isso.
+ - /fpromote <user>: promova usuários na federação. Somente proprietário da Fed.
+ - /fdemote <user>: rebaixa o usuário da federação para um usuário normal.  Somente proprietário da Fed.
+ - /fban <user>: bani usuários da federação em que o grupo faz parte, apenas fedadmin tem controle.
+ - /unfban <user>: desbani o usuário da federação que o grupo faz parte.
+ - /setfrules: organiza as regras da Federação.
+ - /frules: veja as regras da federação
+ - /chatfed: veja a Federação no chat atual.
+ - /fedadmins: mostrar administradores da federação.
+ - /fbanlist: exibe todos os usuários fbanidos na federação no momento.
+ - /fedchats: obtenha todos os grupos conectados na federação.
+ - /importfbans: responda ao arquivo de mensagens de backup da federação para importar a lista de banidos para a federação.
+"""
+
+"Memes ant etc._help": """
+*Alguns comandos de memes, descubra tudo sozinho!*
+- /owo: OWO o texto
+- /stretch: ESTICA o texto
+- /vapor: torne o texto em vapor
+- /hitler: Cite uma mensagem e digite este comando para criar uma legenda para hitler
+- /mock: Faz o mesmo que /hitler, mas com o spongemock no lugar.
+- /kim: Faz o mesmo que /hitler, mas com Kim Jong Un (ah não por favor não bombardeie minha casa)
+- /pidor: 4pda memes
+- /zalgofy: Responde uma mensagem para tornar ela um g̫̞l̼̦i̎͡tͫ͢c̘ͭh̛̗
+- /deepfry: Para quando você está com fome de memes
+- /shout <keyword>: Escreva qualquer coisa que você queira gritar alto
+- /dllm: Alguns memes chineses
+
+*Emojis:*
+- /clapmoji
+- /bmoji
+- /copypasta
+"""
 
 "Android_help": """
 *Aqui você terá vários comandos úteis para usuários Android!*
@@ -678,6 +720,20 @@ Isso permite que você desabilite alguns comandos usados ​​com frequência, 
  - /disable <nome do cmd>: desativa esse comando
  - /listcmds: lista todos os possíveis comandos alternáveis
 """,
+
+"Dogs and Cats_help": """
+*Um módulo para amantes de cães e gatos!*
+
+*Comandos de gatos:*
+ - /dog: Envia fotos de cachorros fofos
+ - /doghd: Envia imagens de cachorros fofos em alta definição
+ - /dogif: Envia gifs de cachorros fofos
+
+*Comandos de cães :*
+ - /cat: Envia fotos de gatinhos fofos
+ - /cathd: Envia imagens de gatinhos fotos em alta definição
+ - /catgif: Envia gifs de gatinhos fotos
+"""
 
 "Locks_help": """
 Os adesivos te incomodam? Ou deseja evitar que as pessoas compartilhem links? Ou fotos? Você está no lugar certo!
