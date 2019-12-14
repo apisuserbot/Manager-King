@@ -183,7 +183,9 @@ PortugueseBrStrings = {
     "Yes.": "Sim",
     "No.": "Não",
     "Maybe.": "Talvez",
-
+    
+    "Sticker kanged successfully! \nPack can be found [here](t.me/addstickers/{packname}": Sticker kangado com sucesso! \nPacote pode ser achado [aqui](t.me/addstickers/{packname})",
+    
     "Please reply to a sticker to get its ID.": "Por favor responda a um stickerer para obeter o seu ID.",
     "Please reply to a sticker for me to upload its PNG.": "Por favor, responda a um sticker para que eu possa upar seu PNG .",
 

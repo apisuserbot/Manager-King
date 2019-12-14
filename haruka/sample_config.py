@@ -23,8 +23,6 @@ class Config(object):
     URL = None
 
     # Some API is required for more features
-    API_OPENWEATHER = None
-    API_ACCUWEATHER = None
     MAPS_API = None
     CAT_API_KEY = None
     DOG_API_KEY = None

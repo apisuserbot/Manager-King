@@ -58,8 +58,6 @@ if ENV:
     WORKERS = int(os.environ.get('WORKERS', 8))
     BAN_STICKER = os.environ.get('BAN_STICKER', 'CAADAgADEAgAAgi3GQL9YQyT_kBpQwI')
     ALLOW_EXCL = os.environ.get('ALLOW_EXCL', False)
-    API_WEATHER = os.environ.get('API_OPENWEATHER', None)
-    API_ACCUWEATHER = os.environ.get('API_ACCUWEATHER', None)
     MAPS_API = os.environ.get('MAPS_API', None)
 
     CAT_API_KEY = os.environ.get('CAT_API_KEY', "")
@@ -106,8 +104,6 @@ else:
     WORKERS = Config.WORKERS
     BAN_STICKER = Config.BAN_STICKER
     ALLOW_EXCL = Config.ALLOW_EXCL
-    API_WEATHER = Config.API_OPENWEATHER
-    API_ACCUWEATHER = Config.API_ACCUWEATHER
     MAPS_API = Config.MAPS_API
 
     CAT_API_KEY = Config.CAT_API_KEY
