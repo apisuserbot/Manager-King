@@ -560,11 +560,11 @@ def snipe(bot: Bot, update: Update, args: List[str]):
 def decide(bot: Bot, update: Update):
     r = randint(1, 100)
     if r <= 65:
-        update.message.reply_text(tld("Yes."))
+        update.message.reply_text(tld(chat.id, "Yes."))
     elif r <= 90:
-        update.message.reply_text(tld("No."))
+        update.message.reply_text(tld(chat.id, "No."))
     else:
-        update.message.reply_text(tld("Maybe."))
+        update.message.reply_text(tld(chat.id, "Maybe."))
 
 
 __help__ = """
