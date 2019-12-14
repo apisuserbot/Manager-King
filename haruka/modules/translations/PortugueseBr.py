@@ -441,13 +441,17 @@ el caso de los datos mencionados anteriormente.""",
         "Connections": "Conexões",
         "Bios and Abouts": "Biografia",
         "Warnings": "Advertências",
-        "Greetings": "saudações",
+        "Greetings": "Saudações",
         "Image Lookup": "Pesquisa de imagens",
         "Direct Links": "Links diretos",
         "Dogs and Cats": "Cachorros e Gatos",
         "Translator": "Tradutor",
         "Domain Blacklists": "Lista negra de domínios",
         "Federation": "Federações",
+        "Stickers": "Adesivos",
+        "Memes and etc.": "Memes e etc.",
+        "Reactions": "Reações",
+        "Sed/Regex": "Sed/Regex",
 
 #Some main stuff
 "Here is the help for the *{}* module:\n{}": "Aqui está a ajuda para o módulo *{}*:\n{}",
@@ -533,8 +537,25 @@ Quando você estiver ausente (AFK), qualquer menção será respondida com uma m
  - /antispam <on/off/yes/no>: desative ou ative a segurança antispam do grupo ou ele fornecerá suas configurações atuais.
 
 Os proprietários do bot costumam usar antispam para proibir spammers em todos os grupos. Isso ajuda a manter seu grupo seguro. \
-eliminando spammers o mais rápido possível. O Anti-Spam pode ser desativado no seu grupo digitando  \
-/antispam
+eliminando spammers o mais rápido possível. O Anti-Spam pode ser desativado no seu grupo digitando /antispam
+
+*Sistema Anti-Spam do Combot:*
+Você pode melhorar sua proteção Antispam usando o comando /setcas para ativar a verificação de novos membros com base no [Combot Anti Spam System](https://combot.org/cas)
+
+*Comandos do CAS:*
+ - /casver: Retorna a versão da API que o bot está executando no momento
+ - /cascheck: Verifica você ou outro usuário em relação ao CAS Ban
+
+*Apenas administradores:*
+ - /setcas <on/off/true/false>: ativa /desativa a verificação do CAS nas boas-vindas
+ - /getcas: obtém as configurações atuais do CAS
+ - /setban <on/off/true/false>: ativa/desativa o banimento automático em usuários banidos no CAS.
+
+*Apenas Sudo:*
+ - /gbanlist: fornecerá a lista completa de usuários banidos globalmente
+
+*Créditos:*
+Obrigado ao @nunopenim por fornecer sua API proprietária do Combot Anti Spam System - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
 """,
 
 "Bans_help": """
