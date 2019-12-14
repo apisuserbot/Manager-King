@@ -136,14 +136,14 @@ Esto creará dos botones en la misma línea en vez de uno en cada línea.
 PortugueseBrStrings = {
 
 #Connections
-    "Disabled connections to this chat for users": "Conexiones deshabilitadas en este chat para los usuarios",
-    "Enabled connections to this chat for users": "Conexiones habilitadas en este chat para los usuarios",
-    "Please enter on/yes/off/no in group!": "Por favor escribe on/yes/off/no en el grupo!",
-    "Successfully connected to *{}*": "Conectado correctamente a *{}*",
-    "Connection failed!": "Conexión fallida!",
-    "Connections to this chat not allowed!": "Conexiones no permitidas en este chat!",
-    "Write chat ID to connect!": "Escribe el ID del chat para conectar!",
-    "Usage limited to PMs only!": "Uso restringido solo a mensajes privados",
+    "Disabled connections to this chat for users": "Conexões desativadas para usuários neste grupo",
+    "Enabled connections to this chat for users": "Conexões ativadas para usuários neste grupo",
+    "Please enter on/yes/off/no in group!": "Por favor, escreva on/yes/off/no no grupo!",
+    "Successfully connected to *{}*": "Conectado com sucesso a *{}*",
+    "Connection failed!": "Falha na conexão!",
+    "Connections to this chat not allowed!": "Conexões não permitidas neste grupo!",
+    "Write chat ID to connect!": "Digite o ID do grupo para se conectar!",
+    "Usage limited to PMs only!": "Use restrito apenas a mensagens privadas",
 
 #Misc
     "RUNS-K": RUN_STRINGS,
@@ -168,7 +168,7 @@ PortugueseBrStrings = {
     "\nUsername: @{}": "\nNome de usuário: @{}",
     "\nUser link: {}\n": "\nLink do usuário: {}",
     "\n\nThis person is my owner - I would never do anything against them!":
-        "\n\nEssa pessoa é minha dono(a), eu nunca faria algo contra ela!",
+        "\n\nEssa pessoa é meu dono, eu nunca faria algo contra ela!",
     "\nThis person is one of my sudo users! Nearly as powerful as my owner - so watch it.":
         "\nEssa pessoa é um dos meus usuários Sudo! Tem quase tanto poder quanto meu dono, então tenha cuidado",
     "\nThis person is one of my support users! Not quite a sudo user, but can still gban you off the map.":
@@ -189,15 +189,15 @@ PortugueseBrStrings = {
     "Please reply to a sticker to get its ID.": "Por favor responda a um stickerer para obeter o seu ID.",
     "Please reply to a sticker for me to upload its PNG.": "Por favor, responda a um sticker para que eu possa upar seu PNG .",
 
-    "Write a location to check the weather.": "Escribe una ubicación para ver que tiempo hace.",
-    "I will keep an eye on both happy and sad times!": "Estaré aquí en las buenas y en las malas!",
-    "Today in {} is being {}, around {}°C.\n": "Hoy en {} hace {}, alrededor de {}°C.\n",
-    "Sorry, location not found.": "Lo siento, ubicación no encontrada.",
+    "Write a location to check the weather.": "Escreva um local para ver como está o tempo.",
+    "I will keep an eye on both happy and sad times!": "Estarei aqui nos bons e maus momentos!",
+    "Today in {} is being {}, around {}°C.\n": "Hoje em {} está fazendo {}, por volta de {}°C.\n",
+    "Sorry, location not found.": "Desculpe, local não encontrado.",
 
-    "Deleting identifiable data...": "Borrando datos de usuario...",
+    "Deleting identifiable data...": "Excluindo dados do usuário...",
 
     "Try forwarding the following message to me, and you'll see!":
-        "Tente me enviar a seguinte mensagem e você a verá!",
+        "Tente me enviar a seguinte mensagem e você verá!",
     "/save test This is a markdown test. _italics_, *bold*, `code`, [URL](example.com) [button](buttonurl:github.com) [button2](buttonurl://google.com:same)":
     """/save teste Este é um teste de markdown _itálico_, *negrito*, `código`, \
 [URL](example.com) 
@@ -205,38 +205,38 @@ PortugueseBrStrings = {
 [Botão2](buttonurl://google.com:same)""",
 
 #Misc GDPR
-"send-gdpr": """Tu información personal ha sido borrada.\n\nTen en cuento que esto no te va a desbanear \
-de ningún chat, ya que eso son datos de Telegram, NO datos de YanaBot.
-Flooding, advertencias, y bans globales también se conservan, a partir de \
-[esto](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
-que establece claramente que el derecho de cancelación no se aplica \
-\"para la realización de una tarea realizada en interés público.\", así como \
-el caso de los datos mencionados anteriormente.""",
+"send-gdpr": """Suas informações pessoais foram excluídas.\n\nLembre-se de que isso não vai remover você \
+de qualquer bate-papo, já que são dados do Telegram, NÃO dados do Hitsuki Bot.
+Flooding, avisos e proibições globais também são preservados, desde \
+[isto](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
+que afirma claramente que o direito de cancelamento não se aplica \
+\"para a realização de uma tarefa realizada no interesse público.\", assim como \
+o caso dos dados mencionados acima.""",
 
 #Admin
-"How am I meant to promote someone that's already an admin?": "¿Como voy a ascender a administrador a alguien que ya lo es?",
-"I can't promote myself! Get an admin to do it for me.": "¡No puedo hacerme administradora a mi misma! ¡Avisa a algún administrador para que lo haga!",
-"Successfully promoted in *{}*!": " Ascendido a administrador en *{}*!",
+"How am I meant to promote someone that's already an admin?": "Como vou promover alguém que já é um administrador?",
+"I can't promote myself! Get an admin to do it for me.": "Eu não posso me tornar um administrador! Notifique um administrador para fazer isso!",
+"Successfully promoted in *{}*!": "Promovido com sucesso em *{}*!",
 
-"This person CREATED the chat, how would I demote them?": "Esta persona ha creado el chat. ¿Cómo quieres que le quite el admin?",
-"Can't demote what wasn't promoted!": "No puedo quitarle el admin si no lo tiene!",
-"I can't demote myself!": "No puedo quitarme de ser administradora yo misma!",
-"Successfully demoted in *{}*!": "Ya no es administrador en *{}*!",
+"This person CREATED the chat, how would I demote them?": "Esta pessoa criou o chat. Como você deseja que o administrador seja removido?",
+"Can't demote what wasn't promoted!": "Não posso tirar o administrador se ele não for um",
+"I can't demote myself!": "Não posso me deixar de ser um administrador!",
+"Successfully demoted in *{}*!": "Rebaixado com sucesso em *{}*!",
 "Could not demote. I might not be admin, or the admin status was appointed by another user, so I can't act upon them!": 
-"No puedo quitarle el admin. Puede que no sea administrador o que el estado de administrador fuese dado por otro usuario, asi que no puedo actuar sobre él!",
+"Não consigo remover o administrador. Pode ser que ele não seja um administrador ou o status de administrador foi atribuído por outro usuário, por isso não posso agir de acordo!",
 
-"I don't have access to the invite link, try changing my permissions!": "No tengo acceso al link de invitación, prueba cambiando mis permisos!",
-"I can only give you invite links for supergroups and channels, sorry!": "Lo siento, solo puedo dar links de invitación para supergrupos y canales.",
+"I don't have access to the invite link, try changing my permissions!": "Não tenho acesso ao link do convite, tente alterar as minhas permissões!",
+"I can only give you invite links for supergroups and channels, sorry!": "Desculpe, só posso dar links de convite para supergrupos e canais.",
 
 "Admins in": "Administradores em",
 "this chat": "este chat",
 " (Creator)": " (Criador)",
 
 #AFK
-"{} is now AFK!": "Agora {} está AFK!",
-"{} is no longer AFK!": "{} Não está AFK!",
-"{} is AFK!": "{} está AFK!",
-"{} is AFK! says its because of: \n{}": "{} está AFK! Disse que é por causa: \n{}",
+"{fst_name} is AFK!": "{} está AFK!",
+"firstname} is no longer AFK!": "{} Não está mais AFK!",
+"{fst_name} is AFK!": "{} está AFK!",
+"{fst_name} is AFK! says its because of:\n{user.reason}": "{} está AFK! Disse que é por causa: \n{}",
 
 #Antiflood
 "I like to leave the flooding to natural disasters. But you, you were just a disappointment. Get out.":
@@ -730,90 +730,89 @@ Se puede añadir botones a las notas usando la sintaxis normal de 'markdown' - e
 """,
 
 "Reporting_help":"""
- - /report <motivo>: responde a un mensaje para reportarlo a los administradores.
- - @admin: responde a un mensaje para reportarlo a los administradores.
-NOTA: ninguno de estos comandos se activará si es utilizado por los administradores
+ - /report <razão>: responda a uma mensagem para denunciá-la aos administradores.
+ - @admin: responda a uma mensagem para denunciá-la aos administradores.
+*NOTA:* nenhum desses itens será acionado se usado pelos administradores
 
-*Solo administradores*
- - /reports <on/off>: cambia la configuración de los reportes, o te permite ver el estado actual de la configuración.
-   - Si se hace en mensaje privado, cambia tu estado
-   - Si se hace en un chat, cambia el estado del chat.
-""",
-
-"RSS Feed_help": """
- - /addrss <link>: añade un link RSS a las suscripciones.
- - /removerss <link>: quita un link RSS de las suscripciones.
- - /rss <link>: muestra los datos del link y la ultima entrada, sirve sobre todo para hacer tests.
- - /listrss: muestra la lista de los feeds RSS a los que el chat está suscrito.
-
-NOTA: En grupos, solo los administradores pueden añadir/borrar links RSS a las suscripciones del grupo.
+*Apenas administradores:*
+ - /reports <on/off>: altera a configuração do denúncias ou exibi o status atual.
+   - Se feito no PV, alterna seu status.
+   - Se feito no grupo, alterna o status do grupo.
 """,
 
 "Rules_help": """
- - /rules: te muestra las normas para ese chat
+*Defina regras para organizar seu grupo, mas não faça dele uma ditadura!*
 
-*Solo administradores:*
- - /setrules <tus normas aquí>: configura las reglas de un chat.
- - /clearrules: borra las reglas para el chat en el que estás.
+ - /rules: Obtenha as regras de um grupo.
+
+*Apenas administradores:*
+ - /setrules <regras>: Define as regras para um grupo.
+ - /clearrules: apague as regras de um grupo.
 """,
 
 "Sed/Regex_help": """
- - s/<text1>/<text2>(/<flag>): Responde a un mensaje con esto para hacer una operación sed en ese mensaje, cambiando todas \
-las cosas de 'text1' con 'text2'. Flags son opcionales, y actualmente incluyen 'i' para ignorar, 'g' para global, \
-o nada. Los delimitadores incluyen `/`, `_`, `|`, y `:`. Se admite la agrupación de texto. El mensaje resultante no puede ser \
-más largo de {}.
-
-*Recordatorio:* Sed usa algunos caracteres especiales para facilitar la comparación, como estos: `+*.?\\`
-Si quieres usar estos caracteres, asegúrate de que no los incluyes!
-eg: `\\?`.
+ - s/<text1>/<text2>(/<flag>): Responda a uma mensagem com isso para executar uma operação sed nessa mensagem, substituindo todas as ocorrências de 'texto1' com 'texto2'. Os sinalizadores são opcionais e atualmente incluem 'i' para ignorar maiúsculas e minúsculas, 'g' para global ou nada.  Os delimitadores incluem `/, _, |,` e `: .` O agrupamento de texto é suportado. A mensagem resultante não pode ser maior que 4096.
+ 
+*Lembrete:* Sed usa alguns caracteres especiais para facilitar a correspondência, como estes: `+ *.? \`
+ Se você quiser usar esses caracteres, escape deles!
+ por exemplo: `\\?.`
 """,
 
 "Warnings_help": """
- - /warns <userhandle>: te muestra el número de avisos y la razón del usuario al que respondes
- - /warnlist: lista de los filtros de avisos actual.
+ - /warns <userhandle>: Mostra o número de avisos e os motivos em relação ao usuário a quem você responde
+ - /warnlist: lista de filtros de aviso atuais.
 
-*Solo administradores:*
- - /warn <userhandle>: advierte a un usuario. Despues de 3 advertencias, el usuario será baneado del grupo. Se puede usar respondiendo a un mensaje.
- - /resetwarn <userhandle>: Resetea las advertencias para un usuario. Puede ser usado como respuesta a un mensaje.
- - /addwarn <palabraclave> <mensaje añadido>: establece un filtro de advertencia en una determinada palabra clave. Si quieres que tu palabra clave \
-ser una oración, ponla entre comillas, como aquí: `/addwarn "muy enfadado" Esto es un usuario enfadado`. 
- - /nowarn <palabraclave>: detiene un filtro de advertencia
- - /warnlimit <num>: establece el numero de advertencias
- - /strongwarn <on/yes/off/no>: Si está en on y se excede el numero de advertencias, el usuario será baneado. Si no solo será expulsado
+*Apenas administradores:*
+ - /warn <userhandle>: avisa um usuário. Após três avisos, o usuário será banido do grupo. Pode ser usado em resposta a uma mensagem.
+ - /resetwarn <userhandle>: Redefina os avisos para um usuário. Pode ser usado em resposta a uma mensagem.
+ - /addwarn <palavrachave> <mensagem adicionada>: defina um filtro de aviso em uma palavra-chave específica. Se você quiser sua palavra-chave \
+ seja uma frase, coloque-a entre aspas, como aqui: `/addwarn "muito puto" Este é um usuário irritado`.
+ - /nowarn <palavrachave>: parar um filtro de aviso
+ - /warnlimit <num>: defina o número máximo de avisos
+ - /strongwarn <on/yes/off/no>: Se estiver ativado e o número de avisos for excedido, o usuário será banido. Caso contrário, a pessoa só será expulsa
 """,
 
 "Greetings_help": """
-Tus mensajes de Bienvenida/despedida en el grupo se pueden personalizar de múltiples formas. Si quieres que los mensajes sean individualizados \
-como mensaje predefinido, sigue estos pasos:
- - `{{first}}`: esto representa el *nombre* del usuario
- - `{{last}}`: esto representa el *apellido* del usuario. Predefinido a *nombre* si el usuario no tiene apellido.
- - `{{fullname}}`: esto representa el nombre *completo*. Por defecto *nombre* del usuario unicamente, si no tiene apellido.
- - `{{username}}`: esto representa el *alias*. Por defecto *meciona* el nombre del usuario si no tiene alias.
- - `{{mention}}`: esto solo *menciona* a un usuario - escribiendo unicamente su nombre.
- - `{{id}}`: esto representa el *id* de usuario.
- - `{{count}}`: esto representa el *numero de miembro*.
- - `{{chatname}}`: esto representa el *nombre del grupo actual*.
-Cada variable DEBE ser metida entre `{{}}` para que sea reemplazada.
-Los mensajes de bienvenida soportan markdown, asi que puedes hacer que cualquier palabra vaya en negrita/cursiva/monoespaciado/links. \
-También puedes poner botones, asi puedes hacer que las bienvenidas queden espectaculares con botones de introducción. \
-Para crear un botón que lleve a tus normas, usa esto: `[Normas](buttonurl://t.me/{}?start=group_id)`. \
-Simplemente reemplaza el `group_id` con la ID de tu grupo, que puedes obtener via /id, y ya estaría. \
-Ten en cuenta que las id de grupo suelen ir precedidas del signo `-`; Ese signo ES NECESARIO, así que por favor \
-no lo borres. \
-Si tienes el humor suficientes puedes tambien poner imágenes/videos/gif/notas de voz como mensaje de bienvenida,\
-respondiendo al mensaje con la imagen/gif/video mediante /setwelcome.
+*Dê a seus membros uma recepção calorosa com o módulo de cumprimentos! Ou um triste adeus... Depende!*
 
-*Solo administradores:*
- - /welcome <on/off>: activa/desactiva ativa e desativa as mensagens de boas vindas.
- - /welcome: mostra a mensagem de boas vindas atual.
- - /welcome noformat: mostra a mensagem de boas vindas atual sem markdown - útil se queres editar uma mensagem de boas vindas!
- - /goodbye -> lo mismo que para /welcome.
- - /setwelcome <alguntexto>: configura tu mensaje de bienvenida. Si se usa respondiendo a media, establece la imagen/gif/video como bienvenida.
- - /setgoodbye <alguntexto>: lo mismo que /setwelcome pero para despedidas.
- - /resetwelcome: resetea el mensaje de bienvenida al mensaje por defecto.
- - /resetgoodbye: resetea el mensaje de despedida al mensaje por defecto.
- - /cleanwelcome <on/off>: Para los nuevos miembros que entran, intenta borrar los mensajes de bienvenida previos, así evita el spam de mensajes de bienvenida en el chat.
- - /cleanservice <on/off/yes/no>: borra los mensajes de servicio; esos mensajes tal que "x se ha unido al grupo" que se ven cuando alguien se une.
- - /welcomesecurity <off/soft/hard>: soft - restringe los permisos del usuario que acaba de entrar, de tal forma que no puede enviar media durante 24 horas, hard - restringe los permisos del usuario para enviar mensages hasta que hace click en el mensaje de \"No soy un bot.\"
+*Os comandos disponíveis são:*
+ - /welcome <on/off/yes/no>: ativa/desativa as mensagens de boas-vindas. Se nenhuma opção for fornecida, retornará para o padrão a mensagem de boas-vindas e as configurações de boas-vindas.
+ - /goodbye <on/off/yes/no>: ativa/desativa as mensagens de despedida. Se nenhuma opção for fornecida, retorna as configurações atuais da mensagem de despedida.
+ - /setwelcome <mensagem>: define uma nova mensagem de boas-vindas! Markdown e botões são suportados, bem como recheios.
+ - /resetwelcome: redefine a mensagem de boas-vindas para o padrão; excluindo as alterações que você fez.
+ - /setgoodbye <mensagem>: define uma nova mensagem de despedidas! Markdown e botões são suportados, bem como recheios.
+ - /resetgoodbye: redefina a mensagem de despedida para o padrão; excluindo as alterações que você fez.
+ - /cleanservice <on/off/yes/no>: exclui todas as mensagens de serviço; esses são os irritantes "x entrou no grupo" que você vê quando as pessoas entram.
+ - /cleanwelcome <on/off/yes/no>: exclui antigas mensagens de boas-vindas;  quando uma nova pessoa entra no grupo, a mensagem de boas-vindas anterior é excluída.
+ - /welcomemute <on/off/yes/no>: todos os usuários que entram no grupo são silenciados;  um botão é adicionado à mensagem de boas-vindas para que eles sejam dessilenciados. Isso prova que eles não são um robô!
+ - /welcomemutetime <Xw/d/h/m>: se um usuário não pressionar o botão "clique para provar que você é humano" na mensagem de boas-vindas após um certo período de tempo, será dessilenciado automaticamente após esse período.
+ Nota: se desejar redefinir o tempo do mudo para sempre, use /welcomemutetime 0m. 0 == infinito!
+ - /setmutetext <novo texto>: Personalize o botão "clique aqui para provar que você é humano" obtido da ativação do welcomemute.
+ - /resetmutetext: redefine o botão de silenciar para o texto padrão.
+
+Leia o /markdownhelp para aprender sobre como formatar seu texto e mencionar novos usuários quando entrarem no grupo!
+
+*Recheios:*
+Como mencionado, você pode usar determinadas tags para preencher sua mensagem de boas-vindas com informações de usuário ou bate-papo; essas são:
+{first}: O primeiro nome do usuário.
+{last}: O sobrenome do usuário.
+{fullname}: O nome completo do usuário.
+{username}: O nome de usuário do usuário;  se nenhum estiver disponível, menciona o usuário.
+{mention}: Menciona o usuário, usando seu primeiro nome.
+{id}: O ID do usuário.
+{chatname}: O nome do grupo.
+
+Um exemplo de como usar recheios seria definir as boas-vindas, via:
+/setwelcome Olá, {first}! Bem-vindo ao {chatname}.
+
+Você pode ativar/desativar as mensagens de boas-vindas da seguinte forma:
+/welcome off
+
+Se você deseja salvar uma imagem, gif ou adesivo ou qualquer outro dado, faça o seguinte:
+/setwelcome enquanto responde a um adesivo ou a qualquer dado que você desejar. Esses dados agora serão enviados para receber novos usuários.
+
+*Dica:* use /welcome noformat para recuperar a mensagem de boas-vindas não formatadaz.
+Isso recuperará a mensagem de boas-vindas e a enviará sem formatação; obtendo o markdown bruto, permitindo que você faça edições fáceis.
+Isso também funciona com /goodbye.
 """
 }
