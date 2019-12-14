@@ -7,6 +7,7 @@ from typing import Optional, List
 
 import requests
 import wikipedia
+from random import randint
 from PyLyrics import *
 from pythonping import ping as ping3
 from requests import get
