@@ -58,7 +58,7 @@ SLAP_TEMPLATES = (
     "{user1} {throws} {item} na cara do {user2} .",
     "{user1} joga na cabeça a {item} no {user2}.",
     "{user1} pensa em bater no {user2} com {item}.",
-    "{user1} derruba {user2} e repetidamente {hits} com {item}.",
+    "{user1} derruba {user2} e repetidamente o {hits} com {item}.",
     "{user1} pega {item} e {hits} no {user2}.",
     "{user1} amarra {user2} em uma cadeira e {throws} {item}.",
     "{user1} deu um empurrão amigável no {user2} para que ele aprenda a nadar na lava"
@@ -104,11 +104,11 @@ THROW = (
 )
 
 HIT = (
-    "soca",
+    "golpeia",
     "bate",
-    "tapas",
-    "cheira",
-    "golpes",
+    "golpeia",
+    "esmurra",
+    "ataca",
 )
 
 MARKDOWN_HELP = """
