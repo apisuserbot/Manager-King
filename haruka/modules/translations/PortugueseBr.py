@@ -156,32 +156,32 @@ PortugueseBrStrings = {
     "MARKDOWN_HELP-K": MARKDOWN_HELP,
 
     "The original sender, {}, has an ID of `{}`.\nThe forwarder, {}, has an ID of `{}`.":
-        "El remitente, {}, tiene el ID `{}`.\nEl receptor, {}, tiene el ID `{}`.",
-    "{}'s id is `{}`.": "ID {} - `{}`.",
-    "Your id is `{}`.": "Tu ID - `{}`.",
-    "This group's id is `{}`.": "ID de este grupo - `{}`.",
+        "O remetente, {}, tem o ID `{}`.\nO receptor, {}, tem o ID `{}`.",
+    "{}'s id is `{}`.": "{} ID - `{}`.",
+    "Your id is `{}`.": "Seu ID - `{}`.",
+    "This group's id is `{}`.": "ID deste grupo - `{}`.",
 
-    "I can't extract a user from this.": "No puedo recuperar el ID de este usuario",
-    "<b>User info</b>:": "<b>Información del usuario</b>:",
-    "\nFirst Name: {}": "\nNombre: {}",
-    "\nLast Name: {}": "\nApellido: {}",
-    "\nUsername: @{}": "\nNombre de usuario: @{}",
-    "\nPermanent user link: {}": "\nLink permanente del usuario: {}",
+    "I can't extract a user from this.": "Não consigo extrair o ID deste usuário",
+    "<b>User info</b>:": "<b>Informações do usuário</b>:",
+    "\nFirst Name: {}": "\nNome: {}",
+    "\nLast Name: {}": "\nSobrenome: {}",
+    "\nUsername: @{}": "\nNome de usuário: @{}",
+    "\nPermanent user link: {}": "\nLink do usuário: {}",
     "\n\nThis person is my owner - I would never do anything against them!":
-        "\n\nEsta persona es mi dueñ@, nunca haría nada contra él/ella!",
+        "\n\nEssa pessoa é minha dono(a), eu nunca faria algo contra ela!",
     "\nThis person is one of my sudo users! Nearly as powerful as my owner - so watch it.":
-        "\nEsta persona es un@ de mis usuari@s sudo! Casi con tanto poder como mi dueñ@, así que ten cuidado",
+        "\nEssa pessoa é um dos meus usuários Sudo! Tem quase tanto poder quanto meu dono, então tenha cuidado",
     "\nThis person is one of my support users! Not quite a sudo user, but can still gban you off the map.":
-        "\nEsta persona es uno de mis usuarios con derechos. No es como un usuario sudo, pero te puede dar global ban, ten cuidado!",
+        "\nEssa pessoa é um dos meus usuários suporte. Não é como um usuário sudo, mas pode te banir globalmente, tenha cuidado!",
     "\nThis person has been whitelisted! That means I'm not allowed to ban/kick them.":
-        "\nEsta persona está en la lista blanca. Esto signidica que no puedo banearla ni echarla.",
+        "\nEssa pessoa está na lista branca. Isso significa que eu não posso banir ou removê-la.",
 
-    "Its always banhammer time for me!": "Siempre es la hora banhammer para mi!",
+    "Its always banhammer time for me!": "É sempre a hora do martelo do ban para mim!",
 
-    "It's {} in {}": "Está {} en {}",
+    "It's {} in {}": "Está {} em {}",
 
-    "Please reply to a sticker to get its ID.": "Por favor responde a un stciker para obtener su ID.",
-    "Please reply to a sticker for me to upload its PNG.": "Por favor, responde a un sticker para que pueda subir su PNG .",
+    "Please reply to a sticker to get its ID.": "Por favor responda a um stickerer para obeter o seu ID.",
+    "Please reply to a sticker for me to upload its PNG.": "Por favor, responda a um sticker para que eu possa upar seu PNG .",
 
     "Write a location to check the weather.": "Escribe una ubicación para ver que tiempo hace.",
     "I will keep an eye on both happy and sad times!": "Estaré aquí en las buenas y en las malas!",
@@ -479,7 +479,7 @@ Principais comandos:
  - /help <module name>: te envia uma mensagem privada com as informações deste comando.
  - /lang: altera o idioma do bot
  - /settings:
-   - em mensagem privada: enviará a configuração de todos os módulos disponíveis.
+   - em um grupo: o redirecionará para o PV, com todas as configurações do determinado grupo.
    {}
    """,
 
@@ -748,13 +748,6 @@ Si quieres usar estos caracteres, asegúrate de que no los incluyes!
 eg: `\\?`.
 """,
 
-"Bios and Abouts_help": """
- - /setbio <texto>: respondiendo a un usuario, guardará su biografía
- - /bio: te mostrará tu biografía o la de otro usuario. 
- - /setme <texto>: te muestra tu información
- - /me: te mostrará tu biografía o la de otro usuario
-""",
-
 "Warnings_help": """
  - /warns <userhandle>: te muestra el número de avisos y la razón del usuario al que respondes
  - /warnlist: lista de los filtros de avisos actual.
@@ -769,7 +762,7 @@ ser una oración, ponla entre comillas, como aquí: `/addwarn "muy enfadado" Est
  - /strongwarn <on/yes/off/no>: Si está en on y se excede el numero de advertencias, el usuario será baneado. Si no solo será expulsado
 """,
 
-"Welcomes/Goodbyes_help": """
+"Greetings_help": """
 Tus mensajes de Bienvenida/despedida en el grupo se pueden personalizar de múltiples formas. Si quieres que los mensajes sean individualizados \
 como mensaje predefinido, sigue estos pasos:
  - `{{first}}`: esto representa el *nombre* del usuario
