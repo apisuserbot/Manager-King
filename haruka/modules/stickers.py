@@ -6,7 +6,7 @@ from typing import List
 from PIL import Image
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError
-from telegram import Update, Bot
+from telegram import Update, Bot, Chat
 from telegram.ext import run_async
 from telegram.ext import CommandHandler
 from telegram.utils.helpers import escape_markdown
