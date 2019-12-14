@@ -13,7 +13,6 @@ from telegram.utils.helpers import escape_markdown
 
 from haruka import dispatcher
 from haruka.modules.disable import DisableAbleCommandHandler
-from haruka.modules.translations.strings import tld
 
 
 @run_async
@@ -103,7 +102,7 @@ def kang(bot: Bot, update: Update, args: List[str]):
             bot.add_sticker_to_set(user_id=user.id, name=packname,
                                    png_sticker=open('kangsticker.png', 'rb'), emojis=sticker_emoji)
             msg.reply_text(tld(f"Sticker kanged successfully! \nPack can be found [here](t.me/addstickers/{packname})" +
-                           f"\nEmoji is: {sticker_emoji}", parse_mode=ParseMode.MARKDOWN))
+                           f"\nEmoji is: {sticker_emoji}"), parse_mode=ParseMode.MARKDOWN)
         except OSError as e:
             msg.reply_text("I can only kang images m8.")
             print(e)
