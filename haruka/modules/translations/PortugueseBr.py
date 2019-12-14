@@ -54,9 +54,9 @@ SLAP_TEMPLATES = (
     "{user1} {hits} {user2} com {item}.",
     "{user1} {hits} {user2} na cara com {item}.",
     "{user1} {hits} {user2} no peito com {item}.",
-    "{user1} {throws} {item} a {user2}.",
+    "{user1} {throws} {item} no {user2}.",
     "{user1} {throws} {item} na cara do {user2} .",
-    "{user1} joga na cabeça a {item} no {user2}.",
+    "{user1} joga {item} na cabeça do {user2}.",
     "{user1} pensa em bater no {user2} com {item}.",
     "{user1} derruba {user2} e repetidamente o {hits} com {item}.",
     "{user1} pega {item} e {hits} no {user2}.",
@@ -98,7 +98,7 @@ ITEMS = (
 
 THROW = (
     "joga",
-    "arremessar",
+    "arremessa",
     "mandris",
     "arremessa",
 )
@@ -166,7 +166,7 @@ PortugueseBrStrings = {
     "\nFirst Name: {}": "\nNome: {}",
     "\nLast Name: {}": "\nSobrenome: {}",
     "\nUsername: @{}": "\nNome de usuário: @{}",
-    "\nPermanent user link: {}": "\nLink do usuário: {}",
+    "\nUset link: {}": "\nLink do usuário: {}",
     "\n\nThis person is my owner - I would never do anything against them!":
         "\n\nEssa pessoa é minha dono(a), eu nunca faria algo contra ela!",
     "\nThis person is one of my sudo users! Nearly as powerful as my owner - so watch it.":
@@ -191,12 +191,12 @@ PortugueseBrStrings = {
     "Deleting identifiable data...": "Borrando datos de usuario...",
 
     "Try forwarding the following message to me, and you'll see!":
-        "Prueba a enviarme el siguiente mensaje y lo verás!",
+        "Tente me enviar a seguinte mensagem e você a verá!",
     "/save test This is a markdown test. _italics_, *bold*, `code`, [URL](example.com) [button](buttonurl:github.com) [button2](buttonurl://google.com:same)":
-    """/save test Esto es un test de markdown. _cursiva_, *negrita*, `codigo`, \
+    """/save teste Este é um teste de markdown _itálico_, *negrito*, `código`, \
 [URL](example.com) 
-[Botón](buttonurl:github.com)
-[Botón2](buttonurl://google.com:same)""",
+[Botão](buttonurl:github.com)
+[Botão2](buttonurl://google.com:same)""",
 
 #Misc GDPR
 "send-gdpr": """Tu información personal ha sido borrada.\n\nTen en cuento que esto no te va a desbanear \
