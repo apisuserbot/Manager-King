@@ -523,7 +523,7 @@ Quando você estiver ausente (AFK), qualquer menção será respondida com uma m
 Este módulo usa o Google Tradutor para fazer as traduções.
 
  - /tr <language code>: como resposta a uma mensagem longa.
-"""
+""", 
 
 "Federation_help": """
 Ah, gerenciamento de grupo. Tudo é divertido, até que os spammers comecem a entrar no seu grupo e você precise bloqueá-los. Então você precisa começar a banir mais e mais, e dói.
@@ -551,7 +551,7 @@ Ainda na fase experimental, fazer federações só pode ser feito pelo meu criad
  - /fbanlist: exibe todos os usuários fbanidos na federação no momento.
  - /fedchats: obtenha todos os grupos conectados na federação.
  - /importfbans: responda ao arquivo de mensagens de backup da federação para importar a lista de banidos para a federação.
-"""
+""", 
 
 "Memes ant etc._help": """
 *Alguns comandos de memes, descubra tudo sozinho!*
@@ -571,7 +571,7 @@ Ainda na fase experimental, fazer federações só pode ser feito pelo meu criad
 - /clapmoji
 - /bmoji
 - /copypasta
-"""
+""", 
 
 "Android_help": """
 *Aqui você terá vários comandos úteis para usuários Android!*
@@ -733,7 +733,7 @@ Isso permite que você desabilite alguns comandos usados ​​com frequência, 
  - /cat: Envia fotos de gatinhos fofos
  - /cathd: Envia imagens de gatinhos fotos em alta definição
  - /catgif: Envia gifs de gatinhos fotos
-"""
+""",
 
 "Locks_help": """
 Os adesivos te incomodam? Ou deseja evitar que as pessoas compartilhem links? Ou fotos? Você está no lugar certo!
