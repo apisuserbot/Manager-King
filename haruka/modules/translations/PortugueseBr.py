@@ -525,6 +525,37 @@ el caso de los datos mencionados anteriormente.""",
 Quando você estiver ausente (AFK), qualquer menção será respondida com uma mensagem informando que você não está disponível.
 """,
 
+"Android_help": """
+*Aqui você terá vários comandos úteis para usuários do Android!*
+
+*Ferramentas úteis:*
+ - /device <codinome>: obtém informações básicas do dispositivo Android a partir de seu codinome
+ - /magisk: obtém a versão mais recente do Magisk Estável/Beta/Canary
+ - /twrp <codinome>: obtém o twrp mais recente para o dispositivo Android usando o codinome
+ - /specs <marca> <nome do aparelho>: fornecerá as especificações completas de um dispositivo
+
+ *ROM específica para um dispositivo:*
+ - /aex <dispositivo> <versão do Android>: Obtenha a ROM AEX mais recente para um dispositivo
+ - /bootleggers <device>: Obtenha a ROM mais recente da Bootleggers para um dispositivo
+ - /dotos <device>: Obtenha a última ROM da DotOS para um dispositivo
+ - /evo <device>: Obtenha a versão mais recente da ROM Evolution X para um dispositivo
+ - /havoc <device>: Obtenha a ROM Havoc mais recente para um dispositivo
+ - /los <device>: Obtenha a ROM mais recente da LineageOS para um dispositivo
+ - /miui <device>: Obtenha a ROM MIUI mais recente para um dispositivo
+ - /pe <device>: Obtenha a ROM mais recente da Pixel Experience para um dispositivo
+ - /pe10 <device>: Obtenha a ROM mais recente da Pixel Experience 10 para um dispositivo
+ - /peplus <device>: Obtenha a ROM mais recente da Pixel Experience Plus para um dispositivo
+ - /pearl <device>: Obtenha a mais recente ROM Pearl de um dispositivo
+ - /pixys <device>: Obtenha a ROM Pixys mais recente de um dispositivo
+ - /posp <device>: Obtenha a ROM POSP mais recente para um dispositivo
+ - /viper <device>: Obtenha a ROM mais recente da Viper para um dispositivo
+ 
+ *GSIs:*
+ - /descendant: Obtenha a GSI mais recente do Descendant!
+ - /enesrelease: Receba o upload mais recente do Enes!
+ - /phh: Receba as últimas GSIs AOSP Oreo do Phh!
+""",
+
 "AntiFlood_help": """
  - /flood: te mostra as atuais configurações do controle anti-flood.
 
