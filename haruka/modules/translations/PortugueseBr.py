@@ -222,9 +222,9 @@ el caso de los datos mencionados anteriormente.""",
 "I don't have access to the invite link, try changing my permissions!": "No tengo acceso al link de invitación, prueba cambiando mis permisos!",
 "I can only give you invite links for supergroups and channels, sorry!": "Lo siento, solo puedo dar links de invitación para supergrupos y canales.",
 
-"Admins in": "Administradores en",
+"Admins in": "Administradores em",
 "this chat": "este chat",
-" (Creator)": " (Creador)",
+" (Creator)": " (Criador)",
 
 #AFK
 "{} is now AFK!": "Agora {} está AFK!",
@@ -302,20 +302,20 @@ el caso de los datos mencionados anteriormente.""",
         "Esse filtro não existe - escreva /filters para ver os filtros ativos.",
     
     #Disable
-    "Disabled the use of `{}` in *{}*": "Desactivado el uso de `{}` en *{}*",
-    "That command can't be disabled": "Ese comando no se puede desactivar!",
-    "What should I disable?": "¿Qué debería desactivar?",
+    "Disabled the use of `{}` in *{}*": "Desativado o uso de `{}` em *{}*",
+    "That command can't be disabled": "Esse comando não pode ser desativado!",
+    "What should I disable?": "O que devo desativar?",
 
-    "Enabled the use of `{}` in *{}*": "Activado el uso de `{}` en *{}*",
-    "Is that even disabled?": "¿Acaso está desactivado?",
-    "What should I enable?": "¿Qué debería activar?",
+    "Enabled the use of `{}` in *{}*": "Ativado o uso de `{}` em *{}*",
+    "Is that even disabled?": "Isso está desativado?",
+    "What should I enable?": "O que devo ativar?",
 
-    "The following commands are toggleable:\n{}": "Los siguientes comandos se pueden desactivar:\n{}",
-    "No commands can be disabled.": "No hay comandos que se puedan desactivar.",
-    "No commands are disabled in *{}*!": "Bo hay comandos desactivados en *{}*!",
-    "No commands are disabled!": "No hay comandos desactivados!",
+    "The following commands are toggleable:\n{}": "Os seguintes comando podem ser desativados:\n{}",
+    "No commands can be disabled.": "Não há comandos que possam ser desativados.",
+    "No commands are disabled in *{}*!": "Não há comandos desabilitados em *{}*!",
+    "No commands are disabled!": "Não há comandos desativados!",
     "The following commands are currently restricted in *{}*:\n{}":
-        "Los siguientes comandos están desactivados en *{}*:\n{}",
+        "Os seguintes comandos estão desativados em *{}*:\n{}",
 
 #Locks
     "Locked {} messages for all non-admins!": "Bloqueados los mensajes de {}  para todos los no administradores!",
@@ -353,9 +353,9 @@ el caso de los datos mencionados anteriormente.""",
 
 #Users
     "I've seen them in <code>{}</code> chats in total.": 
-        "Le he visto en <code>{}</code> chats en total.",
+        "Eu vi ele em <code>{}</code> grupos no total.",
     "I've seen them in... Wow. Are they stalking me? They're in all the same places I am... oh. It's me.":
-        "Le he visto en...Wow. ¿Me estás siguiendo? Estás los mismos sitios que yo... oh, pero si soy yo! Que chorprecha!!.",
+        "Eu o vi em... Uau.  Você está me seguindo você está nos mesmos lugares que eu... Oh, mas sou eu!",
     
 #Msg_deleting
     "Cannot delete all messages. The messages may be too old, I might not have delete rights, or this might not be a supergroup.":
@@ -405,17 +405,17 @@ el caso de los datos mencionados anteriormente.""",
         "¡No has especificado el tiempo para restringir a este usuario!",
     "Well damn, I can't restrict that user.": "Vaya, no puedo restringir a este usuario.",
     "{} is muted in {}!": "{} está silenciado en {}!",
-    "Restricted from sending media for {} in {}!": "Restringido para enviar media por {} en {}!",
-    "Restricted for {} in {}!": "{} Restringido por {} en {}!",
+    "Restricted from sending media for {} in {}!": "Restringido para enviar mídia por {} em {}!",
+    "Restricted for {} in {}!": "{} Restringido por {} em {}!",
 
 #Notes
     "Get rekt": "¡Te destrozo!.",
 
 
 #Multi
-    "Invalid Chat ID provided!": "El ID del chat no es válido!", #Connections
-    "You don't seem to be referring to a user.": "Parece que no te estás refiriendo a ningún usuario.", #Admin, Bans, Muting
-    "I can't seem to find this user": "Parece que no puedo encontrar a este usuario.", #Bans, Muting
+    "Invalid Chat ID provided!": "O ID deste grupo não é válido", #Connections
+    "You don't seem to be referring to a user.": "Parece que você não está se referindo à um usuário.", #Admin, Bans, Muting
+    "I can't seem to find this user": "Eu não consigo encontrar este usuário.", #Bans, Muting
     "Yes": "Sim", #Antispam
     "No": "Não", #Antispam
 
