@@ -45,6 +45,7 @@ def getsticker(bot: Bot, update: Update):
 def kang(bot: Bot, update: Update, args: List[str]):
     msg = update.effective_message
     user = update.effective_user
+    chat = update.effective_chat
     packnum = 0
     packname = "c" + str(user.id) + "_by_" + bot.username
     packname_found = 0
