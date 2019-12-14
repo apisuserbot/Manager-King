@@ -159,12 +159,12 @@ def info(bot: Bot, update: Update, args: List[str]):
     if user.username:
         text += tld(chat.id, "\nUsername: @{}").format(html.escape(user.username))
 
-    text += tld(chat.id, "\nUser link: {}\n").format(mention_html(user.id, "link"))
+    text += tld(chat.id, "\nUser link: {}").format(mention_html(user.id, "link"))
 
     if user.id == OWNER_ID:
-        text += tld(chat.id, "\n\nAy, This guy is my owner. I would never do anything against him!")
+        text += tld(chat.id, "\n\nThis person is my owner - I would never do anything against them!")
     else:
-        if user.id == int(254318997):
+        if user.id == int(302253890):
             text += tld(chat.id, "\nThis person.... He is my god.")
 
         if user.id in SUDO_USERS:
@@ -559,11 +559,11 @@ def snipe(bot: Bot, update: Update, args: List[str]):
 def decide(bot: Bot, update: Update):
     r = randint(1, 100)
     if r <= 65:
-        update.message.reply_text("Yes.")
+        update.message.reply_text(tld("Yes."))
     elif r <= 90:
-        update.message.reply_text("No.")
+        update.message.reply_text(tld("No."))
     else:
-        update.message.reply_text("Maybe.")
+        update.message.reply_text(tld)("Maybe."))
 
 
 __help__ = """

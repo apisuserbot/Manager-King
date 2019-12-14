@@ -179,6 +179,10 @@ PortugueseBrStrings = {
     "Its always banhammer time for me!": "É sempre a hora do martelo do ban para mim!",
 
     "It's {} in {}": "Está {} em {}",
+    
+    "Yes": "Sim",
+    "No": "Não",
+    "Maybe": "Talvez",
 
     "Please reply to a sticker to get its ID.": "Por favor responda a um stickerer para obeter o seu ID.",
     "Please reply to a sticker for me to upload its PNG.": "Por favor, responda a um sticker para que eu possa upar seu PNG .",
@@ -663,24 +667,38 @@ Para configurar um canal de registro se faz da seguinte forma:
 """,
 
 "Misc_help": """
- - /id: obtiene la id del grupo. Si se usa respondiendo a un mensaje, obtiene la id de ese usuario.
- - /runs: responde una frase aleatoria de una batería de frases preestablecidas.
- - /slap: abofetea a u usuario, o recibe una bofetada si no lo utilizas como respuesta.
- - /time <lugar>: te da la hora para el lugar indicado.
- - /weather <ciuidad>: muestra el tiempo climatológico para la ciudad indicada.
- - /info: obtiene información de un usuario.
- - /gdpr: borra tu información de la base de datos del bot. Solo en privado.
- - /stickerid: responde a un sticker con esto y te diré la ID del archivo.
- - /getsticker: responde a un sticker con esto y subiré el archivo en PNG.
+*Ferramentas de grupo:*
+ - /id: obtenha o ID do grupo atual. Se usado respondendo a uma mensagem, obtém o ID do usuário.
+ - /info: obtenha informações sobre um usuário.
+ - /gdpr: exclua suas informações do banco de dados do bot. Apenas conversas privadas.
+ - /stickerid: responda a um adesivo para que eu diga seu ID de arquivo.
+ - /getsticker: responda a um adesivo para fazer o upload do arquivo PNG bruto.
+ - /markdownhelp: resumo rápido de como o markdown funciona no Telegram - só pode ser usado em chat privado.
 
- - /markdownhelp: resumen rápido de como funciona el markdown en telegram - solo se puede usar en chats privados.
+*Ferramentas úteis:*
+ - /git: Retorna informações sobre um usuário ou organização do GitHub.
+ - /repo: Retornar a lista de repositórios de usuários ou organizações do GitHub (Limitado em 40)
+ - /lyrics: Encontre suas letras de músicas favoritas!
+ - /paste: Crie uma pasta ou um URL abreviado usando o [dogbin](https://del.dog)
+ - /getpaste: Obtenha o conteúdo de uma pasta ou URL abreviado do [dogbin](https://del.dog)
+ - /pastestats: Obter estatísticas de uma pasta ou URL abreviado do [dogbin](https://del.dog)
+ - /ud: Digite a palavra ou expressão que deseja pesquisar. Por exemplo /ud Gay
+ - /removebotkeyboard: Tem um teclado de bot desagradável preso no seu grupo?
+ - /exec <language> <code> [/stdin <stdin>]: Execute um código em uma língua especificada. Envie um comando vazio para obter as linguagens suportadas.
+ - /wiki <palavras>: Obtenha artigos da Wikipedia apenas usando este bot!
+
+*Outras coisas:*
+ - /runs: responde uma sequência aleatória de uma matriz de respostas.
+ - /insults: responde uma sequência aleatória de uma matriz de respostas.
+ - /slap: dar um tapa em um usuário ou se dar um tapa se não for uma resposta.
+ - /decide: Responde aleatoriamente entre yes/no/maybe.
 """,
 
 "Purges_help": """
-*Solo administradores:*
- - /del: borra el mensaje al que respondes.
- - /purge: borra todos los mensajes que haya desde el final hasta el mensaje al que respondas.
- - /purge <número X>: borra el mensaje al que respondes, y los X mensajes siguientes.
+*Apenas administradores:*
+ - /del: apaga a mensagem que você responder.
+ - /purge: apaga todas as mensagens antecessoras à mensagem que você respondeu.
+ - /purge <número X>: exclua a mensagem à qual você respondeu e as seguintes X mensagens.
 """,
 
 "Muting & Restricting_help": """
