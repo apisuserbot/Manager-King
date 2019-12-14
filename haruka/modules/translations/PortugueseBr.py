@@ -438,14 +438,11 @@ o caso dos dados mencionados acima.""",
         "Locks": "Bloqueios",
         "Log Channels": "Canais de registro",
         "Misc": "Diversos",
-        "Purges": "Expurgor",
-        "Muting & Restricting": "Silenciar e restringir",
+        "Purges": "Limpeza",
         "Notes": "Notas",
         "Reporting": "Reportar",
-        "RSS Feed": "Feed RSS",
         "Rules": "Regras",
         "Connections": "Conexões",
-        "Bios and Abouts": "Biografia",
         "Warnings": "Advertências",
         "Greetings": "Saudações",
         "Image Lookup": "Pesquisa de imagens",
@@ -461,7 +458,7 @@ o caso dos dados mencionados acima.""",
 
 #Some main stuff
 "Here is the help for the *{}* module:\n{}": "Aqui está a ajuda para o módulo *{}*:\n{}",
-"Back": "⬅️ Voltar",
+"Back": "Voltar",
 
     "send-help": """Olá! Meu nome é *{}*.
 Eu sou um bot para administração de grupos modular com alguns extras divertidos! Confira o seguinte para ter uma idéia de algumas das coisas em que posso ajudá-lo.
@@ -553,7 +550,7 @@ Ainda na fase experimental, fazer federações só pode ser feito pelo meu criad
  - /importfbans: responda ao arquivo de mensagens de backup da federação para importar a lista de banidos para a federação.
 """, 
 
-"Memes ant etc._help": """
+"Memes and etc._help": """
 *Alguns comandos de memes, descubra tudo sozinho!*
 - /owo: OWO o texto
 - /stretch: ESTICA o texto
