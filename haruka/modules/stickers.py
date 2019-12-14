@@ -103,8 +103,8 @@ def kang(bot: Bot, update: Update, args: List[str]):
                 im.save(kangsticker, "PNG")
             bot.add_sticker_to_set(user_id=user.id, name=packname,
                                    png_sticker=open('kangsticker.png', 'rb'), emojis=sticker_emoji)
-            msg.reply_text(tld(chat.id, f"Sticker kanged successfully! \nPack can be found [here](t.me/addstickers/{packname})" +
-                           f"\nEmoji is: {sticker_emoji}"), parse_mode=ParseMode.MARKDOWN)
+            msg.reply_text(tld(chat.id, f"Sticker kanged successfully! \nPack can be found [here](t.me/addstickers/{packname})") +
+                           f"\nEmoji: {sticker_emoji}", parse_mode=ParseMode.MARKDOWN)
         except OSError as e:
             msg.reply_text("I can only kang images m8.")
             print(e)
