@@ -277,33 +277,33 @@ o caso dos dados mencionados acima.""",
     "Banned! User will be banned for {}.": "Banido! O usuario foi banido por {}.",
 
 #Blacklist
-    "<b>Current blacklisted words in {}:</b>\n": "<b>Palabras en la lista negra en {}:</b>\n",
-    "There are no blacklisted messages in <b>{}</b>!": "No hay mensajes en la lista negra en <b>{}</b>!",
+    "<b>Current blacklisted words in {}:</b>\n": "<b>Palavras na lista negra em {}:</b>\n",
+    "There are no blacklisted messages in <b>{}</b>!": "Não há mensagens na lista negra em <b>{}</b>!",
     "Added <code>{}</code> to the blacklist in <b>{}</b>!":
-        "Añadido <code>{}</code> a la lista negra en <b>{}</b>!",
+        "Adicionado <code>{}</code> na lista negra de <b>{}</b>!",
     "Tell me which words you would like to add to the blacklist.":
-        "Dime qué palabras te gustaría añadir a la lista negra.",
+        "Diga-me que palavras você gostaria de adicionar à lista negra.",
     "Removed <code>{}</code> from the blacklist in <b>{}</b>!":
-        "Borrado <code>{}</code> de la lista negra en <b>{}</b>!",
-    "This isn't a blacklisted trigger...!": "Este no es un comando de la lista negrа...!",
+        "Removido <code>{}</code> da lista negra em <b>{}</b>!",
+    "This isn't a blacklisted trigger...!": "Este não é um comando da lista negra...!",
     "None of these triggers exist, so they weren't removed.":
-        "Ninguno de estos comandos existía, asi que no han sido borrados.",
+        "Nenhum desses comandos existia, portanto eles não foram excluídos.",
     "Removed <code>{}</code> triggers from the blacklist in <b>{}</b>! {} did not exist, so were not removed.":
-        "Borrado <code>{}</code> de los comandos de la lista negra en <b>{}</b>! {} no existe, así que no ha sido borrado!.",
+        "Removido <code>{}</code> dos comandos da lista negra em <b>{}</b>! {} no existe, así que no ha sido borrado!.",
     "Tell me which words you would like to remove from the blacklist.":
-        "Dime que palabras te gustaría borrat de la lista negra.",
+        "Diga-me que palavras você gostaria de remover da lista negra.",
 
     #Filters
-    "*Filters in {}:*\n": "*Filtros en {}:*\n",
+    "*Filters in {}:*\n": "*Lista de filtros em {}:*\n",
     "local filters": "filtros locais",
-    "*local filters:*\n": "*filtros locales:*\n",
-    "No filters in {}!": "No tem filtros em {}!",
+    "*local filters:*\n": "*filtros locais:*\n",
+    "No filters in {}!": "Nenhum filtro em {}!",
     "There is no note message - You can't JUST have buttons, you need a message to go with it!":
-        "No hay mensaje - No puedes tener botones vacíos, necesitas un mensaje que vaya dentro del botón!",
-    "You didn't specify what to reply with!": "No has especificado con qué quieres que responda!",
-    "Handler '{}' added in *{}*!": "El filtro '{}' ha sido añadido en *{}*!",
-    "No filters are active in {}!": "No hay filtros activos en {}!",
-    "Yep, I'll stop replying to that in *{}*." : "Valee, dejaré de responder a eso en *{}*.",
+        "Não há mensagem de nota - Você NÃO pode APENAS ter botões, precisa de uma mensagem para acompanhar!",
+    "You didn't specify what to reply with!": "Você não especificou o que deseja que eu responda!",
+    "Handler '{}' added in *{}*!": "O filtro '{}' foi adicionado em *{}*!",
+    "No filters are active in {}!": "Nenhum filtro ativo em {}!",
+    "Yep, I'll stop replying to that in *{}*." : "Sim, vou parar de responder a isso em *{}*.",
     "That's not a current filter - run /filters for all active filters.":
         "Esse filtro não existe - escreva /filters para ver os filtros ativos.",
     
@@ -365,11 +365,11 @@ o caso dos dados mencionados acima.""",
     
 #Msg_deleting
     "Cannot delete all messages. The messages may be too old, I might not have delete rights, or this might not be a supergroup.":
-        "No he podido borrar todos los mensajes. Puede que los mensajes sean muy viejos, que no tenga derechos para borrarlos o que esto no sea un supergrupo.",
-    "Purge complete.": "Purga completada.",
+        "Não foi possível apagar todas as mensagens. As mensagens podem ser muito antigas, ou não tenho direitos para excluí-las ou este grupo pode não ser um supergrupo.",
+    "Purge complete.": "Limpeza concluída.",
     "Reply to a message to select where to start purging from.":
-        "Responde a un mensaje para seleccionar desde donde empezar la purga.",
-    "Whadya want to delete?": "¿Qué quieres borrar?",
+        "Responda a uma mensagem para selecionar de onde iniciar a limpeza.",
+    "Whadya want to delete?": "O que você deseja apagar?",
 
 #Muting
     "You'll need to either give me a username to mute, or reply to someone to be muted.":
@@ -415,7 +415,7 @@ o caso dos dados mencionados acima.""",
     "Restricted for {} in {}!": "{} Restringido por {} em {}!",
 
 #Notes
-    "Get rekt": "¡Te destrozo!.",
+    "Get rekt": "Te despedaçou!",
 
 
 #Multi
@@ -532,29 +532,29 @@ Quando você estiver ausente (AFK), qualquer menção será respondida com uma m
 """,
 
 "Android_help": """
-*Aqui você terá vários comandos úteis para usuários do Android!*
+*Aqui você terá vários comandos úteis para usuários Android!*
 
 *Ferramentas úteis:*
  - /device <codinome>: obtém informações básicas do dispositivo Android a partir de seu codinome
  - /magisk: obtém a versão mais recente do Magisk Estável/Beta/Canary
- - /twrp <codinome>: obtém o twrp mais recente para o dispositivo Android usando o codinome
+ - /twrp <codinome>: obtém o twrp mais recente para o dispositivo Android usando seu codinome
  - /specs <marca> <nome do aparelho>: fornecerá as especificações completas de um dispositivo
 
  *ROM específica para um dispositivo:*
  - /aex <dispositivo> <versão do Android>: Obtenha a ROM AEX mais recente para um dispositivo
- - /bootleggers <device>: Obtenha a ROM mais recente da Bootleggers para um dispositivo
- - /dotos <device>: Obtenha a última ROM da DotOS para um dispositivo
- - /evo <device>: Obtenha a versão mais recente da ROM Evolution X para um dispositivo
+ - /bootleggers <device>: Obtenha a ROM Bootleggers mais recente para um dispositivo
+ - /dotos <device>: Obtenha a ROM DotOS mais recente para um dispositivo
+ - /evo <device>: Obtenha a ROM Evolution X mais recente para um dispositivo
  - /havoc <device>: Obtenha a ROM Havoc mais recente para um dispositivo
- - /los <device>: Obtenha a ROM mais recente da LineageOS para um dispositivo
+ - /los <device>: Obtenha a ROM LineageOS mais recente para um dispositivo
  - /miui <device>: Obtenha a ROM MIUI mais recente para um dispositivo
- - /pe <device>: Obtenha a ROM mais recente da Pixel Experience para um dispositivo
- - /pe10 <device>: Obtenha a ROM mais recente da Pixel Experience 10 para um dispositivo
- - /peplus <device>: Obtenha a ROM mais recente da Pixel Experience Plus para um dispositivo
- - /pearl <device>: Obtenha a mais recente ROM Pearl de um dispositivo
- - /pixys <device>: Obtenha a ROM Pixys mais recente de um dispositivo
+ - /pe <device>: Obtenha a ROM Pixel Experience mais recente para um dispositivo
+ - /pe10 <device>: Obtenha a ROM Pixel Experience (Android 10) mais recente para um dispositivo
+ - /peplus <device>: Obtenha a ROM Pixel Experience Plus mais recente para um dispositivo
+ - /pearl <device>: Obtenha a ROM Pearl mais recente para um dispositivo
+ - /pixys <device>: Obtenha a ROM Pixys mais recente para um dispositivo
  - /posp <device>: Obtenha a ROM POSP mais recente para um dispositivo
- - /viper <device>: Obtenha a ROM mais recente da Viper para um dispositivo
+ - /viper <device>: Obtenha a ROM ViperOS mais recente para um dispositivo
  
  *GSIs:*
  - /descendant: Obtenha a GSI mais recente do Descendant!
@@ -567,6 +567,15 @@ Quando você estiver ausente (AFK), qualquer menção será respondida com uma m
 
 *Apenas administradores:*
  - /setflood <int/'no'/'off'>: ativa e desativa o controle anti-flood
+""",
+
+"Direct Links_help": """
+*Este módulo permite gerar links diretos a partir de vários sites.*
+
+/direct <url>: retornará um link de download direto.
+
+*Lista de URLs suportadas:*
+`Google Drive - MEGA.nz - Cloud Mail - Yandex.Disk - AFH - ZippyShare - MediaFire - SourceForge - OSDN - GitHub`
 """,
 
 "Antispam security_help": """
@@ -596,76 +605,105 @@ Obrigado ao @nunopenim por fornecer sua API proprietária do Combot Anti Spam Sy
 """,
 
 "Bans_help": """
- - /kickme: remove a pessoa que usa o comando
+Algumas pessoas precisam ser banidas publicamente; spammers, pessoas irritantes ou apenas trolls.
 
-*Apenas administradores:*
- - /ban <userhandle>: banea a un usuario. (via nombre de usuario, o respondiendo a un mensaje suyo)
- - /tban <userhandle> x(m/h/d): banea a un usuario durante x tiempo. (via nombre de usuario, o respondiendo a un mensaje suyo). m = minutos, h = horas, d = días.
- - /unban <userhandle>: desbanea a un usuario. (via nombre de usuario, o respondiendo a un mensaje suyo)
- - /kick <userhandle>: expulsa a un usuario, (via nombre de usuario, o respondiendo a un mensaje suyo)
+Este módulo permite que você faça isso facilmente, expondo algumas ações comuns, para que todos vejam!
+
+*Os comandos disponíveis são:*
+ - /ban: bane um usuário do seu grupo.
+ - /banme: banir-se
+ - /tban: bane temporariamente um usuário do seu grupo. Defina o tempo usando <d/h/m> (dias, horas, minutos)
+ - /unban: desbane um usuário do seu grupo.
+ - /sban: bane silenciosamente um usuário. (via identificador ou resposta)
+ - /mute: silencia um usuário no seu grupo.
+ - /tmute: silencia temporariamente um usuário em seu grupo. Defina o tempo usando <d/h/m> (dias, horas, minutos)
+ - /unmute: dessilencia um usuário do seu grupo.
+ - /kick: remove um usuário do seu grupo.
+ - /kickme: usuários que usam isso, se removem!
+
+Um exemplo de como silenciar temporariamente alguém:
+/tmute @username 2h; isso silencia o usuário por 2 horas.
 """,
 
 "Connections_help": """
-Acciones disponibles mediante grupos conectados:
- • Ver y editar notas
- • Ver y editar filtros
- • Ver y editar la lista negra
- • Ascender/quitar administrador
- • Ver la lista de administradores, ver link de invitación
- • Desactivar/activar comandos en el chat
- • Silenciar/quitar silencio a usuarios en el chat
- • Restringir/quitar restricción a usuarios en el chat
- • ¡Más en el futuro!
+Às vezes, você só deseja adicionar notas e filtros a um bate-papo em grupo, mas não quer que todos vejam; É aqui que entram as conexões ...
 
- - /connection <iddelchat>: Conecta al chat remoto
- - /disconnect: Desconecta del chat
- - /allowconnect on/yes/off/no: Permite a los usuarios conectarse al grupo
+Isso permite que você se conecte ao banco de dados de um bate-papo e adicione coisas a ele sem que as pessoas do grupo saibam disso! Por razões óbvias, você precisa ser um administrador para adicionar coisas; mas qualquer membro pode visualizar seus dados. (usuários banidos/removidos não podem!)
+
+*Ações disponíveis em grupos conectados:*
+ • Ver e editar notas
+ • Ver e editar filtros
+ • Ver e editar lista-negra
+ • Promover/rebaixar usuários
+ • Ver lista de administradores e link de convite
+ • Desativar/ativar comandos no grupo
+ • Silenciar/dessilenciar usuários no grupo
+ • Restringir/remover restrições de usuários no grupo
+ • Mais no futuro!
+
+ - Digite /connect ou /connection no grupo que você deseja se conectar.
+ - /connection ou /connect <ID do grupo>: conecte-se ao grupo remoto
+ - /disconnect: desconecte-se do grupo
+ - /allowconnect on/yes/off/no: permiti que usuários se conectem ao grupo
+
+Você pode obter o ID do grupo usando o comando /id no grupo não se surpreenda se o ID for negativo; todos os super grupos têm IDs negativos.
 """,
 
 "Filters_help": """
-Torne o seu bate-papo mais animado com filtros; O bot responderá a certas palavras!
-Os filtros não diferenciam maiúsculas de minúsculas; toda vez que alguém disser suas palavras-chave, {} responderá outra coisa! pode ser usado para criar seus próprios comandos, se desejado.
- - /filters: lista todos os filtros ativos no bate-papo.
-*Apenas Admins:*
- - /filter <palavra> <responda a mensagem>: Toda vez que alguém diz "palavra", o bot responde com "frase". Para vários filtros de palavras, cite a primeira palavra.
- - /stop <palavra usada no filtro>: Para (apaga) um filtro.
+Torne o seu grupo mais animado com filtros; O bot responderá a certas palavras! Os filtros não diferenciam maiúsculas de minúsculas; toda vez que alguém disser suas palavras-chave, Hitsuki responderá outra coisa! pode ser usado para criar seus próprios comandos, se desejado.
+
+ - /filters: lista todos os filtros ativos neste bate-papo.
+
+*Apenas administradores:*
+ - /filter <palavra chave> <mensagem de resposta>: Toda vez que alguém diz "palavra", o bot responde com "frase". Para vários filtros de palavras, cite a primeira palavra.
+ - /stop <palave chave do filtro>: para o determinado filtro
  
+Um exemplo de como definir um filtro seria via:
+`/filter Olá Olá! Como você está?`
+Um filtro de várias palavras pode ser definido através de:
+`/filter "olá amigo" Olá de volta! Há quanto tempo!`
+Se você deseja salvar uma imagem, gif ou adesivo ou qualquer outro dado, faça o seguinte:
+`/filter palavra`, enquanto responde a um adesivo ou a qualquer dado que você desejar. Agora, toda vez que alguém mencionar "palavra", esse adesivo será enviado como resposta.
 """,
 
 "Command disabling_help": """
- - /cmds: comprueba el estado actual de los comandos deshabilitados.
+Nem todo mundo quer todos os recursos que o bot oferece. É melhor deixar alguns comandos sem uso; para evitar spam e abuso.
 
-*Solo administradores:*
- - /enable <nombre comando>: activa ese comando
- - /disable <nombre comando>: desactiva ese comando
- - /listcmds: lista de todos los comandos que se pueden activar o desactivar
+Isso permite que você desabilite alguns comandos usados ​​com frequência, para que ninguém possa usá-los. Também permitirá que você os exclua automaticamente, impedindo que as pessoas enviem mensagens de texto azul.
+
+ - /cmds: verifique o status atual dos comandos desabilitados
+
+*Apenas administradores:*
+ - /enable <nome do cmd>: ativa esse comando
+ - /disable <nome do cmd>: desativa esse comando
+ - /listcmds: lista todos os possíveis comandos alternáveis
 """,
 
 "Locks_help": """
- - /locktypes: lista de todos los tipos de bloqueo posibles
+Os adesivos te incomodam? Ou deseja evitar que as pessoas compartilhem links? Ou fotos? Você está no lugar certo!
 
-*Solo administradores:*
- - /lock <tipo>: bloquea elementos de un determinado tipo (no disponible en chat privado)
- - /unlock <tipo>: desbloquea elementos de un determinado tipo (no disponible en chat privado)
- - /locks: muestra la lista actual de bloqueos en el chat
+O módulo de travas permite bloquear alguns itens comuns no mundo do Telegram; o bot irá excluí-los automaticamente!
 
-Los bloqueos se pueden utilizar para restringir a los usuarios de un grupo.
-ej:
-Bloquear URL borrará automaticamente todos los mensajes que contengan URLs y que no hayan sido metidos en la lista blanca, bloquear stickers borrará todos los \
-stickers, etc.
-Bloquear los bots hará que ningun usuario no administrador pueda añadir bots al chat.
+*Os comandos disponíveis são:*
+ - /lock <item>: bloqueia o uso de "item". Agora, apenas os administradores poderão usar isso!
+ - /unlock <item>: desbloquear "item". Todos podem usá-lo novamente.
+ - /locks: lista o status do bloqueio no chat.
+ - /locktypes: obtém uma lista de todas as coisas que podem ser bloqueadas.  (Veja isso!)
+
+Ex: bloquear adesivos
+/lock sticker
 """,
 
 "Log Channels_help": """
-*Solo administradores:*
+*Apenas administradores:*
 - /logchannel: Obtém o canal de logs
 - /setlog: configura o canal de logs.
-- /unsetlog: elimina o canal de logs.
+- /unsetlog: desativa o canal de logs.
 
-Para configurar um canal de registro se faz da seguinte forma:
-- adicione o bot ao canal desejado (como administrador!)
-- escreva /setlog no canal
-- envie /setlog no grupo
+Para configurar um canal de logs é feito da seguinte forma:
+ 1. Adicione o bot ao canal desejado (como administrador!)
+ 2. Escreva /setlog no canal.
+ 3. Encaminhe /setlog para o grupo
 """,
 
 "Misc_help": """
@@ -697,36 +735,36 @@ Para configurar um canal de registro se faz da seguinte forma:
 """,
 
 "Purges_help": """
-*Apenas administradores:*
- - /del: apaga a mensagem que você responder.
- - /purge: apaga todas as mensagens antecessoras à mensagem que você respondeu.
- - /purge <número X>: exclua a mensagem à qual você respondeu e as seguintes X mensagens.
-""",
+*Exclua mensagens facilmente com este comando. Bot limpa mensagens todas juntas ou individualmente.*
 
-"Muting & Restricting_help": """
-*Solo administradores:*
- - /mute <userhandle>: silencia un usuario. Puede ser usado respondiendo a un mensaje, silenciando al usuario al que respondes.
- - /tmute <userhandle> x(m/h/d): silencia a un usuario durante x tiempo.(via nombre de usuario, o respondiendo a un mensaje suyo). m = minutos, h = horas, d = días.
- - /unmute <userhandle>: quita el silencio a un usuario. Puede ser usado como respuesta, quitando el silencio a usuario al que respondes.
- - /restrict <userhandle>: restringe a un usuario para enviar stickers, gif, links o media. Puede ser usado como respuesta, restringiendo al usuario al que respondes.
- - /trestrict <userhandle> x(m/h/d): restringe a un usuario durante x tiempo. (via nombre de usuario, o respondiendo a un mensaje suyo). m = minutos, h = horas, d = días.
- - /unrestrict <userhandle>: quita la restricción a un usuario para enviar stickers, gif, links o media. Puede ser usado como respuesta, quitando la restricción al usuario al que respondes..
+*Apenas administradores:*
+ - /del: exclui a mensagem para a qual você respondeu
+ - /purge: exclui todas as mensagens entre a resposta do comando e a mensagem.
+ - /purge <X inteiro>: exclui a mensagem respondida e X mensagens após ela.
 """,
 
 "Notes_help": """
- - /get <nombredelanota>: obtienes la nota guardada con este nombre
- - #<nombredelanota>: lo mismo que con /get
- - /notes o /saved: lista de todas las notas guardadas en el chat.
+*Salve dados para futuros usuários com notas!*
+*As notas são ótimas para salvar petiscos aleatórios de informações; um número de telefone, um belo gif, uma imagem engraçada - qualquer coisa!*
 
-Si quieres recuperar el contenido de una nota sin formato, utiliza `/get <nombredelanota> noformat`. Esto puede \
-ser util cuando actualizas una nota, sobre todo si hay botones en ella.
+*Os comandos disponíveis são:*
+ - /save <palavra> <sentença>: Salve essa frase na nota chamada "palavra". Responder a uma mensagem salvará essa mensagem. Funciona até com mídias!
+ - /get <palavra>: receba a nota salva nessa palavra.
+ - #<word>: o mesmo que /get palavra
+ - /clear <palavra>: apaga a nota chamada "palavra"
+ - /notes: lista todas as notas no chat atual
+ - /saved: o mesmo que /notes
 
-*Solo administradores:*
- - /save <nombredelanota> <contenidodelanota>: guarda 'contenidodelanota' como nota con el nombre 'nombredelanota'
-Se puede añadir botones a las notas usando la sintaxis normal de 'markdown' - el link que añadas al boton deberá llevar antes \
-`buttonurl:` tal como se muestra aquí: `[textodelbotón](buttonurl:tulink.com)`. Así quedaria configurado un botón en una nota. Mira /markdownhelp para más información.
- - /save <nombredelanota>: guarda el mensaje al que respondes con 'nombredelanota'
- - /clear <nombredelanota>: borra la nota con ese nombre
+Um exemplo de como salvar uma nota seria via:
+/save data Estes são alguns dados!
+Agora, qualquer pessoa que use "/get data" ou "#data" será respondida com "Estes são alguns dados!!".
+Se você deseja salvar uma imagem, gif ou adesivo ou qualquer outro dado, faça o seguinte:
+/save palavra enquanto responde a um adesivo ou a qualquer dado que você desejar. Agora, a nota em "#palavra" contém um adesivo que será enviado como resposta.
+
+*Dica:* para recuperar uma anotação sem a formatação, use /get <nome da nota> noformat
+Isso recuperará a nota e a enviará sem formatá-la; obtendo o markdown bruto, permitindo que você faça edições fáceis.
+
+*Nota:* Os nomes das notas não diferenciam maiúsculas de minúsculas e são convertidos automaticamente em minúsculas antes de serem salvos.
 """,
 
 "Reporting_help":"""
