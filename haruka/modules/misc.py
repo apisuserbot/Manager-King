@@ -563,7 +563,7 @@ def decide(bot: Bot, update: Update):
     elif r <= 90:
         update.message.reply_text(tld("No."))
     else:
-        update.message.reply_text(tld)("Maybe."))
+        update.message.reply_text(tld("Maybe."))
 
 
 __help__ = """
