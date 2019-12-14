@@ -558,6 +558,7 @@ def snipe(bot: Bot, update: Update, args: List[str]):
 
 
 def decide(bot: Bot, update: Update):
+    chat = update.effective_chat
     r = randint(1, 100)
     if r <= 65:
         update.message.reply_text(tld(chat.id, "Yes."))
