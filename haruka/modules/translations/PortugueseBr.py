@@ -180,9 +180,9 @@ PortugueseBrStrings = {
 
     "It's {} in {}": "Está {} em {}",
     
-    "Yes": "Sim",
-    "No": "Não",
-    "Maybe": "Talvez",
+    "Yes.": "Sim",
+    "No.": "Não",
+    "Maybe.": "Talvez",
 
     "Please reply to a sticker to get its ID.": "Por favor responda a um stickerer para obeter o seu ID.",
     "Please reply to a sticker for me to upload its PNG.": "Por favor, responda a um sticker para que eu possa upar seu PNG .",
