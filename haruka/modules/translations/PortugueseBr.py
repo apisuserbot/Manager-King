@@ -166,7 +166,7 @@ PortugueseBrStrings = {
     "\nFirst Name: {}": "\nNome: {}",
     "\nLast Name: {}": "\nSobrenome: {}",
     "\nUsername: @{}": "\nNome de usuário: @{}",
-    "\nUset link: {}": "\nLink do usuário: {}",
+    "\nUser link: {}\n": "\nLink do usuário: {}",
     "\n\nThis person is my owner - I would never do anything against them!":
         "\n\nEssa pessoa é minha dono(a), eu nunca faria algo contra ela!",
     "\nThis person is one of my sudo users! Nearly as powerful as my owner - so watch it.":
