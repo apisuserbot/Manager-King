@@ -688,6 +688,12 @@ Isso permite que você se conecte ao banco de dados de um bate-papo e adicione c
 Você pode obter o ID do grupo usando o comando /id no grupo não se surpreenda se o ID for negativo; todos os super grupos têm IDs negativos.
 """,
 
+"Image Lookup_help": """
+*Este módulo usa o Google Images para fazer uma pesquisa reversa de imagens.*
+
+- /reverse: Faz uma pesquisa de imagem reversa da mídia à qual foi respondida.
+""",
+
 "Filters_help": """
 Torne o seu grupo mais animado com filtros; O bot responderá a certas palavras! Os filtros não diferenciam maiúsculas de minúsculas; toda vez que alguém disser suas palavras-chave, Hitsuki responderá outra coisa! pode ser usado para criar seus próprios comandos, se desejado.
 
@@ -794,6 +800,36 @@ Para configurar um canal de logs é feito da seguinte forma:
  - /del: exclui a mensagem para a qual você respondeu
  - /purge: exclui todas as mensagens entre a resposta do comando e a mensagem.
  - /purge <X inteiro>: exclui a mensagem respondida e X mensagens após ela.
+""",
+
+"Damain Blacklists_help": """
+A lista negra de domínios é usada para impedir que determinados domínios sejam mencionados em um grupo. Sempre que um URL desse domínio for mencionado, a mensagem será excluída imediatamente.
+
+*NOTA:* a lista negra de domínios não afeta os administradores do grupo.
+
+- /geturl: Exibe os URLs atuais da lista negra
+
+*Apenas administradores:*
+- /addurl <urls>: Adicione um domínio à lista negra. O bot analisará automaticamente o URL.
+- /delurl <urls>: Remove os URLs da lista negra
+""",
+
+"Backups_help": """
+*Apenas para os administradores do grupo:*
+
+ - /import: responda ao arquivo de backup de grupo do butler/emilia para importar o máximo possível, facilitando muito as transferências! Observe que arquivos/fotos não podem ser importados devido a restrições de Telegram.
+
+ - /export: exportar dados do grupo.  Os dados exportados incluem regras, notas (documentos, imagens, música, vídeo, áudio, voz, texto, botões de texto), listas negras, comandos e bloqueios. Mais virá gradualmente!
+
+*Este módulo ainda está na versão beta!*
+""",
+
+"Reactions_help": """
+*Use estes comandos para deixar o bot expressar reações por você!*
+
+ - /react: reage com reações normais.
+ - /happy: reage com felicidade.
+ - /angry: reage com raiva.
 """,
 
 "Notes_help": """
