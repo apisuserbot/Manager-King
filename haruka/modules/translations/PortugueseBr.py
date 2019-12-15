@@ -112,25 +112,38 @@ HIT = (
 )
 
 MARKDOWN_HELP = """
-Markdown es una herramienta de formato muy poderosa soportada por telegram. {} tiene algunas mejoras, para asegurarse de que \
-las notas guardadas se analizan correctamente y te permiten crear botones..
+Você pode usar o markdown para tornar suas mensagens mais expressivas. Este é o markdown atualmente suportado:
 
-- <code>_cursiva_</code>: si se introduce el texto entre '_' generará texto en cursiva
-- <code>*negrita*</code>: si se introduce el texto entre '*' generará texto en negrita
-- <code>`codigo`</code>: si se introduce el texto entre '`' generará texto monoespaciado, también conocido como 'código'
-- <code>[algúntexto](algunaURL)</code>: esto creará un link - el mensaje se mostrará en <code>algúntexto</code>, \
-y pulsando en el te llevará a la página que has puesto en <code>algunaURL</code>.
-EJ: <code>[test](example.com)</code>
+<code>palavras de código</code> os acentos graves permitem agrupar suas palavras em fontes monoespaçadas. Mostra como: <code>palavras de código</code>
+<code>*palavras em negrito*</code> asteriscos são usadas para fontes em negrito. Mostra como: <b>palavras em negrito</b>
+<code>_palavras em itálico_</code> sublinhados são usados ​​para itálico. Mostra como: <i>palavras em itálico</i>
+<code>[hyperlink](example.com)</code> isso é usado para <code>[hyperlink](example.com)</code>, and will show as such: <a href="hyperlink">https://example.com</a>. Certifique-se de não adicionar espaços extras entre o ] e o ( ou não será um markdown válido.
 
-- <code>[textodelboton](buttonurl:algunaURL)</code>: esta es una mejora especial que permite a los usuarios \
-tener botones de telegram. <code>textodelboton</code> será el nombre que aparezca en el botón, y <code>algunaURL</code> \
-será la página web o URL que se abrirá al pulsar.
-EG: <code>[Esto es un botón](buttonurl:example.com)</code>
+Agora, se você quiser ter botões em sua mensagem, poderá usar esta sintaxe especial:
+<code>[botão](buttonurl://example.com)</code>
+Isso criará um botão chamado "botão" que redireciona o usuário para example.com ao clicar.
+Se você deseja adicionar dois botões na mesma linha, adicione: same no final do seu link; colocará na mesma linha que a outra. Por exemplo:
+<code>[botão](buttonurl://example.com)
+[botão2](buttonurl://example.com:same)
+[botão 3](buttonurl://example.com)</code>
+criará dois botões na mesma linha (botões 1 e 2) e um último (botão 3) em uma segunda linha.
 
-Si quieres poner varios botones en la misma línea, usa :same, como aquí:
-<code>[uno](buttonurl://example.com)
-[dos](buttonurl://google.com:same)</code>
-Esto creará dos botones en la misma línea en vez de uno en cada línea.
+Recheios:
+Você também pode usar determinadas tags para preencher sua mensagem com informações de usuário ou bate-papo;  as opções são:
+<code>{first}</code>: O primeiro nome do usuário.
+<code>{last}</code>: O sobrenome do usuário.
+<code>{fullname}</code>: O nome completo do usuário.
+<code>{username}</code>: O nome de usuário do usuário; se nenhum estiver disponível, menciona o usuário.
+<code>{mention}</code>: Menciona o usuário, usando seu primeiro nome.
+<code>{id}</code>: O ID do usuário.
+<code>{chatname}</code>: O nome do bate-papo.
+<code>{rules}</code>: Adiciona um link para as regras do grupo.
+<code>{preview}</code>: Ativa as visualizações de links para a mensagem. Pode ser útil ao usar links para páginas do Instant View.
+
+Um exemplo de como usar recheios seria definir suas boas-vindas, via:
+<code>/setwelcome Olá {first}! Bem-vindo à {chatname}.</code>
+
+Experimente isto em notas, filtros, mensagens de boas-vindas ou até regras!
 """
 
 PortugueseBrStrings = {
@@ -179,6 +192,8 @@ PortugueseBrStrings = {
     "Its always banhammer time for me!": "É sempre a hora do martelo do ban para mim!",
 
     "It's {} in {}": "Está {} em {}",
+    
+    "\nAll commands can either be used with `/` or `!`.\n": "\nTodos os comandos podem ser usados ​​com `/` ou `!`.\n
     
     "Yes.": "Sim",
     "No.": "Não",
