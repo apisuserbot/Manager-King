@@ -193,7 +193,7 @@ PortugueseBrStrings = {
 
     "It's {} in {}": "Está {} em {}",
     
-    "\nAll commands can either be used with `/` or `!`.\n": "\nTodos os comandos podem ser usados ​​com `/` ou `!`.\n
+    "\nAll commands can either be used with `/` or `!`.\n": "\nTodos os comandos podem ser usados ​​com `/` ou `!`.\n"
     
     "Yes.": "Sim",
     "No.": "Não",
