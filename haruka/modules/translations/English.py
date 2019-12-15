@@ -182,7 +182,7 @@ You can use markdown to make your messages more expressive. This is the markdown
 <code>`code words`</code> backticks allow you to wrap your words in monospace fonts. Shows as: <code>code words</code>
 <code>*bold words*</code> asterixes are used for bold font. Shows as: <b>bold words</b>
 <code>_italic words_</code> underscores are used for italics. Shows as: <i>italic words</i>
-<code>[hyperlink](example.com)</code> this is used for <code>[hyperlink](http://example.com/)</code>, and will show as such: <a href="https://example.com">hyperlink</a>. Make sure not to add any extra spaces between the ] and the ( or it won't be valid markdown.
+<code>[hyperlink](example.com)</code> this is used for <code>[hyperlink](http://example.com/)</code>, and will show as such: hyperlink. Make sure not to add any extra spaces between the ] and the ( or it won't be valid markdown.
 
 Now, if you wanted to have buttons on your message, you could use this special syntax:
 <code>[button](buttonurl://example.com)</code>
