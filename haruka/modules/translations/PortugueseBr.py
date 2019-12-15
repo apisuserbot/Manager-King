@@ -193,11 +193,11 @@ PortugueseBrStrings = {
 
     "It's {} in {}": "Está {} em {}",
     
-    "\nAll commands can either be used with `/` or `!`.\n": "\nTodos os comandos podem ser usados ​​com `/` ou `!`.\n"
+    "\nAll commands can either be used with `/` or `!`.\n": "\nTodos os comandos podem ser usados ​​com `/` ou `!`.\n",
     
-    "Yes.": "Sim",
-    "No.": "Não",
-    "Maybe.": "Talvez",
+    "Yes.": "Sim.",
+    "No.": "Não.",
+    "Maybe.": "Talvez.",
     
     "Sticker kanged successfully! \nPack can be found [here](t.me/addstickers/{packname})": "Sticker kangado com sucesso! \nPacote pode ser achado [aqui](t.me/addstickers/{packname})",
     
