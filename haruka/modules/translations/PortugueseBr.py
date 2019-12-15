@@ -117,7 +117,7 @@ Você pode usar o markdown para tornar suas mensagens mais expressivas. Este é 
 <code>palavras de código</code> os acentos graves permitem agrupar suas palavras em fontes monoespaçadas. Mostra como: <code>palavras de código</code>
 <code>*palavras em negrito*</code> asteriscos são usadas para fontes em negrito. Mostra como: <b>palavras em negrito</b>
 <code>_palavras em itálico_</code> sublinhados são usados ​​para itálico. Mostra como: <i>palavras em itálico</i>
-<code>[hyperlink](example.com)</code> isso é usado para <code>[hyperlink](example.com)</code>, and will show as such: <a href="hyperlink">https://example.com</a>. Certifique-se de não adicionar espaços extras entre o ] e o ( ou não será um markdown válido.
+<code>[hyperlink](example.com)</code> isso é usado para <code>[hyperlink](example.com)</code>, and will show as such: <a href="https://example.com/">hyperlink</a>. Certifique-se de não adicionar espaços extras entre o ] e o ( ou não será um markdown válido.
 
 Agora, se você quiser ter botões em sua mensagem, poderá usar esta sintaxe especial:
 <code>[botão](buttonurl://example.com)</code>
