@@ -35,7 +35,8 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
             exit(1)
 
     if not chatD.get_member(bot.id).can_promote_members:
-        update.effective_message.reply_text(tld(chat.id, "I can't promote/demote people here! Make sure I'm an admin and can appoint new admins."))
+	        update.effective_message.reply_text(tld(chat.id, "I can't promote/demote people here! "
+                                                "Make sure I'm an admin and can appoint new admins."))
         exit(1)
 
     user_id = extract_user(message, args)
