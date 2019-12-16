@@ -234,7 +234,7 @@ o caso dos dados mencionados acima.""",
 "Successfully promoted in *{}*!": "Promovido com sucesso em *{}*!",
 "I can't promote/demote people here! Make sure I'm an admin and can appoint new admins.": "Não posso promover/rebaixar pessoas aqui! Certifique-se de que sou administrador e de que posso nomear novos administradores.",
 
-"This person is the CREATOR of the chat, how would I demote them?": "Essa pessoa é o CRIADOR do grupo, como eu a rebaixaria?"
+"This person is the CREATOR of the chat, how would I demote them?": "Essa pessoa é o CRIADOR do grupo, como eu a rebaixaria?",
 
 "Can't demote those who weren't promoted!": "Não é possível rebaixar aqueles que não foram promovidos!",
 
