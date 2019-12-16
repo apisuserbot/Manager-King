@@ -236,7 +236,7 @@ o caso dos dados mencionados acima.""",
 
 "This person is the CREATOR of the chat, how would I demote them?": "Essa pessoa é o CRIADOR do grupo, como eu a rebaixaria?"
 
-"Can't demote what wasn't promoted!": "Não posso tirar o administrador se ele não for um",
+"Can't demote those who weren't promoted!": "Não é possível rebaixar aqueles que não foram promovidos!",
 
 "Successfully demoted in *{}*!": "Rebaixado com sucesso em *{}*!",
 "Could not demote. I might not be admin, or the admin status was appointed by another user, so I can't act upon them!": "Não consigo remover o administrador. Pode ser que ele não seja um administrador ou o status de administrador foi atribuído por outro usuário, por isso não posso agir de acordo!",
