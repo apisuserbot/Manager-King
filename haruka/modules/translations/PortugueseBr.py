@@ -229,9 +229,11 @@ que afirma claramente que o direito de cancelamento não se aplica \
 o caso dos dados mencionados acima.""",
 
 #Admin
-"How am I meant to promote someone that's already an admin?": "Como vou promover alguém que já é um administrador?",
+"How am I meant to promote someone who's already an admin?": "Como vou promover alguém que já é um administrador?",
 "I can't promote myself! Get an admin to do it for me.": "Eu não posso me tornar um administrador! Notifique um administrador para fazer isso!",
 "Successfully promoted in *{}*!": "Promovido com sucesso em *{}*!",
+"I can't promote/demote people here! Make sure I'm an admin and can appoint new admins.": "Não posso promover/rebaixar pessoas aqui! Certifique-se de que sou administrador e de que posso nomear novos administradores.",
+"This person is the CREATOR of the chat, how would I demote them?": "Essa pessoa é o CRIADOR do grupo, como eu a rebaixaria?"
 
 "This person CREATED the chat, how would I demote them?": "Esta pessoa criou o chat. Como você deseja que o administrador seja removido?",
 "Can't demote what wasn't promoted!": "Não posso tirar o administrador se ele não for um",
