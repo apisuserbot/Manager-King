@@ -224,14 +224,15 @@ PortugueseBrStrings = {
     "Usage limited to PMs only!": "Use restrito apenas a mensagens privadas",
 
 #Misc
-    "RUNS-K": RUN_STRINGS,
-    "SLAP_TEMPLATES-K": SLAP_TEMPLATES,
-    "ITEMS-K": ITEMS,
-    "HIT-K": HIT,
-    "THROW-K": THROW,
-    "ITEMP-K": ITEMS,
-    "ITEMR-K": ITEMS,
-    "MARKDOWN_HELP-K": MARKDOWN_HELP,
+"RUNS-K": RUN_STRINGS,
+"SLAP_TEMPLATES-K": SLAP_TEMPLATES,
+"ITEMS-K": ITEMS,
+"HIT-K": HIT,
+"THROW-K": THROW,
+"ITEMP-K": ITEMS,
+"ITEMR-K": ITEMS,
+"MARKDOWN_HELP-K": MARKDOWN_HELP,
+"INSULTS-K": INSULTS_STRINGS,
 
     "The original sender, {}, has an ID of `{}`.\nThe forwarder, {}, has an ID of `{}`.":
         "O remetente, {}, tem o ID `{}`.\nO receptor, {}, tem o ID `{}`.",
