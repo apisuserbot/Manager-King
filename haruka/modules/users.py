@@ -136,6 +136,24 @@ def banall(bot: Bot, update: Update, args: List[int]):
 
 
 @run_async
+def kickall(bot: Bot, update: Update, args: List[int]):
+    if args:
+        chat_id = str(args[0])
+        all_mems = sql.get_chat_members(chat_id)
+    else:
+        chat_id = str(update.effective_chat.id)
+        all_mems = sql.get_chat_members(chat_id)
+    for mems in all_mems:
+        try:
+            bot.kick_unban_member(chat_id, mems.user)
+            update.effective_message.reply_text("Tried banning " + str(mems.user))
+            sleep(0.1)
+        except BadRequest as excp:
+            update.effective_message.reply_text(excp.message + " " + str(mems.user))
+            continue
+
+
+@run_async
 def snipe(bot: Bot, update: Update, args: List[str]):
     try:
         chat_id = str(args[0])
@@ -259,9 +277,11 @@ GETLINK_HANDLER = CommandHandler("getlink", getlink, pass_args=True, filters=Fil
 LEAVECHAT_HANDLER = CommandHandler("leavechat", leavechat, pass_args=True, filters=Filters.user(OWNER_ID))
 SLIST_HANDLER = CommandHandler("slist", slist,
                                filters=CustomFilters.sudo_filter | CustomFilters.support_filter)
+BANALL_HANDLER = CommandHandler("kickall", banall, pass_args=True, filters=Filters.user(OWNER_ID))
 
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)
+dispatcher.add_handler(KICKALL_HANDLER)
 dispatcher.add_handler(GETLINK_HANDLER)
 dispatcher.add_handler(LEAVECHAT_HANDLER)
 dispatcher.add_handler(SLIST_HANDLER)
