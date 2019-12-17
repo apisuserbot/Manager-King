@@ -273,7 +273,10 @@ def evo(bot: Bot, update: Update):
                           f"*Android Version:* `{version}`\n"
                           f"*Maintainer:* [{maintainer}](https://t.me/{maintainer_url})\n")
 
-            keyboard = [[InlineKeyboardButton(text="Click to Download", url=f"{url}")]]
+            keyboard = [[InlineKeyboardButton(text="⬇️ Download ⬇️", url=f"{url}")]]
+            message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
+                               disable_web_page_preview=True)
+            keyboard = [[InlineKeyboardButton(text="📃 Changelog 📃", url=f"{url}")]]
             message.reply_text(reply_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode=ParseMode.MARKDOWN,
                                disable_web_page_preview=True)
             return
