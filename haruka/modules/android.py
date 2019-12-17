@@ -15,11 +15,11 @@ from telegram.ext import run_async
 from haruka import dispatcher, LOGGER
 
 # DO NOT DELETE THIS, PLEASE.
-# Made by @RealAkito on GitHub and Telegram.
+# Originally made by @RealAkito on GitHub and Telegram.
 # This module was inspired by Android Helper Bot by Vachounet.
 # None of the code is taken from the bot itself, to avoid any more confusion.
 
-LOGGER.info("Original Android Modules by @RealAkito on Telegram")
+LOGGER.info("Original Android Modules by @RealAkito on Telegram, modified by @HitaloSama on Telegram")
 
 GITHUB = 'https://github.com'
 DEVICES_DATA = 'https://raw.githubusercontent.com/androidtrackers/certified-android-devices/master/devices.json'
