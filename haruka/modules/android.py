@@ -257,7 +257,7 @@ def evo(bot: Bot, update: Update):
                            disable_web_page_preview=True)
         return
 
-    if fetch.status_code == 200:
+    elif fetch.status_code == 200:
         try:
             usr = fetch.json()
             filename = usr['filename']
