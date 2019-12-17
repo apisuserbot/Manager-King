@@ -242,12 +242,12 @@ def evo(bot: Bot, update: Update):
 
     fetch = get(f'https://raw.githubusercontent.com/Evolution-X-Devices/official_devices/master/builds/{device}.json')
 
-    if device == '':
+    elif device == '':
         reply_text = "Please type your device **codename**!\nFor example, `/evo tissot`"
         message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
         return
 
-    if device == 'gsi':
+    elif device == 'gsi':
         reply_text = "Please check TeamGSIs channel(@TeamGSI) for unofficial but updated GSIs" \
                      " or click the button down to download the official GSIs!"
 
