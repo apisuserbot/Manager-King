@@ -279,7 +279,7 @@ GETLINK_HANDLER = CommandHandler("getlink", getlink, pass_args=True, filters=Fil
 LEAVECHAT_HANDLER = CommandHandler("leavechat", leavechat, pass_args=True, filters=Filters.user(OWNER_ID))
 SLIST_HANDLER = CommandHandler("slist", slist,
                                filters=CustomFilters.sudo_filter | CustomFilters.support_filter)
-KICKALL_HANDLER = CommandHandler("kickall", banall, pass_args=True, filters=Filters.user(OWNER_ID))
+KICKALL_HANDLER = CommandHandler("kickall", kickall, pass_args=True, filters=Filters.user(OWNER_ID))
 
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)
