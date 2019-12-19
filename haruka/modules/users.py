@@ -139,6 +139,7 @@ def banall(bot: Bot, update: Update, args: List[int]):
 def kickall(bot: Bot, update: Update, args: List[int]):
     if args:
         chat_id = str(args[0])
+        chat = update.effective_chat
         all_mems = sql.get_chat_members(chat_id)
     else:
         chat_id = str(update.effective_chat.id)
