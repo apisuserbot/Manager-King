@@ -157,9 +157,9 @@ def new_member(bot: Bot, update: Update):
             if new_mem.id == bot.id:
                 bot.send_message(
                     MESSAGE_DUMP,
-                    "<b>I was added in a group</b>" \
-                    "#AddGroup" \
-                    "<b>Chat name:</b> {}" \
+                    "<b>I was added in a group</b>\n" \
+                    "#AddGroup\n" \
+                    "<b>Chat name:</b> {}\n" \
                     "<b>ID:</b> <code>{}</code>".format(chat.title, chat.id),
                     parse_mode=ParseMode.HTML
                 )
