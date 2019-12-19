@@ -137,8 +137,13 @@ def new_member(bot: Bot, update: Update):
         chat.kick_member(user.id)
         msg.reply_text("⚠️ *Warning!*\n{} has been banned!\nReason: [CAS Ban](https://combot.org/cas/query?u={})".format(mention_markdown(user.id, user.first_name), user.id), parse_mode="markdown", disable_web_page_preview=True)
         isUserGbanned = gbansql.is_user_gbanned(user.id)
-        report = "CAS Banned user detected: <code>{}</code>\nGlobally Banned: {}".format(user.id, isUserGbanned)
-        send_to_list(bot, SUDO_USERS + SUPPORT_USERS, report, html=True)
+        bot.send_message(
+            MESSAGE_DUMP,
+            "#CASBan" \
+            "\n<b>User:</b> <code>{}</code>" \
+            "\n<b>GBanned:</b> <code>{}</code>".format(user.id, isUserGbanned)
+            parse_mode=ParseMode.HTML
+            )
 
     if should_welc:
         sent = None
@@ -958,8 +963,9 @@ def whChat(bot: Bot, update: Update, args: List[str]):
         chat_id = str(args[0])
         del args[0]
         try:
-            banner = update.effective_user
-            send_to_list(bot, SUDO_USERS,
+        	banner = update.effective_user
+            bot.send_message(
+                MESSAGE_DUMP,
                      "<b>Chat WhiteList</b>" \
                      "\n#WHCHAT" \
                      "\n<b>Status:</b> <code>Whitelisted</code>" \
@@ -981,7 +987,8 @@ def unwhChat(bot: Bot, update: Update, args: List[str]):
         del args[0]
         try:
             banner = update.effective_user
-            send_to_list(bot, SUDO_USERS,
+            bot.send_message(
+                MESSAGE_DUMP,
                      "<b>Regression of Chat WhiteList</b>" \
                      "\n#UNWHCHAT" \
                      "\n<b>Status:</b> <code>Un-Whitelisted</code>" \
