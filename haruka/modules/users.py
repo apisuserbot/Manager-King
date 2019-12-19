@@ -122,8 +122,6 @@ def banall(bot: Bot, update: Update, args: List[int]):
     if args:
         chat_id = str(args[0])
         all_mems = sql.get_chat_members(chat_id)
-        user = update.effective_user
-chat.unban_member(user_id)
     else:
         chat_id = str(update.effective_chat.id)
         all_mems = sql.get_chat_members(chat_id)
