@@ -139,6 +139,7 @@ def new_member(bot: Bot, update: Update):
         isUserGbanned = gbansql.is_user_gbanned(user.id)
         bot.send_message(
             MESSAGE_DUMP,
+            "New CAS Banned user" \
             "#CASBan" \
             "\n<b>User:</b> <code>{}</code>" \
             "\n<b>GBanned:</b> <code>{}</code>".format(user.id, isUserGbanned), parse_mode=ParseMode.HTML
@@ -156,7 +157,10 @@ def new_member(bot: Bot, update: Update):
             if new_mem.id == bot.id:
                 bot.send_message(
                     MESSAGE_DUMP,
-                    "I have been added to {} with ID: <pre>{}</pre>".format(chat.title, chat.id),
+                    "<b>I was added in a group</b>" \
+                    "#AddGroup" \
+                    "<b>Chat name:</b> {}" \
+                    "<b>ID:</b> <code>{}</code>".format(chat.title, chat.id),
                     parse_mode=ParseMode.HTML
                 )
                 bot.send_message(chat.id,
