@@ -349,10 +349,10 @@ o caso dos dados mencionados acima.""",
 "\nGlobally muted: <b>{}</b>": "\nSilenciado globalmente: <b>{}</b>",
 "\nReason: {}": "\nMotivo: {}",
 
-"You don't seem to be referring to a user.": "Você não parece estar se referindo a um usuário."
-"I spy with my little eyes... a sudo user war! Why are you guys turning on each other?": "Eu espio com meus olhinhos... uma guerra de usuários do sudo! Por que vocês estão se virando?"
-"OOOH, someone's trying to gban a support user! *grabs popcorn*": "OOOH, alguém está tentando Banir Globalmente um usuário de suporte! *pegando pipoca*
-"-_- So funny, let me gban myself, why don't I? Nice try.": "-_- Tão engraçado, deixe-me me Banir Globalmente, por que não? Boa tentativa."
+"You don't seem to be referring to a user.": "Você não parece estar se referindo a um usuário.",
+"I spy with my little eyes... a sudo user war! Why are you guys turning on each other?": "Eu espio com meus olhinhos... uma guerra de usuários do sudo! Por que vocês estão se virando?",
+"OOOH, someone's trying to gban a support user! *grabs popcorn*": "OOOH, alguém está tentando Banir Globalmente um usuário de suporte! *pegando pipoca*",
+"-_- So funny, let me gban myself, why don't I? Nice try.": "-_- Tão engraçado, deixe-me me Banir Globalmente, por que não? Boa tentativa.",
 
 #Bans
     "I really wish I could ban admins...": "Eu gostaria de poder banir administradores porem...",
