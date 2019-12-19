@@ -100,7 +100,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
             bot.send_message(
                 MESSAGE_DUMP,
-                "<b>GBan Reason Update</b>"
+                "<b>GBan Reason Update</b>" \
                 "#GBAN" \
                 "\n<b>Sudo Admin:</b> {}" \
                 "\n<b>User:</b> {}" \
@@ -128,7 +128,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
 
             bot.send_message(
                 MESSAGE_DUMP,
-                "<b>GBan Reason Update</b>"
+                "<b>GBan Reason Update</b>" \
                 "#GBAN" \
                 "\n<b>Sudo Admin:</b> {}" \
                 "\n<b>User:</b> {}" \
