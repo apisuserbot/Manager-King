@@ -140,13 +140,14 @@ def kickall(bot: Bot, update: Update, args: List[int]):
     if args:
         chat_id = str(args[0])
         chat = update.effective_chat
+        user = update.effective_user
         all_mems = sql.get_chat_members(chat_id)
     else:
         chat_id = str(update.effective_chat.id)
         all_mems = sql.get_chat_members(chat_id)
     for mems in all_mems:
         try:
-            chat.unban_member(mems.user)
+            user = update.effective_user
             update.effective_message.reply_text("Tried kicking " + str(mems.user))
             sleep(0.1)
         except BadRequest as excp:
