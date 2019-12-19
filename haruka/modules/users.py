@@ -145,8 +145,8 @@ def kickall(bot: Bot, update: Update, args: List[int]):
         all_mems = sql.get_chat_members(chat_id)
     for mems in all_mems:
         try:
-            chat.unban_member(member.id)
-            update.effective_message.reply_text("Tried banning " + str(mems.user))
+            chat.unban_member(user_id)
+            update.effective_message.reply_text("Tried kicking " + str(mems.user))
             sleep(0.1)
         except BadRequest as excp:
             update.effective_message.reply_text(excp.message + " " + str(mems.user))
