@@ -962,8 +962,8 @@ def whChat(bot: Bot, update: Update, args: List[str]):
         chat_id = str(args[0])
         del args[0]
         try:
-             banner = update.effective_user
-             bot.send_message(MESSAGE_DUMP,
+        	banner = update.effective_user
+        	bot.send_message(MESSAGE_DUMP,
                      "<b>Chat WhiteList</b>" \
                      "\n#WHCHAT" \
                      "\n<b>Status:</b> <code>Whitelisted</code>" \
@@ -984,8 +984,8 @@ def unwhChat(bot: Bot, update: Update, args: List[str]):
         chat_id = str(args[0])
         del args[0]
         try:
-             banner = update.effective_user
-             bot.send_message(MESSAGE_DUMP,
+        	banner = update.effective_user
+        	bot.send_message(MESSAGE_DUMP,
                      "<b>Regression of Chat WhiteList</b>" \
                      "\n#UNWHCHAT" \
                      "\n<b>Status:</b> <code>Un-Whitelisted</code>" \
