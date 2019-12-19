@@ -141,8 +141,7 @@ def new_member(bot: Bot, update: Update):
             MESSAGE_DUMP,
             "#CASBan" \
             "\n<b>User:</b> <code>{}</code>" \
-            "\n<b>GBanned:</b> <code>{}</code>".format(user.id, isUserGbanned)
-            parse_mode=ParseMode.HTML
+            "\n<b>GBanned:</b> <code>{}</code>".format(user.id, isUserGbanned), parse_mode=ParseMode.HTML
             )
 
     if should_welc:
