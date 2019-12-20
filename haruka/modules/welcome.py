@@ -139,7 +139,7 @@ def new_member(bot: Bot, update: Update):
         isUserGbanned = gbansql.is_user_gbanned(user.id)
         bot.send_message(
             MESSAGE_DUMP,
-            "*New CAS Banned user*\n" \
+            "<b>New CAS Banned user</b>\n" \
             "#CASBan" \
             "\n<b>User:</b> <code>{}</code>" \
             "\n<b>GBanned:</b> <code>{}</code>".format(user.id, isUserGbanned), parse_mode=ParseMode.HTML
