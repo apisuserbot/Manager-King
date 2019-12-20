@@ -8,8 +8,9 @@ from telegram.utils.helpers import escape_markdown
 
 import haruka.modules.sql.rules_sql as sql
 from haruka import dispatcher
+from haruka.modules.helper_funcs.misc import build_keyboard_alternate
 from haruka.modules.helper_funcs.chat_status import user_admin
-from haruka.modules.helper_funcs.string_handling import markdown_parser
+from haruka.modules.helper_funcs.string_handling import markdown_parser, button_markdown_parser
 
 
 @run_async
@@ -32,11 +33,11 @@ def send_rules(update, chat_id, from_pm=False):
         else:
             raise
 
-    rules = sql.get_rules(chat_id)
+    rules, buttons = button_markdown_parser(sql.get_rules(chat_id))
     text = "The rules for *{}* are:\n\n{}".format(escape_markdown(chat.title), rules)
 
     if from_pm and rules:
-        bot.send_message(user.id, text, parse_mode=ParseMode.MARKDOWN)
+        bot.send_message(user.id, text, parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup(build_keyboard_alternate(buttons)))
     elif from_pm:
         bot.send_message(user.id, "The group admins haven't set any rules for this chat yet. "
                                   "This probably doesn't mean it's lawless though...!")
@@ -96,11 +97,11 @@ def __chat_settings__(bot, update, chat, chatP, user):
 __help__ = """
 *Set rules for making your group organized, just don't make it a dictatorship!*
 
- - /rules: Get the rules from a group.
+ - /rules: get the rules for this chat.
 
 *Admin only:*
- - /setrules <rules>: Defines the rules for a group.
- - /clearrules: clear the rules of a group.
+ - /setrules <your rules here>: set the rules for this chat.
+ - /clearrules: clear the rules for this chat.
 """
 
 __mod_name__ = "Rules"
