@@ -225,12 +225,12 @@ or feature requests you might have :)
 If you enjoying using me and/or would like to help me survive in the wild, hit /donate to help fund/upgrade my VPS!
 """,
 
-    "send-help": """Hey there! My name is *{}*.
-I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of the things I can help you with.
+    "send-help": """Hey! My name is *{}*. I am a group management bot, here to help you get around and keep the order in your groups!
+I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
 
-*Main commands available:*
- - /start: Cool command to check if the bot is alive or not
- - /help: PM's you this message.
+*A few handy commands are:*
+ - /start: starts me! You've probably already used this.
+ - /help: gets this message out; I'll tell you more about myself!
  - /help <module name>: PM's you info about that module.
  - /lang: Change bot language
  - /source: Info about my sourcecode

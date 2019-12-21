@@ -322,28 +322,28 @@ o caso dos dados mencionados acima.""",
 
 #Antiflood
 "I like to leave the flooding to natural disasters. But you, you were just a disappointment. Get out.":
-     "Suelo tener bastante paciencia con la gente pesada, pero te has pasado. ¡Largo de aquí!",
+     "Eu gosto de deixar as inundações (flood) para os desastres naturais. Mas você, você foi apenas uma decepção. Saia.",
 "I can't kick people here, give me permissions first! Until then, I'll disable antiflood.":
-    "No puedo expulsar a la gente aquí, dame permisos primero! Hasta que eso ocurra deshabilitaré el antiflood.",
-"Antiflood has been disabled.": "Antiflood ha sido deshabilitado.",
+    "Não posso remover pessoas daqui, me dê permissões primeiro! Até lá, desabilitarei o Anti-Flood.",
+"Antiflood has been disabled.": "O Anti-Flood foi desativado.",
 "Antiflood has to be either 0 (disabled), or a number bigger than 3 (enabled)!":
-    "Antiflood tiene que ser 0 (deshabilitado), o un número superior a 3 (habilitado)!",
-"Antiflood has been updated and set to {}": "Antiflood se ha actualizado y ha sido establecido a {}",
+    "O AntiFlood deve ser 0 (desativado) ou um número maior que 3 (ativado)!",
+"Antiflood has been updated and set to {}": "O Anti-Flood foi atualizado e definido para {}",
 "Unrecognised argument - please use a number, 'off', or 'no'.":
-    "Comando desconocido- por favor usa un número, 'off', o 'no'.",
-"I'm not currently enforcing flood control!": "Ahora mismo no estoy no controlando el flood!",
+    "Argumento não reconhecido - por favor use um número, 'off' ou 'no'.",
+"I'm not currently enforcing flood control!": "Atualmente, não estou aplicando o controle de Anti-Flood",
 "I'm currently banning users if they send more than {} consecutive messages.":
-     "Estoy baneando a todos los usuarios que envíen más de {} mensajes consecutivos.",
+     "No momento, estou banindo usuários que enviarem mais de {} mensagens consecutivas.",
 
 #Antispam
 "I've enabled antispam security in this group. This will help protect you from spammers, unsavoury characters, and the biggest trolls.":
- "He activado la seguridad antispam en este grupo. Esto te ayudará a protegerte contra spammers, personas desagradables y trolls.",
+ "Eu ativei a segurança Anti-Spam neste grupo. Isso ajudará a protegê-lo contra spammers, pessoas desagradáveis ​​e os maiores trolls.",
 
 "I've disabled antispam security in this group. GBans wont affect your users anymore. You'll be less protected from any trolls and spammers though!":
-    "He desactivado la seguridad antispam en este grupo. Los Bans Globales no afectarán a los usuarios. Estarás menos protegido de trolls y spammers!",
+    "Desativei a segurança Anti-Spam neste grupo. Banimentos globais não afetarão mais seus usuários. Você estará menos protegido contra trolls e spammers!",
 
 "Give me some arguments to choose a setting! on/off, yes/no!\n\nYour current setting is: {}\nWhen True, any gbans that happen will also happen in your group. When False, they won't, leaving you at the possible mercy of spammers.":
-    "Dame algún comando para establecer la configuración! on/off, yes/no!\n\nTu configuración actual es: {}\nCuando sea True, cualquier Ban Global que ocurra tambien ocurrirá en tu grupo. Cuando sea False, los Ban Globales no afectarán en tu grupo, dejandolo a merced de posibles spammers.",
+    "Dê-me alguns argumentos para escolher uma configuração! yes/no!\n\nSua configuração atual é: {} \nQuando ativo, quaisquer banimentos globais que acontecerem também acontecerão no seu grupo. Quando desativado, eles não vão, deixando você à mercê de possíveis spammers.",
 
 "Globally banned: <b>{}</b>": "Banido globalmente: <b>{}</b>",
 "\nGlobally muted: <b>{}</b>": "\nSilenciado globalmente: <b>{}</b>",
@@ -547,12 +547,12 @@ o caso dos dados mencionados acima.""",
 "Here is the help for the *{}* module:\n{}": "Aqui está a ajuda para o módulo *{}*:\n{}",
 "Back": "Voltar",
 
-    "send-help": """Olá! Meu nome é *{}*.
-Eu sou um bot para administração de grupos modular com alguns extras divertidos! Confira o seguinte para ter uma idéia de algumas das coisas em que posso ajudá-lo.
+    "send-help": """Ei! Meu nome é *{}*. Eu sou um bot de gerenciamento de grupos, aqui para ajudá-lo a se locomover e manter a ordem em seus grupos!
+Eu tenho muitos recursos úteis, como controle de flood, um sistema de aviso, um sistema de anotações e até respostas predeterminadas em determinadas palavras-chave.
 
-Principais comandos:
- - /start: inicia o bot
- - /help: te envia uma mensagem privada com as informações.
+*Alguns comandos úteis são:*
+ - /start: Me inicializa! Você provavelmente já usou isso.
+ - /help: Envie esta mensagem; Vou lhe contar mais sobre mim!
  - /help <module name>: te envia uma mensagem privada com as informações deste comando.
  - /lang: altera o idioma do bot
  - /settings:
