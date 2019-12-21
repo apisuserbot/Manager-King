@@ -520,7 +520,7 @@ o caso dos dados mencionados acima.""",
         "Bans": "Banimentos",
         "Word Blacklists": "Lista negra",
         "Filters": "Filtros",
-        "Command disabling": "Desativar comandos",
+        "Disabling": "Desativar comandos",
         "Antispam security": "Segurança Anti-Spam",
         "Locks": "Bloqueios",
         "Log Channels": "Canais de registro",
@@ -798,17 +798,22 @@ Se você deseja salvar uma imagem, gif ou adesivo ou qualquer outro dado, faça 
 `/filter palavra`, enquanto responde a um adesivo ou a qualquer dado que você desejar. Agora, toda vez que alguém mencionar "palavra", esse adesivo será enviado como resposta.
 """,
 
-"Command disabling_help": """
-Nem todo mundo quer todos os recursos que o bot oferece. É melhor deixar alguns comandos sem uso; para evitar spam e abuso.
+"Disabling_help": """
+Nem todo mundo quer todos os recursos que o bot oferece. É melhor deixar alguns comandos sem uso;  para evitar spam e abuso.
 
-Isso permite que você desabilite alguns comandos usados ​​com frequência, para que ninguém possa usá-los. Também permitirá que você os exclua automaticamente, impedindo que as pessoas enviem mensagens de texto azul.
+*Isso permite que você desabilite alguns comandos usados ​​com frequência, para que ninguém possa usá-los. Também permitirá que você os exclua automaticamente, impedindo as pessoas de usarem eles.*
 
- - /cmds: verifique o status atual dos comandos desabilitados
+Available commands are:
+ - /cmds: check the current status of disabled commands
 
-*Apenas administradores:*
- - /enable <nome do cmd>: ativa esse comando
- - /disable <nome do cmd>: desativa esse comando
- - /listcmds: lista todos os possíveis comandos alternáveis
+*aApenas administradores:*
+ - /enable <nome do cmd>: ativa este comando
+ - /disable <nome do cmd>: desativa este comando
+ - /listcmds: listar todos os comandos alternáveis ​​possíveis
+
+*Nota:*
+Ao desativar um comando, o comando é desativado apenas para não administradores. Todos os administradores ainda podem usar esses comandos.
+Os comandos desativados ainda estão acessíveis através do recurso /connect.
 """,
 
 "Dogs and Cats_help": """
