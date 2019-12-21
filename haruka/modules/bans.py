@@ -365,23 +365,23 @@ def sban(bot: Bot, update: Update, args: List[str]) -> str:
 
 
 __help__ = """
-Some people need to be publicly banned; spammers, annoyances, or just trolls.
+*Some people need to be publicly banned; spammers, annoyances, or just trolls.*
 
-This module allows you to do that easily, by exposing some common actions, so everyone will see!
+*This module allows you to do that easily, by exposing some common actions, so everyone will see!*
 
-Available commands are:
+*Available commands are:*
  - /ban: bans a user from your chat.
- - /banme: ban yourself
+ - /sban: bans a user from your chat, silently. (And deletes your message)
  - /tban: temporarily bans a user from your chat. set time using int<d/h/m> (days hours minutes)
  - /unban: unbans a user from your chat.
- - /sban: silently bans a user. (via handle, or reply)
  - /mute: mute a user in your chat.
+ - /smute: mutes a user in your chat, silently. (And deletes your message)
  - /tmute: temporarily mute a user in your chat. set time using int<d/h/m> (days hours minutes)
  - /unmute: unmutes a user from your chat.
  - /kick: kicks a user from your chat.
  - /kickme: users who use this, kick themselves!
 
- An example of temporarily muting someone:
+An example of temporarily muting someone:
 /tmute @username 2h; this mutes a user for 2 hours.
 """
 

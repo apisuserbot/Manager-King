@@ -370,15 +370,19 @@ def reaction(bot: Bot, update: Update, args: List[str]) -> str:
 
 
 __help__ = """
- - /adminlist | /admins: Lists the admins in the chat
+*Make it easy to promote and demote users with the admin module!*
 
-*Admin only:*
- - /pin: Silently pins the message replied to. Add 'loud','notify' or 'violent' to send a notification to users.
- - /unpin: Unpins the currently pinned message
+*Available commands are:*
+ - /promote: promote a user.
+ - /demote: demote a user.
+ - /adminlist: list the admins in the current chat.
+
+*Keep your chat up to date on the latest news with a simple pinned message!*
+
+*Available commands are:*
+ - /pin: pin the message you replied to; add 'loud' or 'notify' to send a notification to group members.
+ - /unpin: Unpin the currently pinned message.
  - /permanentpin: Set a permanent pin for supergroup chat, when an admin or telegram channel change pinned message, bot will change pinned message immediatelly
- - /invitelink: Gets the invite link of the group
- - /promote: Promotes a user Reply to the user or use their username.
- - /demote: Demotes a user. Reply to the user or use their username.
 """
 
 __mod_name__ = "Admin"

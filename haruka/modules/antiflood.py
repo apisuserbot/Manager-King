@@ -126,13 +126,13 @@ def __chat_settings__(bot, update, chat, chatP, user):
 
 
 __help__ = """
- You know how sometimes, people join, send 100 messages, and ruin your chat? With antiflood, that happens no more!
+*You know how sometimes, people join, send 100 messages, and ruin your chat? With antiflood, that happens no more!*
 
-Antiflood allows you to take action on users that send more than x messages in a row. Actions are: ban/kick/mute/tban/tmute
+*Antiflood allows you to mute users that send more than x messages in a row.*
 
-Available commands are:
+*Available commands are:*
  - /flood: gets the current antiflood settings.
- - /setflood <number/off>: sets the number of messages at which to take action on a user.
+ - /setflood: <number/off> sets the number of messages at which to take action on a user.
 """
 
 __mod_name__ = "AntiFlood"

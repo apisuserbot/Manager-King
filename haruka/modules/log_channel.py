@@ -148,15 +148,20 @@ if is_module_loaded(FILENAME):
 
 
     __help__ = """
-*Admin only:*
- - /logchannel: get log channel info
- - /setlog: set the log channel.
- - /unsetlog: unset the log channel.
+*Recent actions are nice, but they don't help you log every action taken by the bot. This is why you need log channels!*
 
-*Setting the log channel is done by:*
- 1. adding the bot to the desired channel (as an admin!)
- 2. sending /setlog in the channel
- 3. forwarding the /setlog to the group
+*Log channels can help you keep track of exactly what the other admins are doing. Bans, Mutes, warns, notes - everything can be moderated.*
+
+*Commands:*
+ - /logchannel: Gets the name of the current log channel.
+ - /setlog: Used to setup a log channel for a particular chat.
+ - /unsetlog: Unsets the log channel for a chat.
+
+*Setting a log channel is done by the following steps:*
+ - Add Rose to your channel, as an admin. This is done via the "add administrators" tab.
+ - Send /setlog to your channel.
+ - Forward the /setlog command to the group you wish to be logged.
+ - Congrats! all done :)
 """
 
     __mod_name__ = "Log Channels"

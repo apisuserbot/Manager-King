@@ -153,21 +153,24 @@ if is_module_loaded(FILENAME):
             sql.disable_command(chat_id, disable_cmd)
 
 
-    __mod_name__ = "Command disabling"
+    __mod_name__ = "Disabling"
 
     __help__ = """
-Not everyone wants every feature that the bot offers. Some commands are best \
-left unused; to avoid spam and abuse.
+*Not everyone wants every feature that Rose offers. Some commands are best left unused; to avoid spam and abuse.*
 
-This allows you to disable some commonly used commands, so noone can use them. \
-It'll also allow you to autodelete them, stopping people from bluetexting.
+*This allows you to disable some commonly used commands, so noone can use them. It'll also allow you to autodelete them, stopping people from*
 
+*Available commands are:*
  - /cmds: check the current status of disabled commands
 
 *Admin only:*
  - /enable <cmd name>: enable that command
  - /disable <cmd name>: disable that command
  - /listcmds: list all possible toggleable commands
+
+*Note*:
+When disabling a command, the command only gets disabled for non-admins. All admins can still use those commands.
+Disabled commands are still accessible through the /connect feature.
     """
 
     DISABLE_HANDLER = CommandHandler("disable", disable, pass_args=True, filters=Filters.group)
