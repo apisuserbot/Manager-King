@@ -803,10 +803,10 @@ Nem todo mundo quer todos os recursos que o bot oferece. É melhor deixar alguns
 
 *Isso permite que você desabilite alguns comandos usados ​​com frequência, para que ninguém possa usá-los. Também permitirá que você os exclua automaticamente, impedindo as pessoas de usarem eles.*
 
-Available commands are:
- - /cmds: check the current status of disabled commands
+*Comandos disponíveis:*
+ - /cmds: verifique os comandos desativados
 
-*aApenas administradores:*
+*Apenas administradores:*
  - /enable <nome do cmd>: ativa este comando
  - /disable <nome do cmd>: desativa este comando
  - /listcmds: listar todos os comandos alternáveis ​​possíveis
