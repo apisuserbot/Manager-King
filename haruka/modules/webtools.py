@@ -35,38 +35,6 @@ def get_bot_ip(bot: Bot, update: Update):
     update.message.reply_text(res.text)
 
 
-@run_async
-def rtt(bot: Bot, update: Update):
-    out = ""
-    under = False
-    if os.name == 'nt':
-        output = subprocess.check_output("ping -n 1 1.0.0.1 | findstr time*", shell=True).decode()
-        outS = output.splitlines()
-        out = outS[0]
-    else:
-        out = subprocess.check_output("ping -c 1 1.0.0.1 | grep time=", shell=True).decode()
-    splitOut = out.split(' ')
-    stringtocut = ""
-    for line in splitOut:
-        if (line.startswith('time=') or line.startswith('time<')):
-            stringtocut = line
-            break
-    newstra = stringtocut.split('=')
-    if len(newstra) == 1:
-        under = True
-        newstra = stringtocut.split('<')
-    newstr = ""
-    if os.name == 'nt':
-        newstr = newstra[1].split('ms')
-    else:
-        newstr = newstra[1].split(' ')  # redundant split, but to try and not break windows ping
-    ping_time = float(newstr[0])
-    if os.name == 'nt' and under:
-        update.effective_message.reply_text(" Round-trip time is <{}ms".format(ping_time))
-    else:
-        update.effective_message.reply_text(" Round-trip time: {}ms".format(ping_time))
-
-
 def ping(bot: Bot, update: Update):
     message = update.effective_message
     parsing = extract_text(message).split(' ')
@@ -140,11 +108,9 @@ def speedtst(bot: Bot, update: Update):
 
 
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID))
-RTT_HANDLER = CommandHandler("ping", rtt, filters=CustomFilters.sudo_filter)
 PING_HANDLER = CommandHandler("cping", ping, filters=CustomFilters.sudo_filter)
 SPEED_HANDLER = CommandHandler("speedtest", speedtst, filters=CustomFilters.sudo_filter)
 
 dispatcher.add_handler(IP_HANDLER)
-dispatcher.add_handler(RTT_HANDLER)
 dispatcher.add_handler(SPEED_HANDLER)
 dispatcher.add_handler(PING_HANDLER)
