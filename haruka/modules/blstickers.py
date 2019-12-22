@@ -208,22 +208,22 @@ def blacklist_mode(bot: Bot, update: Update, args: List[str]):
 
 	if args:
 		if args[0].lower() == 'off' or args[0].lower() == 'nothing' or args[0].lower() == 'no':
-			settypeblacklist = (tld(chat.id, 'turn off'))
+			settypeblacklist = (tld(chat.id, 'nothing'))
 			sql.set_blacklist_strength(chat_id, 0, "0")
 		elif args[0].lower() == 'del' or args[0].lower() == 'delete':
-			settypeblacklist = (tld(chat.id, 'I will delet the message'))
+			settypeblacklist = (tld(chat.id, 'deleted'))
 			sql.set_blacklist_strength(chat_id, 1, "0")
 		elif args[0].lower() == 'warn':
-			settypeblacklist = (tld(chat.id, 'I will warn'))
+			settypeblacklist = (tld(chat.id, 'warned'))
 			sql.set_blacklist_strength(chat_id, 2, "0")
 		elif args[0].lower() == 'mute':
-			settypeblacklist = (tld(chat.id, 'I will mute'))
+			settypeblacklist = (tld(chat.id, 'muted'))
 			sql.set_blacklist_strength(chat_id, 3, "0")
 		elif args[0].lower() == 'kick':
-			settypeblacklist = (tld(chat.id, 'I will kick'))
+			settypeblacklist = (tld(chat.id, 'kicked'))
 			sql.set_blacklist_strength(chat_id, 4, "0")
 		elif args[0].lower() == 'ban':
-			settypeblacklist = (tld(chat.id, 'I will ban'))
+			settypeblacklist = (tld(chat.id, 'banned'))
 			sql.set_blacklist_strength(chat_id, 5, "0")
 		elif args[0].lower() == 'tban':
 			if len(args) == 1:
@@ -247,13 +247,13 @@ Example time values: 4m = 4 minutes, 3h = 3 hours, 6d = 6 days, 5w = 5 weeks."""
 			send_message(update.effective_message, (tld(chat.id, "I only understand off/del/warn/ban/kick/mute/tban/tmute!")))
 			return
 		if conn:
-			text = (tld(chat.id, "The sticker blacklist mode has been changed, the User will be `{}` on *{}*!").format(settypeblacklist, chat_name))
+			text = (tld(chat.id, "Updated blacklist reaction to: {} on {}").format(settypeblacklist, chat_name))
 		else:
-			text = (tld(chat.id, "The sticker blacklist mode has been changed, the user will `{}`!").format(settypeblacklist))
+			text = (tld(chat.id, "Updated blacklist reaction to: {}").format(settypeblacklist))
 		send_message(update.effective_message, text, parse_mode="markdown")
 		return "<b>{}:</b>\n" \
 				"<b>Admin:</b> {}\n" \
-				"Changed sticker blacklist mode. Will {}.".format(html.escape(chat.title),
+				"Changed stickers blacklist mode to: {}.".format(html.escape(chat.title),
 																			mention_html(user.id, user.first_name), settypeblacklist)
 	else:
 		getmode, getvalue = sql.get_blacklist_setting(chat.id)
