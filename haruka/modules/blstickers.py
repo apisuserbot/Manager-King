@@ -91,7 +91,7 @@ def add_blackliststicker(bot: Bot, update: Update):
 				sql.add_to_stickers(chat_id, trigger.lower())
 				added += 1
 			except BadRequest:
-				send_message(update.effective_message, (tld(chat.id, "Sticker `{}` can not be found!).format(trigger)), parse_mode="markdown")
+				send_message(update.effective_message, (tld(chat.id, "Sticker `{}` can not be found!).format(trigger), parse_mode="markdown"))
 
 		if added == 0:
 			return
