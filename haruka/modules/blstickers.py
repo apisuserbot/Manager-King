@@ -208,22 +208,22 @@ def blacklist_mode(bot: Bot, update: Update, args: List[str]):
 
 	if args:
 		if args[0].lower() == 'off' or args[0].lower() == 'nothing' or args[0].lower() == 'no':
-			settypeblacklist = tl(update.effective_message, 'turn off')
+			settypeblacklist = (tld(chat.id, 'turn off'))
 			sql.set_blacklist_strength(chat_id, 0, "0")
 		elif args[0].lower() == 'del' or args[0].lower() == 'delete':
-			settypeblacklist = tl(update.effective_message, 'I will delet the message')
+			settypeblacklist = (tld(chat.id, 'I will delet the message'))
 			sql.set_blacklist_strength(chat_id, 1, "0")
 		elif args[0].lower() == 'warn':
-			settypeblacklist = tl(update.effective_message, 'I will warn')
+			settypeblacklist = (tld(chat.id, 'I will warn'))
 			sql.set_blacklist_strength(chat_id, 2, "0")
 		elif args[0].lower() == 'mute':
-			settypeblacklist = tl(update.effective_message, 'I will mute')
+			settypeblacklist = (tld(chat.id, 'I will mute'))
 			sql.set_blacklist_strength(chat_id, 3, "0")
 		elif args[0].lower() == 'kick':
-			settypeblacklist = tl(update.effective_message, 'I will kick')
+			settypeblacklist = (tld(chat.id, 'I will kick'))
 			sql.set_blacklist_strength(chat_id, 4, "0")
 		elif args[0].lower() == 'ban':
-			settypeblacklist = tl(update.effective_message, 'I will ban')
+			settypeblacklist = (tld(chat.id, 'I will ban'))
 			sql.set_blacklist_strength(chat_id, 5, "0")
 		elif args[0].lower() == 'tban':
 			if len(args) == 1:
