@@ -57,7 +57,7 @@ def blackliststicker(bot: Bot, update: Update, args: List[str]):
 	split_text = split_message(sticker_list)
 	for text in split_text:
 		if sticker_list == (tld(chat.id, "<b>Daftar hitam stiker saat saat ini di {}:</b>\n").format(chat_name).format(chat_name)):
-			send_message(update.effective_message, (tld(chat.id, "No blblacklist sticker on <b>{}</b>!").format(chat_name), parse_mode=ParseMode.HTML))
+			send_message(update.effective_message, (tld(chat.id, "No blblacklist sticker on <b>{}</b>!").format(chat_name)), parse_mode=ParseMode.HTML)
 			return
 	send_message(update.effective_message, text, parse_mode=ParseMode.HTML)
 
