@@ -302,35 +302,35 @@ def del_blackliststicker(bot: Bot, update: Update):
 					message.delete()
 				elif getmode == 2:
 					message.delete()
-					warn(update.effective_user, chat, tl(update.effective_message, "Menggunakan stiker '{}' yang ada di daftar hitam stiker").format(trigger), message, update.effective_user, conn=False)
+					warn(update.effective_user, chat, (tld(chat.id, "Use the sticker '{}' which is on the sticker blacklist").format(trigger)), message, update.effective_user, conn=False)
 					return
 				elif getmode == 3:
 					message.delete()
 					bot.restrict_chat_member(chat.id, update.effective_user.id, can_send_messages=False)
-					bot.sendMessage(chat.id, tl(update.effective_message, "{} di bisukan karena menggunakan stiker '{}' yang ada di daftar hitam stiker").format(mention_markdown(user.id, user.first_name), trigger), parse_mode="markdown")
+					bot.sendMessage(chat.id, (tld(chat id, "{} muted for using the sticker '{}' which is on the stickemuted for using the sticker '{}' which is on the stickers blacklist trigger").format(mention_markdown(user.id, user.first_name), trigger), parse_mode="markdown")
 					return
 				elif getmode == 4:
 					message.delete()
 					res = chat.unban_member(update.effective_user.id)
 					if res:
-						bot.sendMessage(chat.id, tl(update.effective_message, "{} di tendang karena menggunakan stiker '{}' yang ada di daftar hitam stiker").format(mention_markdown(user.id, user.first_name), trigger), parse_mode="markdown")
+						bot.sendMessage(chat.id, (tld(chat.id, "{} was kicked for using the sticker '{}' which is on the stickers blacklist").format(mention_markdown(user.id, stickers blacklist trigger), parse_mode="markdown")
 					return
 				elif getmode == 5:
 					message.delete()
 					chat.kick_member(user.id)
-					bot.sendMessage(chat.id, tl(update.effective_message, "{} di blokir karena menggunakan stiker '{}' yang ada di daftar hitam stiker").format(mention_markdown(user.id, user.first_name), trigger), parse_mode="markdown")
+					bot.sendMessage(chat.id, (tld(chat.id, "{} was banned because it uses the sticker '{}' which is on the stickers blacklist").format(mention_markdown(user.id, user.first_name)), trigger), parse_mode="markdown")
 					return
 				elif getmode == 6:
 					message.delete()
 					bantime = extract_time(message, value)
 					chat.kick_member(user.id, until_date=bantime)
-					bot.sendMessage(chat.id, tl(update.effective_message, "{} di blokir selama {} karena menggunakan stiker '{}' yang ada di daftar hitam stiker").format(mention_markdown(user.id, user.first_name), value, trigger), parse_mode="markdown")
+					bot.sendMessage(chat.id, (tld(chat.id, "{} was banned for {} because it used the sticker '{}' which was on the stickers blacklist").format(mention_markdown(user.id, user.first_name)), value, trigger), parse_mode="markdown")
 					return
 				elif getmode == 7:
 					message.delete()
 					mutetime = extract_time(message, value)
 					bot.restrict_chat_member(chat.id, user.id, until_date=mutetime, can_send_messages=False)
-					bot.sendMessage(chat.id, tl(update.effective_message, "{} di bisukan selama {} karena menggunakan stiker '{}' yang ada di daftar hitam stiker").format(mention_markdown(user.id, user.first_name), value, trigger), parse_mode="markdown")
+					bot.sendMessage(chat.id, (tld(chat.id, "{} muted during {} for using the sticker '{}' which is on the stickers blacklist").format(mention_markdown(user.id, user.first_name)), value, trigger), parse_mode="markdown")
 					return
 			except BadRequest as excp:
 				if excp.message == "Message to delete not found":
