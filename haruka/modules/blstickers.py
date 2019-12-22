@@ -211,19 +211,19 @@ def blacklist_mode(bot: Bot, update: Update, args: List[str]):
 			settypeblacklist = (tld(chat.id, 'nothing'))
 			sql.set_blacklist_strength(chat_id, 0, "0")
 		elif args[0].lower() == 'del' or args[0].lower() == 'delete':
-			settypeblacklist = (tld(chat.id, 'deleted'))
+			settypeblacklist = (tld(chat.id, 'delete'))
 			sql.set_blacklist_strength(chat_id, 1, "0")
 		elif args[0].lower() == 'warn':
-			settypeblacklist = (tld(chat.id, 'warned'))
+			settypeblacklist = (tld(chat.id, 'warn'))
 			sql.set_blacklist_strength(chat_id, 2, "0")
 		elif args[0].lower() == 'mute':
-			settypeblacklist = (tld(chat.id, 'muted'))
+			settypeblacklist = (tld(chat.id, 'mute'))
 			sql.set_blacklist_strength(chat_id, 3, "0")
 		elif args[0].lower() == 'kick':
-			settypeblacklist = (tld(chat.id, 'kicked'))
+			settypeblacklist = (tld(chat.id, 'kick'))
 			sql.set_blacklist_strength(chat_id, 4, "0")
 		elif args[0].lower() == 'ban':
-			settypeblacklist = (tld(chat.id, 'banned'))
+			settypeblacklist = (tld(chat.id, 'ban'))
 			sql.set_blacklist_strength(chat_id, 5, "0")
 		elif args[0].lower() == 'tban':
 			if len(args) == 1:
