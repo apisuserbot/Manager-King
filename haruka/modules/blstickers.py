@@ -307,7 +307,7 @@ def del_blackliststicker(bot: Bot, update: Update):
 				elif getmode == 3:
 					message.delete()
 					bot.restrict_chat_member(chat.id, update.effective_user.id, can_send_messages=False)
-					bot.sendMessage(chat.id, (tld(chat id, "{} muted for using the sticker '{}' which is on the stickemuted for using the sticker '{}' which is on the stickers blacklist trigger").format(mention_markdown(user.id, user.first_name)), trigger), parse_mode="markdown")
+					bot.sendMessage(chat.id, (tld(chat.id, "{} muted for using the sticker '{}' which is on the stickemuted for using the sticker '{}' which is on the stickers blacklist trigger").format(mention_markdown(user.id, user.first_name), trigger)), parse_mode="markdown")
 					return
 				elif getmode == 4:
 					message.delete()
