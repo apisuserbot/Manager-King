@@ -152,24 +152,24 @@ def unblackliststicker(bot: Bot, update: Update):
 
 		if len(to_unblacklist) == 1:
 			if successful:
-				send_message(update.effective_message, (tld(chat.id, "Stiker <code>{}</code> dihapus dari daftar hitam di <b>{}</b>!").format(html.escape(to_unblacklist[0]), chat_name),
-							   parse_mode=ParseMode.HTML))
+				send_message(update.effective_message, (tld(chat.id, "Stiker <code>{}</code> dihapus dari daftar hitam di <b>{}</b>!").format(html.escape(to_unblacklist[0]), chat_name)),
+							   parse_mode=ParseMode.HTML)
 			else:
 				send_message(update.effective_message, (tld(chat.id, "Ini tidak ada di daftar hitam stiker...!")))
 
 		elif successful == len(to_unblacklist):
 			send_message(update.effective_message, (tld(chat.id, "Stiker <code>{}</code> dihapus dari daftar hitam di <b>{}</b>!").format(
-					successful, chat_name), parse_mode=ParseMode.HTML))
+					successful, chat_name)), parse_mode=ParseMode.HTML)
 
 		elif not successful:
 			send_message(update.effective_message, (tld(chat.id, "Tidak satu pun stiker ini ada, sehingga tidak dapat dihapus.").format(
-					successful, len(to_unblacklist) - successful), parse_mode=ParseMode.HTML))
+					successful, len(to_unblacklist) - successful)), parse_mode=ParseMode.HTML)
 
 		else:
 			send_message(update.effective_message, (tld(chat.id, 
 				"Stiker <code>{}</code> dihapus dari daftar hitam. {} Tidak ada, "
-				"jadi tidak dihapus.").format(successful, len(to_unblacklist) - successful),
-				parse_mode=ParseMode.HTML))
+				"jadi tidak dihapus.").format(successful, len(to_unblacklist) - successful)),
+				parse_mode=ParseMode.HTML)
 	elif msg.reply_to_message:
 		trigger = msg.reply_to_message.sticker.set_name
 		if trigger == None:
@@ -178,8 +178,8 @@ def unblackliststicker(bot: Bot, update: Update):
 		success = sql.rm_from_stickers(chat_id, trigger.lower())
 
 		if success:
-			send_message(update.effective_message, (tld(chat.id, "Stiker <code>{}</code> dihapus dari daftar hitam di <b>{}</b>!").format(trigger, chat_name),
-							   parse_mode=ParseMode.HTML))
+			send_message(update.effective_message, (tld(chat.id, "Stiker <code>{}</code> dihapus dari daftar hitam di <b>{}</b>!").format(trigger, chat_name)),
+							   parse_mode=ParseMode.HTML)
 		else:
 			send_message(update.effective_message, (tld(chat.id, "{} tidak ada di daftar hitam stiker...!").format(trigger)))
 	else:
@@ -252,8 +252,8 @@ Contoh nilai waktu: 4m = 4 menit, 3h = 3 jam, 6d = 6 hari, 5w = 5 minggu."""))
 		if conn:
 			text = (tld(chat.id, "Mode blacklist sticker diubah, Pengguna akan `{}` pada *{}*!").format(settypeblacklist, chat_name))
 		else:
-			text = (tld(chat.id, "Mode blacklist sticker diubah, Pengguna akan `{}`!").format(settypeblacklist)
-		send_message(update.effective_message, text, parse_mode="markdown"))
+			text = (tld(chat.id, "Mode blacklist sticker diubah, Pengguna akan `{}`!").format(settypeblacklist))
+		send_message(update.effective_message, text, parse_mode="markdown")
 		return "<b>{}:</b>\n" \
 				"<b>Admin:</b> {}\n" \
 				"Changed sticker blacklist mode. Will {}.".format(html.escape(chat.title),
@@ -279,8 +279,8 @@ Contoh nilai waktu: 4m = 4 menit, 3h = 3 jam, 6d = 6 hari, 5w = 5 minggu."""))
 		if conn:
 			text = (tld(chat.id, "Mode blacklist sticker saat ini disetel ke *{}* pada *{}*.").format(settypeblacklist, chat_name))
 		else:
-			text = (tld(chat.id, "Mode blacklist saat ini disetel ke *{}*.").format(settypeblacklist)
-		send_message(chat.id, text, parse_mode=ParseMode.MARKDOWN))
+			text = (tld(chat.id, "Mode blacklist saat ini disetel ke *{}*.").format(settypeblacklist))
+		send_message(chat.id, text, parse_mode=ParseMode.MARKDOWN)
 	return ""
 
 @run_async
@@ -359,8 +359,8 @@ def __chat_settings__(chat_id, user_id):
 	return (tld(chat.id, "Ada `{}` daftar hitam stiker.").format(blacklisted))
 
 def __stats__():
-	return (tld(chat.id, "{} pemicu daftar hitam stiker, di seluruh {} obrolan.").format(sql.num_stickers_filters(),
-															sql.num_stickers_filter_chats()))
+	return (tld(chat.id, "{} pemicu daftar hitam stiker, di seluruh {} obrolan.").format(sql.num_stickers_filters()),
+															sql.num_stickers_filter_chats())
 
 __help__ = "blstickers_help"
 
