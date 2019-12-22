@@ -23,6 +23,8 @@ from haruka.modules.connection import connected
 
 from haruka.modules.helper_funcs.alternate import send_message
 
+from haruka.modules.translations.strings import tld
+
 
 @run_async
 def blackliststicker(bot: Bot, update: Update, args: List[str]):
