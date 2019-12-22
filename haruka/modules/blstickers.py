@@ -91,7 +91,7 @@ def add_blackliststicker(bot: Bot, update: Update):
 				sql.add_to_stickers(chat_id, trigger.lower())
 				added += 1
 			except BadRequest:
-				send_message(update.effective_message, (tld(chat.id, "Sticker `{}` can not be found!).format(trigger), parse_mode="markdown"))
+				send_message(update.effective_message, (tld(chat.id, "Sticker `{}` can not be found!").format(trigger)), parse_mode="markdown")
 
 		if added == 0:
 			return
@@ -152,17 +152,17 @@ def unblackliststicker(bot: Bot, update: Update):
 
 		if len(to_unblacklist) == 1:
 			if successful:
-				send_message(update.effective_message, (tld(chat.id, "Stiker <code>{}</code> dihapus dari daftar hitam di <b>{}</b>!").format(html.escape(to_unblacklist[0]), chat_name)),
+				send_message(update.effective_message, (tld(chat.id, "Sticker <code>{}</code> removed from the blacklist at <b>{}</b>!").format(html.escape(to_unblacklist[0]), chat_name)),
 							   parse_mode=ParseMode.HTML)
 			else:
-				send_message(update.effective_message, (tld(chat.id, "Ini tidak ada di daftar hitam stiker...!")))
+				send_message(update.effective_message, (tld(chat.id, "This isn't on the sticker blacklist...!")))
 
 		elif successful == len(to_unblacklist):
-			send_message(update.effective_message, (tld(chat.id, "Stiker <code>{}</code> dihapus dari daftar hitam di <b>{}</b>!").format(
+			send_message(update.effective_message, (tld(chat.id, "Sticker <code>{}</code> removed from the blacklist at <b>{}</b>!").format(
 					successful, chat_name)), parse_mode=ParseMode.HTML)
 
 		elif not successful:
-			send_message(update.effective_message, (tld(chat.id, "Tidak satu pun stiker ini ada, sehingga tidak dapat dihapus.").format(
+			send_message(update.effective_message, (tld(chat.id, "None of these stickers exist, so they cannot be removed.").format(
 					successful, len(to_unblacklist) - successful)), parse_mode=ParseMode.HTML)
 
 		else:
