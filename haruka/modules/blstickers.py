@@ -356,10 +356,10 @@ def __migrate__(old_chat_id, new_chat_id):
 
 def __chat_settings__(chat_id, user_id):
 	blacklisted = sql.num_stickers_chat_filters(chat_id)
-	return (tld(chat.id, "Ada `{}` daftar hitam stiker.").format(blacklisted))
+	return (tld(user_id, "Ada `{}` daftar hitam stiker.").format(blacklisted))
 
 def __stats__():
-	return (tld(chat.id, "{} pemicu daftar hitam stiker, di seluruh {} obrolan.").format(sql.num_stickers_filters()),
+	return (tld(OWNER_ID, "{} pemicu daftar hitam stiker, di seluruh {} obrolan.").format(sql.num_stickers_filters()),
 															sql.num_stickers_filter_chats())
 
 __help__ = "blstickers_help"
