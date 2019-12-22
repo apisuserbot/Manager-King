@@ -313,7 +313,7 @@ def del_blackliststicker(bot: Bot, update: Update):
 					message.delete()
 					res = chat.unban_member(update.effective_user.id)
 					if res:
-						bot.sendMessage(chat.id, (tld(chat.id, "{} was kicked for using the sticker '{}' which is on the stickers blacklist").format(mention_markdown(user.id, trigger)), parse_mode="markdown")
+						bot.sendMessage(chat.id, (tld(chat.id, "{} was kicked for using the sticker '{}' which is on the stickers blacklist").format(mention_markdown(user.id, user.first_name)), trigger), parse_mode="markdown")
 					return
 				elif getmode == 5:
 					message.delete()
