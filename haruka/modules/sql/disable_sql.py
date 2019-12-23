@@ -19,13 +19,11 @@ class Disable(BASE):
 
 
 Disable.__table__.create(checkfirst=True)
-DisableDelete.__table__.create(checkfirst=True)
 DISABLE_INSERTION_LOCK = threading.RLock()
 DISABLEDEL_INSERTION_LOCK = threading.RLock()
 
 DISABLED = {}
 DISABLEABLE = []
-DISABLEDEL = []
 
 
 def disable_command(chat_id, disable):
