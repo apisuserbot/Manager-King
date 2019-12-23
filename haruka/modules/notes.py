@@ -400,7 +400,7 @@ def list_notes(bot: Bot, update: Update):
 			msg = ""
 		msg += note_name
 
-	if msg == (tld(chat.id, "*Note on {}:*\n").format(chat_name)) or msg == (tld(chat.id, "*Local Note:*\n"))):
+	if msg == (tld(chat.id, "*Note on {}:*\n").format(chat_name)) or msg == (tld(chat.id, "*Local Note:*\n")):
 		if conn:
 			send_message(update.effective_message, (tld(chat.id, "There are no notes in *{}*!").format(chat_name)), parse_mode="markdown")
 		else:
