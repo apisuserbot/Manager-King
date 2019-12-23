@@ -361,7 +361,7 @@ def import_data(bot: Bot, update):
 
 					warn_mode = data['warns'].get('warn_mode')
 					if warn_mode:
-						if warn_mode =< 3:
+						if warn_mode <= 3:
 							warnssql.set_warn_mode(chat_id, int(warn_mode))
 							imp_warn = True
 
