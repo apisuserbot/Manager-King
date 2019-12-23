@@ -912,11 +912,10 @@ def export_data(bot: Bot, update: Update, chat_data):
 	for x in all_handlers:
 		warnreply = warnssql.get_warn_filter(chat_id, x)
 		all_warn_filter.append({'name': x, 'reason': warnreply.reply})
-	if not warn_mode:
-		warn_mode = ""
+
 	# Get all warnings in current chat
 	allwarns = warnssql.get_allwarns(chat_id)
-	warns = {"warn_limit": warn_limit, "warn_mode": warn_mode, "warn_filters": all_warn_filter, "chat_warns": allwarns}
+	warns = {"warn_limit": warn_limit, "warn_filters": all_warn_filter, "chat_warns": allwarns}
 
 
 	# Parsing backups
