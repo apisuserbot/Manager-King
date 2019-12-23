@@ -70,7 +70,7 @@ def get_flood_limit(chat_id):
     return CHAT_FLOOD.get(str(chat_id), DEF_OBJ)[2]
 
     
-    def get_flood_setting(chat_id):
+def get_flood_setting(chat_id):
     try:
         setting = SESSION.query(FloodSettings).get(str(chat_id))
         if setting:
