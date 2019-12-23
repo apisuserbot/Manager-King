@@ -23,11 +23,29 @@ class BlackListFilters(BASE):
                     and self.trigger == other.trigger)
 
 
+class BlacklistSettings(BASE):
+    __tablename__ = "blacklist_settings"
+    chat_id = Column(String(14), primary_key=True)
+    blacklist_type = Column(Integer, default=1)
+    value = Column(UnicodeText, default="0")
+
+    def __init__(self, chat_id, blacklist_type=1, value="0"):
+        self.chat_id = str(chat_id)
+        self.blacklist_type = blacklist_type
+        self.value = value
+
+    def __repr__(self):
+        return "<{} will executing {} for blacklist trigger.>".format(self.chat_id, self.blacklist_type)
+
+
 BlackListFilters.__table__.create(checkfirst=True)
+BlacklistSettings.__table__.create(checkfirst=True)
 
 BLACKLIST_FILTER_INSERTION_LOCK = threading.RLock()
+BLACKLIST_SETTINGS_INSERTION_LOCK = threading.RLock()
 
 CHAT_BLACKLISTS = {}
+CHAT_SETTINGS_BLACKLISTS = {}
 
 
 def add_to_blacklist(chat_id, trigger):
@@ -91,6 +109,18 @@ def __load_chat_blacklists():
             CHAT_BLACKLISTS[x.chat_id] += [x.trigger]
 
         CHAT_BLACKLISTS = {x: set(y) for x, y in CHAT_BLACKLISTS.items()}
+
+    finally:
+        SESSION.close()
+
+
+def get_blacklist_setting(chat_id):
+    try:
+        setting = CHAT_SETTINGS_BLACKLISTS.get(str(chat_id))
+        if setting:
+            return setting['blacklist_type'], setting['value']
+        else:
+            return 1, "0"
 
     finally:
         SESSION.close()
