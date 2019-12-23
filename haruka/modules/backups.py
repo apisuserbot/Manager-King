@@ -369,7 +369,7 @@ def import_data(bot: Bot, update):
 					if data['warns'].get('chat_warns'):
 						for x in data['warns'].get('chat_warns'):
 							# If this invaild
-							if x['warns'] > warn_limit:
+							if x['warns'] > int(warn_limit[0]):
 								break
 							warnssql.reset_warns(x['user_id'], chat_id)
 							warnssql.import_warns(x['user_id'], chat_id, int(x['warns']), x['reasons'])
