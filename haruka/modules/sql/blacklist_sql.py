@@ -1,6 +1,6 @@
 import threading
 
-from sqlalchemy import func, distinct, Column, String, UnicodeText
+from sqlalchemy import func, distinct, Column, String, UnicodeText, Integer
 
 from haruka.modules.sql import SESSION, BASE
 
