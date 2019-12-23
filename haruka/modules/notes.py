@@ -367,7 +367,7 @@ def private_note(bot: Bot, update: Update, args: List[str]):
 	else:
 		is_private, is_delete = sql.get_private_note(chat_id)
 		print(is_private, is_delete)
-		send_message(update.effective_message,) (tld(chat.id, "Private Note Settings at {}: *{}*{}").format(chat_name, "Enabled" if is_private else "Disabled", " - *Hash will be deleted*" if is_delete else "")), parse_mode="markdown")
+		send_message(update.effective_message,) (tld(chat.id, "Private Note Settings at {}: *{}*{}").format(chat_name, "Enabled" if is_private else "Disabled", " - *Hash will be deleted*" if is_delete else ""), parse_mode="markdown")
 
 
 @run_async
