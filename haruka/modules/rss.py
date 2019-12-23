@@ -13,6 +13,7 @@ from haruka.modules.translations.strings import tld
 
 def show_url(bot, update, args):
     tg_chat_id = str(update.effective_chat.id)
+    chat = update.effective_chat  # type: Optional[Chat]
 
     if len(args) >= 1:
         tg_feed_link = args[0]
@@ -54,6 +55,7 @@ def show_url(bot, update, args):
 
 def list_urls(bot, update):
     tg_chat_id = str(update.effective_chat.id)
+    chat = update.effective_chat  # type: Optional[Chat]
 
     user_data = sql.get_urls(tg_chat_id)
 
@@ -110,6 +112,7 @@ def add_url(bot, update, args):
 def remove_url(bot, update, args):
     if len(args) >= 1:
         tg_chat_id = str(update.effective_chat.id)
+        chat = update.effective_chat  # type: Optional[Chat]
 
         tg_feed_link = args[0]
 
@@ -132,6 +135,7 @@ def remove_url(bot, update, args):
 
 def rss_update(bot, job):
     user_data = sql.get_all()
+    chat = update.effective_chat  # type: Optional[Chat]
 
     # this loop checks for every row in the DB
     for row in user_data:
@@ -205,6 +209,7 @@ def rss_update(bot, job):
 
 def rss_set(bot, job):
     user_data = sql.get_all()
+    chat = update.effective_chat  # type: Optional[Chat]
 
     # this loop checks for every row in the DB
     for row in user_data:
