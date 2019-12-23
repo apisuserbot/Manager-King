@@ -56,7 +56,7 @@ def import_data(bot: Bot, update):
 			return ""
 		chat = update.effective_chat
 		chat_id = update.effective_chat.id
-		chat_name = update.effective_message.chat.titlde
+		chat_name = update.effective_message.chat.title
 
 	if msg.reply_to_message and msg.reply_to_message.document:
 		filetype = msg.reply_to_message.document.file_name
@@ -700,7 +700,7 @@ def import_data(bot: Bot, update):
 						   "You are having problems with this, so "
 						   "My owner will be happy to help, and any bugs "
 						   "reportedly makes me better! thank you! 🙂")))
-			LOGGER.exception("Import for chat ID %s with the name %s failed.", str(chat_id), str(chat.titlde))
+			LOGGER.exception("Import for chat ID %s with the name %s failed.", str(chat_id), str(chat.title))
 			return
 
 		# TODO: some of that link logic
@@ -726,7 +726,7 @@ def export_data(bot: Bot, update: Update, chat_data):
 	if conn:
 		chat = dispatcher.bot.getChat(conn)
 		chat_id = conn
-		chat_name = dispatcher.bot.getChat(conn).titlde
+		chat_name = dispatcher.bot.getChat(conn).title
 	else:
 		if update.effective_message.chat.type == "private":
 			send_message(update.effective_message, (tld(chat.id, "You can do this command in the group, not in PM")))
@@ -929,10 +929,10 @@ def export_data(bot: Bot, update: Update, chat_data):
 	bot.sendChatAction(current_chat_id, "upload_document")
 	tgl = time.strftime("%H:%M:%S - %d/%m/%Y", time.localtime(time.time()))
 	try:
-		bot.sendMessage(TEMPORARY_DATA, "*Successfully backed up for:*\Chat name: `{}`\Chat ID: `{}`\nOn: `{}`".format(chat.titlde, chat_id, tgl), parse_mode=ParseMode.MARKDOWN)
+		bot.sendMessage(TEMPORARY_DATA, "*Successfully backed up for:*\Chat name: `{}`\Chat ID: `{}`\nOn: `{}`".format(chat.title, chat_id, tgl), parse_mode=ParseMode.MARKDOWN)
 	except BadRequest:
 		pass
-	send = bot.sendDocument(current_chat_id, document=open('{}-haruka.backup'.format(chat_id), 'rb'), caption=(tld(chat.id, "*Successfully backed up for:*\Chat name: `{}`\nID chat: `{}`\nOn: `{}`\n\nNote: This backup is specific to this bot, if it is imported into another bot then records of documents, videos, audio, voice, etc. will be lost").format(chat.titlde, chat_id, tgl)), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
+	send = bot.sendDocument(current_chat_id, document=open('{}-haruka.backup'.format(chat_id), 'rb'), caption=(tld(chat.id, "*Successfully backed up for:*\Chat name: `{}`\nID chat: `{}`\nOn: `{}`\n\nNote: This backup is specific to this bot, if it is imported into another bot then records of documents, videos, audio, voice, etc. will be lost").format(chat.title, chat_id, tgl)), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
 	try:
 		# Send to temp data for prevent unexpected issue
 		bot.sendDocument(TEMPORARY_DATA, document=send.document.file_id, caption=(tld(chat.id, "**\nChat name: `{}`\Chat ID: `{}`\nOn: `{}`\n\nNote: This backup is specific to this bot, if it is imported into another bot then records of documents, videos, audio, voice, etc. will be lost").format(chat.title, chat_id, tgl)), timeout=360, parse_mode=ParseMode.MARKDOWN)
