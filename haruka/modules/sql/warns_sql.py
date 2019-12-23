@@ -283,6 +283,30 @@ def migrate_chat(old_chat_id, new_chat_id):
         SESSION.commit()
 
 
+def set_warn_mode(chat_id, warn_mode):
+    with WARN_SETTINGS_LOCK:
+        curr_setting = SESSION.query(WarnSettings).get(str(chat_id))
+        if not curr_setting:
+            curr_setting = WarnSettings(chat_id, warn_mode=warn_mode)
+
+        curr_setting.warn_mode = warn_mode
+
+        SESSION.add(curr_setting)
+        SESSION.commit()
+
+
+def get_warn_mode(chat_id):
+    try:
+        setting = SESSION.query(WarnSettings).get(str(chat_id))
+        if setting:
+            return setting.warn_mode, setting.warn_mode
+        else:
+            return 3, False
+
+    finally:
+        SESSION.close()
+
+
 def get_allwarns(chat_id):
     get = SESSION.query(Warns).all()
     allwarns = []
