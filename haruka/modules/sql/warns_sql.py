@@ -49,11 +49,13 @@ class WarnSettings(BASE):
     chat_id = Column(String(14), primary_key=True)
     warn_limit = Column(Integer, default=3)
     soft_warn = Column(Boolean, default=False)
+    warn_mode = Column(Integer, default=0)
 
     def __init__(self, chat_id, warn_limit=3, soft_warn=False):
         self.chat_id = str(chat_id)
         self.warn_limit = warn_limit
         self.soft_warn = soft_warn
+        self.warn_mode = warn_mode
 
     def __repr__(self):
         return "<{} has {} possible warns.>".format(self.chat_id, self.warn_limit)
