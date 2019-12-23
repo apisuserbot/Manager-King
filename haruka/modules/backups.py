@@ -656,7 +656,7 @@ def import_data(bot: Bot, update):
 						os.remove("{}-notimported.txt".format(chat_id))
 					return
 		except Exception as err:
-			send_message(update.effective_message, (tld(chat.id, "An error has occurred in importing Rose backup!"), parse_mode="markdown")
+			send_message(update.effective_message, (tld(chat.id, "An error has occurred in importing Rose backup!")), parse_mode="markdown")
 			LOGGER.exception("An error when importing from Rose base!")
 			return
 
