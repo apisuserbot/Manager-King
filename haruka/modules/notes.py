@@ -145,7 +145,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
 						elif excp.message == "Have no rights to send a message":
 							pass
 					except Unauthorized as excp:
-						send_message(update.effective_message, (tld(chat.id, "Contact me in PM first to get this note."))), parse_mode="markdown")
+						send_message(update.effective_message, (tld(chat.id, "Contact me in PM first to get this note.")), parse_mode="markdown")
 						pass
 					
 			except BadRequest as excp:
