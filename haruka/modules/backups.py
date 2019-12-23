@@ -647,7 +647,7 @@ def import_data(bot: Bot, update):
 						f = open("{}-notimported.txt".format(chat_id), "w")
 						f.write(str(NOT_IMPORTED))
 						f.close()
-						bot.sendDocument(chat_id, document=open('{}-notimported.txt'.format(chat_id), 'rb'), caption=(tld(chatd.id, "*Data that cannot be imported*")), timeout=360, parse_mode=ParseMode.MARKDOWN)
+						bot.sendDocument(chat_id, document=open('{}-notimported.txt'.format(chat_id), 'rb'), caption=(tld(chat.id, "*Data that cannot be imported*")), timeout=360, parse_mode=ParseMode.MARKDOWN)
 						os.remove("{}-notimported.txt".format(chat_id))
 					return
 		except Exception as err:
