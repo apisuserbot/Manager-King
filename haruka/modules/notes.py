@@ -522,18 +522,7 @@ If you would like to retrieve the contents of a note without any formatting, use
 A button can be added to a note by using standard markdown link syntax - the link should just be prepended with a buttonurl: section, as such: [somelink](buttonurl:example.com). Check /markdownhelp for more info.
  - /save <notename>: save the replied message as a note with name notename
  - /clear <notename>: clear note with this name
- - /privatenote <on/yes/off/no> <? del>: whether or not to send the note in PM. Write del besides on/off to delete hashtag message on group.
- 
-An example of how to save a note would be via:
-`/save data This is some data!`
-
-Now, anyone using "/get data", or "#data" will be replied to with "This is some data!".
-
-If you want to save an image, gif, or sticker, or any other data, do the following:
-/save word while replying to a sticker or whatever data you'd like. Now, the note at "#word" contains a sticker which will be sent as a reply.
-
-Tip: to retrieve a note without the formatting, use `/get <notename> noformat`
-This will retrieve the note and send it without formatting it; getting you the raw markdown, allowing you to make easy edits.
+ - /privatenote <on/yes/off/no> <? del>: whether or not to send the note in PM. Write del besides on/off to delete hashtag message on group.
 """
 
 __mod_name__ = "Notes"
