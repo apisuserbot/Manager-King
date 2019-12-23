@@ -77,7 +77,7 @@ def import_data(bot: Bot, update):
 
 		try:
 			# If backup is from haruka
-			if data.get('bot_base') == "Haruka":
+			if data.get('bot_base') == "Hitsuki":
 				imp_antiflood = False
 				imp_blacklist = False
 				imp_blacklist_count = 0
@@ -433,7 +433,7 @@ def import_data(bot: Bot, update):
 				return
 		except Exception as err:
 			send_message(update.effective_message, (tld(chat.id, "An error has occurred in importing backup.")), parse_mode="markdown")
-			LOGGER.exception("An error when importing from haruka base!")
+			LOGGER.exception("An error when importing from Hitsuki base!")
 			return
 
 		try:
@@ -755,7 +755,7 @@ def export_data(bot: Bot, update: Update, chat_data):
 	# Backup version
 	# Revision: 07/07/2019
 	backup_ver = 1
-	bot_base = "haruka"
+	bot_base = "Hitsuki"
 
 	# Make sure this backup is for this bot
 	bot_id = bot.id
@@ -924,13 +924,13 @@ def export_data(bot: Bot, update: Update, chat_data):
 
 
 	all_backups = json.dumps(backup, indent=4, cls=SetEncoder)
-	f = open("{}-haruka.backup".format(chat_id), "w")
+	f = open("{}-Hitsuki.backup".format(chat_id), "w")
 	f.write(str(all_backups))
 	f.close()
 	bot.sendChatAction(current_chat_id, "upload_document")
 	tgl = time.strftime("%H:%M:%S - %d/%m/%Y", time.localtime(time.time()))
 	try:
-		bot.sendMessage(TEMPORARY_DATA, "*Successfully backed up for:*\Chat name: `{}`\Chat ID: `{}`\nOn: `{}`".format(chat.title, chat_id, tgl), parse_mode=ParseMode.MARKDOWN)
+		bot.sendMessage(TEMPORARY_DATA, "*Successfully backed up for:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`".format(chat.title, chat_id, tgl), parse_mode=ParseMode.MARKDOWN)
 	except BadRequest:
 		pass
 	send = bot.sendDocument(current_chat_id, document=open('{}-haruka.backup'.format(chat_id), 'rb'), caption=(tld(chat.id, "*Successfully backed up for:*\Chat name: `{}`\nID chat: `{}`\nOn: `{}`\n\nNote: This backup is specific to this bot, if it is imported into another bot then records of documents, videos, audio, voice, etc. will be lost").format(chat.title, chat_id, tgl)), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
@@ -939,7 +939,7 @@ def export_data(bot: Bot, update: Update, chat_data):
 		bot.sendDocument(TEMPORARY_DATA, document=send.document.file_id, caption=(tld(chat.id, "**\nChat name: `{}`\Chat ID: `{}`\nOn: `{}`\n\nNote: This backup is specific to this bot, if it is imported into another bot then records of documents, videos, audio, voice, etc. will be lost").format(chat.title, chat_id, tgl)), timeout=360, parse_mode=ParseMode.MARKDOWN)
 	except BadRequest:
 		pass
-	os.remove("{}-haruka.backup".format(chat_id)) # Cleaning file
+	os.remove("{}-Hitsuki.backup".format(chat_id)) # Cleaning file
 
 
 class SetEncoder(json.JSONEncoder):
