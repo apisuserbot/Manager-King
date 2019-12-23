@@ -23,9 +23,26 @@ class FloodControl(BASE):
         return "<flood control for %s>" % self.chat_id
 
 
-FloodControl.__table__.create(checkfirst=True)
+class FloodSettings(BASE):
+    __tablename__ = "antiflood_settings"
+    chat_id = Column(String(14), primary_key=True)
+    flood_type = Column(Integer, default=1)
+    value = Column(UnicodeText, default="0")
 
-INSERTION_LOCK = threading.RLock()
+    def __init__(self, chat_id, flood_type=1, value="0"):
+        self.chat_id = str(chat_id)
+        self.flood_type = flood_type
+        self.value = value
+
+    def __repr__(self):
+        return "<{} will executing {} for flood.>".format(self.chat_id, self.flood_type)
+
+
+FloodControl.__table__.create(checkfirst=True)
+FloodSettings.__table__.create(checkfirst=True)
+
+INSERTION_FLOOD_LOCK = threading.RLock()
+INSERTION_FLOOD_SETTINGS_LOCK = threading.RLock()
 
 CHAT_FLOOD = {}
 
