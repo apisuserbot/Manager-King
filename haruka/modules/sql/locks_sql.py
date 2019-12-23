@@ -66,11 +66,27 @@ class Restrictions(BASE):
         return "<Restrictions for %s>" % self.chat_id
 
 
+class LockConfig(BASE):
+    __tablename__ = "lock_config"
+    chat_id = Column(String(14), primary_key=True)
+    warn = Column(Boolean, default=False)
+
+    def __init__(self, chat_id):
+        self.chat_id = str(chat_id)  # ensure string
+        self.warn = False
+
+    def __repr__(self):
+        return "<Restrictions for %s>" % self.chat_id
+
+
 Permissions.__table__.create(checkfirst=True)
 Restrictions.__table__.create(checkfirst=True)
+LockConfig.__table__.create(checkfirst=True)
+
 
 PERM_LOCK = threading.RLock()
 RESTR_LOCK = threading.RLock()
+CONF_LOCK = threading.RLock()
 
 
 def init_permissions(chat_id, reset=False):
@@ -239,3 +255,13 @@ def migrate_chat(old_chat_id, new_chat_id):
         if rest:
             rest.chat_id = str(new_chat_id)
         SESSION.commit()
+
+
+def get_lockconf(chat_id) -> bool:
+    try:
+        lock_setting = SESSION.query(LockConfig).get(str(chat_id))
+        if lock_setting:
+            return lock_setting.warn
+        return False
+    finally:
+        SESSION.close()
