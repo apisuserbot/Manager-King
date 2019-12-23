@@ -962,7 +962,38 @@ def get_chat(chat_id, chat_data):
 
 __mod_name__ = "Backups"
 
-__help__ = "backups_help"
+__help__ = """
+*Some people just want to see the world burn. Others, just want to have a way of grouping their chat data in one place so they can export their configuration to other chats!*
+
+Hitsuki import/export settings feature allows you to quickly set up a chat using a preexisting template. Instead of setting the same settings over and over again in different chats, you can use this feature to copy the general configuration across groups.
+
+Exporting settings can be done by any administrator, but for security reasons, importing can only be done by the group creator.
+
+The following modules will have their data exported:
+
+ - admin
+ - antiflood
+ - blacklists
+ - disabled
+ - federations
+ - filters
+ - greetings
+ - locks
+ - notes
+ - reports
+ - rules
+ - translations
+ - warns
+
+The generated file is in standard JSON format, so if there are any settings you dont want to import to your other chats, just open the file and edit it before importing.
+
+*Admin only:*
+ - /import: reply to a group butler/marie/rose/emilia backup file to import as much as possible, making the transfer super simple!
+Note that files/photos from other bots can't be imported due to telegram restrictions. Except for Emilia backup it self.
+ - /export: export group data, you can do this 12 hours once.
+
+*Note:* To avoid abuse, this command is heavily rate limited; this is to make sure that people importing/exporting data don't slow down the bot.
+"""
 
 IMPORT_HANDLER = CommandHandler("import", import_data, filters=Filters.group)
 EXPORT_HANDLER = CommandHandler("export", export_data, pass_chat_data=True)
