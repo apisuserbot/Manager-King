@@ -283,4 +283,13 @@ def migrate_chat(old_chat_id, new_chat_id):
         SESSION.commit()
 
 
+def get_allwarns(chat_id):
+    get = SESSION.query(Warns).all()
+    allwarns = []
+    for x in get:
+        if x.chat_id == str(chat_id) and x.num_warns > 0:
+            allwarns.append({"user_id": x.user_id, 'warns': x.num_warns, 'reasons': x.reasons})
+    return allwarns
+
+
 __load_chat_warn_filters()
