@@ -59,7 +59,7 @@ if ENV:
     BAN_STICKER = os.environ.get('BAN_STICKER', 'CAADAgADEAgAAgi3GQL9YQyT_kBpQwI')
     ALLOW_EXCL = os.environ.get('ALLOW_EXCL', False)
     MAPS_API = os.environ.get('MAPS_API', None)
-	TEMPORARY_DATA = os.environ.get('TEMPORARY_DATA', None)
+    TEMPORARY_DATA = os.environ.get('TEMPORARY_DATA', None)
 
     CAT_API_KEY = os.environ.get('CAT_API_KEY', "")
     DOG_API_KEY = os.environ.get('DOG_API_KEY', "")
