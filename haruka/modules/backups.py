@@ -664,7 +664,7 @@ def import_data(bot: Bot, update):
 		if len(data) > 1 and str(chat_id) not in data:
 			send_message(update.effective_message, (tld(chat.id, "There is more than one group in this file, and no one has the same chat id as "
 						   "this group - how do you choose what to import?"))
-			return
+				return
 
 		# Check if backup is this chat
 		try:
