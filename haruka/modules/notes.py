@@ -504,6 +504,7 @@ def __migrate__(old_chat_id, new_chat_id):
 
 
 def __chat_settings__(bot, update, chat, chatP, user):
+	chat_id = chat.id
 	notes = sql.get_all_chat_notes(chat_id)
 	return (tld(user_id, "There are `{}` notes in this chat.").format(len(notes)))
 
