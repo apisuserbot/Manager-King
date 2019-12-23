@@ -317,7 +317,7 @@ def clear(bot: Bot, update: Update, args: List[str]):
 				send_message(update.effective_message, (tld(chat.id, rtext)), parse_mode=ParseMode.HTML)
 
 	else:
-		send_message(update.effective_message, tl(update.effective_message, "Apa yang ingin dihapus?"))
+		send_message(update.effective_message, (tld(chat.id, "What do you want to delete?")))
 
 @run_async
 @user_admin
@@ -355,7 +355,7 @@ def private_note(bot: Bot, update: Update, args: List[str]):
 	else:
 		is_private, is_delete = sql.get_private_note(chat_id)
 		print(is_private, is_delete)
-		send_message(update.effective_message,) (tld(chat.id, "Private Note Settings at {}: *{}*{}").format(chat_name, "Enabled" if is_private else "Disabled", " - *Hash will be deleted*" if is_delete else ""), parse_mode="markdown")
+		send_message(update.effective_message, (tld(chat.id, "Private note settings at {}: *{}*{}").format(chat_name, "Enabled" if is_private else "Disabled", " - *Hash will be deleted*" if is_delete else ""), parse_mode="markdown")
 
 
 @run_async
@@ -366,15 +366,15 @@ def list_notes(bot: Bot, update: Update):
 	if conn:
 		chat_id = conn
 		chat_name = dispatcher.bot.getChat(conn).title
-		msg = (tld(chat.id, "*Note on {}:*\n").format(chat_name))
+		msg = (tld(chat.id, "*Notes in {}:*\n").format(chat_name))
 	else:
 		chat_id = update.effective_chat.id
 		if chat.type == "private":
 			chat_name = ""
-			msg = (tld(chat.id, "*Local Note:*\n"))
+			msg = (tld(chat.id, "*Local notes:*\n"))
 		else:
 			chat_name = chat.title
-			msg = (tld(chat.id, "*Note on {}:*\n").format(chat_name))
+			msg = (tld(chat.id, "*Notes in {}:*\n").format(chat_name))
 
 	note_list = sql.get_all_chat_notes(chat_id)
 
@@ -385,7 +385,7 @@ def list_notes(bot: Bot, update: Update):
 			msg = ""
 		msg += note_name
 
-	if msg == (tld(chat.id, "*Note on {}:*\n").format(chat_name)) or msg == (tld(chat.id, "*Local Note:*\n")):
+	if msg == (tld(chat.id, "*Notes in {}:*\n").format(chat_name)) or msg == (tld(chat.id, "*Local notes:*\n")):
 		if conn:
 			send_message(update.effective_message, (tld(chat.id, "There are no notes in *{}*!").format(chat_name)), parse_mode="markdown")
 		else:
@@ -398,17 +398,17 @@ def list_notes(bot: Bot, update: Update):
 		except BadRequest:
 			if chat.type == "private":
 				chat_name = ""
-				msg = (tld(chat.id, "<b>Local Note:</b>\n"))
+				msg = (tld(chat.id, "<b>Local notes:</b>\n"))
 			else:
 				chat_name = chat.title
-				msg = (tld(chat.id, "<b>Note at {}:</b>\n").format(chat_name))
+				msg = (tld(chat.id, "<b>Notes in {}:</b>\n").format(chat_name))
 			for note in note_list:
 				note_name = " - <code>{}</code>\n".format(note.name)
 				if len(msg) + len(note_name) > MAX_MESSAGE_LENGTH:
 					send_message(update.effective_message, msg, parse_mode=ParseMode.MARKDOWN)
 					msg = ""
 				msg += note_name
-			msg += (tld(chat.id, "\nYou can retrieve this note by using <code>/get notename</code>, or <code>#notename</code>"))
+			msg += (tld(chat.id, "\nYou can retrieve these note by using <code>/get notename</code>, or <code>#notename</code>"))
 			send_message(update.effective_message, msg, parse_mode=ParseMode.HTML)
 
 
@@ -496,7 +496,7 @@ def __import_data__(chat_id, data):
 
 
 def __stats__():
-	return (tld(OWNER_ID, "{} note, on {} chats.").format(sql.num_notes(), sql.num_chats()))
+	return (tld(OWNER_ID, "{} notes, accross {} chats.").format(sql.num_notes(), sql.num_chats()))
 
 
 def __migrate__(old_chat_id, new_chat_id):
