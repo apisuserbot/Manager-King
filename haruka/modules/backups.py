@@ -15,6 +15,7 @@ from haruka.modules.helper_funcs.misc import build_keyboard, revert_buttons
 from haruka.modules.helper_funcs.msg_types import get_note_type
 from haruka.modules.rules import get_rules
 from haruka.modules.helper_funcs.string_handling import button_markdown_parser, make_time
+from haruka.modules.translations.strings import tld
 
 # SQL
 import haruka.modules.sql.antiflood_sql as antifloodsql
