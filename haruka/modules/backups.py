@@ -356,7 +356,7 @@ def import_data(bot: Bot, update):
 				# Import warn config
 				if data.get('warns'):
 					warn_limit = data['warns'].get('warn_limit')
-					if int(warn_limit) >= 3:
+					if int(warn_limit[0]) >= 3:
 						warnssql.set_warn_limit(chat_id, int(warn_limit))
 
 					# Import all warn filters
