@@ -48,7 +48,7 @@ CHAT_FLOOD = {}
 
 
 def set_flood(chat_id, amount):
-    with INSERTION_LOCK:
+    with INSERTION_FLOOD_LOCK:
         flood = SESSION.query(FloodControl).get(str(chat_id))
         if not flood:
             flood = FloodControl(str(chat_id))
