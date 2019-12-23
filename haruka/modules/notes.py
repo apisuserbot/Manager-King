@@ -323,7 +323,7 @@ def clear(bot: Bot, update: Update, args: List[str]):
 					rtext = (tld(chat.id, "Note in <b>{chat_name}</b> for <code>{note_name}</code> deleted 😁\nNote <code>{fnote_name}</code> failed to delete!").format(chat_name=chat_name, note_name=", ".join(catatan), fnote_name=", ".join(catatangagal)))
 				else:
 					rtext = (tld(chat.id, "Note <code>{note_name}</code> deleted 😁\nNote <code>{fnote_name}</code> failed to delete!").format(note_name=", ".join(catatan), fnote_name=", ".join(catatangagal)))
-				send_message(update.effective_message, (tld(chat.id, rtext), parse_mode=ParseMode.HTML)
+				send_message(update.effective_message, (tld(chat.id, rtext)), parse_mode=ParseMode.HTML)
 
 	else:
 		send_message(update.effective_message, tl(update.effective_message, "Apa yang ingin dihapus?"))
