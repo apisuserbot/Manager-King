@@ -392,7 +392,7 @@ def list_notes(bot: Bot, update: Update):
 			send_message(update.effective_message, (tld(chat.id, "There are no notes in this chat!")))
 
 	elif len(msg) != 0:
-		msg += (tld(chat.id, "\nYou can retrieve this note by using `/get notename`, or`#notename`"))
+		msg += (tld(chat.id, "\nYou can retrieve these notes by using `/get notename`, or `#notename`"))
 		try:
 			send_message(update.effective_message, msg, parse_mode=ParseMode.MARKDOWN)
 		except BadRequest:
@@ -403,12 +403,12 @@ def list_notes(bot: Bot, update: Update):
 				chat_name = chat.title
 				msg = (tld(chat.id, "<b>Notes in {}:</b>\n").format(chat_name))
 			for note in note_list:
-				note_name = " - <code>{}</code>\n".format(note.name)
+				note_name = " • <code>#{}</code>\n".format(note.name)
 				if len(msg) + len(note_name) > MAX_MESSAGE_LENGTH:
 					send_message(update.effective_message, msg, parse_mode=ParseMode.MARKDOWN)
 					msg = ""
 				msg += note_name
-			msg += (tld(chat.id, "\nYou can retrieve these note by using <code>/get notename</code>, or <code>#notename</code>"))
+			msg += (tld(chat.id, "\nYou can retrieve these notes by using <code>/get notename</code>, or <code>#notename</code>"))
 			send_message(update.effective_message, msg, parse_mode=ParseMode.HTML)
 
 
