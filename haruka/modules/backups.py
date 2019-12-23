@@ -1,333 +1,981 @@
-import json
-import os
-import time
+import json, time, os
 from io import BytesIO
 from typing import Optional
 
+from telegram import MAX_MESSAGE_LENGTH, ParseMode, InlineKeyboardMarkup
 from telegram import Message, Chat, Update, Bot
-from telegram import ParseMode
 from telegram.error import BadRequest
-from telegram.ext import CommandHandler, run_async
+from telegram.ext import CommandHandler, run_async, Filters
 
-import haruka.modules.sql.blacklist_sql as blacklistsql
-import haruka.modules.sql.locks_sql as locksql
 import haruka.modules.sql.notes_sql as sql
-import haruka.modules.sql.rules_sql as rulessql
-from haruka import dispatcher, LOGGER, MESSAGE_DUMP
+from haruka import dispatcher, LOGGER, OWNER_ID, SUDO_USERS, TEMPORARY_DATA
 from haruka.__main__ import DATA_IMPORT
-from haruka.modules.connection import connected
 from haruka.modules.helper_funcs.chat_status import user_admin
-from haruka.modules.sql import disable_sql as disabledsql
+from haruka.modules.helper_funcs.misc import build_keyboard, revert_buttons
+from haruka.modules.helper_funcs.msg_types import get_note_type
+from haruka.modules.rules import get_rules
+from haruka.modules.helper_funcs.string_handling import button_markdown_parser, make_time
 
+# SQL
+import haruka.modules.sql.antiflood_sql as antifloodsql
+import haruka.modules.sql.blacklist_sql as blacklistsql
+import haruka.modules.sql.blsticker_sql as blackliststksql
+from haruka.modules.sql import disable_sql as disabledsql
+from haruka.modules.sql import cust_filters_sql as filtersql
+from haruka.modules.sql import languages_sql as langsql
+import haruka.modules.sql.locks_sql as locksql
+from haruka.modules.locks import LOCK_TYPES, RESTRICTION_TYPES
+from haruka.modules.sql import notes_sql as notesql
+from haruka.modules.sql import reporting_sql as reportsql
+import haruka.modules.sql.rules_sql as rulessql
+from haruka.modules.sql import warns_sql as warnssql
+import haruka.modules.sql.welcome_sql as welcsql
+
+from haruka.modules.connection import connected
+
+from haruka.modules.helper_funcs.msg_types import Types
+from haruka.modules.helper_funcs.alternate import send_message
 
 @run_async
 @user_admin
 def import_data(bot: Bot, update):
-    msg = update.effective_message  # type: Optional[Message]
-    chat = update.effective_chat  # type: Optional[Chat]
-    user = update.effective_user  # type: Optional[User]
-    # TODO: allow uploading doc with command, not just as reply
-    # only work with a doc
+	msg = update.effective_message  # type: Optional[Message]
+	chat = update.effective_chat  # type: Optional[Chat]
+	user = update.effective_user  # type: Optional[User]
+	# TODO: allow uploading doc with command, not just as reply
+	# only work with a doc
 
-    conn = connected(bot, update, chat, user.id, need_admin=True)
-    if conn:
-        chat = dispatcher.bot.getChat(conn)
-        chat_id = conn
-        chat_name = dispatcher.bot.getChat(conn).title
-    else:
-        if update.effective_message.chat.type == "private":
-            update.effective_message.reply_text("This command can only be runned on group, not PM.")
-            return ""
+	conn = connected(bot, update, chat, user.id, need_admin=True)
+	if conn:
+		chat = dispatcher.bot.getChat(conn)
+		chat_id = conn
+		chat_name = dispatcher.bot.getChat(conn).titlde
+	else:
+		if update.effective_message.chat.type == "private":
+			send_message(update.effective_message, (tld(chat.id, "You can do this command in the group, not in PM")))
+			return ""
+		chat = update.effective_chat
+		chat_id = update.effective_chat.id
+		chat_name = update.effective_message.chat.titlde
 
-        chat = update.effective_chat
-        chat_id = update.effective_chat.id
-        chat_name = update.effective_message.chat.title
+	if msg.reply_to_message and msg.reply_to_message.document:
+		filetype = msg.reply_to_message.document.file_name
+		if filetype.split('.')[-1] not in ("backup", "json", "txt"):
+			send_message(update.effective_message, (tld(chat.id, "Invalid backup file!")))
+			return
+		try:
+			file_info = bot.get_file(msg.reply_to_message.document.file_id)
+		except BadRequest:
+			send_message(update.effective_message, (tld(chat.id, "Try downloading and re-uploading files as yourself before importing - this one seems to be corrupt!")))
+			return
 
-    if msg.reply_to_message and msg.reply_to_message.document:
-        try:
-            file_info = bot.get_file(msg.reply_to_message.document.file_id)
-        except BadRequest:
-            msg.reply_text("Try downloading and uploading the file yourself again, This one seem broken!")
-            return
+		with BytesIO() as file:
+			file_info.download(out=file)
+			file.seek(0)
+			data = json.load(file)
 
-        with BytesIO() as file:
-            file_info.download(out=file)
-            file.seek(0)
-            data = json.load(file)
+		try:
+			# If backup is from haruka
+			if data.get('bot_base') == "Haruka":
+				imp_antiflood = False
+				imp_blacklist = False
+				imp_blacklist_count = 0
+				imp_blsticker = False
+				imp_blsticker_count = 0
+				imp_disabled_count = 0
+				imp_filters_count = 0
+				imp_greet = False
+				imp_gdbye = False
+				imp_greet_pref = False
+				imp_locks = False
+				imp_notes = 0
+				imp_report = False
+				imp_rules = False
+				imp_lang = False
+				imp_warn = False
+				imp_warn_chat = 0
+				imp_warn_filter = 0
+				NOT_IMPORTED = "This cannot be imported because from other bot."
+				NOT_IMPORTED_INT = 0
+				# If backup is from this bot, import all files
+				if data.get('bot_id') == bot.id:
+					is_self = True
+				else:
+					is_self = False
+				# Import antiflood
+				if data.get('antiflood'):
+					imp_antiflood = True
+					flood_limit = data['antiflood'].get('flood_limit')
+					flood_mode = data['antiflood'].get('flood_mode')
+					flood_duration = data['antiflood'].get('flood_duration')
 
-        # only import one group
-        if len(data) > 1 and str(chat.id) not in data:
-            msg.reply_text(
-                "There are more than one group in this file and the chat.id is not same! How am i supposed to import it?")
-            return
+					# Add to db
+					antifloodsql.set_flood(chat_id, int(flood_limit))
+					antifloodsql.set_flood_strength(chat_id, flood_mode, flood_duration)
 
-        # Check if backup is this chat
-        try:
-            if data.get(str(chat.id)) == None:
-                if conn:
-                    text = "Backup comes from another chat, I can't return another chat to chat *{}*".format(chat_name)
-                else:
-                    text = "Backup comes from another chat, I can't return another chat to this chat"
-                return msg.reply_text(text, parse_mode="markdown")
-        except:
-            return msg.reply_text(
-                "There is problem while importing the data! Please ask in @HarukaAyaGroup about why this happened.")
-        # Check if backup is from self
-        try:
-            if str(bot.id) != str(data[str(chat.id)]['bot']):
-                return msg.reply_text(
-                    "Backup from another bot that is not suggested might cause the problem, documents, photos, videos, audios, records might not work as it should be. However, You can still request a feature regarding this in @HarukaAyaGroup !")
-        except:
-            pass
-        # Select data source
-        if str(chat.id) in data:
-            data = data[str(chat.id)]['hashes']
-        else:
-            data = data[list(data.keys())[0]]['hashes']
+				# Import blacklist
+				if data.get('blacklists'):
+					imp_blacklist = True
+					blacklist_mode = data['blacklists'].get('blacklist_mode')
+					blacklist_duration = data['blacklists'].get('blacklist_duration')
+					blacklisted = data['blacklists'].get('blacklists')
 
-        try:
-            for mod in DATA_IMPORT:
-                mod.__import_data__(str(chat.id), data)
-        except Exception:
-            msg.reply_text(
-                "An error occurred while recovering your data. The process failed. If you experience a problem with this, please ask in @HarukaAyaGroup . My owner and community will be happy to help. Also, bugs report makes me even better!\nThank you!")
+					# Add to db
+					blacklistsql.set_blacklist_strength(chat_id, blacklist_mode, blacklist_duration)
+					if blacklisted:
+						for x in blacklisted:
+							blacklistsql.add_to_blacklist(chat_id, x.lower())
+							imp_blacklist_count += 1
 
-            LOGGER.exception("Imprt for the chat %s with the name %s failed.", str(chat.id), str(chat.title))
-            return
+				# Import blacklist sticker
+				if data.get('blstickers'):
+					imp_blsticker = True
+					blsticker_mode = data['blstickers'].get('blsticker_mode')
+					blsticker_duration = data['blstickers'].get('blsticker_duration')
+					blstickers = data['blstickers'].get('blstickers')
 
-        # TODO: some of that link logic
-        # NOTE: consider default permissions stuff?
-        if conn:
+					# Add to db
+					blackliststksql.set_blacklist_strength(chat_id, blsticker_mode, blsticker_duration)
+					if blstickers:
+						for x in blstickers:
+							blackliststksql.add_to_stickers(chat_id, x.lower())
+							imp_blsticker_count += 1
 
-            text = "Backup fully restored on *{}*.".format(chat_name)
-        else:
-            text = "Backup fully restored"
-        msg.reply_text(text, parse_mode="markdown")
+				# Import disabled
+				if data.get('disabled'):
+					candisable = disabledsql.get_disableable()
+					if data['disabled'].get('disabled'):
+						for listdisabled in data['disabled'].get('disabled'):
+							if listdisabled in candisable:
+								disabledsql.disable_command(chat_id, listdisabled)
+								imp_disabled_count += 1
+
+				# Import filters
+				if data.get('filters'):
+					NOT_IMPORTED += "\n\nFilters:\n"
+					for x in data['filters'].get('filters'):
+						# If from self, import all
+						if is_self:
+							is_sticker = False
+							is_document = False
+							is_image = False
+							is_audio = False
+							is_voice = False
+							is_video = False
+							has_markdown = False
+							universal = False
+							if x['type'] == 1:
+								is_sticker = True
+							elif x['type'] == 2:
+								is_document = True
+							elif x['type'] == 3:
+								is_image = True
+							elif x['type'] == 4:
+								is_audio = True
+							elif x['type'] == 5:
+								is_voice = True
+							elif x['type'] == 6:
+								is_video = True
+							elif x['type'] == 0:
+								has_markdown = True
+							note_data, buttons = button_markdown_parser(x['reply'], entities=0)
+							filtersql.add_filter(chat_id, x['name'], note_data, is_sticker, is_document, is_image, is_audio, is_voice, is_video, buttons)
+							imp_filters_count += 1	
+						else:
+							if x['has_markdown']:
+								note_data, buttons = button_markdown_parser(x['reply'], entities=0)
+								filtersql.add_filter(chat_id, x['name'], note_data, False, False, False, False, False, False, buttons)
+								imp_filters_count += 1
+							else:
+								NOT_IMPORTED += "- {}\n".format(x['name'])
+								NOT_IMPORTED_INT += 1
+
+				# Import greetings
+				if data.get('greetings'):
+					if data['greetings'].get('welcome'):
+						welcenable = data['greetings']['welcome'].get('enable')
+						welcsql.set_welc_preference(str(chat_id), bool(welcenable))
+
+						welctext = data['greetings']['welcome'].get('text')
+						welctype = data['greetings']['welcome'].get('type')
+						if welctype == 0:
+							welctype = Types.TEXT
+						elif welctype == 1:
+							welctype = Types.BUTTON_TEXT
+						elif welctype == 2:
+							welctype = Types.STICKER
+						elif welctype == 3:
+							welctype = Types.DOCUMENT
+						elif welctype == 4:
+							welctype = Types.PHOTO
+						elif welctype == 5:
+							welctype = Types.AUDIO
+						elif welctype == 6:
+							welctype = Types.VOICE
+						elif welctype == 7:
+							welctype = Types.VIDEO
+						elif welctype == 8:
+							welctype = Types.VIDEO_NOTE
+						else:
+							welctype = None
+						welccontent = data['greetings']['welcome'].get('content')
+						if welctext and welctype:
+							note_data, buttons = button_markdown_parser(welctext, entities=0)
+							welcsql.set_custom_welcome(chat_id, welccontent, note_data, welctype, buttons)
+							imp_greet = True
+					if data['greetings'].get('goodbye'):
+						gdbyenable = data['greetings']['goodbye'].get('enable')
+						welcsql.set_gdbye_preference(str(chat_id), bool(gdbyenable))
+
+						gdbytext = data['greetings']['goodbye'].get('text')
+						gdbytype = data['greetings']['goodbye'].get('type')
+						if gdbytype == 0:
+							gdbytype = Types.TEXT
+						elif gdbytype == 1:
+							gdbytype = Types.BUTTON_TEXT
+						elif gdbytype == 2:
+							gdbytype = Types.STICKER
+						elif gdbytype == 3:
+							gdbytype = Types.DOCUMENT
+						elif gdbytype == 4:
+							gdbytype = Types.PHOTO
+						elif gdbytype == 5:
+							gdbytype = Types.AUDIO
+						elif gdbytype == 6:
+							gdbytype = Types.VOICE
+						elif gdbytype == 7:
+							gdbytype = Types.VIDEO
+						elif gdbytype == 8:
+							gdbytype = Types.VIDEO_NOTE
+						else:
+							gdbytype = None
+						gdbycontent = data['greetings']['goodbye'].get('content')
+						if welctext and gdbytype:
+							note_data, buttons = button_markdown_parser(gdbytext, entities=0)
+							welcsql.set_custom_gdbye(chat_id, gdbycontent, note_data, gdbytype, buttons)
+							imp_gdbye = True
+
+				# clean service
+				cleanserv = data['greetings'].get('clean_service')
+				welcsql.set_clean_service(chat_id, bool(cleanserv))
+
+				# security welcome
+				if data['greetings'].get('security'):
+					secenable = data['greetings']['security'].get('enable')
+					secbtn = data['greetings']['security'].get('text')
+					sectime = data['greetings']['security'].get('time')
+					welcsql.set_welcome_security(chat_id, bool(secenable), str(sectime), str(secbtn))
+					imp_greet_pref = True
+
+				# Import language
+				if data['greetings'].get('language'):
+					lang = data['language'].get('language')
+					if lang:
+						if lang in ('en', 'id'):
+							langsql.set_lang(chat_id, lang)
+							imp_lang = True
+
+				# Import Locks
+				if data.get('locks'):
+					if data['locks'].get('lock_warn'):
+						locksql.set_lockconf(chat_id, True)
+					else:
+						locksql.set_lockconf(chat_id, False)
+					if data['locks'].get('locks'):
+						for x in list(data['locks'].get('locks')):
+							if x in LOCK_TYPES:
+								is_locked = data['locks']['locks'].get('x')
+								locksql.update_lock(chat_id, x, locked=is_locked)
+								imp_locks = True
+							if x in RESTRICTION_TYPES:
+								is_locked = data['locks']['locks'].get('x')
+								locksql.update_restriction(chat_id, x, locked=is_locked)
+								imp_locks = True
+
+				# Import notes
+				if data.get('notes'):
+					allnotes = data['notes']
+					NOT_IMPORTED += "\n\nNotes:\n"
+					for x in allnotes:
+						# If from self, import all
+						if is_self:
+							note_data, buttons = button_markdown_parser(x['note_data'], entities=0)
+							note_name = x['note_tag']
+							note_file = None
+							note_type = x['note_type']
+							if x['note_file']:
+								note_file = x['note_file']
+							if note_type == 0:
+								note_type = Types.TEXT
+							elif note_type == 1:
+								note_type = Types.BUTTON_TEXT
+							elif note_type == 2:
+								note_type = Types.STICKER
+							elif note_type == 3:
+								note_type = Types.DOCUMENT
+							elif note_type == 4:
+								note_type = Types.PHOTO
+							elif note_type == 5:
+								note_type = Types.AUDIO
+							elif note_type == 6:
+								note_type = Types.VOICE
+							elif note_type == 7:
+								note_type = Types.VIDEO
+							elif note_type == 8:
+								note_type = Types.VIDEO_NOTE
+							else:
+								note_type = None
+							if note_type <= 8:
+								notesql.add_note_to_db(chat_id, note_name, note_data, note_type, buttons, note_file)
+								imp_notes += 1
+						else:
+							# If this text
+							if x['note_type'] == 0:
+								note_data, buttons = button_markdown_parser(x['text'].replace("\\", ""), entities=0)
+								note_name = x['name']
+								notesql.add_note_to_db(chat_id, note_name, note_data, Types.TEXT, buttons, None)
+								imp_notes += 1
+							else:
+								NOT_IMPORTED += "- {}\n".format(x['name'])
+								NOT_IMPORTED_INT += 1
+
+				# Import reports
+				if data.get('report'):
+					reporting = data['report'].get('report')
+					reportsql.set_chat_setting(chat_id, bool(reporting))
+					imp_report = True
+
+				# Import rules
+				if data.get('rules'):
+					contrules = data['rules'].get('rules')
+					if contrules:
+						rulessql.set_rules(chat_id, contrules)
+						imp_rules = True
+
+				# Import warn config
+				if data.get('warns'):
+					warn_limit = data['warns'].get('warn_limit')
+					if warn_limit >= 3:
+						warnssql.set_warn_limit(chat_id, int(warn_limit))
+
+					warn_mode = data['warns'].get('warn_mode')
+					if warn_mode:
+						if warn_mode <= 3:
+							warnssql.set_warn_mode(chat_id, int(warn_mode))
+							imp_warn = True
+
+					# Import all warn filters
+					if data['warns'].get('warn_filters'):
+						for x in data['warns'].get('warn_filters'):
+							warnssql.add_warn_filter(chat_id, x['name'], x['reason'])
+							imp_warn_filter += 1
+
+					# Import all warn from backup chat, reset first for prevent overwarn
+					if data['warns'].get('chat_warns'):
+						for x in data['warns'].get('chat_warns'):
+							# If this invaild
+							if x['warns'] > warn_limit:
+								break
+							warnssql.reset_warns(x['user_id'], chat_id)
+							warnssql.import_warns(x['user_id'], chat_id, int(x['warns']), x['reasons'])
+							imp_warn_chat += 1
+
+				if conn:
+					text = (tld(chat.id, "The backup is fully restored at *{}*. Welcome back! 😀").format(chat_name))
+				else:
+					text = (tld(chat.id, "Backup fully restored. Welcome back! 😀").format(chat_name))
+				text += (tldd(chat.id, "\n\nWhat i returned:\n"))
+				if imp_antiflood:
+					text += (tld(chat.id, "- AntiFlood Settings\n"))
+				if imp_blacklist:
+					text += (tld(chat.id, "- Blacklist Settings\n"))
+				if imp_blacklist_count:
+					text += (tld(chat.id, "- {} blacklists\n").format(imp_blacklist_count))
+				if imp_blsticker:
+					text += (tld(chat.id, "- {} blacklist stickers\n").format(imp_blsticker_count))
+				if imp_disabled_count:
+					text += (tld(chat.id, "- {} cmd disabled\n").format(imp_disabled_count))
+				if imp_filters_count:
+					text += (tld(chat.id, "- {} filters\n").format(imp_filters_count))
+				if imp_greet_pref:
+					text += (tld(chat.id, "- Greetings Settings\n"))
+				if imp_greet:
+					text += (tld(chat.id, "- Greetings\n"))
+				if imp_gdbye:
+					text += (tld(chat.id, "- Goodbye message\n"))
+				if imp_locks:
+					text += (tld(chat.id, "- Lockup\n"))
+				if imp_notes:
+					text += (tld(chat.id, "- {} Notes\n").format(imp_notes))
+				if imp_report:
+					text += (tld(chat.id, "- Reporting Settings\n"))
+				if imp_rules:
+					text += (tld(chat.id, "- Group rules\n"))
+				if imp_lang:
+					text += (tld(chat.id, "- Language setting\n"))
+				if imp_warn:
+					text += (tld(chat.id, "- Warning Settings\n"))
+				if imp_warn_chat:
+					text += (tld(chat.id, "- {} User alert\n").format(imp_warn_chat))
+				if imp_warn_filter:
+					text += (tld(chat.id, "- {} Filter warning\n").format(imp_warn_filter))
+				try:
+					send_message(update.effective_message, text, parse_mode="markdown")
+				except BadRequest:
+					send_message(update.effective_message, text, parse_mode="markdown", quote=False)
+				if NOT_IMPORTED_INT:
+					f = open("{}-notimported.txt".format(chat_id), "w")
+					f.write(str(NOT_IMPORTED))
+					f.close()
+					bot.sendDocument(chat_id, document=open('{}-notimported.txt'.format(chat_id), 'rb'), caption=tl(update.effective_message, "*Data yang tidak dapat di import*"), timeout=360, parse_mode=ParseMode.MARKDOWN)
+					os.remove("{}-notimported.txt".format(chat_id))
+				return
+		except Exception as err:
+			send_message(update.effective_message, (tld(chat.id, "An error has occurred in importing backup.")), parse_mode="markdown")
+			LOGGER.exception("An error when importing from haruka base!")
+			return
+
+		try:
+			# If backup is from rose
+			# doing manual lol
+			if data.get('bot_id') == 609517172:
+				imp_antiflood = False
+				imp_blacklist = False
+				imp_blacklist_count = 0
+				imp_disabled_count = 0
+				imp_filters_count = 0
+				imp_greet = False
+				imp_gdbye = False
+				imp_greet_pref = False
+				imp_notes = 0
+				imp_report = False
+				imp_rules = False
+				imp_lang = False
+				imp_warn = False
+				NOT_IMPORTED = "This cannot be imported because from other bot."
+				NOT_IMPORTED_INT = 0
+				if data.get('data'):
+					# Import antiflood
+					if data['data'].get('antiflood'):
+						floodlimit = data['data']['antiflood'].get('flood_limit')
+						action = data['data']['antiflood'].get('action')
+						actionduration = data['data']['antiflood'].get('action_duration')
+						act_dur = make_time(int(actionduration))
+						antifloodsql.set_flood(chat_id, int(floodlimit))
+						if action == "ban":
+							antifloodsql.set_flood_strength(chat_id, 1, str(act_dur))
+							imp_antiflood = True
+						elif action == "kick":
+							antifloodsql.set_flood_strength(chat_id, 2, str(act_dur))
+							imp_antiflood = True
+						elif action == "mute":
+							antifloodsql.set_flood_strength(chat_id, 3, str(act_dur))
+							imp_antiflood = True
+					# Import blacklist
+					if data['data'].get('blacklists'):
+						action = data['data']['blacklists'].get('action')
+						actionduration = data['data']['blacklists'].get('action_duration')
+						act_dur = make_time(int(actionduration))
+						strengthdone = False
+						if action == "del":
+							strengthdone = True
+							blacklistsql.set_blacklist_strength(chat_id, 1, str(act_dur))
+							imp_blacklist = True
+						elif action == "warn":
+							strengthdone = True
+							blacklistsql.set_blacklist_strength(chat_id, 2, str(act_dur))
+							imp_blacklist = True
+						elif action == "mute":
+							strengthdone = True
+							blacklistsql.set_blacklist_strength(chat_id, 3, str(act_dur))
+							imp_blacklist = True
+						elif action == "kick":
+							strengthdone = True
+							blacklistsql.set_blacklist_strength(chat_id, 4, str(act_dur))
+							imp_blacklist = True
+						elif action == "ban":
+							strengthdone = True
+							blacklistsql.set_blacklist_strength(chat_id, 5, str(act_dur))
+							imp_blacklist = True
+						else:
+							if not strengthdone:
+								action = data['data']['blacklists'].get('should_delete')
+								if action:
+									blacklistsql.set_blacklist_strength(chat_id, 1, "0")
+									imp_blacklist = True
+						blacklisted = data['data']['blacklists'].get('filters')
+						if blacklisted:
+							for x in blacklisted:
+								blacklistsql.add_to_blacklist(chat_id, x['name'].lower())
+								imp_blacklist_count += 1
+					# Import disabled
+					if data['data'].get('disabled'):
+						if data['data']['disabled'].get('disabled'):
+							candisable = disabledsql.get_disableable()
+							for listdisabled in data['data']['disabled'].get('disabled'):
+								if listdisabled in candisable:
+									disabledsql.disable_command(chat_id, listdisabled)
+									imp_disabled_count += 1
+					# Import filters
+					if data['data'].get('filters'):
+						NOT_IMPORTED += "\n\nFilters:\n"
+						if data['data']['filters'].get('filters'):
+							for x in data['data']['filters'].get('filters'):
+								if x['type'] == 0:
+									note_data, buttons = button_markdown_parser(x['text'].replace("\\", ""), entities=0)
+									filtersql.add_filter(chat_id, x['name'], note_data, False, False, False, False, False, False, buttons)
+									imp_filters_count += 1
+								else:
+									NOT_IMPORTED += "- {}\n".format(x['name'])
+									NOT_IMPORTED_INT += 1
+					# Import greetings
+					if data['data'].get('greetings'):
+						if data['data']['greetings'].get('welcome'):
+							welctext = data['data']['greetings']['welcome'].get('text')
+							if welctext:
+								note_data, buttons = button_markdown_parser(welctext.replace("\\", ""), entities=0)
+								welcsql.set_custom_welcome(chat_id, None, note_data, Types.TEXT, buttons)
+								imp_greet = True
+						if data['data']['greetings'].get('goodbye'):
+							gdbytext = data['data']['greetings']['goodbye'].get('text')
+							if welctext:
+								note_data, buttons = button_markdown_parser(gdbytext.replace("\\", ""), entities=0)
+								welcsql.set_custom_gdbye(chat_id, None, note_data, Types.TEXT, buttons)
+								imp_gdbye = True
+						# Welcome config
+						if data['data']['greetings'].get('should_welcome'):
+							welcsql.set_welc_preference(str(chat_id), True)
+						else:
+							welcsql.set_welc_preference(str(chat_id), False)
+						# Goodbye config
+						if data['data']['greetings'].get('should_goodbye'):
+							welcsql.set_gdbye_preference(str(chat_id), True)
+						else:
+							welcsql.set_gdbye_preference(str(chat_id), False)
+						# clean service
+						if data['data']['greetings'].get('should_delete_service'):
+							welcsql.set_clean_service(chat_id, True)
+						else:
+							welcsql.set_clean_service(chat_id, False)
+						# custom mute btn
+						if data['data']['greetings'].get('mute_text'):
+							getcur, cur_value, cust_text = welcsql.welcome_security(chat_id)
+							welcsql.set_welcome_security(chat_id, getcur, cur_value, data['data']['greetings'].get('mute_text'))
+						imp_greet_pref = True
+						# TODO parsing unix time and import that
+					# TODO Locks
+					# Import notes
+					if data['data'].get('notes'):
+						NOT_IMPORTED += "\n\nNotes:\n"
+						allnotes = data['data']['notes']['notes']
+						for x in allnotes:
+							# If this text
+							if x['type'] == 0:
+								note_data, buttons = button_markdown_parser(x['text'].replace("\\", ""), entities=0)
+								note_name = x['name']
+								notesql.add_note_to_db(chat_id, note_name, note_data, Types.TEXT, buttons, None)
+								imp_notes += 1
+							else:
+								NOT_IMPORTED += "- {}\n".format(x['name'])
+								NOT_IMPORTED_INT += 1
+					# Import reports
+					if data['data'].get('reports'):
+						if data['data']['reports'].get('disable_reports'):
+							reporting = False
+						else:
+							reporting = True
+						reportsql.set_chat_setting(chat_id, reporting)
+						imp_report = True
+					# Import rules
+					if data['data'].get('rules'):
+						contrules = data['data']['rules'].get('content')
+						if contrules:
+							rulessql.set_rules(chat_id, contrules.replace("\\", ""))
+							imp_rules = True
+					# Import current lang
+					if data['data'].get('translations'):
+						lang = data['data']['translations'].get('lang')
+						if lang:
+							if lang in ('en', 'id'):
+								langsql.set_lang(chat_id, lang)
+								imp_lang = True
+					# Import warn
+					if data['data'].get('warns'):
+						action = data['data']['warns'].get('action')
+						# actionduration = data['data']['warns'].get('action_duration')
+						# act_dur = make_time(int(actionduration))
+						if action == "kick":
+							warnssql.set_warn_mode(chat_id, 1)
+							imp_warn = True
+						elif action == "ban":
+							warnssql.set_warn_mode(chat_id, 2)
+							imp_warn = True
+						elif action == "mute":
+							warnssql.set_warn_mode(chat_id, 3)
+							imp_warn = True
+					if conn:
+						text = (tld(chat.id, "Backup fully restored at *{}*. Welcome back! 😀").format(chat_name))
+					else:
+						text = (tld(chat.id, "Backup fully restored. Welcome back! 😀").format(chat_name))
+					text += (tld(chat.id, "\n\nI returned:\n"))
+					if imp_antiflood:
+						text += (tld(chat.id, "- AntiFlood Settings\n"))
+					if imp_blacklist:
+						text += (tld(chat.id, "- Blacklist Settings\n"))
+					if imp_blacklist_count:
+						text += (tld(chat.id, "- {} blacklists\n").format(imp_blacklist_count))
+					if imp_disabled_count:
+						text += (tld(chat.id, "- {} cmd disabled\n").format(imp_disabled_count))
+					if imp_filters_count:
+						text += (tld(chat.id, "- {} filters\n").format(imp_filters_count))
+					if imp_greet_pref:
+						text += (tld(chat.id, "- Greetings Settings\n"))
+					if imp_greet:
+						text += (tld(chat.id, "- Greetings\n"))
+					if imp_gdbye:
+						text += (tld(chat.id, "- Goodbye message\n"))
+					if imp_notes:
+						text += (tld(chat.id, "- {} Notes\n").format(imp_notes))
+					if imp_report:
+						text += (tld(chat.id, "- Reporting Settings\n"))
+					if imp_rules:
+						text += (tld(chat.id, "- Group rules\n"))
+					if imp_lang:
+						text += (tld(chat.id, "- Language setting\n"))
+					if imp_warn:
+						text += (tld(chat.id, "- Warning Settings\n"))
+					try:
+						send_message(update.effective_message, text, parse_mode="markdown")
+					except BadRequest:
+						send_message(update.effective_message, text, parse_mode="markdown", quote=False)
+					if NOT_IMPORTED_INT:
+						f = open("{}-notimported.txt".format(chat_id), "w")
+						f.write(str(NOT_IMPORTED))
+						f.close()
+						bot.sendDocument(chat_id, document=open('{}-notimported.txt'.format(chat_id), 'rb'), caption=tl(update.effective_message, "*Data yang tidak dapat di import*"), timeout=360, parse_mode=ParseMode.MARKDOWN)
+						os.remove("{}-notimported.txt".format(chat_id))
+					return
+		except Exception as err:
+			send_message(update.effective_message, (tld(chat.id, "An error has occurred in importing Rose backup!"), parse_mode="markdown")
+			LOGGER.exception("An error when importing from Rose base!")
+			return
+
+		# only import one group
+		if len(data) > 1 and str(chat_id) not in data:
+			send_message(update.effective_message, (tld(chat.id, "There is more than one group in this file, and no one has the same chat id as "
+						   "this group - how do you choose what to import?"))
+			return
+
+		# Check if backup is this chat
+		try:
+			if data.get(str(chat_id)) == None:
+				if conn:
+					text = tl(update.effective_message, "Backup berasal chat lain, Saya tidak bisa mengembalikan chat lain kedalam chat *{}*").format(chat_name)
+				else:
+					text = tl(update.effective_message, "Backup berasal chat lain, Saya tidak bisa mengembalikan chat lain kedalam chat ini")
+				return send_message(update.effective_message, text, parse_mode="markdown")
+		except:
+			return send_message(update.effective_message, (tld(chat.id, "An error has occurred in checking the data, please report it to my creator "
+								  "for this problem to make me better! Thank you!🙂")))
+		# Check if backup is from self
+		try:
+			if str(bot.id) != str(data[str(chat_id)]['bot']):
+				return send_message(update.effective_message, (tld(chat.id, "Backups come from other bots, documents, photos, videos, audio, sound will not "
+							   "works, if your file doesn't want to be lost, import it from a bot that is backed up."
+							   "if it still doesn't work, report it to the bot maker for "
+							   "make me better! Thank you! 🙂")))
+		except:
+			pass
+		# Select data source
+		if str(chat_id) in data:
+			data = data[str(chat_id)]['hashes']
+		else:
+			data = data[list(data.keys())[0]]['hashes']
+
+		try:
+			for mod in DATA_IMPORT:
+				mod.__import_data__(str(chat_id), data)
+		except Exception:
+			send_message(update.effective_message, (tld(chat.id, "An error occurred while restoring your data. The process may not be complete. If "
+						   "You are having problems with this, so "
+						   "My owner will be happy to help, and any bugs "
+						   "reportedly makes me better! thank you! 🙂")))
+			LOGGER.exception("Import for chat ID %s with the name %s failed.", str(chat_id), str(chat.titlde))
+			return
+
+		# TODO: some of that link logic
+		# NOTE: consider default permissions stuff?
+		if conn:
+			text = (tld(chat.id, "The backup is fully restored at *{}*. Welcome back! 😀").format(chat_name))
+		else:
+			text = (tld(chat.id, "Backup fully restored. Welcome back! 😀").format(chat_name))
+		send_message(update.effective_message, text, parse_mode="markdown")
 
 
 @run_async
 @user_admin
 def export_data(bot: Bot, update: Update, chat_data):
-    msg = update.effective_message  # type: Optional[Message]
-    user = update.effective_user  # type: Optional[User]
+	msg = update.effective_message  # type: Optional[Message]
+	user = update.effective_user  # type: Optional[User]
+	spam = spamfilters(update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
+	if spam == True:
+		return
 
-    chat_id = update.effective_chat.id
-    chat = update.effective_chat
-    current_chat_id = update.effective_chat.id
+	chat_id = update.effective_chat.id
+	chat = update.effective_chat
+	current_chat_id = update.effective_chat.id
 
-    conn = connected(bot, update, chat, user.id, need_admin=True)
-    if conn:
-        chat = dispatcher.bot.getChat(conn)
-        chat_id = conn
-        chat_name = dispatcher.bot.getChat(conn).title
-    else:
-        if update.effective_message.chat.type == "private":
-            update.effective_message.reply_text("This command can only be used on group, not PM")
-            return ""
-        chat = update.effective_chat
-        chat_id = update.effective_chat.id
-        chat_name = update.effective_message.chat.title
+	conn = connected(bot, update, chat, user.id, need_admin=True)
+	if conn:
+		chat = dispatcher.bot.getChat(conn)
+		chat_id = conn
+		chat_name = dispatcher.bot.getChat(conn).titlde
+	else:
+		if update.effective_message.chat.type == "private":
+			send_message(update.effective_message, (tld(chat.id, "You can do this command in the group, not in PM")))
+			return ""
+		chat = update.effective_chat
+		chat_id = update.effective_chat.id
+		chat_name = update.effective_message.chat.titlde
 
-    jam = time.time()
-    new_jam = jam + 10800
-    checkchat = get_chat(chat_id, chat_data)
-    if checkchat.get('status'):
-        if jam <= int(checkchat.get('value')):
-            timeformatt = time.strftime("%H:%M:%S %d/%m/%Y", time.localtime(checkchat.get('value')))
-            update.effective_message.reply_text(
-                "You can only backup once a day!\nYou can backup again in about `{}`".format(timeformatt),
-                parse_mode=ParseMode.MARKDOWN)
-            return
-        else:
-            if user.id != 654839744:
-                put_chat(chat_id, new_jam, chat_data)
-    else:
-        if user.id != 654839744:
-            put_chat(chat_id, new_jam, chat_data)
+	jam = time.time()
+	new_jam = jam + 43200
+	cek = get_chat(chat_id, chat_data)
+	if cek.get('status'):
+		if jam <= int(cek.get('value')):
+			waktu = time.strftime("%H:%M:%S %d/%m/%Y", time.localtime(cek.get('value')))
+			send_message(update.effective_message, tld(update.effective_message, "Anda dapat mencadangan data sekali dalam 12 jam!\n[Orang ini](tg://user?id={}) sudah mencadangan data\nAnda dapat mencadangan data lagi pada `{}`").format(cek.get('user'), waktu), parse_mode=ParseMode.MARKDOWN)
+			return
+		else:
+			if user.id != OWNER_ID:
+				put_chat(chat_id, user.id, new_jam, chat_data)
+	else:
+		if user.id != OWNER_ID:
+			put_chat(chat_id, user.id, new_jam, chat_data)
 
-    note_list = sql.get_all_chat_notes(chat_id)
-    backup = {}
-    notes = {}
-    button = ""
-    buttonlist = []
-    namacat = ""
-    isicat = ""
-    rules = ""
-    count = 0
-    countbtn = 0
-    # Notes
-    for note in note_list:
-        count += 1
-        getnote = sql.get_note(chat_id, note.name)
-        namacat += '{}<###splitter###>'.format(note.name)
-        if note.msgtype == 1:
-            tombol = sql.get_buttons(chat_id, note.name)
-            keyb = []
-            for btn in tombol:
-                countbtn += 1
-                if btn.same_line:
-                    buttonlist.append(('{}'.format(btn.name), '{}'.format(btn.url), True))
-                else:
-                    buttonlist.append(('{}'.format(btn.name), '{}'.format(btn.url), False))
-            isicat += '###button###: {}<###button###>{}<###splitter###>'.format(note.value, str(buttonlist))
-            buttonlist.clear()
-        elif note.msgtype == 2:
-            isicat += '###sticker###:{}<###splitter###>'.format(note.file)
-        elif note.msgtype == 3:
-            isicat += '###file###:{}<###TYPESPLIT###>{}<###splitter###>'.format(note.file, note.value)
-        elif note.msgtype == 4:
-            isicat += '###photo###:{}<###TYPESPLIT###>{}<###splitter###>'.format(note.file, note.value)
-        elif note.msgtype == 5:
-            isicat += '###audio###:{}<###TYPESPLIT###>{}<###splitter###>'.format(note.file, note.value)
-        elif note.msgtype == 6:
-            isicat += '###voice###:{}<###TYPESPLIT###>{}<###splitter###>'.format(note.file, note.value)
-        elif note.msgtype == 7:
-            isicat += '###video###:{}<###TYPESPLIT###>{}<###splitter###>'.format(note.file, note.value)
-        elif note.msgtype == 8:
-            isicat += '###video_note###:{}<###TYPESPLIT###>{}<###splitter###>'.format(note.file, note.value)
-        else:
-            isicat += '{}<###splitter###>'.format(note.value)
-    for x in range(count):
-        notes['#{}'.format(namacat.split("<###splitter###>")[x])] = '{}'.format(isicat.split("<###splitter###>")[x])
-    # Rules
-    rules = rulessql.get_rules(chat_id)
-    # Blacklist
-    bl = list(blacklistsql.get_chat_blacklist(chat_id))
-    # Disabled command
-    disabledcmd = list(disabledsql.get_all_disabled(chat_id))
-    # Filters (TODO)
-    """
-    all_filters = list(filtersql.get_chat_triggers(chat_id))
-    export_filters = {}
-    for filters in all_filters:
-        filt = filtersql.get_filter(chat_id, filters)
-        # print(vars(filt))
-        if filt.is_sticker:
-            tipefilt = "sticker"
-        elif filt.is_document:
-            tipefilt = "doc"
-        elif filt.is_image:
-            tipefilt = "img"
-        elif filt.is_audio:
-            tipefilt = "audio"
-        elif filt.is_voice:
-            tipefilt = "voice"
-        elif filt.is_video:
-            tipefilt = "video"
-        elif filt.has_buttons:
-            tipefilt = "button"
-            buttons = filtersql.get_buttons(chat.id, filt.keyword)
-            print(vars(buttons))
-        elif filt.has_markdown:
-            tipefilt = "text"
-        if tipefilt == "button":
-            content = "{}#=#{}|btn|{}".format(tipefilt, filt.reply, buttons)
-        else:
-            content = "{}#=#{}".format(tipefilt, filt.reply)
-        print(content)
-        export_filters[filters] = content
-    print(export_filters)
-    """
-    # Welcome (TODO)
-    # welc = welcsql.get_welc_pref(chat_id)
-    # Locked
-    locks = locksql.get_locks(chat_id)
-    locked = []
-    if locks:
-        if locks.sticker:
-            locked.append('sticker')
-        if locks.document:
-            locked.append('document')
-        if locks.contact:
-            locked.append('contact')
-        if locks.audio:
-            locked.append('audio')
-        if locks.game:
-            locked.append('game')
-        if locks.bots:
-            locked.append('bots')
-        if locks.gif:
-            locked.append('gif')
-        if locks.photo:
-            locked.append('photo')
-        if locks.video:
-            locked.append('video')
-        if locks.voice:
-            locked.append('voice')
-        if locks.location:
-            locked.append('location')
-        if locks.forward:
-            locked.append('forward')
-        if locks.url:
-            locked.append('url')
-        restr = locksql.get_restr(chat_id)
-        if restr.other:
-            locked.append('other')
-        if restr.messages:
-            locked.append('messages')
-        if restr.preview:
-            locked.append('preview')
-        if restr.media:
-            locked.append('media')
-    # Warns (TODO)
-    # warns = warnssql.get_warns(chat_id)
-    # Backing up
-    backup[chat_id] = {'bot': bot.id,
-                       'hashes': {'info': {'rules': rules}, 'extra': notes, 'blacklist': bl, 'disabled': disabledcmd,
-                                  'locks': locked}}
-    baccinfo = json.dumps(backup, indent=4)
-    f = open("harukab{}.backup".format(chat_id), "w")
-    f.write(str(baccinfo))
-    f.close()
-    bot.sendChatAction(current_chat_id, "upload_document")
-    tgl = time.strftime("%H:%M:%S - %d/%m/%Y", time.localtime(time.time()))
-    try:
-        bot.sendMessage(MESSAGE_DUMP,
-                        "*Successfully imported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`".format(chat.title,
-                                                                                                      chat_id, tgl),
-                        parse_mode=ParseMode.MARKDOWN)
-    except BadRequest:
-        pass
-    bot.sendDocument(current_chat_id, document=open('harukab{}.backup'.format(chat_id), 'rb'),
-                     caption="*Successfully imported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `harukab` is specially made for notes.".format(
-                         chat.title, chat_id, tgl), timeout=360, reply_to_message_id=msg.message_id,
-                     parse_mode=ParseMode.MARKDOWN)
-    os.remove("harukab{}.backup".format(chat_id))  # Cleaning file
+
+	# Backup version
+	# Revision: 07/07/2019
+	backup_ver = 1
+	bot_base = "haruka"
+
+	# Make sure this backup is for this bot
+	bot_id = bot.id
+
+	# Backuping antiflood
+	flood_mode, flood_duration = antifloodsql.get_flood_setting(chat_id)
+	flood_limit = antifloodsql.get_flood_limit(chat_id)
+	antiflood = {'flood_mode': flood_mode, 'flood_duration': flood_duration, 'flood_limit': flood_limit}
+
+	# Backuping blacklists
+	all_blacklisted = blacklistsql.get_chat_blacklist(chat_id)
+	blacklist_mode, blacklist_duration = blacklistsql.get_blacklist_setting(chat.id)
+	blacklists = {'blacklist_mode': blacklist_mode, 'blacklist_duration': blacklist_duration, 'blacklists': all_blacklisted}
+
+	# Backuping blacklists sticker
+	all_blsticker = blackliststksql.get_chat_stickers(chat_id)
+	blsticker_mode, blsticker_duration = blacklistsql.get_blacklist_setting(chat.id)
+	blstickers = {'blsticker_mode': blsticker_mode, 'blsticker_duration': blsticker_duration, 'blstickers': all_blsticker}
+
+	# Backuping disabled
+	cmd_disabled = disabledsql.get_all_disabled(chat_id)
+	disabled = {'disabled': cmd_disabled}
+
+	# Backuping filters
+	all_filters = filtersql.get_chat_triggers(chat_id)
+	filters_gen = []
+	for x in all_filters:
+		filt = filtersql.get_filter(chat.id, x)
+		if filt.is_sticker:
+			filt_type = 1
+		elif filt.is_document:
+			filt_type = 2
+		elif filt.is_image:
+			filt_type = 3
+		elif filt.is_audio:
+			filt_type = 4
+		elif filt.is_voice:
+			filt_type = 5
+		elif filt.is_video:
+			filt_type = 6
+		elif filt.has_markdown:
+			filt_type = 0
+		else:
+			filt_type = 7
+		filters_gen.append({"name": x, "reply": filt.reply, "type": filt_type})
+	filters = {'filters': filters_gen}
+
+	# Backuping greetings msg and config
+	greetings = {}
+	pref, welcome_m, cust_content, welcome_type = welcsql.get_welc_pref(chat_id)
+	if not welcome_m:
+		welcome_m = ""
+	if not cust_content:
+		cust_content = ""
+	buttons = welcsql.get_welc_buttons(chat_id)
+	welcome_m += revert_buttons(buttons)
+	greetings["welcome"] = {"enable": pref, "text": welcome_m, "content": cust_content, "type": welcome_type}
+
+	pref, goodbye_m, cust_content, goodbye_type = welcsql.get_gdbye_pref(chat_id)
+	if not goodbye_m:
+		goodbye_m = ""
+	if not cust_content:
+		cust_content = ""
+	buttons = welcsql.get_gdbye_buttons(chat_id)
+	goodbye_m += revert_buttons(buttons)
+	greetings["goodbye"] = {"enable": pref, "text": goodbye_m, "content": cust_content, "type": goodbye_type}
+
+	curr = welcsql.clean_service(chat_id)
+	greetings["clean_service"] = curr
+
+	getcur, cur_value, cust_text = welcsql.welcome_security(chat_id)
+	greetings["security"] = {"enable": getcur, "text": cust_text, "time": cur_value}
+
+	# Backuping chat language
+	getldang = langsql.get_lang(chat_id)
+	language = {"language": getldang}
+
+	# Backuping locks
+	curr_locks = locksql.get_locks(chat_id)
+	curr_restr = locksql.get_restr(chat_id)
+
+	if curr_locks:
+		locked_lock = {
+			"sticker": curr_locks.sticker,
+			"audio": curr_locks.audio,
+			"voice": curr_locks.voice,
+			"document": curr_locks.document,
+			"video": curr_locks.video,
+			"contact": curr_locks.contact,
+			"photo": curr_locks.photo,
+			"gif": curr_locks.gif,
+			"url": curr_locks.url,
+			"bots": curr_locks.bots,
+			"forward": curr_locks.forward,
+			"game": curr_locks.game,
+			"location": curr_locks.location,
+			"rtld": curr_locks.rtld
+		}
+	else:
+		locked_lock = {}
+
+	if curr_restr:
+		locked_restr = {
+			"messages": curr_restr.messages,
+			"media": curr_restr.media,
+			"other": curr_restr.other,
+			"previews": curr_restr.preview,
+			"all": all([curr_restr.messages, curr_restr.media, curr_restr.other, curr_restr.preview])
+		}
+	else:
+		locked_restr = {}
+
+	lock_warn = locksql.get_lockconf(chat_id)
+
+	locks = {'lock_warn': lock_warn, 'locks': locked_lock, 'restrict': locked_restr}
+
+	# Backuping notes
+	note_list = notesql.get_all_chat_notes(chat_id)
+	notes = []
+	for note in note_list:
+		buttonlist = ""
+		note_tag = note.name
+		note_type = note.msgtype
+		getnote = notesql.get_note(chat_id, note.name)
+		if not note.value:
+			note_data = ""
+		else:
+			tombol = notesql.get_buttons(chat_id, note_tag)
+			keyb = []
+			buttonlist = ""
+			for btn in tombol:
+				if btn.same_line:
+					buttonlist += "[{}](buttonurl:{}:same)\n".format(btn.name, btn.url)
+				else:
+					buttonlist += "[{}](buttonurl:{})\n".format(btn.name, btn.url)
+			note_data = "{}\n\n{}".format(note.value, buttonlist)
+		note_file = note.file
+		if not note_file:
+			note_file = ""
+		notes.append({"note_tag": note_tag, "note_data": note_data, "note_file": note_file, "note_type": note_type})
+
+	# Backuping reports
+	get_report = reportsql.user_should_report(chat_id)
+	report = {'report': get_report}
+
+	# Backuping rules
+	getrules = rulessql.get_rules(chat_id)
+	rules = {"rules": getrules}
+
+	# Backuping warns config and warn filters
+	warn_limit, _, warn_mode = warnssql.get_warn_setting(chat_id)
+	all_handlers = warnssql.get_chat_warn_triggers(chat_id)
+	all_warn_filter = []
+	for x in all_handlers:
+		warnreply = warnssql.get_warn_filter(chat_id, x)
+		all_warn_filter.append({'name': x, 'reason': warnreply.reply})
+	if not warn_mode:
+		warn_mode = ""
+	# Get all warnings in current chat
+	allwarns = warnssql.get_allwarns(chat_id)
+	warns = {"warn_limit": warn_limit, "warn_mode": warn_mode, "warn_filters": all_warn_filter, "chat_warns": allwarns}
+
+
+	# Parsing backups
+	backup = {"bot_id": bot_id, "bot_base": bot_base, "antiflood": antiflood, "blacklists": blacklists, "blstickers": blstickers, "disabled": disabled, "filters": filters, "greetings": greetings, "language": language, "locks": locks, "notes": notes, "report": report, "rules": rules, "warns": warns, "version": backup_ver}
+
+
+	all_backups = json.dumps(backup, indent=4, cls=SetEncoder)
+	f = open("{}-haruka.backup".format(chat_id), "w")
+	f.write(str(all_backups))
+	f.close()
+	bot.sendChatAction(current_chat_id, "upload_document")
+	tgl = time.strftime("%H:%M:%S - %d/%m/%Y", time.localtime(time.time()))
+	try:
+		bot.sendMessage(TEMPORARY_DATA, "*Successfully backed up for:*\Chat name: `{}`\Chat ID: `{}`\nOn: `{}`".format(chat.titlde, chat_id, tgl), parse_mode=ParseMode.MARKDOWN)
+	except BadRequest:
+		pass
+	send = bot.sendDocument(current_chat_id, document=open('{}-haruka.backup'.format(chat_id), 'rb'), caption=(tld(chat.id, "*Successfully backed up for:*\Chat name: `{}`\nID chat: `{}`\nOn: `{}`\n\nNote: This backup is specific to this bot, if it is imported into another bot then records of documents, videos, audio, voice, etc. will be lost").format(chat.titlde, chat_id, tgl)), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
+	try:
+		# Send to temp data for prevent unexpected issue
+		bot.sendDocument(TEMPORARY_DATA, document=send.document.file_id, caption=(tld(chat.id, "**\nChat name: `{}`\Chat ID: `{}`\nOn: `{}`\n\nNote: This backup is specific to this bot, if it is imported into another bot then records of documents, videos, audio, voice, etc. will be lost").format(chat.titlde, chat_id, tgl)), timeout=360, parse_mode=ParseMode.MARKDOWN)
+	except BadRequest:
+		pass
+	os.remove("{}-haruka.backup".format(chat_id)) # Cleaning file
+
+
+class SetEncoder(json.JSONEncoder):
+	def default(self, obj):
+		if isinstance(obj, set):
+			return list(obj)
+		return json.JSONEncoder.default(self, obj)
 
 
 # Temporary data
-def put_chat(chat_id, value, chat_data):
-    # print(chat_data)
-    if value == False:
-        status = False
-    else:
-        status = True
-    chat_data[chat_id] = {'backups': {"status": status, "value": value}}
-
+def put_chat(chat_id, user_id, value, chat_data):
+	# print(chat_data)
+	if value == False:
+		status = False
+	else:
+		status = True
+	chat_data[chat_id] = {'backups': {"status": status, "user": user_id, "value": value}}
 
 def get_chat(chat_id, chat_data):
-    # print(chat_data)
-    try:
-        value = chat_data[chat_id]['backups']
-        return value
-    except KeyError:
-        return {"status": False, "value": False}
+	# print(chat_data)
+	try:
+		value = chat_data[chat_id]['backups']
+		return value
+	except KeyError:
+		return {"status": False, "user": None, "value": False}
 
 
-__mod_name__ = "Backups"
+__mod_name__ = "Import/Export"
 
-__help__ = """
-*Only for chat administrator:*
+__help__ = "backups_help"
 
- - /import: reply to the backup file for the butler / emilia group to import as much as possible, making transfers very easy!  Note that files / photos cannot be imported due to telegram restrictions.
-
- - /export: export group data. Exported data will include rules, notes (documents, images, music, video, audio, voice, text, text buttons), blacklists, disabled commands and locks. More will come gradually!
-
-*This module is still in beta!*
-"""
-
-IMPORT_HANDLER = CommandHandler("import", import_data)
+IMPORT_HANDLER = CommandHandler("import", import_data, filters=Filters.group)
 EXPORT_HANDLER = CommandHandler("export", export_data, pass_chat_data=True)
+# EXPORT_HANDLER = CommandHandler("export", export_data, filters=Filters.user(OWNER_ID))
 
 dispatcher.add_handler(IMPORT_HANDLER)
 dispatcher.add_handler(EXPORT_HANDLER)
