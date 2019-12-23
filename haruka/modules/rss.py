@@ -8,6 +8,7 @@ from telegram.ext import CommandHandler
 from haruka import dispatcher, updater
 from haruka.modules.helper_funcs.chat_status import user_admin
 from haruka.modules.sql import rss_sql as sql
+from haruka.modules.translations.strings import tld
 
 
 def show_url(bot, update, args):
