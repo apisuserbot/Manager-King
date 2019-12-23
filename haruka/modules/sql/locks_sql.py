@@ -257,6 +257,16 @@ def migrate_chat(old_chat_id, new_chat_id):
         SESSION.commit()
 
 
+def set_lockconf(chat_id, should_warn):
+    with CONF_LOCK:
+        lock_setting = SESSION.query(LockConfig).get(str(chat_id))
+        if not lock_setting:
+            lock_setting = LockConfig(str(chat_id))
+
+        lock_setting.warn = should_warn
+        SESSION.add(lock_setting)
+        SESSION.commit()
+
 def get_lockconf(chat_id) -> bool:
     try:
         lock_setting = SESSION.query(LockConfig).get(str(chat_id))
