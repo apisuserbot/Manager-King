@@ -10,11 +10,12 @@ from telegram.ext.dispatcher import run_async
 from telegram.utils.helpers import mention_html
 
 import haruka.modules.sql.connection_sql as sql
-from haruka import dispatcher, LOGGER, SUDO_USERS, spamfilters
+from haruka import dispatcher, LOGGER, SUDO_USERS
 from haruka.modules.helper_funcs.chat_status import bot_admin, user_admin, is_user_admin, can_restrict
 from haruka.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from haruka.modules.helper_funcs.string_handling import extract_time
 
+from haruka.modules.translations.strings import tld
 from haruka.modules.helper_funcs.alternate import send_message
 
 
@@ -47,9 +48,6 @@ def connection_chat(bot, update):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
 
-    spam = spamfilters(update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
-    if spam == True:
-        return
     conn = connected(bot, update, chat, user.id, need_admin=True)
     if conn:
         chat = dispatcher.bot.getChat(conn)
@@ -73,10 +71,6 @@ def connection_chat(bot, update):
 def connect_chat(bot, update, args):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
-
-    spam = spamfilters(update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
-    if spam == True:
-        return
 
     if update.effective_chat.type == 'private':
         if len(args) >= 1:
@@ -166,9 +160,6 @@ def connect_chat(bot, update, args):
 
 
 def disconnect_chat(bot, update):
-    spam = spamfilters(update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
-    if spam == True:
-        return
 
     if update.effective_chat.type == 'private':
         disconnection_status = sql.disconnect(update.effective_message.from_user.id)
@@ -182,9 +173,6 @@ def disconnect_chat(bot, update):
 
 def connected(bot, update, chat, user_id, need_admin=True):
     user = update.effective_user  # type: Optional[User]
-    spam = spamfilters(update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
-    if spam == True:
-        return
         
     if chat.type == chat.PRIVATE and sql.get_connected_chat(user_id):
         conn_id = sql.get_connected_chat(user_id).chat_id
@@ -213,9 +201,6 @@ def help_connect_chat(bot, update, args):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
 
-    spam = spamfilters(update.effective_message.text, update.effective_message.from_user.id, update.effective_chat.id, update.effective_message)
-    if spam == True:
-        return
     if update.effective_message.chat.type != "private":
         send_message(update.effective_message, (tld(chat.id, "PM me with that command to get help"))
         return
