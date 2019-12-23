@@ -49,7 +49,7 @@ def import_data(bot: Bot, update):
 	if conn:
 		chat = dispatcher.bot.getChat(conn)
 		chat_id = conn
-		chat_name = dispatcher.bot.getChat(conn).titlde
+		chat_name = dispatcher.bot.getChat(conn).title
 	else:
 		if update.effective_message.chat.type == "private":
 			send_message(update.effective_message, (tld(chat.id, "You can do this command in the group, not in PM")))
