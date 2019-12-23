@@ -385,7 +385,7 @@ def import_data(bot: Bot, update):
 					text = (tld(chat.id, "The backup is fully restored at *{}*. Welcome back! 😀").format(chat_name))
 				else:
 					text = (tld(chat.id, "Backup fully restored. Welcome back! 😀").format(chat_name))
-				text += (tldd(chat.id, "\n\nWhat i returned:\n"))
+				text += (tld(chat.id, "\n\nWhat i returned:\n"))
 				if imp_antiflood:
 					text += (tld(chat.id, "- AntiFlood Settings\n"))
 				if imp_blacklist:
