@@ -361,7 +361,7 @@ def import_data(bot: Bot, update):
 
 					warn_mode = data['warns'].get('warn_mode')
 					if warn_mode:
-						if warn_mode <= 3:
+						if warn_mode =< 3:
 							warnssql.set_warn_mode(chat_id, int(warn_mode))
 							imp_warn = True
 
@@ -428,7 +428,7 @@ def import_data(bot: Bot, update):
 					f = open("{}-notimported.txt".format(chat_id), "w")
 					f.write(str(NOT_IMPORTED))
 					f.close()
-					bot.sendDocument(chat_id, document=open('{}-notimported.txt'.format(chat_id), 'rb'), caption=tl(update.effective_message, "*Data yang tidak dapat di import*"), timeout=360, parse_mode=ParseMode.MARKDOWN)
+					bot.sendDocument(chat_id, document=open('{}-notimported.txt'.format(chat_id), 'rb'), caption=(tld(chatd.id, "*Data that cannot be imported*")), timeout=360, parse_mode=ParseMode.MARKDOWN)
 					os.remove("{}-notimported.txt".format(chat_id))
 				return
 		except Exception as err:
@@ -653,7 +653,7 @@ def import_data(bot: Bot, update):
 						f = open("{}-notimported.txt".format(chat_id), "w")
 						f.write(str(NOT_IMPORTED))
 						f.close()
-						bot.sendDocument(chat_id, document=open('{}-notimported.txt'.format(chat_id), 'rb'), caption=tl(update.effective_message, "*Data yang tidak dapat di import*"), timeout=360, parse_mode=ParseMode.MARKDOWN)
+						bot.sendDocument(chat_id, document=open('{}-notimported.txt'.format(chat_id), 'rb'), caption=(tld(chatd.id, "*Data that cannot be imported*")), timeout=360, parse_mode=ParseMode.MARKDOWN)
 						os.remove("{}-notimported.txt".format(chat_id))
 					return
 		except Exception as err:
@@ -671,9 +671,9 @@ def import_data(bot: Bot, update):
 		try:
 			if data.get(str(chat_id)) == None:
 				if conn:
-					text = tl(update.effective_message, "Backup berasal chat lain, Saya tidak bisa mengembalikan chat lain kedalam chat *{}*").format(chat_name)
+					text = (tld(chat.id, "Backup comes from another chat, i can't return another chat to chat *{}*").format(chat_name))
 				else:
-					text = tl(update.effective_message, "Backup berasal chat lain, Saya tidak bisa mengembalikan chat lain kedalam chat ini")
+					text = (tld(chat.id, "Backup comes from another chat, i can't return another chat to this chat"))
 				return send_message(update.effective_message, text, parse_mode="markdown")
 		except:
 			return send_message(update.effective_message, (tld(chat.id, "An error has occurred in checking the data, please report it to my creator "
