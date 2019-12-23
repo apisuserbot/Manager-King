@@ -3,7 +3,7 @@ from typing import Union
 
 from sqlalchemy import Column, Integer, String, UnicodeText
 
-from emilia.modules.sql import SESSION, BASE
+from haruka.modules.sql import SESSION, BASE
 
 
 class UserLanguage(BASE):
