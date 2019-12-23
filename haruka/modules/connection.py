@@ -203,7 +203,6 @@ def help_connect_chat(bot, update, args):
 
     if update.effective_message.chat.type != "private":
         send_message(update.effective_message, (tld(chat.id, "PM me with that command to get help"))
-        return
     else:
         send_message(update.effective_message, (tld(chat.id, "supportcmd")), parse_mode="markdown")
 
