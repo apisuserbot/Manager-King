@@ -140,8 +140,8 @@ def send_start(bot, update):
         pass
 
     chat = update.effective_chat  # type: Optional[Chat] and unused variable
-    text = tld(chat.id, "Hey there! My name is *Ｈｉｔｓｕｋｉ* - I'm here to help you manage your groups!\n\
-Click Help button to find out more about how to use me to my full potential.\n\nFollow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n")
+    text = (tld(chat.id, "Hey there! My name is *Ｈｉｔｓｕｋｉ* - I'm here to help you manage your groups!\n\
+Click Help button to find out more about how to use me to my full potential.\n\nFollow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n"))
 
     text += "This bot is managed by @HitaloSama\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)"
 
@@ -401,11 +401,11 @@ def get_help(bot: Bot, update: Update):
     # ONLY send help in PM
     if chat.type != chat.PRIVATE:
 
-        update.effective_message.reply_text("Contact me in PM for help!",
+        update.effective_message.reply_text((tld(chat.id, "Contact me in PM for help!",))
                                             reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="Click me for help!",
+                                                [[InlineKeyboardButton(text=(tld(chat.id, "Click me for help!",
                                                                        url="t.me/{}?start=help".format(
-                                                                           bot.username))]]))
+                                                                           bot.username))))]]))
         return
 
     elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):

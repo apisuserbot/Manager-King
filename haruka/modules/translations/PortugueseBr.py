@@ -276,6 +276,9 @@ PortugueseBrStrings = {
     "Please reply to a sticker to get its ID.": "Por favor responda a um stickerer para obeter o seu ID.",
     "Please reply to a sticker for me to upload its PNG.": "Por favor, responda a um sticker para que eu possa upar seu PNG .",
 
+    "Contact me in PM for help!": "Contate-me no privado para que eu lhe ajude!",
+    "Click me for help!": "Clique em mim para ajuda!",
+    
     "Write a location to check the weather.": "Escreva um local para ver como está o tempo.",
     "I will keep an eye on both happy and sad times!": "Estarei aqui nos bons e maus momentos!",
     "Today in {} is being {}, around {}°C.\n": "Hoje em {} está fazendo {}, por volta de {}°C.\n",
