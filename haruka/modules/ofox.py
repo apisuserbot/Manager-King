@@ -81,6 +81,6 @@ __help__ = """
 
 __mod_name__ = "AFK"
 
-GET_BUILD_INFO_HANDLER = DisableAbleCommandHandler("get_build_info", ofox)
+GET_BUILD_INFO_HANDLER = DisableAbleCommandHandler("ofox", get_build_info)
 
 dispatcher.add_handler(GET_BUILD_INFO_HANDLER)
