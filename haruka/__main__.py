@@ -126,7 +126,7 @@ def start(bot: Bot, update: Update, args: List[str]):
     else:
         try:
             update.effective_message.reply_text(
-                "Hey there! I'm alive :3 PM me if you have any questions on how to use me!")
+                (tld(chat.id, "Hey there! I'm alive :3 PM me if you have any questions on how to use me!")))
         except:
             print("Nut")
 
@@ -139,9 +139,9 @@ def send_start(bot, update):
     except:
         pass
 
-    # chat = update.effective_chat  # type: Optional[Chat] and unused variable
-    text = "Hey there! My name is *Ｈｉｔｓｕｋｉ* - I'm here to help you manage your groups!\n\
-Click Help button to find out more about how to use me to my full potential.\n\nFollow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n"
+    chat = update.effective_chat  # type: Optional[Chat] and unused variable
+    text = tld(chat.id, "Hey there! My name is *Ｈｉｔｓｕｋｉ* - I'm here to help you manage your groups!\n\
+Click Help button to find out more about how to use me to my full potential.\n\nFollow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n")
 
     text += "This bot is managed by @HitaloSama\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)"
 
@@ -294,7 +294,7 @@ def control_panel(bot, update):
                                                           chat=chat_id)))
 
         elif back_match:
-            text = "Control Panel :3"
+            text = tld(chat.id, "Control Panel :3")
             query.message.reply_text(text=text, parse_mode=ParseMode.MARKDOWN,
                                      reply_markup=InlineKeyboardMarkup(
                                          paginate_modules(user.id, 0, CHAT_SETTINGS, "cntrl_panel_G")))
@@ -528,7 +528,7 @@ def get_settings(bot: Bot, update: Update):
     # ONLY send settings in PM
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
-            text = "Click here to get this chat's settings, as well as yours."
+            text = (tld(chat.id("Click here to get this chat's settings, as well as yours."))
             msg.reply_text(text,
                            reply_markup=InlineKeyboardMarkup(
                                [[InlineKeyboardButton(text="Settings",
