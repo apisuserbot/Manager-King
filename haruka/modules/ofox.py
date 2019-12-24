@@ -26,7 +26,7 @@ FOX_BETA_CHANNEL = -1001429093106
 @run_async
 def get_build_info(bot: Bot, update: Update, args: List[str]) -> str:
     codename = message.text.split('@LordHitsuki_BOT')[0][1:].lower()
-        return
+
     chat_id = message.chat.id
     chat_type = 'stable'
     files_dir = 'OrangeFox-Stable/'
