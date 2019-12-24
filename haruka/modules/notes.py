@@ -511,31 +511,28 @@ def __chat_settings__(bot, update, chat, chatP, user):
 
 
 __help__ = """
-Notes are great to save random tidbits of information; a phone number, a nice gif, a funny picture - anything!
+*Save data for future users with notes!
+Notes are great to save random tidbits of information; a phone number, a nice gif, a funny picture - anything!*
 
- - /get <notename>: get the note with this notename
- - #<notename>: same as /get
- - /notes or /saved: list all saved notes in this chat
-
-If you would like to retrieve the contents of a note without any formatting, use /get <notename> noformat. This can be useful when updating a current note.
-
-*Admin only:*
- - /save <notename> <notedata>: saves notedata as a note with name notename
-A button can be added to a note by using standard markdown link syntax - the link should just be prepended with a buttonurl: section, as such: [google](buttonurl:google.com). Check /markdownhelp for more info.
- - /save <notename>: save the replied message as a note with name notename
- - /clear <notename>: clear note with this name
+*Available commands are:*
+ - /save <word> <sentence>: Save that sentence to the note called "word". Replying to a message will save that message. Even works on media!
+ - /get <word>: get the note registered to that word.
+ - #<word>: same as /get word
+ - /clear <word>: delete the note called "word"
+ - /notes: List all notes in the current chat
+ - /saved: same as /notes
  - /privatenote <on/yes/off/no> <? del>: whether or not to send the note in PM. Write del besides on/off to delete hashtag message on group.
- 
-An example of how to save a note would be via:
+
+*An example of how to save a note would be via:*
 /save data This is some data!
 Now, anyone using "/get data", or "#data" will be replied to with "This is some data!".
 If you want to save an image, gif, or sticker, or any other data, do the following:
 /save word while replying to a sticker or whatever data you'd like. Now, the note at "#word" contains a sticker which will be sent as a reply.
 
-Tip: to retrieve a note without the formatting, use /get <notename> noformat
+*Tip:* to retrieve a note without the formatting, use /get <notename> noformat
 This will retrieve the note and send it without formatting it; getting you the raw markdown, allowing you to make easy edits
 
-Note: Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
+*Note:* Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
 """
 
 __mod_name__ = "Notes"
