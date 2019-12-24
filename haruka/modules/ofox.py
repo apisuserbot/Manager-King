@@ -35,14 +35,6 @@ def get_build_info(bot: Bot, update: Update, args: List[str]) -> str:
         text = '<b>OrangeFox Recovery Beta</b>\n'
         chat_type = 'beta'
         files_dir = 'OrangeFox-Beta/'
-
-    if f'{chat_type}_build' not in device:
-        text = f'This device not support {chat_type} builds, check '
-        if chat_type == 'stable':
-            text += '<a href="https://t.me/joinchat/HNZTNkxOlyslccxryvKeeQ">OrangeFox Beta chat</a>'
-        else:
-            text += '<a href="https://t.me/OrangeFoxChat">OrangeFox Main chat</a>'
-        await message.reply(text)
         return
 
     last_build = device[chat_type + "_build"]
