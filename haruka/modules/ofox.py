@@ -23,7 +23,7 @@ FOX_STABLE_CHANNEL = -1001196811863
 FOX_BETA_CHANNEL = -1001429093106
 
 @run_async
-def get_build_info(bot: Bot, update: Update, args: List[str]) -> str:
+async def get_build_info(bot: Bot, update: Update, args: List[str]) -> str:
     codename = message.text.split('@LordHitsuki_BOT')[0][1:].lower()
 
     chat_id = message.chat.id
