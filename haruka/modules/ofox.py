@@ -80,7 +80,7 @@ async def get_build_info(bot: Bot, update: Update, args: List[str]) -> str:
 __help__ = """
 """
 
-__mod_name__ = "AFK"
+__mod_name__ = "OFOX"
 
 GET_BUILD_INFO_HANDLER = DisableAbleCommandHandler("ofox", get_build_info)
 
