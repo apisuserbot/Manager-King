@@ -403,9 +403,9 @@ def get_help(bot: Bot, update: Update):
 
         update.effective_message.reply_text((tld(chat.id, "Contact me in PM for help!",))
                                             reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text=(tld(chat.id, "Click me for help!",
+                                                [[InlineKeyboardButton(text="Click me for help!",
                                                                        url="t.me/{}?start=help".format(
-                                                                           bot.username))))]]))
+                                                                           bot.username))]]))
         return
 
     elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
