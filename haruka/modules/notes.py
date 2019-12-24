@@ -117,11 +117,11 @@ def get(bot, update, notename, show_none=True, no_format=False):
 										 reply_markup=keyboard)
 					except BadRequest as excp:
 						if excp.message == "Wrong http url":
-							failtext = (tld(chat.id, "Error: The URL on the button is invalid! Please update this note."))
+							failtext = "Error: The URL on the button is invalid! Please update this note."
 							failtext += "\n\n```\n{}```".format(note.value + revert_buttons(buttons))
 							send_message(update.effective_message, failtext, parse_mode="markdown")
 						elif excp.message == "Button_url_invalid":
-							failtext = (tld(chat.id, "Error: The URL on the button is invalid! Please update this note."))
+							failtext = "Error: The URL on the button is invalid! Please update this note."
 							failtext += "\n\n```\n{}```".format(note.value + revert_buttons(buttons))
 							send_message(update.effective_message, failtext, parse_mode="markdown")
 						elif excp.message == "Message can't be deleted":
