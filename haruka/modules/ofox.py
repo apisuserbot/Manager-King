@@ -6,8 +6,6 @@ import re
 import subprocess
 import time
 
-import pysftp
-import ujson
 from aiogram import types
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types.inline_keyboard import InlineKeyboardMarkup, InlineKeyboardButton
