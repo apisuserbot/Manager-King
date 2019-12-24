@@ -385,11 +385,11 @@ def import_data(bot: Bot, update):
 				if imp_blacklist:
 					text += (tld(chat.id, "- Blacklist Settings\n"))
 				if imp_blacklist_count:
-					text += (tld(chat.id, "- {} blacklists\n").format(imp_blacklist_count))
+					text += (tld(chat.id, "- {} Blacklists\n").format(imp_blacklist_count))
 				if imp_blsticker:
-					text += (tld(chat.id, "- {} blacklist stickers\n").format(imp_blsticker_count))
+					text += (tld(chat.id, "- {} Stickers blacklist\n").format(imp_blsticker_count))
 				if imp_disabled_count:
-					text += (tld(chat.id, "- {} cmd disabled\n").format(imp_disabled_count))
+					text += (tld(chat.id, "- {} Cmd disabled\n").format(imp_disabled_count))
 				if imp_filters_count:
 					text += (tld(chat.id, "- {} filters\n").format(imp_filters_count))
 				if imp_greet_pref:
@@ -618,11 +618,11 @@ def import_data(bot: Bot, update):
 					if imp_blacklist:
 						text += (tld(chat.id, "- Blacklist Settings\n"))
 					if imp_blacklist_count:
-						text += (tld(chat.id, "- {} blacklists\n").format(imp_blacklist_count))
+						text += (tld(chat.id, "- {} Blacklists\n").format(imp_blacklist_count))
 					if imp_disabled_count:
-						text += (tld(chat.id, "- {} cmd disabled\n").format(imp_disabled_count))
+						text += (tld(chat.id, "- {} Cmd disabled\n").format(imp_disabled_count))
 					if imp_filters_count:
-						text += (tld(chat.id, "- {} filters\n").format(imp_filters_count))
+						text += (tld(chat.id, "- {} Filters \n").format(imp_filters_count))
 					if imp_greet_pref:
 						text += (tld(chat.id, "- Greetings Settings\n"))
 					if imp_greet:

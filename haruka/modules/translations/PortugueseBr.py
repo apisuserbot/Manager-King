@@ -315,10 +315,10 @@ o caso dos dados mencionados acima.""",
 " (Creator)": " (Criador)",
 
 #AFK
-"{fst_name} is AFK!": "{} está AFK!",
-"firstname} is no longer AFK!": "{} Não está mais AFK!",
-"{fst_name} is AFK!": "{} está AFK!",
-"{fst_name} is AFK! says its because of:\n{user.reason}": "{} está AFK! Disse que é por causa: \n{}",
+"{fname} is now AFK!": "{fname} está agora AFK!",
+"{firstname} is no longer AFK!": "{firstname} Não está mais AFK!",
+"{fst_name} is AFK!": "{fst_name} está AFK!",
+"{fst_name} is AFK! says its because of:\n{user.reason}": "{fst_name} está AFK! Disse que é por causa: \n{}",
 
 #Antiflood
 "I like to leave the flooding to natural disasters. But you, you were just a disappointment. Get out.":
@@ -336,10 +336,10 @@ o caso dos dados mencionados acima.""",
      "No momento, estou banindo usuários que enviarem mais de {} mensagens consecutivas.",
 
 #Antispam
-"I've enabled antispam security in this group. This will help protect you from spammers, unsavoury characters, and the biggest trolls.":
+"I've enabled antispam security in this group. This will help to protect you from spammers, unsavoury characters, and the biggest trolls.":
  "Eu ativei a segurança Anti-Spam neste grupo. Isso ajudará a protegê-lo contra spammers, pessoas desagradáveis ​​e os maiores trolls.",
 
-"I've disabled antispam security in this group. GBans wont affect your users anymore. You'll be less protected from any trolls and spammers though!":
+"I've disabled antispam security in this group. GBans won't affect your users anymore. You'll be less protected from any trolls and spammers though!":
     "Desativei a segurança Anti-Spam neste grupo. Banimentos globais não afetarão mais seus usuários. Você estará menos protegido contra trolls e spammers!",
 
 "Give me some arguments to choose a setting! on/off, yes/no!\n\nYour current setting is: {}\nWhen True, any gbans that happen will also happen in your group. When False, they won't, leaving you at the possible mercy of spammers.":
@@ -460,49 +460,51 @@ o caso dos dados mencionados acima.""",
 
 #Muting
     "You'll need to either give me a username to mute, or reply to someone to be muted.":
-        "Necesitas darme un nombre de usuario para silenciar, o responde a alguien para silenciarle.",
-    "I'm not muting myself!": "¡No me voy a silenciar a mi misma!",
-    "Afraid I can't stop an admin from talking!": "¡Me temo que no puedo hacer que un administrador pare de hablar!",
+        "Você precisará me fornecer um nome de usuário para silenciar ou responder a alguém para ser silenciado.",
+    "I'm not muting myself!": "Eu não vou sleicnair a mim mesmo!",
+    "Afraid I can't stop an admin from talking!": "Com medo de não poder impedir um administrador de falar!",
     "You'll need to either give me a username to unmute, or reply to someone to be unmuted.":
-        "Necesitas darme un nombre de usuario para dejar de silenciarle, o responde a alguien que está silenciado para quitarle el silencio.",
-    "This user already has the right to speak in {}.": "Este usuario ya puede hablar en {}.",
-    "Yep, {} can start talking again in {}!": "Si, {} puede empezar a hablar otra vez en {}!",
+        "Você precisará me fornecer um nome de usuário para desmutar ou responder a alguém.",
+    "This user already has the right to speak in {}.": "Este usuário já tem o direito de falar em {}.",
+    "Yep, {} can start talking again in {}!": "Sim, {} pode voltar a falar em {}",
     "This user isn't even in the chat, unmuting them won't make them talk more than they already do!":
-        "Este usuario ni siquiera está en el chat.",
-    "I really wish I could mute admins...": "Ya me gustaría poder silenciar a administradores...",
-    "I'm not gonna MUTE myself, are you crazy?" : "No voy a silenciarme a mi misma, ¿estás loco?",
+        "Esse usuário nem está no grupo!",
+    "I really wish I could mute admins...": "Eu realmente gostaria de poder silenciar administradores...",
+    "I'm not gonna MUTE myself, are you crazy?" : "Eu não vou me silenciar, você está louco?",
     "You haven't specified a time to mute this user for!":
-        "¡No has especificado el tiempo para silenciar a este usuario!",
-    "Muted for {} in {}!": "Silenciado durante {} en {}!",
-    "This user is already muted in {}!": "Este usuario ya está silenciado.",
-    "Well damn, I can't mute that user.": "Vaya, no puedo silenciar a este usuario.",
+        "Você não especificou o tempo para silenciar este usuário!",
+    "Muted for {} in {}!": "Silenciado durante {} em {}!",
+    "This user is already muted in {}!": "Este usuário já está silenciado em {}.",
+    "Well damn, I can't mute that user.": "Bem, droga, não posso silenciar esse usuário.",
 
     "You'll need to either give me a username to restrict, or reply to someone to be restricted.":
-        "Necesitas darme un nombre de usuario para restringir, o responder a alguien para restringirle.",
-    "I'm not restricting myself!": "No me voy a restringir a mi misma!",
-    "Afraid I can't restrict admins!": "Me temo que no puedo restringir a administradores!",
-    "{} is restricted from sending media in {}!": "{} ha sido restringido para enviar media en {}!",
-    "This user is already restricted in {}!": "Este usuario ya está restringifo en {}!",
-    "This user isn't in the {}!": "Este usuario no está en {}!",
+        "Você precisará me dar um nome de usuário para ser restringido ou responder a alguém para restringir.",
+    "I'm not restricting myself!": "Eu não vou me restringir!",
+    "Afraid I can't restrict admins!": "Com medo de não poder restringir os administradores!",
+    "{} is restricted from sending media in {}!": "{} está impedido de enviar mídia em {}!",
+    "This user is already restricted in {}!": "Este usuário já está restringido em {}!",
+    "This user isn't in the {}!": "Este usuário não está em {}!",
 
     "You'll need to either give me a username to unrestrict, or reply to someone to be unrestricted.":
-        "Necesitas darme un nombre de usuario para quitar la restricción, o responder a un mensaje de esa persona.",
+        "Você precisará me fornecer um nome de usuário para remover as restrições ou responder a alguém.",
     "This user already has the rights to send anything in {}.": 
-        "Este usuario ya tiene permisos para enviar cualquier cosa en {}.",
-    "Yep, {} can send media again in {}!": "Si, {} puede volver a enviar media en {}!",
+        "Este usuário já tem o direito de enviar qualquer coisa em {}.",
+    "Yep, {} can send media again in {}!": "Sim, {} pode enviar mídia novamente em {}!",
     "This user isn't even in the chat, unrestricting them won't make them send anything than they already do!":
-        "ЭEste usuario ni siquiera está en el chat.",
-    "I really wish I could restrict admins...": "Ya me gustaría poder restringir a administradores...",
-    "I'm not gonna RESTRICT myself, are you crazy?": "No voy a restringirme a mi misma, ¿estás loco?",
+        "Este usuário não está no grupo!",
+    "I really wish I could restrict admins...": "Eu realmente gostaria de poder restringir administradores...",
+    "I'm not gonna RESTRICT myself, are you crazy?": "Eu não vou me restringir, você está louco?",
     "You haven't specified a time to restrict this user for!": 
-        "¡No has especificado el tiempo para restringir a este usuario!",
-    "Well damn, I can't restrict that user.": "Vaya, no puedo restringir a este usuario.",
-    "{} is muted in {}!": "{} está silenciado en {}!",
+        "Você não especificou o tempo para restringir este usuário",
+    "Well damn, I can't restrict that user.": "Bem, droga, não posso restringir este usuário.",
+    "{} is muted in {}!": "{} está silenciado em {}!",
     "Restricted from sending media for {} in {}!": "Restringido para enviar mídia por {} em {}!",
     "Restricted for {} in {}!": "{} Restringido por {} em {}!",
 
 #Notes
-    "Get rekt": "Te despedaçou!",
+    "You must give a name to this note!": "Você deve dar um nome a esta nota!",
+    "No note!": "Nenhuma nota!",
+    "Ok, the note `{note_name}` is saved in *{chat_name}*.": "Ok, a nota `{note_name}` foi salva em *{chat name}*.",
 
 
 #Multi
@@ -907,13 +909,36 @@ A lista negra de domínios é usada para impedir que determinados domínios seja
 """,
 
 "Backups_help": """
-*Apenas para os administradores do grupo:*
+*Algumas pessoas só querem ver o mundo queimar. Outros, só querem ter uma maneira de agrupar seus dados de grupos em um só lugar para que eles possam exportar sua configuração para outros grupos!*
 
- - /import: responda ao arquivo de backup de grupo do butler/emilia para importar o máximo possível, facilitando muito as transferências! Observe que arquivos/fotos não podem ser importados devido a restrições de Telegram.
+O recurso de configurações de backups do Hitsuki permite que você configure rapidamente um grupo usando um modelo pré-existente. Em vez de definir as mesmas configurações repetidamente em grupos diferentes, você pode usar esse recurso para copiar a configuração geral entre grupos.
 
- - /export: exportar dados do grupo.  Os dados exportados incluem regras, notas (documentos, imagens, música, vídeo, áudio, voz, texto, botões de texto), listas negras, comandos e bloqueios. Mais virá gradualmente!
+As configurações de exportação podem ser feitas por qualquer administrador, mas por motivos de segurança, a importação pode ser feita apenas pelo criador do grupo.
 
-*Este módulo ainda está na versão beta!*
+Os seguintes módulos terão seus dados exportados:
+
+ - admin
+ - antiflood
+ - blacklists
+ - disabled
+ - federations
+ - filters
+ - greetings
+ - locks
+ - notes
+ - reports
+ - rules
+ - translations
+ - warns
+
+O arquivo gerado está no formato JSON padrão; portanto, se houver alguma configuração que você não queira importar para os outros grupos, basta abrir o arquivo e editá-lo antes de importar.
+
+*Apenas administradores:*
+ - /import: responda a um arquivo de backup de grupo butler/marie/rose/emilia para importar o máximo possível, tornando a transferência super simples!
+Observe que arquivos/fotos de outros bots não podem ser importados devido a restrições de Telegram.  Exceto Backups feitos no próprio Hitsuki.
+ - /export: exportar dados do grupo, você pode fazer isso a cada 12 horas
+
+*Nota:* Para evitar abusos, esse comando é bastante limitado à taxa;  isso é para garantir que as pessoas que importam/exportam dados não diminuem a velocidade do bot.
 """,
 
 "Reactions_help": """
@@ -935,6 +960,7 @@ A lista negra de domínios é usada para impedir que determinados domínios seja
  - /clear <palavra>: apaga a nota chamada "palavra"
  - /notes: lista todas as notas no chat atual
  - /saved: o mesmo que /notes
+ - /privatenote <on/yes/off/no> <?  del>: para definir se deve ou não enviar a nota no PM. Escreva del além de ativado/desativado para excluir a mensagem com hashtag no grupo.
 
 Um exemplo de como salvar uma nota seria via:
 /save data Estes são alguns dados!
