@@ -17,7 +17,7 @@ from aiogram.types.inline_keyboard import InlineKeyboardMarkup, InlineKeyboardBu
 from aiogram.utils.callback_data import CallbackData
 
 # Constants
-FOX_CHATS = [483808054, -1001287179850, -1001280218923, -1001155400138, -1001362128194]
+FOX_CHATS = [-1001332080671]
 FOX_BETA_CHATS = [-1001280218923, -1001362128194, 483808054]
 FOX_DEV_CHAT = -1001155400138
 FOX_DOMAIN = 'https://files.orangefox.tech/'
