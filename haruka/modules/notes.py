@@ -115,8 +115,8 @@ def get(bot, update, notename, show_none=True, no_format=False):
 							bot.send_message(send_id, text, reply_to_message_id=reply_id,
 										 parse_mode=parseMode, disable_web_page_preview=True,
 										 reply_markup=keyboard)
-					except BadRequest as excp:
-						if excp.message == "Wrong http url":
+                except BadRequest as excp:
+                    if excp.message == "Wrong http url":
 							failtext = "Error: The URL on the button is invalid! Please update this note."
 							failtext += "\n\n```\n{}```".format(note.value + revert_buttons(buttons))
 							send_message(update.effective_message, failtext, parse_mode="markdown")
