@@ -6,6 +6,7 @@ import re
 import subprocess
 import time
 
+from haruka.modules.disable import DisableAbleCommandHandler
 from typing import Optional, List
 from telegram import Message, Chat, Update, Bot, User
 from telegram.ext.dispatcher import run_async
