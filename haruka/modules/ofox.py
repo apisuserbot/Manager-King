@@ -6,6 +6,8 @@ import re
 import subprocess
 import time
 
+from telegram import Message, Chat, Update, Bot, User
+from telegram.ext.dispatcher import run_async
 from aiogram import types
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types.inline_keyboard import InlineKeyboardMarkup, InlineKeyboardButton
@@ -20,8 +22,8 @@ FOX_DOMAIN = 'https://files.orangefox.tech/'
 FOX_STABLE_CHANNEL = -1001196811863
 FOX_BETA_CHANNEL = -1001429093106
 
-
-async def get_build_info(bot: Bot, update: Update, args: List[str]) -> str:
+@run_async
+def get_build_info(bot: Bot, update: Update, args: List[str]) -> str:
     codename = message.text.split('@LordHitsuki_BOT')[0][1:].lower()
 
     chat_id = message.chat.id
