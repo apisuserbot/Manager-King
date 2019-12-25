@@ -5,6 +5,7 @@ import haruka.modules.helper_funcs.git_api as api
 
 from haruka import dispatcher, OWNER_ID, LOGGER, SUDO_USERS, SUPPORT_USERS
 from haruka.modules.helper_funcs.filters import CustomFilters
+from haruka.modules.translations.strings import tld
 
 from telegram.ext import CommandHandler, run_async, Filters
 from telegram import Message, Chat, Update, Bot, User, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
