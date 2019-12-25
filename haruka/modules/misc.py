@@ -271,60 +271,6 @@ def ping(bot: Bot, update: Update):
 #        update.effective_message.reply_text('*Searching:*\n`' + str(query[1]) + '`\n\n*RESULTS:*\n' + result, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
-@user_is_gbanned
-@run_async
-def github(bot: Bot, update: Update):
-    message = update.effective_message
-    text = message.text[len('/git '):]
-    usr = get(f'https://api.github.com/users/{text}').json()
-    if usr.get('login'):
-        text = f"*Username:* [{usr['login']}](https://github.com/{usr['login']})"
-
-        whitelist = ['name', 'id', 'type', 'location', 'blog',
-                     'bio', 'followers', 'following', 'hireable',
-                     'public_gists', 'public_repos', 'email',
-                     'company', 'updated_at', 'created_at']
-
-        difnames = {'id': 'Account ID', 'type': 'Account type', 'created_at': 'Account created at',
-                    'updated_at': 'Last updated', 'public_repos': 'Public Repos', 'public_gists': 'Public Gists'}
-
-        goaway = [None, 0, 'null', '']
-
-        for x, y in usr.items():
-            if x in whitelist:
-                if x in difnames:
-                    x = difnames[x]
-                else:
-                    x = x.title()
-
-                if x == 'Account created at' or x == 'Last updated':
-                    y = datetime.strptime(y, "%Y-%m-%dT%H:%M:%SZ")
-
-                if y not in goaway:
-                    if x == 'Blog':
-                        x = "Website"
-                        y = f"[Here!]({y})"
-                        text += ("\n*{}:* {}".format(x, y))
-                    else:
-                        text += ("\n*{}:* `{}`".format(x, y))
-        reply_text = text
-    else:
-        reply_text = "User not found. Make sure you entered valid username!"
-    message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
-
-
-@user_is_gbanned
-@run_async
-def repo(bot: Bot, update: Update, args: List[str]):
-    message = update.effective_message
-    text = message.text[len('/repo '):]
-    usr = get(f'https://api.github.com/users/{text}/repos?per_page=40').json()
-    reply_text = "*Repo*\n"
-    for i in range(len(usr)):
-        reply_text += f"[{usr[i]['name']}]({usr[i]['html_url']})\n"
-    message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
-
-
 LYRICSINFO = "\n[Full Lyrics](http://lyrics.wikia.com/wiki/%s:%s)"
 
 
@@ -578,8 +524,6 @@ __help__ = """
  - /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats.
 
 *Useful tools:*
- - /git: Returns info about a GitHub user or organization.
- - /repo: Return the GitHub user or organization repository list (Limited at 40)
  - /lyrics: Find your favorite songs lyrics!
  - /paste: Create a paste or a shortened url using [dogbin](https://del.dog)
  - /getpaste: Get the content of a paste or shortened url from [dogbin](https://del.dog)
@@ -608,8 +552,6 @@ INSULTS_HANDLER = DisableAbleCommandHandler("insults", insults, admin_ok=True)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs, admin_ok=True)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True, admin_ok=True)
 INFO_HANDLER = CommandHandler("info", info, pass_args=True, admin_ok=True)
-GITHUB_HANDLER = CommandHandler("git", github, admin_ok=True)
-REPO_HANDLER = CommandHandler("repo", repo, pass_args=True, admin_ok=True)
 
 ECHO_HANDLER = CommandHandler("echo", echo, filters=Filters.user(OWNER_ID))
 MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, filters=Filters.private)
@@ -643,9 +585,7 @@ dispatcher.add_handler(STATS_HANDLER)
 dispatcher.add_handler(GDPR_HANDLER)
 dispatcher.add_handler(PING_HANDLER)
 # dispatcher.add_handler(GOOGLE_HANDLER)
-dispatcher.add_handler(GITHUB_HANDLER)
 dispatcher.add_handler(LYRICS_HANDLER)
-dispatcher.add_handler(REPO_HANDLER)
 dispatcher.add_handler(DisableAbleCommandHandler("removebotkeyboard", reply_keyboard_remove))
 dispatcher.add_handler(EXECUTE_HANDLER)
 dispatcher.add_handler(WIKI_HANDLER)
