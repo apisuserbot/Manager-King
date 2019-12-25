@@ -41,10 +41,10 @@ def pingme():
 
 @run_async
 def status(bot: Bot, update: Update):
-    pingSpeed = pingme()
+    #pingSpeed = pingme()
     reply = "System Status: operational\n\n"
     reply += "Python version: "+python_version()+"\n"
-    reply += "Ping speed: "+str(pingSpeed)+"ms\n"
+    #reply += "Ping speed: "+str(pingSpeed)+"ms\n"
     reply += "CAS API version: "+str(cas.vercheck())+"\n"
     reply += "GitHub API version: "+str(git.vercheck())+"\n"
     update.effective_message.reply_text(reply)
