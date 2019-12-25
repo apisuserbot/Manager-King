@@ -99,7 +99,7 @@ __help__ = """
 *Need some GitHub release but don't want to have to go to GitHub and go to the repository? Here are some commands that can make your life easier with GitHub.*
 
 *Available ommands are:*
- - /git <user>/<repo>: will fetch the most recent release from that repo.
+ - /gitr <user>/<repo>: will fetch the most recent release from that repo.
  - /git: Returns info about a GitHub user or organization.
  - /repo: Return the GitHub user or organization repository list (Limited at 40).
  
