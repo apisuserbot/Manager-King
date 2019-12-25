@@ -133,9 +133,8 @@ def remove_url(bot, update, args):
         update.effective_message.reply_text(tld(chat.id, "URL missing"))
 
 
-def rss_update(bot, update, job):
+def rss_update(bot, job):
     user_data = sql.get_all()
-    chat = update.effective_chat  # type: Optional[Chat]
 
     # this loop checks for every row in the DB
     for row in user_data:
@@ -178,7 +177,7 @@ def rss_update(bot, update, job):
                         sql.remove_url(tg_chat_id, tg_feed_link)
                 else:
                     try:
-                        bot.send_message(chat_id=tg_chat_id, text=(tld(chat.id, "<b>Warning:</b> Message is too long to send")),
+                        bot.send_message(chat_id=tg_chat_id, text="<b>Warning:</b> Message is too long to send",
                                      parse_mode=ParseMode.HTML)
                     except error.Unauthorized:
                         print("Cannot send msg bcz bot is kicked")
@@ -194,14 +193,14 @@ def rss_update(bot, update, job):
                         sql.remove_url(tg_chat_id, tg_feed_link)
                 else:
                     try:
-                        bot.send_message(chat_id=tg_chat_id, text=(tld(chat.id, "<b>Warning:</b> Message is too long to send")),
+                        bot.send_message(chat_id=tg_chat_id, text="<b>Warning:</b> Message is too long to send",
                                      parse_mode=ParseMode.HTML)
                     except error.Unauthorized:
                         sql.remove_url(tg_chat_id, tg_feed_link)
 
             try:
                 bot.send_message(chat_id=tg_chat_id, parse_mode=ParseMode.HTML,
-                             text=(tld(chat.id, "<b>Warning: </b>{} events have been left to prevent spam"))
+                             text="<b>Warning: </b>{} events have been left to prevent spam"
                              .format(len(new_entry_links) - 5))
             except error.Unauthorized:
                 sql.remove_url(tg_chat_id, tg_feed_link)
