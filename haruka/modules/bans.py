@@ -134,9 +134,9 @@ def temp_ban(bot: Bot, update: Update, args: List[str]) -> str:
 
     log = "<b>{}:</b>" \
           "\n#TEMP BANNED" \
-          "\n<b>Admin:</b> {}" \
-          "\n<b>User:</b> {} (<code>{}</code>)" \
-          "\n<b>Time:</b> {}".format(html.escape(chat.title),
+          "\n<b>• Admin:</b> {}" \
+          "\n<b>• User:</b> {} (<code>{}</code>)" \
+          "\n<b>• Time:</b> {}".format(html.escape(chat.title),
                                      mention_html(user.id, user.first_name),
                                      mention_html(member.user.id, member.user.first_name),
                                      member.user.id,
@@ -204,8 +204,8 @@ def kick(bot: Bot, update: Update, args: List[str]) -> str:
         message.reply_text("Kicked!")
         log = "<b>{}:</b>" \
               "\n#KICKED" \
-              "\n<b>Admin:</b> {}" \
-              "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+              "\n<b>• Admin:</b> {}" \
+              "\n<b>• User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                            mention_html(user.id, user.first_name),
                                                            mention_html(member.user.id, member.user.first_name),
                                                            member.user.id)
@@ -253,8 +253,8 @@ def banme(bot: Bot, update: Update):
         update.effective_message.reply_text("No problem, banned.")
         log = "<b>{}:</b>" \
               "\n#BANME" \
-              "\n<b>User:</b> {}" \
-              "\n<b>ID:</b> <code>{}</code>".format(html.escape(chat.title),
+              "\n<b>• User:</b> {}" \
+              "\n<b>• ID:</b> <code>{}</code>".format(html.escape(chat.title),
                                                     mention_html(user.id, user.first_name), user_id)
         return log
 
@@ -299,8 +299,8 @@ def unban(bot: Bot, update: Update, args: List[str]) -> str:
 
     log = "<b>{}:</b>" \
           "\n#UNBANNED" \
-          "\n<b>Admin:</b> {}" \
-          "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+          "\n<b>• Admin:</b> {}" \
+          "\n<b>• User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
                                                        mention_html(user.id, user.first_name),
                                                        mention_html(member.user.id, member.user.first_name),
                                                        member.user.id)
