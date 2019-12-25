@@ -1,16 +1,16 @@
 import subprocess
 import os
 
-import tg_bot.modules.helper_funcs.cas_api as cas
-import tg_bot.modules.helper_funcs.git_api as git
+import haruka.modules.helper_funcs.cas_api as cas
+import haruka.modules.helper_funcs.git_api as git
 
 from platform import python_version
 from telegram import Update, Bot, Message, Chat
 from telegram.ext import CommandHandler, run_async, Filters
 
-from tg_bot import dispatcher, OWNER_ID, SUDO_USERS
-from tg_bot.modules.helper_funcs.filters import CustomFilters
-from tg_bot.modules.disable import DisableAbleCommandHandler
+from haruka import dispatcher, OWNER_ID, SUDO_USERS
+from haruka.modules.helper_funcs.filters import CustomFilters
+from haruka.modules.disable import DisableAbleCommandHandler
 
 def pingme():
     out = ""
