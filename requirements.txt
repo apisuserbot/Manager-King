@@ -6,7 +6,6 @@ python-telegram-bot==11.1.0
 psycopg2
 feedparser
 pythonping
-aiogram
 
 #Memes from Skitt_Bot
 spongemock>=0.3.4
@@ -33,3 +32,4 @@ pyowm
 wikipedia
 bleach
 markdown2
+regex

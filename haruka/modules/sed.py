@@ -1,4 +1,4 @@
-import re
+import regex
 import sre_constants
  
 import telegram
@@ -70,7 +70,7 @@ def sed(bot: Bot, update: Update):
             return
  
         try:
-            check = re.match(repl, to_fix, flags=re.IGNORECASE)
+            check = regex.match(repl, to_fix, flags=regex.IGNORECASE)
  
             user_id = update.effective_user.id
             if (user_id == "OWNER_ID" or user_id in SUDO_USERS):
@@ -82,13 +82,13 @@ def sed(bot: Bot, update: Update):
                 return
  
             if 'i' in flags and 'g' in flags:
-                text = re.sub(repl, repl_with, to_fix, flags=re.I).strip()
+                text = regex.sub(repl, repl_with, to_fix, flags=regex.I).strip()
             elif 'i' in flags:
-                text = re.sub(repl, repl_with, to_fix, count=1, flags=re.I).strip()
+                text = regex.sub(repl, repl_with, to_fix, count=1, flags=regex.I).strip()
             elif 'g' in flags:
-                text = re.sub(repl, repl_with, to_fix).strip()
+                text = regex.sub(repl, repl_with, to_fix).strip()
             else:
-                text = re.sub(repl, repl_with, to_fix, count=1).strip()
+                text = regex.sub(repl, repl_with, to_fix, count=1).strip()
         except sre_constants.error:
             LOGGER.warning(update.effective_message.text)
             LOGGER.exception("SRE constant error")
