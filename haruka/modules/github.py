@@ -83,7 +83,6 @@ def github(bot: Bot, update: Update):
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
-@user_is_gbanned
 @run_async
 def repo(bot: Bot, update: Update, args: List[str]):
     message = update.effective_message
