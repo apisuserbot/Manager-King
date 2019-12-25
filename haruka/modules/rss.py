@@ -2,7 +2,7 @@ import html
 import re
 
 from feedparser import parse
-from telegram import ParseMode, constants, error
+from telegram import Message, Chat, Update, Bot, User, ParseMode, constants, error
 from telegram.ext import CommandHandler
 
 from haruka import dispatcher, updater
