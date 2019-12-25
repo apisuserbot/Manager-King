@@ -1,5 +1,6 @@
 import html
 from typing import Optional, List
+from requests import get
 
 import haruka.modules.helper_funcs.git_api as api
 
@@ -106,7 +107,7 @@ __help__ = """
 This module was only possible thanks to the [pyGitHyb_API](https://github.com/nunopenim/pyGitHyb_API)
 """
 
-__mod_name__ = "Github"
+__mod_name__ = "GitHub"
 
 GITHUB_HANDLER = CommandHandler("git", github, admin_ok=True)
 REPO_HANDLER = CommandHandler("repo", repo, pass_args=True, admin_ok=True)
