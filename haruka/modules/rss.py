@@ -133,7 +133,7 @@ def remove_url(bot, update, args):
         update.effective_message.reply_text(tld(chat.id, "URL missing"))
 
 
-def rss_update(bot, job):
+def rss_update(bot, update, job):
     user_data = sql.get_all()
     chat = update.effective_chat  # type: Optional[Chat]
 
