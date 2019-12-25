@@ -1,4 +1,3 @@
-future
 emoji
 requests
 sqlalchemy
@@ -10,7 +9,6 @@ pythonping
 #Memes from Skitt_Bot
 spongemock>=0.3.4
 zalgo-text
-geopy
 nltk
 aiohttp>=2.2.5
 Pillow>=4.2.0
@@ -28,7 +26,6 @@ speedtest-cli>=2.1.2
 
 tldextract
 PyYAML
-pyowm
 wikipedia
 bleach
 markdown2
