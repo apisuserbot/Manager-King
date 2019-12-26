@@ -77,57 +77,55 @@ def get_all_filters():
         SESSION.close()
 
 
-def add_filter(chat_id, keyword, reply, is_sticker=False, is_document=False, is_image=False, is_audio=False,
-               is_voice=False, is_video=False, buttons=None):
-    global CHAT_FILTERS
+def new_add_filter(chat_id, keyword, reply_text, file_type, file_id, buttons):
+	global CHAT_FILTERS
 
-    if buttons is None:
-        buttons = []
+	if buttons is None:
+		buttons = []
 
-    with CUST_FILT_LOCK:
-        prev = SESSION.query(CustomFilters).get((str(chat_id), keyword))
-        if prev:
-            with BUTTON_LOCK:
-                prev_buttons = SESSION.query(Buttons).filter(Buttons.chat_id == str(chat_id),
-                                                             Buttons.keyword == keyword).all()
-                for btn in prev_buttons:
-                    SESSION.delete(btn)
-            SESSION.delete(prev)
+	with CUST_FILT_LOCK:
+		prev = SESSION.query(CustomFilters).get((str(chat_id), keyword))
+		if prev:
+			with BUTTON_LOCK:
+				prev_buttons = SESSION.query(Buttons).filter(Buttons.chat_id == str(chat_id),
+															 Buttons.keyword == keyword).all()
+				for btn in prev_buttons:
+					SESSION.delete(btn)
+			SESSION.delete(prev)
 
-        filt = CustomFilters(str(chat_id), keyword, reply, is_sticker, is_document, is_image, is_audio, is_voice,
-                             is_video, bool(buttons))
+		filt = CustomFilters(str(chat_id), keyword, reply="there is should be a new reply", is_sticker=False, is_document=False, is_image=False, is_audio=False, is_voice=False, is_video=False, has_buttons=bool(buttons), reply_text=reply_text, file_type=file_type.value, file_id=file_id)
 
-        if keyword not in CHAT_FILTERS.get(str(chat_id), []):
-            CHAT_FILTERS[str(chat_id)] = sorted(CHAT_FILTERS.get(str(chat_id), []) + [keyword],
-                                                key=lambda x: (-len(x), x))
+		if keyword not in CHAT_FILTERS.get(str(chat_id), []):
+			CHAT_FILTERS[str(chat_id)] = sorted(CHAT_FILTERS.get(str(chat_id), []) + [keyword],
+												key=lambda x: (-len(x), x))
 
-        SESSION.add(filt)
-        SESSION.commit()
+		SESSION.add(filt)
+		SESSION.commit()
 
-    for b_name, url, same_line in buttons:
-        add_note_button_to_db(chat_id, keyword, b_name, url, same_line)
+	for b_name, url, same_line in buttons:
+		add_note_button_to_db(chat_id, keyword, b_name, url, same_line)
 
 
 def remove_filter(chat_id, keyword):
-    global CHAT_FILTERS
-    with CUST_FILT_LOCK:
-        filt = SESSION.query(CustomFilters).get((str(chat_id), keyword))
-        if filt:
-            if keyword in CHAT_FILTERS.get(str(chat_id), []):  # Sanity check
-                CHAT_FILTERS.get(str(chat_id), []).remove(keyword)
+	global CHAT_FILTERS
+	with CUST_FILT_LOCK:
+		filt = SESSION.query(CustomFilters).get((str(chat_id), keyword))
+		if filt:
+			if keyword in CHAT_FILTERS.get(str(chat_id), []):  # Sanity check
+				CHAT_FILTERS.get(str(chat_id), []).remove(keyword)
 
-            with BUTTON_LOCK:
-                prev_buttons = SESSION.query(Buttons).filter(Buttons.chat_id == str(chat_id),
-                                                             Buttons.keyword == keyword).all()
-                for btn in prev_buttons:
-                    SESSION.delete(btn)
+			with BUTTON_LOCK:
+				prev_buttons = SESSION.query(Buttons).filter(Buttons.chat_id == str(chat_id),
+															 Buttons.keyword == keyword).all()
+				for btn in prev_buttons:
+					SESSION.delete(btn)
 
-            SESSION.delete(filt)
-            SESSION.commit()
-            return True
+			SESSION.delete(filt)
+			SESSION.commit()
+			return True
 
-        SESSION.close()
-        return False
+		SESSION.close()
+		return False
 
 
 def get_chat_triggers(chat_id):
