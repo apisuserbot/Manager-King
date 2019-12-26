@@ -20,10 +20,11 @@ class CustomFilters(BASE):
 
     has_buttons = Column(Boolean, nullable=False, default=False)
     # NOTE: Here for legacy purposes, to ensure older filters don't mess up.
+    reply_text = Column(UnicodeText)
     has_markdown = Column(Boolean, nullable=False, default=False)
 
     def __init__(self, chat_id, keyword, reply, is_sticker=False, is_document=False, is_image=False, is_audio=False,
-                 is_voice=False, is_video=False, has_buttons=False):
+                 is_voice=False, is_video=False, reply_text=None, has_buttons=False):
         self.chat_id = str(chat_id)  # ensure string
         self.keyword = keyword
         self.reply = reply
