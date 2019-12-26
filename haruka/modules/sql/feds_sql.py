@@ -26,10 +26,12 @@ class Federations(BASE):
 class ChatF(BASE):
     __tablename__ = "chat_feds"
     chat_id = Column(String(14), primary_key=True)
+    chat_name = Column(UnicodeText)
     fed_id = Column(UnicodeText)
 
     def __init__(self, chat_id, fed_id):
         self.chat_id = chat_id
+        self.chat_name = chat_name
         self.fed_id = fed_id
 
 

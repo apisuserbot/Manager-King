@@ -280,7 +280,7 @@ def user_join_fed(bot: Bot, update: Update, args: List[str]):
 			return
 		res = sql.user_join_fed(fed_id, user_id)
 		if res:
-			send_message(update.effective_message, tl(update.effective_message, "💖 Berhasil dinaikan jabatannya!"))
+			send_message(update.effective_message, tl(update.effective_message, "This person was promoted in the federation"))
 		else:
 			send_message(update.effective_message, tl(update.effective_message, "Gagal dipromosikan!"))
 	else:
@@ -325,7 +325,7 @@ def user_demote_fed(bot: Bot, update: Update, args: List[str]):
 
 		res = sql.user_demote_fed(fed_id, user_id)
 		if res == True:
-			send_message(update.effective_message, tl(update.effective_message, "💔 Dia telah di keluarkan dari federasi anda!"))
+			send_message(update.effective_message, tl(update.effective_message, "This person was demoted from the federation"))
 		else:
 			send_message(update.effective_message, tl(update.effective_message, "Saya tidak bisa mengusirnya, Saya tidak berdaya!"))
 	else:
