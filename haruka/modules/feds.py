@@ -1034,8 +1034,8 @@ def fed_ban_list(bot: Bot, update: Update, args: List[str], chat_data):
 				backups += json.dumps(json_parser)
 				backups += "\n"
 			with BytesIO(str.encode(backups)) as output:
-				output.name = "haruka_fbanned_users.json"
-				update.effective_message.reply_document(document=output, filename="haruka_fbanned_users.json",
+				output.name = "hitsuki_fbanned_users.json"
+				update.effective_message.reply_document(document=output, filename="hitsuki_fbanned_users.json",
 													caption=tl(update.effective_message, "Total {} pengguna terkena blokir federasi {}.").format(len(getfban), info['fname']))
 			return
 		elif args[0] == 'csv':
@@ -1059,8 +1059,8 @@ def fed_ban_list(bot: Bot, update: Update, args: List[str], chat_data):
 				backups += "{user_id},{first_name},{last_name},{user_name},{reason}".format(user_id=users, first_name=getuserinfo['first_name'], last_name=getuserinfo['last_name'], user_name=getuserinfo['user_name'], reason=getuserinfo['reason'])
 				backups += "\n"
 			with BytesIO(str.encode(backups)) as output:
-				output.name = "haruka_fbanned_users.csv"
-				update.effective_message.reply_document(document=output, filename="haruka_fbanned_users.csv",
+				output.name = "hitsuki_fbanned_users.csv"
+				update.effective_message.reply_document(document=output, filename="hitsuki_fbanned_users.csv",
 													caption=tl(update.effective_message, "Total {} pengguna terkena blokir federasi {}.").format(len(getfban), info['fname']))
 			return
 
