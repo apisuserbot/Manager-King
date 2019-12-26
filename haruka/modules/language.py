@@ -22,15 +22,15 @@ def locale(bot, update, args):
                 switch_to_locale(chat.id, locale)
                 update.message.reply_text(tld(chat.id, 'Switched to {} successfully!').format(list_locales[locale]))
             else:
-                update.message.reply_text("{} is not supported yet!".format(list_locales[locale]))
+                update.message.reply_text(tld(chat.id, "{} is not supported yet!".format(list_locales[locale])))
         else:
-            update.message.reply_text("Is that even a valid language code? Use an internationally accepted ISO code!")
+            update.message.reply_text(tld(chat.id, "Is that even a valid language code? Use an internationally accepted ISO code!"))
     else:
         LANGUAGE = prev_locale(chat.id)
         if LANGUAGE:
             locale = LANGUAGE.locale_name
             native_lang = list_locales[locale]
-            update.message.reply_text("Current locale for this chat is: *{}*".format(native_lang),
+            update.message.reply_text(tld(chat.id, "Current locale for this chat is: *{}*".format(native_lang)),
                                       parse_mode=ParseMode.MARKDOWN)
         else:
             update.message.reply_text("Current locale for this chat is: *English*", parse_mode=ParseMode.MARKDOWN)

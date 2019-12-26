@@ -216,7 +216,7 @@ PortugueseBrStrings = {
 #Connections
     "Disabled connections to this chat for users": "Conexões desativadas para usuários neste grupo",
     "Enabled connections to this chat for users": "Conexões ativadas para usuários neste grupo",
-    "Please enter on/yes/off/no in group!": "Por favor, escreva on/yes/off/no no grupo!",
+    "Please enter on/yes/off/no in group!": "Por favor, escreva yes/no no grupo!",
     "Successfully connected to *{}*": "Conectado com sucesso a *{}*",
     "Connection failed!": "Falha na conexão!",
     "Connections to this chat not allowed!": "Conexões não permitidas neste grupo!",
@@ -265,6 +265,12 @@ PortugueseBrStrings = {
     "No.": "Não.",
     "Maybe.": "Talvez.",
     
+    "Switched to {} successfully!": "Alterado para {} com sucesso!",
+    "{} is not supported yet!": "{} não é suportado ainda!",
+    "Is that even a valid language code? Use an internationally accepted ISO code!": "Isso é mesmo um código de idioma válido? Use um código ISO aceito internacionalmente!",
+    "Current locale for this chat is: *{}*": "O idioma atual deste chat é: *{}*",
+    
+    
     "Click here to get this chat's settings, as well as yours.": "Clique no botão abaixo para obter as configurações deste grupos e as suas.",
     "Hey there! I'm alive :3 PM me if you have any questions on how to use me!": "Olá! Estou vivo :3, se você tiver alguma dúvida sobre como me usar me chame no PV!",
     "Control Panel :3": "Painel de controle :3",
@@ -293,15 +299,6 @@ PortugueseBrStrings = {
 [URL](example.com) 
 [Botão](buttonurl:github.com)
 [Botão2](buttonurl://google.com:same)""",
-
-#Misc GDPR
-"send-gdpr": """Suas informações pessoais foram excluídas.\n\nLembre-se de que isso não vai remover você \
-de qualquer bate-papo, já que são dados do Telegram, NÃO dados do Hitsuki Bot.
-Flooding, avisos e proibições globais também são preservados, desde \
-[isto](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
-que afirma claramente que o direito de cancelamento não se aplica \
-\"para a realização de uma tarefa realizada no interesse público.\", assim como \
-o caso dos dados mencionados acima.""",
 
 #Admin
 "How am I meant to promote someone who's already an admin?": "Como vou promover alguém que já é um administrador?",
@@ -420,38 +417,22 @@ o caso dos dados mencionados acima.""",
         "Os seguintes comandos estão desativados em *{}*:\n{}",
 
 #Locks
-    "Locked {} messages for all non-admins!": "Bloqueados los mensajes de {}  para todos los no administradores!",
-    "What are you trying to lock...? Try /locktypes for the list of lockables":
-        "¿Qué estás intentando bloquear...? Escribe /locktypes para ver la lista de los tipos de bloqueos.",
-    "I'm not an administrator, or haven't got delete rights.":
-        "No soy administrador o no tengo permisos para borrar.",
-    "Unlocked {} for everyone!": "Desbloqueado {} para todos!",
-    "What are you trying to unlock...? Try /locktypes for the list of lockables":
-        "¿Qué estás intentando desbloquear...? Escribe /locktypes para ver la lista de los tipos de bloqueos.",
-    "What are you trying to unlock...?": "¿Qué estás intentando desbloquear...?",
-    "I see a bot, and I've been told to stop them joining... but I'm not admin!":
-        "He visto un bot y se me ha ordenado evitar que entre al grupo..., pero no soy administrador!",
-    "Only admins are allowed to add bots to this chat! Get outta here.":
-        "¡Solo se permite a los administradores añadir bots! ¡Fuera de aquí!",
-    "There are no current locks in *{}*.": "No hay bloqueos en *{}*.",
-    "These are the locks in *{}*:": "Estos son los bloqueos en *{}*:",
-    "this chat": "este chat",
 
 #Log channel
     "Now, forward the /setlog to the group you want to tie this channel to!":
-        "Ahora envia /setlog al grupo con el que quieres vincular este canal!",
+        "Agora envie /setlog para o grupo ao qual você deseja vincular este canal!",
     "This channel has been set as the log channel for {}.": 
-        "Este canal ha sido configurado como el canal de registro para {}.",
-    "Successfully set log channel!": "Canal de registro establecido con éxito!",
+        "Este canal foi configurado como o canal de logs para {}.",
+    "Successfully set log channel!": "Canal de registro definido con sucesso!",
     "*The steps to set a log channel are:*\n • add bot to the desired channel\n • send /setlog to the channel\n • forward the /setlog to the group\n":
-        """*Los pasos para establecer un canal de registro son:*
- • añade el bot al canal que quieras!)
- • escribe /setlog en el canal
- • envía el /setlog que has puesto en el canal al grupo.""",
+        """*As etapas para definir um canal de logs são:*
+ • Adicione o bot ao canal que você deseja!)
+ • Escreva /setlog no canal
+ • Envie o /setlog que você colocou no canal para o grupo.""",
 
-    "Channel has been unlinked from {}": "El canal ha sido desvinculado de {}",
-    "Log channel has been un-set.": "Canal de registro no establecido.",
-    "No log channel has been set yet!": "No hay ningún canal de registro establecido!",
+    "Channel has been unlinked from {}": "O canal foi desconectado de {}",
+    "Log channel has been un-set.": "Canal de registro não definido",
+    "No log channel has been set yet!": "Não existe um canal de logs definido!",
 
 #Users
     "I've seen them in <code>{}</code> chats in total.": 
@@ -584,27 +565,21 @@ você tiver interesse""",
 "ITEMR-K": ITEMS,
 "MARKDOWN_HELP-K": MARKDOWN_HELP,
 
-#GDPR
-"send-gdpr": """Tu información personal ha sido borrada.\n\nTen en cuento que esto no te va a desbanear \
-de ningún chat, ya que eso son datos de Telegram, NO datos de YanaBot.
-Flooding, advertencias, y bans globales también se conservan, a partir de \
-[esto](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
-que establece claramente que el derecho de cancelación no se aplica \
-\"para la realización de una tarea realizada en interés público.\", así como \
-el caso de los datos mencionados anteriormente.""",
-
-
 #Help modules
 "Admin_help": """
- - /adminlist | /admins: Lista os administradores do grupo
+*Facilite a promoção e rebaixamento de usuários com o módulo de administração!*
 
-*Apenas administradores:*
- - /pin: Afixa silenciosamente a mensagem respondida. Adicione 'loud', 'notify' ou 'violent' para enviar uma notificação aos usuários.
- - /unpin: Desafixa a mensagem atualmente afixada
- - /permanentpin: Defina um PIN permanente para um supergrupo. Quando um canal de administrador ou Telegram altera a mensagem fixada, o bot altera a mensagem fixada imediatamente
- - /invitelink: Obtém o link de convite do grupo
- - /promote: Promove um usuário. Responda ao usuário ou use seu nome de usuário.
- - /demote: Rebaixa um usuário. Responda ao usuário ou use seu nome de usuário.
+*Comandos disponíveis:*
+ - /promote: promove um usuário.
+ - /demote: rebaixa um usuário.
+ - /adminlist: lista os administradores no grupo atual.
+
+*Mantenha seu grupo atualizado sobre as últimas notícias com uma simples mensagem fixada!*
+
+*Comandos disponíveis:*
+ - /pin: fixe a mensagem à qual você respondeu; adicione 'loud' ou 'notify' para enviar uma notificação aos membros do grupo.
+ - /unpin: remover a mensagem atualmente fixada.
+  - /permanentpin: defina uma mensagem para ser fixada permanente em um supergrupo. Quando um canal de administrador ou o Telegram altera a mensagem fixada, o bot altera a mensagem fixada imediatamente
 """,
 
 "AFK_help": """
@@ -868,6 +843,17 @@ Para configurar um canal de logs é feito da seguinte forma:
  3. Encaminhe /setlog para o grupo
 """,
 
+"GitHub_help": """
+*Precisa de alguma release do GitHub mas não quer ter que acessar o GitHub e ir até o repositório? Aqui estão alguns comandos que podem facilitar sua vida com GitHub.*
+
+*Comandos disponíveis:*
+ - /gitr <usuário>/<repo>: buscará a versão mais recente do release desse repositório.
+ - /git: Retorna informações sobre um usuário ou organização do GitHub.
+ - /repo: Retornar a lista de repositórios de usuários ou organizações do GitHub (Limitado em 40)
+ 
+Este apenas foi possível graças à [pyGitHyb_API](https://github.com/nunopenim/pyGitHyb_API)
+"""
+
 "Misc_help": """
 *Ferramentas de grupo:*
  - /id: obtenha o ID do grupo atual. Se usado respondendo a uma mensagem, obtém o ID do usuário.
@@ -878,8 +864,6 @@ Para configurar um canal de logs é feito da seguinte forma:
  - /markdownhelp: resumo rápido de como o markdown funciona no Telegram - só pode ser usado em chat privado.
 
 *Ferramentas úteis:*
- - /git: Retorna informações sobre um usuário ou organização do GitHub.
- - /repo: Retornar a lista de repositórios de usuários ou organizações do GitHub (Limitado em 40)
  - /lyrics: Encontre suas letras de músicas favoritas!
  - /paste: Crie uma pasta ou um URL abreviado usando o [dogbin](https://del.dog)
  - /getpaste: Obtenha o conteúdo de uma pasta ou URL abreviado do [dogbin](https://del.dog)
