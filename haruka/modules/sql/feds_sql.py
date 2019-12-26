@@ -42,7 +42,7 @@ class BansF(BASE):
     user_name = Column(UnicodeText)
     reason = Column(UnicodeText, default="")
 
-    def __init__(self, fed_id, user_id, first_name, last_name, user_name, reason):
+    def __init__(self, fed_id, user_id, first_name, last_name, user_name, reason, time):
         self.fed_id = fed_id
         self.user_id = user_id
         self.first_name = first_name
