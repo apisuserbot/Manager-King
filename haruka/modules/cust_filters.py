@@ -38,6 +38,7 @@ ENUM_FUNC_MAP = {
 }
 
 
+
 @run_async
 def list_handlers(bot: Bot, update: Update):
 	chat = update.effective_chat  # type: Optional[Chat]
@@ -316,7 +317,7 @@ def get_exception(excp, filt, chat):
 
 
 def __stats__():
-	return tl(OWNER_ID, "{} filters, across {chat}.").format(sql.num_filters(), sql.num_chats())
+	return "{} filters, across {} chats.".format(sql.num_filters(), sql.num_chats())
 
 
 def __import_data__(chat_id, data):
