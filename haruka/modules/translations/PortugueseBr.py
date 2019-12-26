@@ -852,7 +852,7 @@ Para configurar um canal de logs é feito da seguinte forma:
  - /repo: Retornar a lista de repositórios de usuários ou organizações do GitHub (Limitado em 40)
  
 Este apenas foi possível graças à [pyGitHyb_API](https://github.com/nunopenim/pyGitHyb_API)
-"""
+""",
 
 "Misc_help": """
 *Ferramentas de grupo:*
