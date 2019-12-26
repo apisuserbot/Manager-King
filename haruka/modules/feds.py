@@ -88,10 +88,10 @@ def new_fed(bot: Bot, update: Update):
 		LOGGER.info(fed_id)
 
 		# Currently only for creator
-		if fednam == "Team Nusantara Disciplinary Circle":
-			fed_id = "TeamNusantaraDevs"
-		elif fednam == "haruka Official Support":
-			fed_id = "harukaSupport"
+		if fednam == "Hitsuki Official":
+			fed_id = "HitsukiOfficial"
+		elif fednam == "Hitsuki Official Support":
+			fed_id = "HitsukiSupport"
 
 		x = sql.new_fed(user.id, fed_name, fed_id)
 		if not x:
@@ -139,7 +139,7 @@ def del_fed(bot: Bot, update: Update, args: List[str]):
 
 	send_message(update.effective_message, tl(update.effective_message, "Anda yakin ingin menghapus federasi Anda? Tindakan ini tidak bisa dibatalkan, Anda akan kehilangan seluruh daftar larangan Anda, dan '{}' akan hilang secara permanen.").format(getinfo['fname']),
 			reply_markup=InlineKeyboardMarkup(
-						[[InlineKeyboardButton(text=tl(update.effective_message, "⚠️ Hapus Federasi ⚠️"), callback_data="rmfed_{}".format(fed_id))],
+						[[InlineKeyboardButton(text=tl(update.effective_message, "⚠️ Remove Federation ⚠️"), callback_data="rmfed_{}".format(fed_id))],
 						[InlineKeyboardButton(text=tl(update.effective_message, "Batalkan"), callback_data="rmfed_cancel")]]))
 
 @run_async
@@ -363,7 +363,7 @@ def fed_info(bot: Bot, update: Update, args: List[str]):
 	chat = update.effective_chat  # type: Optional[Chat]
 	info = sql.get_fed_info(fed_id)
 
-	text = tl(update.effective_message, "<b>ℹ️ Info federasi:</b>")
+	text = tl(update.effective_message, "<b>ℹ️ Fed Info:</b>")
 	text += "\nFedID: <code>{}</code>".format(fed_id)
 	text += tl(update.effective_message, "\nNama: {}").format(info['fname'])
 	text += tl(update.effective_message, "\nPembuat: {}").format(mention_html(owner.id, owner_name))
