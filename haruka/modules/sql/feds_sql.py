@@ -76,6 +76,8 @@ FedsUserSettings.__table__.create(checkfirst=True)
 FEDS_LOCK = threading.RLock()
 CHAT_FEDS_LOCK = threading.RLock()
 FEDS_SETTINGS_LOCK = threading.RLock()
+FEDS_SUBSCRIBER_LOCK = threading.RLock()
+
 
 FEDERATION_BYNAME = {}
 FEDERATION_BYOWNER = {}
@@ -88,6 +90,8 @@ FEDERATION_BANNED_FULL = {}
 FEDERATION_BANNED_USERID = {}
 
 FEDERATION_NOTIFICATION = {}
+FEDS_SUBSCRIBER = {}
+MYFEDS_SUBSCRIBER = {}
 
 
 def get_fed_info(fed_id):
