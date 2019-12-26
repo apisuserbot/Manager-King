@@ -38,7 +38,6 @@ ENUM_FUNC_MAP = {
 }
 
 
-
 @run_async
 def list_handlers(bot: Bot, update: Update):
 	chat = update.effective_chat  # type: Optional[Chat]
