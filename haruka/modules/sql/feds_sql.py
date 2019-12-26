@@ -158,203 +158,203 @@ def get_user_fbanlist(user_id):
 
 
 def new_fed(owner_id, fed_name, fed_id):
-    with FEDS_LOCK:
-        global FEDERATION_BYOWNER, FEDERATION_BYFEDID, FEDERATION_BYNAME
-        fed = Federations(str(owner_id), fed_name, str(fed_id), 'Rules is not set in this federation.',
-                          str({'owner': str(owner_id), 'members': '[]'}))
-        SESSION.add(fed)
-        SESSION.commit()
-        FEDERATION_BYOWNER[str(owner_id)] = (
-        {'fid': str(fed_id), 'fname': fed_name, 'frules': 'Rules is not set in this federation.',
-         'fusers': str({'owner': str(owner_id), 'members': '[]'})})
-        FEDERATION_BYFEDID[str(fed_id)] = (
-        {'owner': str(owner_id), 'fname': fed_name, 'frules': 'Rules is not set in this federation.',
-         'fusers': str({'owner': str(owner_id), 'members': '[]'})})
-        FEDERATION_BYNAME[fed_name] = (
-        {'fid': str(fed_id), 'owner': str(owner_id), 'frules': 'Rules is not set in this federation.',
-         'fusers': str({'owner': str(owner_id), 'members': '[]'})})
-        return fed
-
+	with FEDS_LOCK:
+		global FEDERATION_BYOWNER, FEDERATION_BYFEDID, FEDERATION_BYNAME
+		fed = Federations(str(owner_id), fed_name, str(fed_id), 'Rules is not set in this federation.', None, str({'owner': str(owner_id), 'members': '[]'}))
+		SESSION.add(fed)
+		SESSION.commit()
+		FEDERATION_BYOWNER[str(owner_id)] = ({'fid': str(fed_id), 'fname': fed_name, 'frules': 'Rules is not set in this federation.', 'flog': None, 'fusers': str({'owner': str(owner_id), 'members': '[]'})})
+		FEDERATION_BYFEDID[str(fed_id)] = ({'owner': str(owner_id), 'fname': fed_name, 'frules': 'Rules is not set in this federation.', 'flog': None, 'fusers': str({'owner': str(owner_id), 'members': '[]'})})
+		FEDERATION_BYNAME[fed_name] = ({'fid': str(fed_id), 'owner': str(owner_id), 'frules': 'Rules is not set in this federation.', 'flog': None, 'fusers': str({'owner': str(owner_id), 'members': '[]'})})
+		return fed
 
 def del_fed(fed_id):
-    with FEDS_LOCK:
-        global FEDERATION_BYOWNER, FEDERATION_BYFEDID, FEDERATION_BYNAME, FEDERATION_CHATS, FEDERATION_CHATS_BYID, FEDERATION_BANNED_USERID, FEDERATION_BANNED_FULL
-        getcache = FEDERATION_BYFEDID.get(fed_id)
-        if getcache == None:
-            return False
-        # Variables
-        getfed = FEDERATION_BYFEDID.get(fed_id)
-        owner_id = getfed['owner']
-        fed_name = getfed['fname']
-        # Delete from cache
-        FEDERATION_BYOWNER.pop(owner_id)
-        FEDERATION_BYFEDID.pop(fed_id)
-        FEDERATION_BYNAME.pop(fed_name)
-        if FEDERATION_CHATS_BYID.get(fed_id):
-            for x in FEDERATION_CHATS_BYID[fed_id]:
-                delchats = SESSION.query(ChatF).get(str(x))
-                if delchats:
-                    SESSION.delete(delchats)
-                    SESSION.commit()
-                FEDERATION_CHATS.pop(x)
-            FEDERATION_CHATS_BYID.pop(fed_id)
-        # Delete fedban users
-        getall = FEDERATION_BANNED_USERID.get(fed_id)
-        if getall:
-            for x in getall:
-                banlist = SESSION.query(BansF).get((fed_id, str(x)))
-                if banlist:
-                    SESSION.delete(banlist)
-                    SESSION.commit()
-        FEDERATION_BANNED_USERID.pop(fed_id)
-        FEDERATION_BANNED_FULL.pop(fed_id)
-        # Delete from database
-        curr = SESSION.query(Federations).get(fed_id)
-        if curr:
-            SESSION.delete(curr)
-            SESSION.commit()
-        return True
+	with FEDS_LOCK:
+		global FEDERATION_BYOWNER, FEDERATION_BYFEDID, FEDERATION_BYNAME, FEDERATION_CHATS, FEDERATION_CHATS_BYID, FEDERATION_BANNED_USERID, FEDERATION_BANNED_FULL
+		getcache = FEDERATION_BYFEDID.get(fed_id)
+		if getcache == None:
+			return False
+		# Variables
+		getfed = FEDERATION_BYFEDID.get(fed_id)
+		owner_id = getfed['owner']
+		fed_name = getfed['fname']
+		# Delete from cache
+		FEDERATION_BYOWNER.pop(owner_id)
+		FEDERATION_BYFEDID.pop(fed_id)
+		FEDERATION_BYNAME.pop(fed_name)
+		if FEDERATION_CHATS_BYID.get(fed_id):
+			for x in FEDERATION_CHATS_BYID[fed_id]:
+				delchats = SESSION.query(ChatF).get(str(x))
+				if delchats:
+					SESSION.delete(delchats)
+					SESSION.commit()
+				FEDERATION_CHATS.pop(x)
+			FEDERATION_CHATS_BYID.pop(fed_id)
+		# Delete fedban users
+		getall = FEDERATION_BANNED_USERID.get(fed_id)
+		if getall:
+			for x in getall:
+				banlist = SESSION.query(BansF).get((fed_id, str(x)))
+				if banlist:
+					SESSION.delete(banlist)
+					SESSION.commit()
+		if FEDERATION_BANNED_USERID.get(fed_id):
+			FEDERATION_BANNED_USERID.pop(fed_id)
+		if FEDERATION_BANNED_FULL.get(fed_id):
+			FEDERATION_BANNED_FULL.pop(fed_id)
+		# Delete fedsubs
+		getall = MYFEDS_SUBSCRIBER.get(fed_id)
+		if getall:
+			for x in getall:
+				getsubs = SESSION.query(FedSubs).get((fed_id, str(x)))
+				if getsubs:
+					SESSION.delete(getsubs)
+					SESSION.commit()
+		if FEDS_SUBSCRIBER.get(fed_id):
+			FEDS_SUBSCRIBER.pop(fed_id)
+		if MYFEDS_SUBSCRIBER.get(fed_id):
+			MYFEDS_SUBSCRIBER.pop(fed_id)
+		# Delete from database
+		curr = SESSION.query(Federations).get(fed_id)
+		if curr:
+			SESSION.delete(curr)
+			SESSION.commit()
+		return True
 
-
-def chat_join_fed(fed_id, chat_id):
-    with FEDS_LOCK:
-        global FEDERATION_CHATS, FEDERATION_CHATS_BYID
-        r = ChatF(chat_id, fed_id)
-        SESSION.add(r)
-        FEDERATION_CHATS[str(chat_id)] = {'fid': fed_id}
-        checkid = FEDERATION_CHATS_BYID.get(fed_id)
-        if checkid == None:
-            FEDERATION_CHATS_BYID[fed_id] = []
-        FEDERATION_CHATS_BYID[fed_id].append(str(chat_id))
-        SESSION.commit()
-        return r
-
+def chat_join_fed(fed_id, chat_name, chat_id):
+	with FEDS_LOCK:
+		global FEDERATION_CHATS, FEDERATION_CHATS_BYID
+		r = ChatF(chat_id, chat_name, fed_id)
+		SESSION.add(r)
+		FEDERATION_CHATS[str(chat_id)] = {'chat_name': chat_name, 'fid': fed_id}
+		checkid = FEDERATION_CHATS_BYID.get(fed_id)
+		if checkid == None:
+			FEDERATION_CHATS_BYID[fed_id] = []
+		FEDERATION_CHATS_BYID[fed_id].append(str(chat_id))
+		SESSION.commit()
+		return r
 
 def search_fed_by_name(fed_name):
-    allfed = FEDERATION_BYNAME.get(fed_name)
-    if allfed == None:
-        return False
-    return allfed
-
+	allfed = FEDERATION_BYNAME.get(fed_name)
+	if allfed == None:
+		return False
+	return allfed
 
 def search_user_in_fed(fed_id, user_id):
-    getfed = FEDERATION_BYFEDID.get(fed_id)
-    if getfed == None:
-        return False
-    getfed = eval(getfed['fusers'])['members']
-    if user_id in eval(getfed):
-        return True
-    else:
-        return False
+	getfed = FEDERATION_BYFEDID.get(fed_id)
+	if getfed == None:
+		return False
+	getfed = eval(getfed['fusers'])['members']
+	if user_id in eval(getfed):
+		return True
+	else:
+		return False
 
 
 def user_demote_fed(fed_id, user_id):
-    with FEDS_LOCK:
-        global FEDERATION_BYOWNER, FEDERATION_BYFEDID, FEDERATION_BYNAME
-        # Variables
-        getfed = FEDERATION_BYFEDID.get(str(fed_id))
-        owner_id = getfed['owner']
-        fed_name = getfed['fname']
-        fed_rules = getfed['frules']
-        # Temp set
-        try:
-            members = eval(eval(getfed['fusers'])['members'])
-        except ValueError:
-            return False
-        members.remove(user_id)
-        # Set user
-        FEDERATION_BYOWNER[str(owner_id)]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
-        FEDERATION_BYFEDID[str(fed_id)]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
-        FEDERATION_BYNAME[fed_name]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
-        # Set on database
-        fed = Federations(str(owner_id), fed_name, str(fed_id), fed_rules,
-                          str({'owner': str(owner_id), 'members': str(members)}))
-        SESSION.merge(fed)
-        SESSION.commit()
-        return True
+	with FEDS_LOCK:
+		global FEDERATION_BYOWNER, FEDERATION_BYFEDID, FEDERATION_BYNAME
+		# Variables
+		getfed = FEDERATION_BYFEDID.get(str(fed_id))
+		owner_id = getfed['owner']
+		fed_name = getfed['fname']
+		fed_rules = getfed['frules']
+		fed_log = getfed['flog']
+		# Temp set
+		try:
+			members = eval(eval(getfed['fusers'])['members'])
+		except ValueError:
+			return False
+		members.remove(user_id)
+		# Set user
+		FEDERATION_BYOWNER[str(owner_id)]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
+		FEDERATION_BYFEDID[str(fed_id)]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
+		FEDERATION_BYNAME[fed_name]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
+		# Set on database
+		fed = Federations(str(owner_id), fed_name, str(fed_id), fed_rules, fed_log, str({'owner': str(owner_id), 'members': str(members)}))
+		SESSION.merge(fed)
+		SESSION.commit()
+		return True
 
-        curr = SESSION.query(UserF).all()
-        result = False
-        for r in curr:
-            if int(r.user_id) == int(user_id):
-                if r.fed_id == fed_id:
-                    SESSION.delete(r)
-                    SESSION.commit()
-                    result = True
+		curr = SESSION.query(UserF).all()
+		result = False
+		for r in curr:
+			if int(r.user_id) == int(user_id):
+				if r.fed_id == fed_id:
+					SESSION.delete(r)
+					SESSION.commit()
+					result = True
 
-        SESSION.close()
-        return result
+		SESSION.close()
+		return result
 
 
 def user_join_fed(fed_id, user_id):
-    with FEDS_LOCK:
-        global FEDERATION_BYOWNER, FEDERATION_BYFEDID, FEDERATION_BYNAME
-        # Variables
-        getfed = FEDERATION_BYFEDID.get(str(fed_id))
-        owner_id = getfed['owner']
-        fed_name = getfed['fname']
-        fed_rules = getfed['frules']
-        # Temp set
-        members = eval(eval(getfed['fusers'])['members'])
-        members.append(user_id)
-        # Set user
-        FEDERATION_BYOWNER[str(owner_id)]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
-        FEDERATION_BYFEDID[str(fed_id)]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
-        FEDERATION_BYNAME[fed_name]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
-        # Set on database
-        fed = Federations(str(owner_id), fed_name, str(fed_id), fed_rules,
-                          str({'owner': str(owner_id), 'members': str(members)}))
-        SESSION.merge(fed)
-        SESSION.commit()
-        __load_all_feds_chats()
-        return True
+	with FEDS_LOCK:
+		global FEDERATION_BYOWNER, FEDERATION_BYFEDID, FEDERATION_BYNAME
+		# Variables
+		getfed = FEDERATION_BYFEDID.get(str(fed_id))
+		owner_id = getfed['owner']
+		fed_name = getfed['fname']
+		fed_rules = getfed['frules']
+		fed_log = getfed['flog']
+		# Temp set
+		members = eval(eval(getfed['fusers'])['members'])
+		members.append(user_id)
+		# Set user
+		FEDERATION_BYOWNER[str(owner_id)]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
+		FEDERATION_BYFEDID[str(fed_id)]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
+		FEDERATION_BYNAME[fed_name]['fusers'] = str({'owner': str(owner_id), 'members': str(members)})
+		# Set on database
+		fed = Federations(str(owner_id), fed_name, str(fed_id), fed_rules, fed_log, str({'owner': str(owner_id), 'members': str(members)}))
+		SESSION.merge(fed)
+		SESSION.commit()
+		__load_all_feds_chats()
+		return True
 
 
 def chat_leave_fed(chat_id):
-    with FEDS_LOCK:
-        global FEDERATION_CHATS, FEDERATION_CHATS_BYID
-        # Set variables
-        fed_info = FEDERATION_CHATS.get(str(chat_id))
-        if fed_info == None:
-            return False
-        fed_id = fed_info['fid']
-        # Delete from cache
-        FEDERATION_CHATS.pop(str(chat_id))
-        FEDERATION_CHATS_BYID[str(fed_id)].remove(str(chat_id))
-        # Delete from db
-        curr = SESSION.query(ChatF).all()
-        for U in curr:
-            if int(U.chat_id) == int(chat_id):
-                SESSION.delete(U)
-                SESSION.commit()
-        return True
-
+	with FEDS_LOCK:
+		global FEDERATION_CHATS, FEDERATION_CHATS_BYID
+		# Set variables
+		fed_info = FEDERATION_CHATS.get(str(chat_id))
+		if fed_info == None:
+			return False
+		fed_id = fed_info['fid']
+		# Delete from cache
+		FEDERATION_CHATS.pop(str(chat_id))
+		FEDERATION_CHATS_BYID[str(fed_id)].remove(str(chat_id))
+		# Delete from db
+		curr = SESSION.query(ChatF).all()
+		for U in curr:
+			if int(U.chat_id) == int(chat_id):
+				SESSION.delete(U)
+				SESSION.commit()
+		return True
 
 def all_fed_chats(fed_id):
-    with FEDS_LOCK:
-        getfed = FEDERATION_CHATS_BYID.get(fed_id)
-        if getfed == None:
-            return []
-        else:
-            return getfed
-
+	with FEDS_LOCK:
+		getfed = FEDERATION_CHATS_BYID.get(fed_id)
+		if getfed == None:
+			return []
+		else:
+			return getfed
 
 def all_fed_users(fed_id):
-    with FEDS_LOCK:
-        getfed = FEDERATION_BYFEDID.get(str(fed_id))
-        if getfed == None:
-            return False
-        fed_owner = eval(eval(getfed['fusers'])['owner'])
-        fed_admins = eval(eval(getfed['fusers'])['members'])
-        fed_admins.append(fed_owner)
-        return fed_admins
-
+	with FEDS_LOCK:
+		getfed = FEDERATION_BYFEDID.get(str(fed_id))
+		if getfed == None:
+			return False
+		fed_owner = eval(eval(getfed['fusers'])['owner'])
+		fed_admins = eval(eval(getfed['fusers'])['members'])
+		fed_admins.append(fed_owner)
+		return fed_admins
 
 def all_fed_members(fed_id):
-    with FEDS_LOCK:
-        getfed = FEDERATION_BYFEDID.get(str(fed_id))
-        fed_admins = eval(eval(getfed['fusers'])['members'])
-        return fed_admins
+	with FEDS_LOCK:
+		getfed = FEDERATION_BYFEDID.get(str(fed_id))
+		fed_admins = eval(eval(getfed['fusers'])['members'])
+		return fed_admins
 
 
 def set_frules(fed_id, rules):
