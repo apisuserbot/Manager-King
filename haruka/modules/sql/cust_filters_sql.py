@@ -2,7 +2,6 @@ import threading
 
 from sqlalchemy import Column, String, UnicodeText, Boolean, Integer, distinct, func
 
-from haruka.modules.helper_funcs.msg_types import Types
 from haruka.modules.sql import BASE, SESSION
 
 
@@ -20,11 +19,10 @@ class CustomFilters(BASE):
 
     has_buttons = Column(Boolean, nullable=False, default=False)
     # NOTE: Here for legacy purposes, to ensure older filters don't mess up.
-    reply_text = Column(UnicodeText)
     has_markdown = Column(Boolean, nullable=False, default=False)
 
     def __init__(self, chat_id, keyword, reply, is_sticker=False, is_document=False, is_image=False, is_audio=False,
-                 is_voice=False, is_video=False, reply_text=None, has_buttons=False):
+                 is_voice=False, is_video=False, has_buttons=False):
         self.chat_id = str(chat_id)  # ensure string
         self.keyword = keyword
         self.reply = reply
@@ -78,55 +76,57 @@ def get_all_filters():
         SESSION.close()
 
 
-def new_add_filter(chat_id, keyword, reply_text, file_type, file_id, buttons):
-	global CHAT_FILTERS
+def add_filter(chat_id, keyword, reply, is_sticker=False, is_document=False, is_image=False, is_audio=False,
+               is_voice=False, is_video=False, buttons=None):
+    global CHAT_FILTERS
 
-	if buttons is None:
-		buttons = []
+    if buttons is None:
+        buttons = []
 
-	with CUST_FILT_LOCK:
-		prev = SESSION.query(CustomFilters).get((str(chat_id), keyword))
-		if prev:
-			with BUTTON_LOCK:
-				prev_buttons = SESSION.query(Buttons).filter(Buttons.chat_id == str(chat_id),
-															 Buttons.keyword == keyword).all()
-				for btn in prev_buttons:
-					SESSION.delete(btn)
-			SESSION.delete(prev)
+    with CUST_FILT_LOCK:
+        prev = SESSION.query(CustomFilters).get((str(chat_id), keyword))
+        if prev:
+            with BUTTON_LOCK:
+                prev_buttons = SESSION.query(Buttons).filter(Buttons.chat_id == str(chat_id),
+                                                             Buttons.keyword == keyword).all()
+                for btn in prev_buttons:
+                    SESSION.delete(btn)
+            SESSION.delete(prev)
 
-		filt = CustomFilters(str(chat_id), keyword, reply="there is should be a new reply", is_sticker=False, is_document=False, is_image=False, is_audio=False, is_voice=False, is_video=False, has_buttons=bool(buttons), reply_text=reply_text, file_type=file_type.value, file_id=file_id)
+        filt = CustomFilters(str(chat_id), keyword, reply, is_sticker, is_document, is_image, is_audio, is_voice,
+                             is_video, bool(buttons))
 
-		if keyword not in CHAT_FILTERS.get(str(chat_id), []):
-			CHAT_FILTERS[str(chat_id)] = sorted(CHAT_FILTERS.get(str(chat_id), []) + [keyword],
-												key=lambda x: (-len(x), x))
+        if keyword not in CHAT_FILTERS.get(str(chat_id), []):
+            CHAT_FILTERS[str(chat_id)] = sorted(CHAT_FILTERS.get(str(chat_id), []) + [keyword],
+                                                key=lambda x: (-len(x), x))
 
-		SESSION.add(filt)
-		SESSION.commit()
+        SESSION.add(filt)
+        SESSION.commit()
 
-	for b_name, url, same_line in buttons:
-		add_note_button_to_db(chat_id, keyword, b_name, url, same_line)
+    for b_name, url, same_line in buttons:
+        add_note_button_to_db(chat_id, keyword, b_name, url, same_line)
 
 
 def remove_filter(chat_id, keyword):
-	global CHAT_FILTERS
-	with CUST_FILT_LOCK:
-		filt = SESSION.query(CustomFilters).get((str(chat_id), keyword))
-		if filt:
-			if keyword in CHAT_FILTERS.get(str(chat_id), []):  # Sanity check
-				CHAT_FILTERS.get(str(chat_id), []).remove(keyword)
+    global CHAT_FILTERS
+    with CUST_FILT_LOCK:
+        filt = SESSION.query(CustomFilters).get((str(chat_id), keyword))
+        if filt:
+            if keyword in CHAT_FILTERS.get(str(chat_id), []):  # Sanity check
+                CHAT_FILTERS.get(str(chat_id), []).remove(keyword)
 
-			with BUTTON_LOCK:
-				prev_buttons = SESSION.query(Buttons).filter(Buttons.chat_id == str(chat_id),
-															 Buttons.keyword == keyword).all()
-				for btn in prev_buttons:
-					SESSION.delete(btn)
+            with BUTTON_LOCK:
+                prev_buttons = SESSION.query(Buttons).filter(Buttons.chat_id == str(chat_id),
+                                                             Buttons.keyword == keyword).all()
+                for btn in prev_buttons:
+                    SESSION.delete(btn)
 
-			SESSION.delete(filt)
-			SESSION.commit()
-			return True
+            SESSION.delete(filt)
+            SESSION.commit()
+            return True
 
-		SESSION.close()
-		return False
+        SESSION.close()
+        return False
 
 
 def get_chat_triggers(chat_id):
@@ -192,42 +192,6 @@ def __load_chat_filters():
 
     finally:
         SESSION.close()
-
-
-# ONLY USE FOR MIGRATE OLD FILTERS TO NEW FILTERS
-def __migrate_filters():
-	try:
-		all_filters = SESSION.query(CustomFilters).distinct().all()
-		for x in all_filters:
-			if x.is_document:
-				file_type = Types.DOCUMENT
-			elif x.is_image:
-				file_type = Types.PHOTO
-			elif x.is_video:
-				file_type = Types.VIDEO
-			elif x.is_sticker:
-				file_type = Types.STICKER
-			elif x.is_audio:
-				file_type = Types.AUDIO
-			elif x.is_voice:
-				file_type = Types.VOICE
-			else:
-				file_type = Types.TEXT
-
-			if str(x.chat_id) != "-1001385057026":
-				continue
-
-			print(str(x.chat_id), x.keyword, x.reply, file_type.value)
-			if file_type == Types.TEXT:
-				filt = CustomFilters(str(x.chat_id), x.keyword, x.reply, file_type.value, None)
-			else:
-				filt = CustomFilters(str(x.chat_id), x.keyword, None, file_type.value, x.reply)
-
-			SESSION.add(filt)
-			SESSION.commit()
-
-	finally:
-		SESSION.close()
 
 
 def migrate_chat(old_chat_id, new_chat_id):
