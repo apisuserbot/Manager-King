@@ -89,18 +89,72 @@ FEDERATION_NOTIFICATION = {}
 
 
 def get_fed_info(fed_id):
-    get = FEDERATION_BYFEDID.get(str(fed_id))
-    if get == None:
-        return False
-    return get
+	get = FEDERATION_BYFEDID.get(str(fed_id))
+	if get == None:
+		return False
+	return get
 
 
 def get_fed_id(chat_id):
-    get = FEDERATION_CHATS.get(str(chat_id))
-    if get == None:
-        return False
-    else:
-        return get['fid']
+	get = FEDERATION_CHATS.get(str(chat_id))
+	if get == None:
+		return False
+	else:
+		return get['fid']
+
+def get_fed_name(chat_id):
+	get = FEDERATION_CHATS.get(str(chat_id))
+	if get == None:
+		return False
+	else:
+		return get['chat_name']
+
+def get_user_fban(fed_id, user_id):
+	if not FEDERATION_BANNED_FULL.get(fed_id):
+		return False, False, False
+	user_info = FEDERATION_BANNED_FULL[fed_id].get(user_id)
+	if not user_info:
+		return None, None, None
+	return user_info['first_name'], user_info['reason'], user_info['time']
+
+def get_user_admin_fed_name(user_id):
+	user_feds = []
+	for f in FEDERATION_BYFEDID:
+		if int(user_id) in eval(eval(FEDERATION_BYFEDID[f]['fusers'])['members']):
+			user_feds.append(FEDERATION_BYFEDID[f]['fname'])
+	return user_feds
+
+def get_user_owner_fed_name(user_id):
+	user_feds = []
+	for f in FEDERATION_BYFEDID:
+		if int(user_id) == int(eval(FEDERATION_BYFEDID[f]['fusers'])['owner']):
+			user_feds.append(FEDERATION_BYFEDID[f]['fname'])
+	return user_feds
+
+def get_user_admin_fed_full(user_id):
+	user_feds = []
+	for f in FEDERATION_BYFEDID:
+		if int(user_id) in eval(eval(FEDERATION_BYFEDID[f]['fusers'])['members']):
+			user_feds.append({"fed_id": f, "fed": FEDERATION_BYFEDID[f]})
+	return user_feds
+
+def get_user_owner_fed_full(user_id):
+	user_feds = []
+	for f in FEDERATION_BYFEDID:
+		if int(user_id) == int(eval(FEDERATION_BYFEDID[f]['fusers'])['owner']):
+			user_feds.append({"fed_id": f, "fed": FEDERATION_BYFEDID[f]})
+	return user_feds
+
+def get_user_fbanlist(user_id):
+	banlist = FEDERATION_BANNED_FULL
+	user_name = ""
+	fedname = []
+	for x in banlist:
+		if banlist[x].get(user_id):
+			if user_name == "":
+				user_name = banlist[x][user_id].get('first_name')
+			fedname.append([x, banlist[x][user_id].get('reason')])
+	return user_name, fedname
 
 
 def new_fed(owner_id, fed_name, fed_id):
