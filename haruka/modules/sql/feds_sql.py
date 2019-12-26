@@ -13,7 +13,6 @@ class Federations(BASE):
     fed_name = Column(UnicodeText)
     fed_id = Column(UnicodeText, primary_key=True)
     fed_rules = Column(UnicodeText)
-    fed_log = Column(UnicodeText)
     fed_users = Column(UnicodeText)
 
     def __init__(self, owner_id, fed_name, fed_id, fed_rules, fed_users):
@@ -21,7 +20,6 @@ class Federations(BASE):
         self.fed_name = fed_name
         self.fed_id = fed_id
         self.fed_rules = fed_rules
-        self.fed_log = fed_log
         self.fed_users = fed_users
 
 
