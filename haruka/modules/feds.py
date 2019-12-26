@@ -621,7 +621,7 @@ def fed_ban(bot: Bot, update: Update, args: List[str]):
 	if reason == "":
 		reason = tl(update.effective_message, "Tidak ada alasan.")
 
-	x = sql.fban_user(fed_id, fban_user_id, fban_user_name, fban_user_lname, fban_user_uname, reason())
+	x = sql.fban_user(fed_id, fban_user_id, fban_user_name, fban_user_lname, fban_user_uname, reason)
 	if not x:
 		send_message(update.effective_message, tl(update.effective_message, "Gagal melarangan federasi! Jika masalah ini terus terjadi, hubungi pembuat saya."))
 		return
