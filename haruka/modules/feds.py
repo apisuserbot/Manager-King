@@ -1556,6 +1556,7 @@ def __stats__():
 
 def __user_info__(user_id, chat_id):
     fed_id = sql.get_fed_id(chat_id)
+    chat = update.effective_chat  # type: Optional[Chat]
     if fed_id:
         fban, fbanreason = sql.get_fban_user(fed_id, user_id)
         info = sql.get_fed_info(fed_id)
