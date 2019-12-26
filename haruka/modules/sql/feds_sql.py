@@ -419,7 +419,7 @@ def set_fed_log(fed_id, chat_id):
 		FEDERATION_BYFEDID[str(fed_id)]['flog'] = fed_log
 		FEDERATION_BYNAME[fed_name]['flog'] = fed_log
 		# Set on database
-		fed = Federations(str(owner_id), fed_name, str(fed_id), fed_rules, fed_log, str(fed_members))
+		fed = Federations(str(owner_id), fed_name, str(fed_id), fed_rules, str(fed_members))
 		SESSION.merge(fed)
 		SESSION.commit()
 		print(fed_log)
