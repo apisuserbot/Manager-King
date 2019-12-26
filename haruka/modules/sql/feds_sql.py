@@ -383,6 +383,95 @@ def set_frules(fed_id, rules):
         return True
 
 
+def get_fed_log(fed_id):
+	fed_setting = FEDERATION_BYFEDID.get(str(fed_id))
+	if fed_setting == None:
+		fed_setting = False
+		return fed_setting
+	if fed_setting.get('flog') == None:
+		return False
+	elif fed_setting.get('flog'):
+		try:
+			dispatcher.bot.get_chat(fed_setting.get('flog'))
+		except BadRequest:
+			set_fed_log(fed_id, None)
+			return False
+		except Unauthorized:
+			set_fed_log(fed_id, None)
+			return False
+		return fed_setting.get('flog')
+	else:
+		return False
+
+
+def set_fed_log(fed_id, chat_id):
+	with FEDS_LOCK:
+		global FEDERATION_BYOWNER, FEDERATION_BYFEDID, FEDERATION_BYNAME
+		# Variables
+		getfed = FEDERATION_BYFEDID.get(str(fed_id))
+		owner_id = getfed['owner']
+		fed_name = getfed['fname']
+		fed_members = getfed['fusers']
+		fed_rules = getfed['frules']
+		fed_log = str(chat_id)
+		# Set user
+		FEDERATION_BYOWNER[str(owner_id)]['flog'] = fed_log
+		FEDERATION_BYFEDID[str(fed_id)]['flog'] = fed_log
+		FEDERATION_BYNAME[fed_name]['flog'] = fed_log
+		# Set on database
+		fed = Federations(str(owner_id), fed_name, str(fed_id), fed_rules, fed_log, str(fed_members))
+		SESSION.merge(fed)
+		SESSION.commit()
+		print(fed_log)
+		return True
+
+
+def subs_fed(fed_id, my_fed):
+	check = get_spec_subs(fed_id, my_fed)
+	if check:
+		return False
+	with FEDS_SUBSCRIBER_LOCK:
+		subsfed = FedSubs(fed_id, my_fed)
+
+		SESSION.merge(subsfed)  # merge to avoid duplicate key issues
+		SESSION.commit()
+		global FEDS_SUBSCRIBER
+		if FEDS_SUBSCRIBER.get(fed_id, set()) == set():
+			FEDS_SUBSCRIBER[fed_id] = {my_fed}
+		else:
+			FEDS_SUBSCRIBER.get(fed_id, set()).add(my_fed)
+		return True
+
+def unsubs_fed(fed_id, my_fed):
+	with FEDS_SUBSCRIBER_LOCK:
+		getsubs = SESSION.query(FedSubs).get((fed_id, my_fed))
+		if getsubs:
+			if my_fed in FEDS_SUBSCRIBER.get(fed_id, set()):  # sanity check
+				FEDS_SUBSCRIBER.get(fed_id, set()).remove(my_fed)
+
+			SESSION.delete(getsubs)
+			SESSION.commit()
+			return True
+
+		SESSION.close()
+		return False
+
+def get_all_subs(fed_id):
+	return FEDS_SUBSCRIBER.get(fed_id, set())
+
+def get_spec_subs(fed_id, fed_target):
+	if FEDS_SUBSCRIBER.get(fed_id, set()) == set():
+		return {}
+	else:
+		return FEDS_SUBSCRIBER.get(fed_id, fed_target)
+
+def get_mysubs(my_fed):
+	return list(MYFEDS_SUBSCRIBER.get(my_fed))
+
+def get_subscriber(fed_id):
+	return FEDS_SUBSCRIBER.get(fed_id, set())
+
+
 def get_frules(fed_id):
     with FEDS_LOCK:
         rules = FEDERATION_BYFEDID[str(fed_id)]['frules']
