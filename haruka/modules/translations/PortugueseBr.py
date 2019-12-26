@@ -270,6 +270,8 @@ PortugueseBrStrings = {
     "Is that even a valid language code? Use an internationally accepted ISO code!": "Isso é mesmo um código de idioma válido? Use um código ISO aceito internacionalmente!",
     "Current locale for this chat is: *{}*": "O idioma atual deste chat é: *{}*",
     
+    "Please specify a combination of <user>/<repo>": "Por favor especifique uma combinação de <usuário>/<repo>",
+    "Invalid <user>/<repo> combo": "Combinação de <usuário>/<repo> inválida",
     
     "Click here to get this chat's settings, as well as yours.": "Clique no botão abaixo para obter as configurações deste grupos e as suas.",
     "Hey there! I'm alive :3 PM me if you have any questions on how to use me!": "Olá! Estou vivo :3, se você tiver alguma dúvida sobre como me usar me chame no PV!",
@@ -359,6 +361,15 @@ PortugueseBrStrings = {
 "I spy with my little eyes... a sudo user war! Why are you guys turning on each other?": "Eu espio com meus olhinhos... uma guerra de usuários sudo! Por que vocês estão se atacando?",
 "OOOH, someone's trying to gban a support user! *grabs popcorn*": "OOOH, alguém está tentando Banir Globalmente um usuário de suporte! *pegando pipoca*",
 "-_- So funny, let me gban myself, why don't I? Nice try.": "-_- Tão engraçado, deixe-me me Banir Globalmente, por que não? Boa tentativa.",
+
+#Backups
+"You can do this command in the group, not in PM": "Você pode usar este comando no grupo, não no PV",
+"Invalid backup file!": "Arquivo de backup inválido",
+"Try downloading and re-uploading files as yourself before importing - this one seems to be corrupt!": "Tente fazer o download e reenviar o arquivo como você antes de importar - este parece estar corrompido!",
+"The backup is fully restored at *{}*. Welcome back! 😀": "O backup foi totalmente restaurado em *{}*. Bem vindo de volta! 😀",
+"Backup fully restored. Welcome back! 😀": "Backup completamente restaurado. Bem vindo de volta",
+"\n\nWhat i returned:\n": "\n\nO que eu retornei:\n",
+
 
 #Bans
     "I really wish I could ban admins...": "Eu gostaria de poder banir administradores porem...",
