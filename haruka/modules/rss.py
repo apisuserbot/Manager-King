@@ -208,7 +208,6 @@ def rss_update(bot, job):
 
 def rss_set(bot, job):
     user_data = sql.get_all()
-    chat = update.effective_chat  # type: Optional[Chat]
 
     # this loop checks for every row in the DB
     for row in user_data:
