@@ -365,7 +365,8 @@ you're interested in.""",
 	"Federasi `{}` sudah tidak mengikuti `{}`": "Federation `{}` has unsubscribe fed `{}`.",
 	"*Ini adalah federasi milik anda:\n*": "*You are owner of feds:\n*",
 	"*Anda tidak mempunyai federasi!*": "*You are not have any feds!*",
-	"\n\n<b>Pengguna ini adalah pemilik federasi ini:</b>\n<code>": "\n\n<b>This user is a owner fed in the current federation:</b>\n<code>", 
+	"\n\n<b>Pengguna ini adalah pemilik federasi ini:</b>\n<code>": "\n\n<b>This user is a owner fed in the current federation:</b>\n<code>",
+	"Perintah ini di khususkan untuk grup, bukan pada PM!": "This command should be used in groups, not in the PM!",
 
 #Misc
 "RUNS-K": RUN_STRINGS,

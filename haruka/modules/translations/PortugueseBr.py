@@ -322,6 +322,13 @@ PortugueseBrStrings = {
 "this chat": "este chat",
 " (Creator)": " (Criador)",
 
+#Federations
+"This user is the owner of the current Federation: <b>{}</b>.": "Este usuário é o proprietário da federação atual: <b>{}</b>.",
+"This user is the admin of the current Federation: <b>{}</b>.": "Este usuário é administrador da federação atual: <b>{}</b>.",
+"Banned in the current Federation: <b>Yes</b>": "Banido na federação atual: <b>Sim</b>",
+"\n<b>Reason:</b> {}": "\n<b>Motivo:</b> {}",
+"Banned in the current Federation: <b>No</b>": "Banido na federação atual: <b>Não</b>",
+
 #AFK
 "{fname} is now AFK!": "{fname} está agora AFK!",
 "{firstname} is no longer AFK!": "{firstname} Não está mais AFK!",

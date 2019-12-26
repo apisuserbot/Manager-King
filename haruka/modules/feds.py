@@ -1493,116 +1493,6 @@ def unset_fed_log(bot, update, args):
 	else:
 		send_message(update.effective_message, tl(update.effective_message, "Anda belum memberikan ID federasinya!"))
 
-
-@run_async
-def subs_feds(bot, update, args):
-	chat = update.effective_chat  # type: Optional[Chat]
-	user = update.effective_user  # type: Optional[User]
-	msg = update.effective_message  # type: Optional[Message]
-
-	if chat.type == 'private':
-		send_message(update.effective_message, tl(update.effective_message, "Perintah ini di khususkan untuk grup, bukan pada PM!"))
-		return
-
-	fed_id = sql.get_fed_id(chat.id)
-	fedinfo = sql.get_fed_info(fed_id)
-
-	if not fed_id:
-		send_message(update.effective_message, tl(update.effective_message, "Grup ini tidak dalam federasi apa pun!"))
-		return
-
-	if is_user_fed_owner(fed_id, user.id) == False:
-		send_message(update.effective_message, tl(update.effective_message, "Hanya pemilik federasi yang dapat melakukan ini!"))
-		return
-
-	if args:
-		getfed = sql.search_fed_by_id(args[0])
-		if getfed == False:
-			send_message(update.effective_message, tl(update.effective_message, "Silakan masukkan id federasi yang valid."))
-			return
-		subfed = sql.subs_fed(args[0], fed_id)
-		if subfed:
-			send_message(update.effective_message, tl(update.effective_message, "Federasi `{}` telah mengikuti federasi `{}`. Setiap ada fedban dari federasi tersebut, federasi ini juga akan banned pengguna tsb.").format(fedinfo['fname'], getfed['fname']), parse_mode="markdown")
-			get_fedlog = sql.get_fed_log(args[0])
-			if get_fedlog:
-				if int(get_fedlog) != int(chat.id):
-					bot.send_message(get_fedlog, tl(update.effective_message, "Federasi `{}` telah mengikuti federasi `{}`").format(fedinfo['fname'], getfed['fname']), parse_mode="markdown")
-		else:
-			send_message(update.effective_message, tl(update.effective_message, "Federasi `{}` sudah mengikuti federasi `{}`.").format(fedinfo['fname'], getfed['fname']), parse_mode="markdown")
-	else:
-		send_message(update.effective_message, tl(update.effective_message, "Anda belum memberikan ID federasinya!"))
-
-@run_async
-def unsubs_feds(bot, update, args):
-	chat = update.effective_chat  # type: Optional[Chat]
-	user = update.effective_user  # type: Optional[User]
-	msg = update.effective_message  # type: Optional[Message]
-
-	if chat.type == 'private':
-		send_message(update.effective_message, tl(update.effective_message, "Perintah ini di khususkan untuk grup, bukan pada PM!"))
-		return
-
-	fed_id = sql.get_fed_id(chat.id)
-	fedinfo = sql.get_fed_info(fed_id)
-
-	if not fed_id:
-		send_message(update.effective_message, tl(update.effective_message, "Grup ini tidak dalam federasi apa pun!"))
-		return
-
-	if is_user_fed_owner(fed_id, user.id) == False:
-		send_message(update.effective_message, tl(update.effective_message, "Hanya pemilik federasi yang dapat melakukan ini!"))
-		return
-
-	if args:
-		getfed = sql.search_fed_by_id(args[0])
-		if getfed == False:
-			send_message(update.effective_message, tl(update.effective_message, "Silakan masukkan id federasi yang valid."))
-			return
-		subfed = sql.unsubs_fed(args[0], fed_id)
-		if subfed:
-			send_message(update.effective_message, tl(update.effective_message, "Federasi `{}` sudah tidak mengikuti `{}` lagi.").format(fedinfo['fname'], getfed['fname']), parse_mode="markdown")
-			get_fedlog = sql.get_fed_log(args[0])
-			if get_fedlog:
-				if int(get_fedlog) != int(chat.id):
-					bot.send_message(get_fedlog, tl(update.effective_message, "Federasi `{}` sudah tidak mengikuti `{}`").format(fedinfo['fname'], getfed['fname']), parse_mode="markdown")
-		else:
-			send_message(update.effective_message, tl(update.effective_message, "Federasi `{}` tidak mengikuti federasi `{}`.").format(fedinfo['fname'], getfed['fname']), parse_mode="markdown")
-	else:
-		send_message(update.effective_message, tl(update.effective_message, "Anda belum memberikan ID federasinya!"))
-
-@run_async
-def get_myfedsubs(bot, update, args):
-	chat = update.effective_chat  # type: Optional[Chat]
-	user = update.effective_user  # type: Optional[User]
-	msg = update.effective_message  # type: Optional[Message]
-
-	if chat.type == 'private':
-		send_message(update.effective_message, tl(update.effective_message, "Perintah ini di khususkan untuk grup, bukan pada PM!"))
-		return
-
-	fed_id = sql.get_fed_id(chat.id)
-	fedinfo = sql.get_fed_info(fed_id)
-
-	if not fed_id:
-		send_message(update.effective_message, tl(update.effective_message, "Grup ini tidak dalam federasi apa pun!"))
-		return
-
-	if is_user_fed_owner(fed_id, user.id) == False:
-		send_message(update.effective_message, tl(update.effective_message, "Hanya pemilik federasi yang dapat melakukan ini!"))
-		return
-
-	getmy = sql.get_mysubs(fed_id)
-
-	if len(getmy) == 0:
-		send_message(update.effective_message, tl(update.effective_message, "Federasi `{}` tidak mengikuti federasi apapun.").format(fedinfo['fname']), parse_mode="markdown")
-		return
-	else:
-		listfed = tl(update.effective_message, "Federasi `{}` mengikuti federasi berikut ini:\n").format(fedinfo['fname'])
-		for x in getmy:
-			listfed += "- `{}`\n".format(x)
-		listfed += tl(update.effective_message, "\nUntuk info federasi, ketik `/fedinfo <fedid>`. Untuk berhenti berlangganan ketik `/unsubfed <fedid>`.")
-		send_message(update.effective_message, listfed, parse_mode="markdown")
-
 @run_async
 def get_myfeds_list(bot, update):
 	chat = update.effective_chat  # type: Optional[Chat]
@@ -1672,15 +1562,15 @@ def __user_info__(user_id, chat_id):
         infoname = info['fname']
 
         if int(info['owner']) == user_id:
-            text = "This user is the owner of the current Federation: <b>{}</b>.".format(infoname)
+            text = tl(chat.id, "This user is the owner of the current Federation: <b>{}</b>.".format(infoname))
         elif is_user_fed_admin(fed_id, user_id):
-            text = "This user is the admin of the current Federation: <b>{}</b>.".format(infoname)
+            text = tl(chat.id, "This user is the admin of the current Federation: <b>{}</b>.".format(infoname))
 
         elif fban:
-            text = "Banned in the current Federation: <b>Yes</b>"
-            text += "\n<b>Reason:</b> {}".format(fbanreason)
+            text = tl(chat.id, "Banned in the current Federation: <b>Yes</b>")
+            text += tl(chat.id, "\n<b>Reason:</b> {}".format(fbanreason))
         else:
-            text = "Banned in the current Federation: <b>No</b>"
+            text = tl(chat.id, "Banned in the current Federation: <b>No</b>")
     else:
         text = ""
     return text
@@ -1740,8 +1630,6 @@ You can even appoint federation admins, so that your trustworthiest admins can b
  - /fdemote <user>: Demotes the user from fed admin to normal user, in your fed.
  - /fbanlist: Get the list of currently banned users. If you want different modes, use /fbanlist <csv/json>
  - /importfbans: Reply federated backup message file to import banned list to current federation.
- - /subfed <fedid>: to subscribe federation, can subscribe multiple federations.
- - /unsubfed <fedid>: unsubscribe that federation.
 """
 
 NEW_FED_HANDLER = CommandHandler("newfed", new_fed)
@@ -1765,9 +1653,6 @@ FED_IMPORTBAN_HANDLER = CommandHandler("importfbans", fed_import_bans, pass_chat
 FEDSTAT_USER = DisableAbleCommandHandler(["fedstat", "fbanstat"], fed_stat_user, pass_args=True)
 SET_FED_LOG = CommandHandler("setfedlog", set_fed_log, pass_args=True)
 UNSET_FED_LOG = CommandHandler("unsetfedlog", unset_fed_log, pass_args=True)
-SUBS_FED = CommandHandler("subfed", subs_feds, pass_args=True)
-UNSUBS_FED = CommandHandler("unsubfed", unsubs_feds, pass_args=True)
-MY_SUB_FED = CommandHandler("fedsubs", get_myfedsubs, pass_args=True)
 MY_FEDS_LIST = CommandHandler("myfeds", get_myfeds_list)
 
 DELETEBTN_FED_HANDLER = CallbackQueryHandler(del_fed_button, pattern=r"rmfed_")
@@ -1793,9 +1678,6 @@ dispatcher.add_handler(FED_IMPORTBAN_HANDLER)
 dispatcher.add_handler(FEDSTAT_USER)
 dispatcher.add_handler(SET_FED_LOG)
 dispatcher.add_handler(UNSET_FED_LOG)
-dispatcher.add_handler(SUBS_FED)
-dispatcher.add_handler(UNSUBS_FED)
-dispatcher.add_handler(MY_SUB_FED)
 dispatcher.add_handler(MY_FEDS_LIST)
 
 dispatcher.add_handler(DELETEBTN_FED_HANDLER)

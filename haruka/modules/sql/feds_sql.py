@@ -433,52 +433,6 @@ def set_fed_log(fed_id, chat_id):
 		return True
 
 
-def subs_fed(fed_id, my_fed):
-	check = get_spec_subs(fed_id, my_fed)
-	if check:
-		return False
-	with FEDS_SUBSCRIBER_LOCK:
-		subsfed = FedSubs(fed_id, my_fed)
-
-		SESSION.merge(subsfed)  # merge to avoid duplicate key issues
-		SESSION.commit()
-		global FEDS_SUBSCRIBER
-		if FEDS_SUBSCRIBER.get(fed_id, set()) == set():
-			FEDS_SUBSCRIBER[fed_id] = {my_fed}
-		else:
-			FEDS_SUBSCRIBER.get(fed_id, set()).add(my_fed)
-		return True
-
-def unsubs_fed(fed_id, my_fed):
-	with FEDS_SUBSCRIBER_LOCK:
-		getsubs = SESSION.query(FedSubs).get((fed_id, my_fed))
-		if getsubs:
-			if my_fed in FEDS_SUBSCRIBER.get(fed_id, set()):  # sanity check
-				FEDS_SUBSCRIBER.get(fed_id, set()).remove(my_fed)
-
-			SESSION.delete(getsubs)
-			SESSION.commit()
-			return True
-
-		SESSION.close()
-		return False
-
-def get_all_subs(fed_id):
-	return FEDS_SUBSCRIBER.get(fed_id, set())
-
-def get_spec_subs(fed_id, fed_target):
-	if FEDS_SUBSCRIBER.get(fed_id, set()) == set():
-		return {}
-	else:
-		return FEDS_SUBSCRIBER.get(fed_id, fed_target)
-
-def get_mysubs(my_fed):
-	return list(MYFEDS_SUBSCRIBER.get(my_fed))
-
-def get_subscriber(fed_id):
-	return FEDS_SUBSCRIBER.get(fed_id, set())
-
-
 def get_frules(fed_id):
     with FEDS_LOCK:
         rules = FEDERATION_BYFEDID[str(fed_id)]['frules']
