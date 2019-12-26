@@ -517,7 +517,7 @@ def fed_ban(bot: Bot, update: Update, args: List[str]):
 		if not temp:
 			send_message(update.effective_message, tl(update.effective_message, "Gagal mengupdate alasan fedban!"))
 			return
-		x = sql.fban_user(fed_id, fban_user_id, fban_user_name, fban_user_lname, fban_user_uname, reason, int(time.time()))
+		x = sql.fban_user(fed_id, user_id, user_chat.first_name, user_chat.last_name, user_chat.username, reason)
 		if not x:
 			send_message(update.effective_message, tl(update.effective_message, "Gagal melarangan federasi! Jika masalah ini terus terjadi, hubungi pembuat saya."))
 			return
