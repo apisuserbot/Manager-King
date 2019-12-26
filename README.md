@@ -18,7 +18,7 @@ Join the [Hitsuki News](https://t.me/HitsukiNews) if you just want to stay in 
 - AyraHikari - Weather , reworked federations, private notes, etc.
 - Paul Larsen - Marie and Rose creator, inspiration to do many things
 - FFBot - For translations functions.
-- Nuno Penim - For providing his proprietary Combot Anti Spam System API (pyCombotCAS_API) and GitHub API (pyGitHyb_API)
+- Nuno Penim - For providing his proprietary Combot Anti Spam System API (pyCombotCAS_API) and GitHub API (PyGitHub_API)
 - Alisson - Helped clean up the code and countless other things!
 
 And much more that we couldn't list it here!
