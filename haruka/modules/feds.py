@@ -1665,25 +1665,25 @@ def __stats__():
 
 
 def __user_info__(user_id, chat_id):
-	fed_id = sql.get_fed_id(chat_id)
-	if fed_id:
-		fban, fbanreason, fbantime = sql.get_fban_user(fed_id, user_id)
-		info = sql.get_fed_info(fed_id)
-		infoname = info['fname']
+    fed_id = sql.get_fed_id(chat_id)
+    if fed_id:
+        fban, fbanreason = sql.get_fban_user(fed_id, user_id)
+        info = sql.get_fed_info(fed_id)
+        infoname = info['fname']
 
-		if int(info['owner']) == user_id:
-			text = tl(chat_id, "Pengguna ini adalah owner di federasi saat ini: <b>{}</b>.").format(infoname)
-		elif is_user_fed_admin(fed_id, user_id):
-			text = tl(chat_id, "Pengguna ini adalah admin di federasi saat ini: <b>{}</b>.").format(infoname)
+        if int(info['owner']) == user_id:
+            text = "This user is the owner of the current Federation: <b>{}</b>.".format(infoname)
+        elif is_user_fed_admin(fed_id, user_id):
+            text = "This user is the admin of the current Federation: <b>{}</b>.".format(infoname)
 
-		elif fban:
-			text = tl(chat_id, "Dilarang di federasi saat ini: <b>Ya</b>")
-			text += tl(chat_id, "\n<b>Alasan:</b> {}").format(fbanreason)
-		else:
-			text = tl(chat_id, "Dilarang di federasi saat ini: <b>Tidak</b>")
-	else:
-		text = ""
-	return text
+        elif fban:
+            text = "Banned in the current Federation: <b>Yes</b>"
+            text += "\n<b>Reason:</b> {}".format(fbanreason)
+        else:
+            text = "Banned in the current Federation: <b>No</b>"
+    else:
+        text = ""
+    return text
 
 
 # Temporary data
