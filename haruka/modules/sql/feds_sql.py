@@ -113,7 +113,7 @@ def get_fed_name(chat_id):
 	if get == None:
 		return False
 	else:
-		return get['chat_id']
+		return get['chat']['id']
 
 def get_user_fban(fed_id, user_id):
 	if not FEDERATION_BANNED_FULL.get(fed_id):
