@@ -18,7 +18,7 @@ from telegram import Message, Chat, Update, Bot, User, ParseMode, InlineKeyboard
 @run_async
 def getRelease(bot: Bot, update: Update, args: List[str]):
     msg = update.effective_message
-    chat = update.effective_message
+    chat = update.effective_chat
     if(len(args)<1):
         msg.reply_text(tld(chat.id, "Please specify a combination of <user>/<repo>"))
         return
