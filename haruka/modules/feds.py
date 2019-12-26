@@ -1554,24 +1554,23 @@ def __stats__():
 	return tl(OWNER_ID, "{} pengguna di fbanned, pada {} federasi").format(len(all_fbanned), len(all_feds))
 
 
-def __user_info__(user_id, chat_id):
+def __user_info__(user_id, chat_id, bot, update):
     fed_id = sql.get_fed_id(chat_id)
-    chat = update.effective_chat  # type: Optional[Chat]
     if fed_id:
         fban, fbanreason = sql.get_fban_user(fed_id, user_id)
         info = sql.get_fed_info(fed_id)
         infoname = info['fname']
 
         if int(info['owner']) == user_id:
-            text = tl(chat.id, "This user is the owner of the current Federation: <b>{}</b>.".format(infoname))
+            text = tl(update.effective_message, "This user is the owner of the current Federation: <b>{}</b>.".format(infoname))
         elif is_user_fed_admin(fed_id, user_id):
-            text = tl(chat.id, "This user is the admin of the current Federation: <b>{}</b>.".format(infoname))
+            text = tl(update.effective_message, "This user is the admin of the current Federation: <b>{}</b>.".format(infoname))
 
         elif fban:
-            text = tl(chat.id, "Banned in the current Federation: <b>Yes</b>")
-            text += tl(chat.id, "\n<b>Reason:</b> {}".format(fbanreason))
+            text = tl(update.effective_message, "Banned in the current Federation: <b>Yes</b>")
+            text += tl(update.effective_message, "\n<b>Reason:</b> {}".format(fbanreason))
         else:
-            text = tl(chat.id, "Banned in the current Federation: <b>No</b>")
+            text = tl(update.effective_message, "Banned in the current Federation: <b>No</b>")
     else:
         text = ""
     return text
