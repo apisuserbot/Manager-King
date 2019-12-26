@@ -195,12 +195,13 @@ def join_fed(bot: Bot, update: Update, args: List[str]):
 		return
 
 	if len(args) >= 1:
+		fedd = args[0]
 		getfed = sql.search_fed_by_id(args[0])
 		if getfed == False:
 			send_message(update.effective_message, tl(update.effective_message, "Silakan masukkan id federasi yang valid."))
 			return
 
-		x = sql.chat_join_fed(args[0], chat.title, chat.id)
+		x = sql.chat_join_fed(fedd, chat.id)
 		if not x:
 			send_message(update.effective_message, tl(update.effective_message, "Gagal bergabung dengan federasi! Tolong hubungi pembuat saya jika masalah ini masih berlanjut."))
 			return
