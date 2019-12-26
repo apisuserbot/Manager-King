@@ -105,7 +105,7 @@ def new_fed(bot: Bot, update: Update):
 											"\n`/joinfed {}`").format(fed_name, fed_id, fed_id), parse_mode=ParseMode.MARKDOWN)
 		try:
 			bot.send_message(TEMPORARY_DATA,
-				"Federasi <b>{}</b> telah di buat dengan ID: <pre>{}</pre>".format(fed_name, fed_id), parse_mode=ParseMode.HTML)
+				"Federation <b>{}</b> have been made with the ID: <pre>{}</pre>".format(fed_name, fed_id), parse_mode=ParseMode.HTML)
 		except:
 			LOGGER.warning("Cannot send a message to TEMPORARY_DATA")
 	else:
