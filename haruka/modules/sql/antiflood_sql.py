@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import String, Column, Integer, UnicodeText
 
-from emilia.modules.sql import SESSION, BASE
+from haruka.modules.sql import SESSION, BASE
 
 DEF_COUNT = 0
 DEF_LIMIT = 0
