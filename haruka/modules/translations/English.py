@@ -387,7 +387,7 @@ you're interested in.""",
 	"Saat ini saya tidak memberlakukan pengendalian pesan beruntun": "I'm not currently enforcing flood control!",
 	"Saat ini saya melarang pengguna jika mereka mengirim lebih dari *{}* pesan berturut-turut pada *{}*.": "I'm currently banning users if they send more than *{}* consecutive messages in *{}*.",
 	"Saat ini saya melarang pengguna jika mereka mengirim lebih dari *{}* pesan berturut-turut.": "I'm currently banning users if they send more than *{}* consecutive messages.",
-	"blokir": "blocked",
+	"blokir": "banned",
 	"tendang": "kicked",
 	"bisukan": "muted",
 

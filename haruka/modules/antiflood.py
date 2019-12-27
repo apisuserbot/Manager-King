@@ -209,18 +209,18 @@ def set_flood_mode(bot: Bot, update: Update, args: List[str]):
             sql.set_flood_strength(chat_id, 3, "0")
         elif args[0].lower() == 'tban':
             if len(args) == 1:
-                teks = tl(update.effective_message, """Sepertinya Anda mencoba menetapkan nilai sementara untuk anti-banjir, tetapi belum menentukan waktu; gunakan `/setfloodmode tban <timevalue>`.
+                teks = tl(update.effective_message, """It looks like you are trying to set a temporary value for anti-flood, but have not determined the time yet; use `/setfloodmode tban <timevalue>`.
 
-Contoh nilai waktu: 4m = 4 menit, 3h = 3 jam, 6d = 6 hari, 5w = 5 minggu.""")
+Example time values: 4m = 4 minutes, 3h = 3 hours, 6d = 6 days, 5w = 5 weeks.""")
                 send_message(update.effective_message, teks, parse_mode="markdown")
                 return
             settypeflood = tl(update.effective_message, "blokir sementara selama {}").format(args[1])
             sql.set_flood_strength(chat_id, 4, str(args[1]))
         elif args[0].lower() == 'tmute':
             if len(args) == 1:
-                teks = tl(update.effective_message, """Sepertinya Anda mencoba menetapkan nilai sementara untuk anti-banjir, tetapi belum menentukan waktu; gunakan `/setfloodmode tban <timevalue>`.
+                teks = tl(update.effective_message, """It looks like you are trying to set a temporary value for anti-flood, but have not determined the time yet; use `/setfloodmode tban <timevalue>`.
 
-Contoh nilai waktu: 4m = 4 menit, 3h = 3 jam, 6d = 6 hari, 5w = 5 minggu.""")
+Example time values: 4m = 4 minutes, 3h = 3 hours, 6d = 6 days, 5w = 5 weeks.""")
                 send_message(update.effective_message, teks, parse_mode="markdown")
                 return
             settypeflood = tl(update.effective_message, 'bisukan sementara selama {}').format(args[1])
@@ -229,9 +229,9 @@ Contoh nilai waktu: 4m = 4 menit, 3h = 3 jam, 6d = 6 hari, 5w = 5 minggu.""")
             send_message(update.effective_message, tl(update.effective_message, "Saya hanya mengerti ban/kick/mute/tban/tmute!"))
             return
         if conn:
-            text = tl(update.effective_message, "Terlalu banyak mengirim pesan sekarang akan menghasilkan `{}` pada *{}*!").format(settypeflood, chat_name)
+            text = tl(update.effective_message, "Sending too many messages now will result in `{}` in *{}*!").format(settypeflood, chat_name)
         else:
-            text = tl(update.effective_message, "Terlalu banyak mengirim pesan sekarang akan menghasilkan `{}`!").format(settypeflood)
+            text = tl(update.effective_message, "Sending too many messages now will result in `{}`!").format(settypeflood)
         send_message(update.effective_message, text, parse_mode="markdown")
         return "<b>{}:</b>\n" \
                 "<b>Admin:</b> {}\n" \
