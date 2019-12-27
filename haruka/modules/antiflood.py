@@ -250,9 +250,9 @@ Example time values: 4m = 4 minutes, 3h = 3 hours, 6d = 6 days, 5w = 5 weeks."""
         elif getmode == 5:
             settypeflood = tl(update.effective_message, 'temporarily muted for {}').format(getvalue)
         if conn:
-            text = tl(update.effective_message, "Jika member mengirim pesan beruntun, maka dia akan *di {}* pada *{}*.").format(settypeflood, chat_name)
+            text = tl(update.effective_message, "If member is flooding messages, they will be *{}* at *{}*.").format(settypeflood, chat_name)
         else:
-            text = tl(update.effective_message, "Jika member mengirim pesan beruntun, maka dia akan *di {}*.").format(settypeflood)
+            text = tl(update.effective_message, "If member is flooding messages, they will be *{}*.").format(settypeflood)
         send_message(update.effective_message, text, parse_mode=ParseMode.MARKDOWN)
     return ""
 
