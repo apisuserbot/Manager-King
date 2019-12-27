@@ -223,10 +223,10 @@ Example time values: 4m = 4 minutes, 3h = 3 hours, 6d = 6 days, 5w = 5 weeks."""
 Example time values: 4m = 4 minutes, 3h = 3 hours, 6d = 6 days, 5w = 5 weeks.""")
                 send_message(update.effective_message, teks, parse_mode="markdown")
                 return
-            settypeflood = tl(update.effective_message, 'bisukan sementara selama {}').format(args[1])
+            settypeflood = tl(update.effective_message, 'temporarily muted for {}').format(args[1])
             sql.set_flood_strength(chat_id, 5, str(args[1]))
         else:
-            send_message(update.effective_message, tl(update.effective_message, "Saya hanya mengerti ban/kick/mute/tban/tmute!"))
+            send_message(update.effective_message, tl(update.effective_message, "I only understand ban/kick/mute/tban/tmute!"))
             return
         if conn:
             text = tl(update.effective_message, "Sending too many messages now will result in `{}` in *{}*!").format(settypeflood, chat_name)
