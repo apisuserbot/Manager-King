@@ -272,7 +272,7 @@ def import_data(bot: Bot, update):
 				if data['greetings'].get('language'):
 					lang = data['language'].get('language')
 					if lang:
-						if lang in ('en', 'id'):
+						if lang in ('en', 'pt-br'):
 							langsql.set_lang(chat_id, lang)
 							imp_lang = True
 
@@ -591,7 +591,7 @@ def import_data(bot: Bot, update):
 					if data['data'].get('translations'):
 						lang = data['data']['translations'].get('lang')
 						if lang:
-							if lang in ('en', 'id'):
+							if lang in ('en', 'pt-br'):
 								langsql.set_lang(chat_id, lang)
 								imp_lang = True
 					# Import warn
