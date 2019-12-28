@@ -507,7 +507,7 @@ def wiki(bot: Bot, update: Update):
 			button = InlineKeyboardMarkup([[InlineKeyboardButton(text=tld(update.effective_message, "📃 Read more..."), url="t.me/{}?start=wiki-{}".format(bot.username, teks.replace(' ', '_')))]])
 		else:
 			button = None
-		send_message(update.effective_message, tld(update.effective_message, "The result of {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary), parse_mode=ParseMode.HTML, reply_markup=button)
+		send_message(update.effective_message, "The result of {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary), parse_mode=ParseMode.HTML, reply_markup=button)
 
 
 @run_async
