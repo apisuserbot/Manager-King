@@ -27,6 +27,7 @@ from haruka.modules.sql import languages_sql as langsql
 from haruka.modules.rextester.api import Rextester, CompilerError
 from haruka.modules.rextester.langs import languages
 from haruka.modules.translations.strings import tld
+from haruka.modules.helper_funcs.alternate import send_message
 
 
 @user_is_gbanned
