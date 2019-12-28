@@ -265,13 +265,6 @@ def ping(bot: Bot, update: Update):
     update.effective_message.reply_text(text, parse_mode=ParseMode.MARKDOWN)
 
 
-# def google(bot: Bot, update: Update):
-#        query = update.effective_message.text.split(" ",1)
-#        result_ = subprocess.run(['gsearch', str(query[1])], stdout=subprocess.PIPE)
-#        result = str(result_.stdout.decode())
-#        update.effective_message.reply_text('*Searching:*\n`' + str(query[1]) + '`\n\n*RESULTS:*\n' + result, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
-
-
 LYRICSINFO = "\n[Full Lyrics](http://lyrics.wikia.com/wiki/%s:%s)"
 
 
@@ -474,7 +467,7 @@ def wiki(bot: Bot, update: Update):
 	teks = args[1]
 	message = update.effective_message
 	getlang = langsql.get_lang(chat_id)
-	if str(getlang) == "id":
+	if str(getlang) == "pt-br":
 		wikipedia.set_lang("pt-br")
 	else:
 		wikipedia.set_lang("en")
@@ -575,7 +568,6 @@ __mod_name__ = "Misc"
 ID_HANDLER = CommandHandler("id", get_id, pass_args=True, admin_ok=True)
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID), admin_ok=True)
 PING_HANDLER = CommandHandler("ping", ping, admin_ok=True)
-# GOOGLE_HANDLER = DisableAbleCommandHandler("google", google)
 LYRICS_HANDLER = DisableAbleCommandHandler("lyrics", lyrics, pass_args=True, admin_ok=True)
 
 INSULTS_HANDLER = DisableAbleCommandHandler("insults", insults, admin_ok=True)
@@ -614,7 +606,6 @@ dispatcher.add_handler(MD_HELP_HANDLER)
 dispatcher.add_handler(STATS_HANDLER)
 dispatcher.add_handler(GDPR_HANDLER)
 dispatcher.add_handler(PING_HANDLER)
-# dispatcher.add_handler(GOOGLE_HANDLER)
 dispatcher.add_handler(LYRICS_HANDLER)
 dispatcher.add_handler(DisableAbleCommandHandler("removebotkeyboard", reply_keyboard_remove))
 dispatcher.add_handler(EXECUTE_HANDLER)
