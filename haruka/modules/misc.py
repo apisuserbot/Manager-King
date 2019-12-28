@@ -23,6 +23,7 @@ from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.helper_funcs.chat_status import user_is_gbanned
 from haruka.modules.helper_funcs.extraction import extract_user
 from haruka.modules.helper_funcs.filters import CustomFilters
+from haruka.modules.sql import languages_sql as langsql
 from haruka.modules.rextester.api import Rextester, CompilerError
 from haruka.modules.rextester.langs import languages
 from haruka.modules.translations.strings import tld
