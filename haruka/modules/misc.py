@@ -471,7 +471,7 @@ def wiki(bot: Bot, update: Update):
 	msg = update.effective_message
 	chat_id = update.effective_chat.id
 	args = update.effective_message.text.split(None, 1)
-	teks = args[0]
+	teks = args[1]
 	message = update.effective_message
 	getlang = langsql.get_lang(chat_id)
 	if str(getlang) == "id":
