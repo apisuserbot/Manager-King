@@ -1,6 +1,7 @@
 import datetime
 import importlib
 import re
+import wikipedia
 from typing import Optional, List
 
 from telegram import Message, Chat, Update, Bot, User
@@ -19,6 +20,7 @@ from haruka.modules import ALL_MODULES
 from haruka.modules.helper_funcs.chat_status import is_user_admin
 from haruka.modules.helper_funcs.misc import paginate_modules
 from haruka.modules.translations.strings import tld, tld_help
+from haruka.modules.sql import languages_sql as langsql
 from haruka.modules.connection import connected
 
 SOURCE_STRING = """
@@ -121,6 +123,22 @@ def start(bot: Bot, update: Update, args: List[str]):
 
             elif args[0].lower() == "controlpanel":
                 control_panel(bot, update)
+                
+            elif args[0][:4] == "wiki":
+                wiki = args[0].split("-")[1].replace('_', ' ')
+                message = update.effective_message
+                getlang = langsql.get_lang(message)
+                if getlang == "pt-br":
+                    wikipedia.set_lang("pt-br")
+                pagewiki = wikipedia.page(wiki)
+                judul = pagewiki.title
+                summary = pagewiki.summary
+                if len(summary) >= 4096:
+                    summary = summary[:4000]+"..."
+                message.reply_text("<b>{}</b>\n{}".format(judul, summary), parse_mode=ParseMode.HTML,
+                    reply_markup=InlineKeyboardMarkup(
+                            [[InlineKeyboardButton(text=tld(update.effective_message, "Read it on Wikipedia"), url=pagewiki.url)]]))
+
         else:
             send_start(bot, update)
     else:
