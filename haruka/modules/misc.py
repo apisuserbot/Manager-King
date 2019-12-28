@@ -466,24 +466,53 @@ def execute(bot: Bot, update: Update, args: List[str]):
 @user_is_gbanned
 @run_async
 def wiki(bot: Bot, update: Update):
-    kueri = re.split(pattern="wiki", string=update.effective_message.text)
-    wikipedia.set_lang("en")
-    if len(str(kueri[1])) == 0:
-        update.effective_message.reply_text("Enter keywords!")
-    else:
-        try:
-            pertama = update.effective_message.reply_text("🔄 Loading...")
-            keyboard = InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="🔧 More Info...", url=wikipedia.page(kueri).url)]])
-            bot.editMessageText(chat_id=update.effective_chat.id, message_id=pertama.message_id,
-                                text=wikipedia.summary(kueri, sentences=10), reply_markup=keyboard)
-        except wikipedia.PageError as e:
-            update.effective_message.reply_text(f"⚠ Error: {e}")
-        except BadRequest as et:
-            update.effective_message.reply_text(f"⚠ Error: {et}")
-        except wikipedia.exceptions.DisambiguationError as eet:
-            update.effective_message.reply_text(
-                f"⚠ Error\n There are too many query! Express it more!\nPossible query result:\n{eet}")
+	msg = update.effective_message
+	chat_id = update.effective_chat.id
+	args = update.effective_message.text.split(None, 1)
+	teks = args[1]
+	message = update.effective_message
+	getlang = langsql.get_lang(chat_id)
+	if str(getlang) == "id":
+		wikipedia.set_lang("pt-br")
+	else:
+		wikipedia.set_lang("en")
+	try:
+		pagewiki = wikipedia.page(teks)
+	except wikipedia.exceptions.PageError:
+		send_message(update.effective_message, tld(update.effective_message, "No results found"))
+		return
+	except wikipedia.exceptions.DisambiguationError as refer:
+		rujuk = str(refer).split("\n")
+		if len(rujuk) >= 6:
+			batas = 6
+		else:
+			batas = len(rujuk)
+		teks = ""
+		for x in range(batas):
+			if x == 0:
+				if getlang == "pt-br":
+					teks += rujuk[x].replace('may refer to', 'pode se referir a')+"\n"
+				else:
+					teks += rujuk[x]+"\n"
+			else:
+				teks += "- `"+rujuk[x]+"`\n"
+		send_message(update.effective_message, teks, parse_mode="markdown")
+		return
+	except IndexError:
+		send_message(update.effective_message, tld(update.effective_message, "Write a message to search from wikipedia sources"))
+		return
+	judul = pagewiki.title
+	summary = pagewiki.summary
+	if update.effective_message.chat.type == "private":
+		send_message(update.effective_message, tld(update.effective_message, "The result for {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary), parse_mode=ParseMode.HTML)
+	else:
+		if len(summary) >= 200:
+			judul = pagewiki.title
+			summary = summary[:200]+"..."
+			button = InlineKeyboardMarkup([[InlineKeyboardButton(text=tld(update.effective_message, "📃 Read more..."), url="t.me/{}?start=wiki-{}".format(bot.username, teks.replace(' ', '_')))]])
+		else:
+			button = None
+		send_message(update.effective_message, tld(update.effective_message, "The result of {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary), parse_mode=ParseMode.HTML, reply_markup=button)
 
 
 @run_async
