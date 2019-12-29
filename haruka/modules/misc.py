@@ -569,6 +569,7 @@ ECHO_HANDLER = CommandHandler("echo", echo, filters=Filters.user(OWNER_ID))
 MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, filters=Filters.private)
 
 STATS_HANDLER = CommandHandler("stats", stats, filters=Filters.user(OWNER_ID))
+EXECUTE_HANDLER = CommandHandler("exec", execute, pass_args=True, filters=CustomFilters.sudo_filter)
 
 PASTE_HANDLER = CommandHandler("paste", paste, pass_args=True)
 GET_PASTE_HANDLER = CommandHandler("getpaste", get_paste_content, pass_args=True)
