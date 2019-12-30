@@ -634,7 +634,7 @@ def phh(bot: Bot, update: Update, args: List[str]):
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
 
 
-def kraken(bot: Bot, update: Update):
+def kraken(bot: Bot, update: Update, args):
     message = update.effective_message
     usr = get(f'https://api.github.com/repos/Project-Butter/KRAKEN_7870/releases').json()
     reply_text = "*Kraken Kernel lastest upload(s)*\n"
