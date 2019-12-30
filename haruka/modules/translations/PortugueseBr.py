@@ -876,6 +876,7 @@ Este apenas foi possível graças à [pyGitHyb_API](https://github.com/nunopenim
 *Ferramentas de grupo:*
  - /id: obtenha o ID do grupo atual. Se usado respondendo a uma mensagem, obtém o ID do usuário.
  - /info: obtenha informações sobre um usuário.
+ - /gdpr: exclua suas informações do banco de dados do bot. Apenas conversas privadas.
  - /stickerid: responda a um adesivo para que eu diga seu ID de arquivo.
  - /getsticker: responda a um adesivo para fazer o upload do arquivo PNG bruto.
  - /markdownhelp: resumo rápido de como o markdown funciona no Telegram - só pode ser usado em chat privado.

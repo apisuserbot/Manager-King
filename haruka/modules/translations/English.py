@@ -402,4 +402,13 @@ you're interested in.""",
 "MARKDOWN_HELP-K": MARKDOWN_HELP,
 "INSULTS-K": INSULTS_STRINGS,
 
+#GDPR
+"send-gdpr": """Your personal data has been deleted.\n\nNote that this will not unban \
+you from any chats, as that is telegram data, not YanaBot data.
+Flooding, warns, and gbans are also preserved, as of \
+[this](https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/), "
+which clearly states that the right to erasure does not apply \
+\"for the performance of a task carried out in the public interest\", as is \
+the case for the aforementioned pieces of data."""
+
 }

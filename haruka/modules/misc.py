@@ -224,6 +224,15 @@ def reply_keyboard_remove(bot: Bot, update: Update):
     )
 
 
+@run_async
+def gdpr(bot: Bot, update: Update):
+    update.effective_message.reply_text(tld(update.effective_chat.id, "Deleting identifiable data..."))
+    for mod in GDPR:
+        mod.__gdpr__(update.effective_user.id)
+
+    update.effective_message.reply_text(tld(update.effective_chat.id, "send_gdpr"), parse_mode=ParseMode.MARKDOWN)
+
+
 @user_is_gbanned
 @run_async
 def markdown_help(bot: Bot, update: Update):
@@ -532,6 +541,7 @@ __help__ = """
 *Group tools:*
  - /id: get the current group id. If used by replying to a message, gets that user's id.
  - /info: get information about a user.
+ - /gdpr: deletes your information from the bot's database. Private chats only.
  - /stickerid: reply to a sticker to me to tell you its file ID.
  - /getsticker: reply to a sticker to me to upload its raw PNG file.
  - /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats.
@@ -569,6 +579,10 @@ ECHO_HANDLER = CommandHandler("echo", echo, filters=Filters.user(OWNER_ID))
 MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, filters=Filters.private)
 
 STATS_HANDLER = CommandHandler("stats", stats, filters=Filters.user(OWNER_ID))
+<<<<<<< HEAD
+=======
+GDPR_HANDLER = CommandHandler("gdpr", gdpr, filters=Filters.private)
+>>>>>>> parent of 7130f87... removed the /gdpr command and bringing back the previous antiflood system
 EXECUTE_HANDLER = CommandHandler("exec", execute, pass_args=True, filters=CustomFilters.sudo_filter)
 
 PASTE_HANDLER = CommandHandler("paste", paste, pass_args=True)
@@ -593,6 +607,7 @@ dispatcher.add_handler(INFO_HANDLER)
 dispatcher.add_handler(ECHO_HANDLER)
 dispatcher.add_handler(MD_HELP_HANDLER)
 dispatcher.add_handler(STATS_HANDLER)
+dispatcher.add_handler(GDPR_HANDLER)
 dispatcher.add_handler(PING_HANDLER)
 dispatcher.add_handler(LYRICS_HANDLER)
 dispatcher.add_handler(DisableAbleCommandHandler("removebotkeyboard", reply_keyboard_remove))
