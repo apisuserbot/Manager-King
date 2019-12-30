@@ -634,6 +634,20 @@ def phh(bot: Bot, update: Update, args: List[str]):
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
 
 
+def kraken(bot: Bot, update: Update, args: List[str]):
+    message = update.effective_message
+    usr = get(f'https://api.github.com/repos/Project-Butter/KRAKEN_7870/releases').json()
+    reply_text = "*Kraken Kernel lastest upload(s)*\n"
+    for i in range(len(usr)):
+        try:
+            name = usr['assets'][i]['name']
+            url = usr['assets'][i]['browser_download_url']
+            reply_text += f"[{name}]({url})\n"
+        except IndexError:
+            continue
+    message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
+
+
 # Android Specs Module for Hitsuki Bot
 @run_async
 def specs(bot, update, args):
@@ -711,6 +725,9 @@ __help__ = """
  - /descendant: Get the latest Descendant GSI!
  - /enesrelease: Get the latest Enes upload
  - /phh: Get the latest Phh AOSP Oreo GSI!
+ 
+*Kernels:*
+ - /kraken: Get the latest Kraken Kernel for Exynos 7870
 """
 
 __mod_name__ = "Android"
@@ -736,6 +753,7 @@ DESCENDANT_HANDLER = CommandHandler("descendant", descendant, pass_args=True, ad
 ENES_HANDLER = CommandHandler("enesrelease", enesrelease, pass_args=True, admin_ok=True)
 PHH_HANDLER = CommandHandler("phh", phh, pass_args=True, admin_ok=True)
 SPECS_HANDLER = CommandHandler("specs", specs, pass_args=True)
+PHH_HANDLER = CommandHandler("kraken", kraken, pass_args=True, admin_ok=True)
 
 dispatcher.add_handler(DEVICE_HANDLER)
 dispatcher.add_handler(MAGISK_HANDLER)
@@ -758,3 +776,4 @@ dispatcher.add_handler(DESCENDANT_HANDLER)
 dispatcher.add_handler(ENES_HANDLER)
 dispatcher.add_handler(PHH_HANDLER)
 dispatcher.add_handler(SPECS_HANDLER)
+dispatcher.add_handler(KRAKEN_HANDLER)
