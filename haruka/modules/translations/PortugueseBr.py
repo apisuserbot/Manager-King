@@ -685,11 +685,6 @@ Ainda na fase experimental, fazer federações só pode ser feito pelo meu criad
  - /pixys <device>: Obtenha a ROM Pixys mais recente para um dispositivo
  - /posp <device>: Obtenha a ROM POSP mais recente para um dispositivo
  - /viper <device>: Obtenha a ROM ViperOS mais recente para um dispositivo
- 
- *GSIs:*
- - /descendant: Obtenha a GSI mais recente do Descendant!
- - /enesrelease: Receba o upload mais recente do Enes!
- - /phh: Receba as últimas GSIs AOSP Oreo do Phh!
 """,
 
 "AntiFlood_help": """

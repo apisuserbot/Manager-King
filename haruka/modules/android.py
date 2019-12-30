@@ -591,49 +591,6 @@ def viper(bot: Bot, update: Update):
         message.reply_text("Device not found")
 
 
-def descendant(bot: Bot, update: Update, args: List[str]):
-    message = update.effective_message
-    usr = get(f'https://api.github.com/repos/Descendant/InOps/releases/latest').json()
-    reply_text = "*Descendant GSI Download(s)*\n"
-    for i in range(len(usr)):
-        try:
-            name = usr['assets'][i]['name']
-            url = usr['assets'][i]['browser_download_url']
-            download_count = usr['assets'][i]['download_count']
-            reply_text += f"[{name}]({url}) - Downloaded `{download_count}` Times\n\n"
-        except IndexError:
-            continue
-    message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
-
-
-def enesrelease(bot: Bot, update: Update, args: List[str]):
-    message = update.effective_message
-    usr = get(f'https://api.github.com/repos/EnesSastim/Downloads/releases/latest').json()
-    reply_text = "*Enes Sastim's lastest upload(s)*\n"
-    for i in range(len(usr)):
-        try:
-            name = usr['assets'][i]['name']
-            url = usr['assets'][i]['browser_download_url']
-            reply_text += f"[{name}]({url})\n"
-        except IndexError:
-            continue
-    message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
-
-
-def phh(bot: Bot, update: Update, args: List[str]):
-    message = update.effective_message
-    usr = get(f'https://api.github.com/repos/phhusson/treble_experimentations/releases/latest').json()
-    reply_text = "*Phh's lastest AOSP Release(s)*\n"
-    for i in range(len(usr)):
-        try:
-            name = usr['assets'][i]['name']
-            url = usr['assets'][i]['browser_download_url']
-            reply_text += f"[{name}]({url})\n"
-        except IndexError:
-            continue
-    message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
-
-
 # Android Specs Module for Hitsuki Bot
 @run_async
 def specs(bot, update, args):
@@ -706,11 +663,6 @@ __help__ = """
  - /pixys <device>: Get the latest Pixys ROM for a device
  - /posp <device>: Get the latest POSP ROM for a device
  - /viper <device>: Get the latest Viper ROM for a device
-
-*GSIs:*
- - /descendant: Get the latest Descendant GSI!
- - /enesrelease: Get the latest Enes upload
- - /phh: Get the latest Phh AOSP Oreo GSI!
 """
 
 __mod_name__ = "Android"
@@ -732,9 +684,6 @@ PEARL_HANDLER = CommandHandler("pearl", pearl, admin_ok=True)
 PIXYS_HANDLER = CommandHandler("pixys", pixys, admin_ok=True)
 POSP_HANDLER = CommandHandler("posp", posp, admin_ok=True)
 VIPER_HANDLER = CommandHandler("viper", viper, admin_ok=True)
-DESCENDANT_HANDLER = CommandHandler("descendant", descendant, pass_args=True, admin_ok=True)
-ENES_HANDLER = CommandHandler("enesrelease", enesrelease, pass_args=True, admin_ok=True)
-PHH_HANDLER = CommandHandler("phh", phh, pass_args=True, admin_ok=True)
 SPECS_HANDLER = CommandHandler("specs", specs, pass_args=True)
 
 dispatcher.add_handler(DEVICE_HANDLER)
@@ -754,7 +703,4 @@ dispatcher.add_handler(PEARL_HANDLER)
 dispatcher.add_handler(PIXYS_HANDLER)
 dispatcher.add_handler(POSP_HANDLER)
 dispatcher.add_handler(VIPER_HANDLER)
-dispatcher.add_handler(DESCENDANT_HANDLER)
-dispatcher.add_handler(ENES_HANDLER)
-dispatcher.add_handler(PHH_HANDLER)
 dispatcher.add_handler(SPECS_HANDLER)
