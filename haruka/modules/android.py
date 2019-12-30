@@ -753,7 +753,7 @@ DESCENDANT_HANDLER = CommandHandler("descendant", descendant, pass_args=True, ad
 ENES_HANDLER = CommandHandler("enesrelease", enesrelease, pass_args=True, admin_ok=True)
 PHH_HANDLER = CommandHandler("phh", phh, pass_args=True, admin_ok=True)
 SPECS_HANDLER = CommandHandler("specs", specs, pass_args=True)
-PHH_HANDLER = CommandHandler("kraken", kraken, pass_args=True, admin_ok=True)
+KRAKEN_HANDLER = CommandHandler("kraken", kraken, pass_args=True, admin_ok=True)
 
 dispatcher.add_handler(DEVICE_HANDLER)
 dispatcher.add_handler(MAGISK_HANDLER)
