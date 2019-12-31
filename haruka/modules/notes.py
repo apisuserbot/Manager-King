@@ -174,7 +174,7 @@ def cmd_get(bot: Bot, update: Update, args: List[str]):
 	elif len(args) >= 1:
 		get(bot, update, args[0], show_none=True)
 	else:
-		send_message(update.effective_message, (tlf(chat.id, "Get what?")))
+		send_message(update.effective_message, (tld(chat.id, "Get what?")))
 
 
 @run_async
