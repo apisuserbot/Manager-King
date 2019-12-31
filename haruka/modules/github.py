@@ -28,10 +28,11 @@ def getRelease(bot: Bot, update: Update, args: List[str]):
         return
     recentRelease = api.getLastestReleaseData(api.getData(url))
     author = api.getAuthor(recentRelease)
+    authorUrl = api.getAuthorUrl(recentRelease)
     name = api.getReleaseName(recentRelease)
     assets = api.getAssets(recentRelease)
     releaseName = api.getReleaseName(recentRelease)
-    message = "Author: "+author+"\n"
+    message = "Author: [{}]({})\n".format(author, authorUrl)
     message += "Release Name: "+releaseName+"\n\n"
     for asset in assets:
         message += "*Asset:* \n"
@@ -44,7 +45,7 @@ def getRelease(bot: Bot, update: Update, args: List[str]):
         message += assetFile + "\n"
         message += "Size: " + size + " MB"
         message += "\nDownload Count: " + str(downloadCount) + "\n\n" 
-    msg.reply_text(message, parse_mode=ParseMode.MARKDOWN)
+    msg.reply_text(message, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     return
 
 
