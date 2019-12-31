@@ -277,7 +277,9 @@ PortugueseBrStrings = {
     "Hey there! I'm alive :3 PM me if you have any questions on how to use me!": "Olá! Estou vivo :3, se você tiver alguma dúvida sobre como me usar me chame no PV!",
     "Control Panel :3": "Painel de controle :3",
     "Hey there! My name is *Hitsuki* - I'm here to help you manage your groups!\nClick Help button to find out more about how to use me to my full potential.\n\nFollow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n":
-        "Olá! Meu nome é *Hitsuki* - estou aqui para ajudá-lo a gerenciar seus grupos!\nClique no botão *help* para descobrir mais sobre como me usar em todo o meu potencial.\n\mSiga [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) se quiser acompanhar as notícias, atualizações e tempo de inatividade do bot!\n\n",
+        "Olá! Meu nome é *Hitsuki* - estou aqui para ajudá-lo a gerenciar seus grupos!\nClique no botão *help* para descobrir mais sobre como me usar em todo o meu potencial.\n\nSiga [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) se quiser acompanhar as notícias, atualizações e tempo de inatividade do bot!\n\n",
+        
+    "This bot is managed by @HitaloSama\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)": "Este bot é mantido por @HitaloSama\n\nDeseja me adicionar em seu grupo? [Clique aqui!](t.me/LordHitsuki_BOT?startgroup=true)",
     
     "Sticker kanged successfully! \nPack can be found [here](t.me/addstickers/{packname})": "Sticker kangado com sucesso! \nPacote pode ser achado [aqui](t.me/addstickers/{packname})",
     
@@ -287,13 +289,6 @@ PortugueseBrStrings = {
     "Contact me in PM for help!": "Contate-me no privado para que eu lhe ajude!",
     "Click me for help!": "Clique em mim para ajuda!",
     
-    "Write a location to check the weather.": "Escreva um local para ver como está o tempo.",
-    "I will keep an eye on both happy and sad times!": "Estarei aqui nos bons e maus momentos!",
-    "Today in {} is being {}, around {}°C.\n": "Hoje em {} está fazendo {}, por volta de {}°C.\n",
-    "Sorry, location not found.": "Desculpe, local não encontrado.",
-
-    "Deleting identifiable data...": "Excluindo dados do usuário...",
-
     "Try forwarding the following message to me, and you'll see!":
         "Tente me enviar a seguinte mensagem e você verá!",
     "/save test This is a markdown test. _italics_, *bold*, `code`, [URL](example.com) [button](buttonurl:github.com) [button2](buttonurl://google.com:same)":
@@ -510,10 +505,10 @@ PortugueseBrStrings = {
     "Restricted for {} in {}!": "{} Restringido por {} em {}!",
 
 #Notes
-    "You must give a name to this note!": "Você deve dar um nome a esta nota!",
-    "No note!": "Nenhuma nota!",
-    "Ok, the note `{note_name}` is saved in *{chat_name}*.": "Ok, a nota `{note_name}` foi salva em *{chat name}*.",
-
+    "Contact me in PM first to get this note.": "Contate-me no privado primeiro para receber esta nota",
+    "This note does not exist": "Esta nota não existe",
+    "Get what?": "Você quer o que?",
+    "Ok, the note `{note_name}` is saved in *{chat_name}*.": "Ok, a nota `{note_name}` foi salva em *{chat_name}*.",
 
 #Multi
     "Invalid Chat ID provided!": "O ID deste grupo não é válido", #Connections
