@@ -169,6 +169,7 @@ def get(bot, update, notename, show_none=True, no_format=False):
 
 @run_async
 def cmd_get(bot: Bot, update: Update, args: List[str]):
+	chat = update.effective_chat  # type: Optional[Chat]
 	if len(args) >= 2 and args[1].lower() == "noformat":
 		get(bot, update, args[0], show_none=True, no_format=True)
 	elif len(args) >= 1:
