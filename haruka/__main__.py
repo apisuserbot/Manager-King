@@ -24,7 +24,9 @@ from haruka.modules.sql import languages_sql as langsql
 from haruka.modules.connection import connected
 
 SOURCE_STRING = """
-I'm a modular Telegram Python bot running on python3 with an sqlalchemy database, using the python-telegram-bot library, and am fully opensource - you can find what makes me alive [here](https://github.com/RealAkito/HarukaAya
+I'm a modular Telegram Python bot running on python3 with an sqlalchemy database, 
+using the python-telegram-bot library, and am fully opensource 
+- you can find what makes me alive [here](https://github.com/HitaloKun/Hitsuki)
 """
 
 IMPORTED = {}
@@ -37,8 +39,6 @@ DATA_EXPORT = []
 
 CHAT_SETTINGS = {}
 USER_SETTINGS = {}
-
-GDPR = []
 
 for module_name in ALL_MODULES:
     imported_module = importlib.import_module("haruka.modules." + module_name)
@@ -155,10 +155,9 @@ def send_start(bot, update):
         pass
 
     chat = update.effective_chat  # type: Optional[Chat] and unused variable
-    text = (tld(chat.id, "Hey there! My name is *Ｈｉｔｓｕｋｉ* - I'm here to help you manage your groups!\n\
-Click Help button to find out more about how to use me to my full potential.\n\nFollow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n"))
+    text = (tld(chat.id, "Hey there! My name is *Hitsuki* - I'm here to help you manage your groups!\n\Click Help button to find out more about how to use me to my full potential.\n\nFollow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n"))
 
-    text += "This bot is managed by @HitaloSama\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)"
+    text += (tld(chat.id, "This bot is managed by @HitaloSama\n\nWant to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)"
 
     keyboard = [[InlineKeyboardButton(text="📃 HitaloSama's Docs", url="https://telegra.ph/HitaloKun-doc-07-15")]]
     keyboard += [[InlineKeyboardButton(text="🛠 Control panel", callback_data="cntrl_panel_M")]]

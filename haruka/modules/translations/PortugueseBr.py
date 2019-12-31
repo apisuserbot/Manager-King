@@ -276,8 +276,8 @@ PortugueseBrStrings = {
     "Click here to get this chat's settings, as well as yours.": "Clique no botão abaixo para obter as configurações deste grupos e as suas.",
     "Hey there! I'm alive :3 PM me if you have any questions on how to use me!": "Olá! Estou vivo :3, se você tiver alguma dúvida sobre como me usar me chame no PV!",
     "Control Panel :3": "Painel de controle :3",
-    "Hey there! My name is *Ｈｉｔｓｕｋｉ* - I'm here to help you manage your groups!\n\ Click Help button to find out more about how to use me to my full potential.\n\nFollow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n":
-        "Olá! Meu nome é *Ｈｉｔｓｕｋｉ* - estou aqui para ajudá-lo a gerenciar seus grupos!\n\ Clique no botão Ajuda para descobrir mais sobre como me usar em todo o meu potencial.\!n\Siga [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) se quiser acompanhar as notícias, atualizações e tempo de inatividade do bot!\n\n",
+    "Hey there! My name is *Hitsuki* - I'm here to help you manage your groups!\nClick Help button to find out more about how to use me to my full potential.\n\nFollow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!\n\n":
+        "Olá! Meu nome é *Hitsuki* - estou aqui para ajudá-lo a gerenciar seus grupos!\nClique no botão *help* para descobrir mais sobre como me usar em todo o meu potencial.\n\mSiga [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) se quiser acompanhar as notícias, atualizações e tempo de inatividade do bot!\n\n",
     
     "Sticker kanged successfully! \nPack can be found [here](t.me/addstickers/{packname})": "Sticker kangado com sucesso! \nPacote pode ser achado [aqui](t.me/addstickers/{packname})",
     
