@@ -493,7 +493,7 @@ def wiki(bot: Bot, update: Update):
 	judul = pagewiki.title
 	summary = pagewiki.summary
 	if update.effective_message.chat.type == "private":
-		send_message(update.effective_message, (tld(chat.id, "The result for {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary)), parse_mode=ParseMode.HTML)
+		send_message(update.effective_message, (tld(chat.id, "The result of {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary)), parse_mode=ParseMode.HTML)
 	else:
 		if len(summary) >= 200:
 			judul = pagewiki.title
