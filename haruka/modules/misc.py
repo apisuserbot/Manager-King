@@ -468,7 +468,7 @@ def wiki(bot: Bot, update: Update):
 	try:
 		pagewiki = wikipedia.page(teks)
 	except wikipedia.exceptions.PageError:
-		send_message(update.effective_message, tld(chat.id, "No results found"))
+		send_message(update.effective_message, (tld(chat.id, "No results found")))
 		return
 	except wikipedia.exceptions.DisambiguationError as refer:
 		rujuk = str(refer).split("\n")
@@ -488,20 +488,20 @@ def wiki(bot: Bot, update: Update):
 		send_message(update.effective_message, teks, parse_mode="markdown")
 		return
 	except IndexError:
-		send_message(update.effective_message, tld(chat.id, "Write a message to search from wikipedia sources"))
+		send_message(update.effective_message, (tld(chat.id, "Write a message to search from wikipedia sources")))
 		return
 	judul = pagewiki.title
 	summary = pagewiki.summary
 	if update.effective_message.chat.type == "private":
-		send_message(update.effective_message, tld(chat.id, "The result for {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary), parse_mode=ParseMode.HTML)
+		send_message(update.effective_message, (tld(chat.id, "The result for {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary)), parse_mode=ParseMode.HTML)
 	else:
 		if len(summary) >= 200:
 			judul = pagewiki.title
 			summary = summary[:200]+"..."
-			button = InlineKeyboardMarkup([[InlineKeyboardButton(text=tld(chat.id, "📃 Read more..."), url="t.me/{}?start=wiki-{}".format(bot.username, teks.replace(' ', '_')))]])
+			button = InlineKeyboardMarkup([[InlineKeyboardButton(text=(tld(chat.id, "📃 Read more...")), url="t.me/{}?start=wiki-{}".format(bot.username, teks.replace(' ', '_')))]])
 		else:
 			button = None
-		send_message(update.effective_message, tld(chat.id, "The result of {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary), parse_mode=ParseMode.HTML, reply_markup=button)
+		send_message(update.effective_message, (tld(chat.id, "The result of {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary)), parse_mode=ParseMode.HTML, reply_markup=button)
 
 
 @run_async
