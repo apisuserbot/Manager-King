@@ -463,7 +463,7 @@ def wiki(bot: Bot, update: Update):
 	if str(getlang) == "en":
 		wikipedia.set_lang("en")
 	else:
-		wikipedia.set_lang("pt-br")
+		wikipedia.set_lang("pt")
 	try:
 		pagewiki = wikipedia.page(teks)
 	except wikipedia.exceptions.PageError:
@@ -479,7 +479,7 @@ def wiki(bot: Bot, update: Update):
 		for x in range(batas):
 			if x == 0:
 				if getlang == "en":
-					teks += rujuk[x].replace('may refer to', 'pode se referir a')+"\n"
+					teks += rujuk[x].replace('pode se referir a', 'may refer to')+"\n"
 				else:
 					teks += rujuk[x]+"\n"
 			else:
