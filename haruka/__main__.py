@@ -134,7 +134,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                     summary = summary[:4000]+"..."
                 message.reply_text("<b>{}</b>\n{}".format(judul, summary), parse_mode=ParseMode.HTML,
                     reply_markup=InlineKeyboardMarkup(
-                            [[InlineKeyboardButton(text=tld(update.effective_message, "Read it on Wikipedia"), url=pagewiki.url)]]))
+                            [[InlineKeyboardButton(text=tld(chat.id, "Read it on Wikipedia"), url=pagewiki.url)]]))
 
         else:
             send_start(bot, update)

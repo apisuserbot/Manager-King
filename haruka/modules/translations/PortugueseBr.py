@@ -433,8 +433,8 @@ PortugueseBrStrings = {
     "Read it on Wikipedia": "Ler na Wikipedia",
     "No results found": "Nenhum resultado encontrado",
     "Write a message to search from wikipedia sources": "Escreva uma mensagem para pesquisar em fontes da wikipedia",
-    "The result for {} are:\n\n<b>{}</b>\n{}": "O resultado para {} é:\n\n<b>{}</b>\n{}",
-    "📃 Read more..": "📃 Ler mais...",
+    "The result of {} are:\n\n<b>{}</b>\n{}": "O resultado para {} é:\n\n<b>{}</b>\n{}",
+    "Read more..": "Ler mais...",
 
 #Log channel
     "Now, forward the /setlog to the group you want to tie this channel to!":

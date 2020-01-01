@@ -498,7 +498,7 @@ def wiki(bot: Bot, update: Update):
 		if len(summary) >= 200:
 			judul = pagewiki.title
 			summary = summary[:200]+"..."
-			button = InlineKeyboardMarkup([[InlineKeyboardButton(text=(tld(chat.id, "📃 Read more...")), url="t.me/{}?start=wiki-{}".format(bot.username, teks.replace(' ', '_')))]])
+			button = InlineKeyboardMarkup([[InlineKeyboardButton(text=(tld(chat.id, "Read more...")), url="t.me/{}?start=wiki-{}".format(bot.username, teks.replace(' ', '_')))]])
 		else:
 			button = None
 		send_message(update.effective_message, (tld(chat.id, "The result of {} are:\n\n<b>{}</b>\n{}").format(teks, judul, summary)), parse_mode=ParseMode.HTML, reply_markup=button)
