@@ -125,8 +125,8 @@ def start(bot: Bot, update: Update, args: List[str]):
                 wiki = args[0].split("-")[1].replace('_', ' ')
                 message = update.effective_message
                 getlang = langsql.get_lang(message)
-                if getlang == "pt-br":
-                    wikipedia.set_lang("pt-br")
+                if getlang == "en":
+                    wikipedia.set_lang("en")
                 pagewiki = wikipedia.page(wiki)
                 judul = pagewiki.title
                 summary = pagewiki.summary

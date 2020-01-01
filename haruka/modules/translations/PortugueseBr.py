@@ -429,7 +429,12 @@ PortugueseBrStrings = {
     "The following commands are currently restricted in *{}*:\n{}":
         "Os seguintes comandos estão desativados em *{}*:\n{}",
 
-#Locks
+#Wiki
+    "Read it on Wikipedia": "Ler na Wikipedia",
+    "No results found": "Nenhum resultado encontrado",
+    "Write a message to search from wikipedia sources": "Escreva uma mensagem para pesquisar em fontes da wikipedia",
+    "The result for {} are:\n\n<b>{}</b>\n{}": "O resultado para {} é:\n\n<b>{}</b>\n{}",
+    "📃 Read more..": "📃 Ler mais...",
 
 #Log channel
     "Now, forward the /setlog to the group you want to tie this channel to!":

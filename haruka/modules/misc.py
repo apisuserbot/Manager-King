@@ -460,10 +460,10 @@ def wiki(bot: Bot, update: Update):
 	teks = args[1]
 	message = update.effective_message
 	getlang = langsql.get_lang(chat_id)
-	if str(getlang) == "pt-br":
-		wikipedia.set_lang("pt-br")
-	else:
+	if str(getlang) == "en":
 		wikipedia.set_lang("en")
+	else:
+		wikipedia.set_lang("pt-br")
 	try:
 		pagewiki = wikipedia.page(teks)
 	except wikipedia.exceptions.PageError:
@@ -478,7 +478,7 @@ def wiki(bot: Bot, update: Update):
 		teks = ""
 		for x in range(batas):
 			if x == 0:
-				if getlang == "pt-br":
+				if getlang == "en":
 					teks += rujuk[x].replace('may refer to', 'pode se referir a')+"\n"
 				else:
 					teks += rujuk[x]+"\n"
