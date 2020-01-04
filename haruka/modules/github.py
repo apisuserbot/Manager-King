@@ -11,7 +11,6 @@ from haruka import dispatcher, OWNER_ID, LOGGER, SUDO_USERS, SUPPORT_USERS
 from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.helper_funcs.chat_status import user_admin
 from haruka.modules.translations.strings import tld
-from haruka.modules.disable import DisableAbleCommandHandler
 
 from telegram.ext import CommandHandler, run_async, Filters
 from telegram import Message, Chat, Update, Bot, User, ParseMode, InlineKeyboardMarkup, MAX_MESSAGE_LENGTH
@@ -199,11 +198,11 @@ __mod_name__ = "GitHub"
 GITHUB_HANDLER = CommandHandler("git", github, admin_ok=True)
 REPO_HANDLER = CommandHandler("repo", repo, pass_args=True, admin_ok=True)
 RELEASEHANDLER = CommandHandler("gitr", getRelease, pass_args=True, admin_ok=True)
-FETCH_HANDLER = DisableAbleCommandHandler("fetch", cmdFetch, pass_args=True, admin_ok=True)
+FETCH_HANDLER = CommandHandler("fetch", cmdFetch, pass_args=True, admin_ok=True)
 SAVEREPO_HANDLER = CommandHandler("saverepo", saveRepo, pass_args=True)
 DELREPO_HANDLER = CommandHandler("delrepo", delRepo, pass_args=True)
-LISTREPO_HANDLER = DisableAbleCommandHandler("listrepo", listRepo, admin_ok=True)
-VERCHECKER_HANDLER = DisableAbleCommandHandler("gitver", getVer, admin_ok=True)
+LISTREPO_HANDLER = CommandHandler("listrepo", listRepo, admin_ok=True)
+VERCHECKER_HANDLER = CommandHandler("gitver", getVer, admin_ok=True)
 
 HASHFETCH_HANDLER = RegexHandler(r"^&[^\s]+", hashFetch)
 
