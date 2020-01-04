@@ -700,7 +700,7 @@ Ainda na fase experimental, fazer federações só pode ser feito pelo meu criad
 /direct <url>: retornará um link de download direto.
 
 *Lista de URLs suportadas:*
-`Google Drive - MEGA.nz - Cloud Mail - Yandex.Disk - AFH - ZippyShare - MediaFire - SourceForge - OSDN - GitHub`
+`Google Drive - MediaFire - SourceForge`
 """,
 
 "Antispam security_help": """
