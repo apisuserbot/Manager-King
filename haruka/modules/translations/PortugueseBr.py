@@ -620,8 +620,6 @@ Mas então você tem muitos grupos e não deseja que esses spammers estejam em u
 Já não! Com as Federações, você pode banir uma pessoa em todos os outros grupos que estão na federação.
 Você pode até designar administradores para sua federação, para que seu administrador confiável possa banir pessoa de todos os chats que você deseja proteger.
 
-Ainda na fase experimental, fazer federações só pode ser feito pelo meu criador
-
 *Comandos:*
  - /newfed <nome da fed>: crie uma nova Federação com o nome fornecido. Os usuários só podem ter uma federação. Este método também pode ser usado para renomear a Federação. (máx. 64 caracteres)
  - /delfed: exclua sua Federação e qualquer informação relacionada a ela. Não removerá usuários banidos.
