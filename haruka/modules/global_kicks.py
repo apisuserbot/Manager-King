@@ -92,7 +92,7 @@ def gkick(bot: Bot, update: Update, args: List[str]):
         except TelegramError:
             pass
 
-def __user_info__(user_id):
+def __user_info__(user_id, chat_id):
     times = sql.get_times(user_id)
     
     if int(user_id) in SUDO_USERS or int(user_id) in SUPPORT_USERS:
