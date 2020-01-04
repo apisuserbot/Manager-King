@@ -64,14 +64,15 @@ def gkick(bot: Bot, update: Update, args: List[str]):
 
     chats = get_all_chats()
     banner = update.effective_user  # type: Optional[User]
-    send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
-                 "<b>Global Kick</b>" \
-                 "\n#GKICK" \
-                 "\n<b>Sudo Admin:</b> {}" \
-                 "\n<b>User:</b> {}" \
-                 "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),
-                                              mention_html(user_chat.id, user_chat.first_name), 
-                                                           user_chat.id), 
+    bot.send_message(
+    	MESSAGE_DUMP,
+    	"<b>Global Kick</b>" \
+    	"\n#GKICK" \
+    	"\n<b>Sudo Admin:</b> {}" \
+    	"\n<b>User:</b> {}" \
+    	"\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),
+    									mention_html(user_chat.id, user_chat.first_name), 
+    									user_chat.id), 
                 html=True)
     message.reply_text("Globally kicking user @{}".format(user_chat.username))
     sql.gkick_user(user_id, user_chat.username, 1)
