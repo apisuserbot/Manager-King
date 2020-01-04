@@ -11,6 +11,7 @@ from haruka import dispatcher, OWNER_ID, LOGGER, SUDO_USERS, SUPPORT_USERS
 from haruka.modules.helper_funcs.filters import CustomFilters
 from haruka.modules.helper_funcs.chat_status import user_admin
 from haruka.modules.translations.strings import tld
+from haruka.modules.disable import DisableAbleCommandHandler
 
 from telegram.ext import CommandHandler, run_async, Filters
 from telegram import Message, Chat, Update, Bot, User, ParseMode, InlineKeyboardMarkup, MAX_MESSAGE_LENGTH
