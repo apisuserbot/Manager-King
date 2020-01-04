@@ -190,6 +190,16 @@ __help__ = """
  - /gitr <user>/<repo>: will fetch the most recent release from that repo.
  - /git: Returns info about a GitHub user or organization.
  - /repo: Return the GitHub user or organization repository list (Limited at 40).
+ - /fetch <word>: get the repo shortcut registered to that word.
+ - &<word>: same as /get word
+ - /delrepo <word>: delete the repo shortcut called "word"
+ - /listrepo: List all repo shortcuts in the current chat
+
+An example of how to save a repo shortcut would be via:
+`/saverepo ptb python-telegram-bot/python-telegram-bot`
+Now, anyone using "`/fetch ptb`", or "`&ptb`" will be answered with the releases of the given repository.
+
+*Note:* Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
  
 This module was only possible thanks to the [pyGitHyb_API](https://github.com/nunopenim/pyGitHyb_API)
 """
