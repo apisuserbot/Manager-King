@@ -72,7 +72,10 @@ def gkick(bot: Bot, update: Update, args: List[str]):
     	"\n<b>User:</b> {}" \
     	"\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),
     									mention_html(user_chat.id, user_chat.first_name), 
-    									user_chat.id), html=True)
+    									user_chat.id),
+    	parse_mode=ParseMode.HTML
+    )
+    
     message.reply_text("Globally kicking user @{}".format(user_chat.username))
     sql.gkick_user(user_id, user_chat.username, 1)
     for chat in chats:
