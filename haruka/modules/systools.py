@@ -1,5 +1,7 @@
 import subprocess
 import os
+import requests
+import speedtest
 
 import haruka.modules.helper_funcs.cas_api as cas
 import haruka.modules.helper_funcs.git_api as git
