@@ -1063,6 +1063,22 @@ def is_user_fed_owner(fed_id, user_id):
 
 
 @run_async
+def get_myfeds_list(bot, update):
+	chat = update.effective_chat  # type: Optional[Chat]
+	user = update.effective_user  # type: Optional[User]
+	msg = update.effective_message  # type: Optional[Message]
+
+	fedowner = sql.get_user_owner_fed_full(user.id)
+	if fedowner:
+		text = tld(update.effective_message, "*This is your federations:\n*")
+		for f in fedowner:
+			text += "- `{}`: *{}*\n".format(f['fed_id'], f['fed']['fname'])
+	else:
+		text = tld(update.effective_message, "*You do not have a federation!*")
+	send_message(update.effective_message, text, parse_mode="markdown")
+
+
+@run_async
 def welcome_fed(bot, update):
 	chat = update.effective_chat  # type: Optional[Chat]
 	user = update.effective_user  # type: Optional[User]
