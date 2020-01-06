@@ -20,6 +20,7 @@ from haruka.modules.helper_funcs.misc import is_module_loaded, send_to_list
 from haruka.modules.helper_funcs.chat_status import is_user_admin
 from haruka.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from haruka.modules.helper_funcs.string_handling import markdown_parser
+from emilia.modules.helper_funcs.alternate import send_message
 from haruka.modules.disable import DisableAbleCommandHandler
 from haruka.modules.translations.strings import tld
 
