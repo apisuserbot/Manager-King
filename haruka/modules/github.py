@@ -183,6 +183,10 @@ def repo(bot: Bot, update: Update, args: List[str]):
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
+def __stats__():
+	return (tld(OWNER_ID, "{} repos, accross {} chats.").format(sql.num_github(), sql.num_chats())) 
+
+
 __help__ = """
 *Need some GitHub release but don't want to have to go to GitHub and go to the repository? Here are some commands that can make your life easier with GitHub.*
 
