@@ -658,18 +658,23 @@ def get_frules(bot: Bot, update: Update, args: List[str]):
 def fed_broadcast(bot: Bot, update: Update, args: List[str]):
 	msg = update.effective_message  # type: Optional[Message]
 	user = update.effective_user  # type: Optional[User]
+	chat = update.effective_chat  # type: Optional[Chat]
+
+	if chat.type == 'private':
+		send_message(update.effective_message, tld(update.effective_message, "This command is specifically for groups, not PM!"))
+		return
+
 	if args:
 		chat = update.effective_chat  # type: Optional[Chat]
 		fed_id = sql.get_fed_id(chat.id)
 		fedinfo = sql.get_fed_info(fed_id)
-		text = "*New broadcast from the Federation {}*\n".format(fedinfo['fname'])
 		# Parsing md
 		raw_text = msg.text
 		args = raw_text.split(None, 1)  # use python's maxsplit to separate cmd and args
 		txt = args[1]
 		offset = len(txt) - len(raw_text)  # set correct offset relative to command
 		text_parser = markdown_parser(txt, entities=msg.parse_entities(), offset=offset)
-		text += text_parser
+		text = text_parser
 		try:
 			broadcaster = user.first_name
 		except:
@@ -678,16 +683,24 @@ def fed_broadcast(bot: Bot, update: Update, args: List[str]):
 		chat_list = sql.all_fed_chats(fed_id)
 		failed = 0
 		for chat in chat_list:
+			title = tld(chat, "*New broadcast from Federation {}*\n").format(fedinfo['fname'])
 			try:
-				bot.sendMessage(chat, text, parse_mode="markdown")
+				bot.sendMessage(chat, title + text, parse_mode="markdown")
 			except TelegramError:
+				try:
+					dispatcher.bot.getChat(chat)
+				except Unauthorized:
+					failed += 1
+					sql.chat_leave_fed(chat)
+					LOGGER.info("Chat {} has leave fed {} because bot is kicked".format(chat, fedinfo['fname']))
+					continue
 				failed += 1
-				LOGGER.warning("Couldn't send broadcast to %s, group name %s", str(chat.chat_id), str(chat.chat_name))
+				LOGGER.warning("Couldn't send broadcast to {}".format(str(chat)))
 
-		send_text = "The federation broadcast is complete"
+		send_text = tld(update.effective_message, "Federation broadcast complete.")
 		if failed >= 1:
-			send_text += "{} the group failed to receive the message, probably because it left the Federation.".format(failed)
-		update.effective_message.reply_text(send_text)
+			send_text += tld(update.effective_message, "{} group failed to receive the message, possibly because it left the federation.").format(failed)
+		send_message(update.effective_message, send_text)
 
 @run_async
 def fed_ban_list(bot: Bot, update: Update, args: List[str], chat_data):
@@ -1131,6 +1144,7 @@ You can even designate admin federations, so your trusted admin can ban all the 
  - /frules: See Federation regulations.
  - /chatfed: See the Federation in the current chat.
  - /fedadmins: Show Federation admin.
+ - /fbroadcast <text>: Broadcast text to all groups that join the federation.
  - /fbanlist: Displays all users who are victimized at the Federation at this time.
  - /fedchats: Get all the chats that are connected in the Federation.
  - /importfbans: Reply to the Federation backup message file to import the banned list to the Federation now.
@@ -1154,6 +1168,7 @@ FED_USERBAN_HANDLER = CommandHandler("fbanlist", fed_ban_list, pass_args=True, p
 FED_NOTIF_HANDLER = CommandHandler("fednotif", fed_notif, pass_args=True)
 FED_CHATLIST_HANDLER = CommandHandler("fedchats", fed_chats, pass_args=True)
 FED_IMPORTBAN_HANDLER = CommandHandler("importfbans", fed_import_bans, pass_chat_data=True)
+FED_BROADCAST_HANDLER = CommandHandler("fbroadcast", fed_broadcast, pass_args=True)
 
 DELETEBTN_FED_HANDLER = CallbackQueryHandler(del_fed_button, pattern=r"rmfed_")
 
@@ -1172,6 +1187,7 @@ dispatcher.add_handler(FED_GET_RULES_HANDLER)
 dispatcher.add_handler(FED_CHAT_HANDLER)
 dispatcher.add_handler(FED_ADMIN_HANDLER)
 dispatcher.add_handler(FED_USERBAN_HANDLER)
+dispatcher.add_handler(FED_BROADCAST_HANDLER)
 # dispatcher.add_handler(FED_NOTIF_HANDLER)
 dispatcher.add_handler(FED_CHATLIST_HANDLER)
 dispatcher.add_handler(FED_IMPORTBAN_HANDLER)
