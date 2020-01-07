@@ -238,7 +238,7 @@ SAVEREPO_HANDLER = CommandHandler("saverepo", saveRepo, pass_args=True)
 DELREPO_HANDLER = CommandHandler("delrepo", delRepo, pass_args=True)
 LISTREPO_HANDLER = CommandHandler("listrepo", listRepo, admin_ok=True)
 VERCHECKER_HANDLER = CommandHandler("gitver", getVer, admin_ok=True)
-CHANGELOG_HANDLER = DisableAbleCommandHandler("changelog", changelog, pass_args=True, admin_ok=True)
+CHANGELOG_HANDLER = CommandHandler("changelog", changelog, pass_args=True, admin_ok=True)
 
 HASHFETCH_HANDLER = RegexHandler(r"^&[^\s]+", hashFetch)
 
