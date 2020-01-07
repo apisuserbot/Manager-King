@@ -183,7 +183,7 @@ def ungban(bot: Bot, update: Update, args: List[str]):
 
     user_chat = bot.get_chat(user_id)
     if user_chat.type != 'private':
-        message.reply_text(tld(chat.id, "That's not a user!"))
+        message.reply_text("That's not a user!")
         return
 
     if not sql.is_user_gbanned(user_id):
@@ -192,19 +192,44 @@ def ungban(bot: Bot, update: Update, args: List[str]):
 
     banner = update.effective_user  # type: Optional[User]
 
-    message.reply_text("I'll give {} a second chance, globally.".format(user_chat.first_name))
+    # message.reply_text("{}, will be unbanned globally.".format(user_chat.first_name or "Deleted Account"))
 
-    bot.send_message(
-        MESSAGE_DUMP,
-        "<b>Regression of Global Ban</b>" \
-        "\n#UNGBAN" \
-        "\n<b>Sudo Admin:</b> {}" \
-        "\n<b>Sudo Admin:</b> {}" \
-        "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),
-                                              mention_html(user_chat.id, user_chat.first_name or "Deleted Account"), 
-                                                           user_chat.id),
-        parse_mode=ParseMode.HTML
-    )
+    bot.send_message(MESSAGE_DUMP,
+                 "<b>Regression of Global Ban</b>" \
+                 "\n#UNGBAN" \
+                 "\n<b>Sudo Admin:</b> {}" \
+                 "\n<b>User:</b> {}" \
+                 "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),
+                                                       mention_html(user_chat.id, user_chat.first_name or "Deleted Account"), 
+                                                                    user_chat.id),
+                 parse_mode=ParseMode.HTML)
+
+    chats = get_all_chats()
+    for chat in chats:
+        chat_id = chat.chat_id
+
+        # Check if this group has disabled gbans
+        if not sql.does_chat_gban(chat_id):
+            continue
+
+        try:
+            member = bot.get_chat_member(chat_id, user_id)
+            if member.status == 'kicked':
+                bot.unban_chat_member(chat_id, user_id)
+
+        except BadRequest as excp:
+            if excp.message in UNGBAN_ERRORS:
+                pass
+            else:
+                message.reply_text("Could not un-gban due to: {}".format(excp.message))
+                bot.send_message(OWNER_ID, "Could not un-gban due to: {}".format(excp.message))
+                return
+        except TelegramError:
+            pass
+
+    sql.ungban_user(user_id)
+
+    message.reply_text("Person has been un-gbanned.")
                                                            
 
 @run_async
