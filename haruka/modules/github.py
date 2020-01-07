@@ -81,7 +81,25 @@ def cmdFetch(bot: Bot, update: Update, args: List[str]):
     text = getData(url)
     msg.reply_text(text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
     return
-    
+
+
+@run_async
+def changelog(bot: Bot, update: Update, args: List[str]):
+    msg = update.effective_message
+    if(len(args) != 1):
+        msg.reply_text("Invalid repo name")
+        return
+    url = getRepo(bot, update, args[0])
+    if not api.getData(url):
+        msg.reply_text("Invalid <user>/<repo> combo")
+        return
+    data = api.getData(url)
+    release = api.getLastestReleaseData(data)
+    body = api.getBody(release)
+    msg.reply_text(body)
+    return
+
+
 @run_async
 @user_admin
 def saveRepo(bot: Bot, update: Update, args: List[str]):
@@ -197,6 +215,7 @@ __help__ = """
  - /saverepo <word> <user>/<repo>: Save that repo releases to the shortcut called "word".
  - /fetch <word>: get the repo shortcut registered to that word.
  - &<word>: same as /get word
+ - /changelog <word>: gets the changelog of a saved repo shortcut
  - /delrepo <word>: delete the repo shortcut called "word"
  - /listrepo: List all repo shortcuts in the current chat
 
@@ -219,6 +238,7 @@ SAVEREPO_HANDLER = CommandHandler("saverepo", saveRepo, pass_args=True)
 DELREPO_HANDLER = CommandHandler("delrepo", delRepo, pass_args=True)
 LISTREPO_HANDLER = CommandHandler("listrepo", listRepo, admin_ok=True)
 VERCHECKER_HANDLER = CommandHandler("gitver", getVer, admin_ok=True)
+CHANGELOG_HANDLER = DisableAbleCommandHandler("changelog", changelog, pass_args=True, admin_ok=True)
 
 HASHFETCH_HANDLER = RegexHandler(r"^&[^\s]+", hashFetch)
 
@@ -231,3 +251,4 @@ dispatcher.add_handler(DELREPO_HANDLER)
 dispatcher.add_handler(LISTREPO_HANDLER)
 dispatcher.add_handler(HASHFETCH_HANDLER)
 dispatcher.add_handler(VERCHECKER_HANDLER)
+dispatcher.add_handler(CHANGELOG_HANDLER)
