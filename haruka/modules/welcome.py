@@ -132,7 +132,14 @@ def new_member(bot: Bot, update: Update):
         msg.reply_text("⚠️ *Warning!*\n{} has been muted!\nReason: [CAS Ban](https://combot.org/cas/query?u={})".format(mention_markdown(user.id, user.first_name), user.id), parse_mode="markdown", disable_web_page_preview=True)
         isUserGbanned = gbansql.is_user_gbanned(user.id)
         report = "CAS Banned user detected: <code>{}</code>\nGlobally Banned: {}".format(user.id, isUserGbanned)
-        send_to_list(bot, SUDO_USERS + SUPPORT_USERS, report, html=True)
+        bot.send_message(
+            MESSAGE_DUMP,
+            "<b>New CAS Banned user</b>\n" \
+            "#CASBan" \
+            "\n<b>User:</b> <code>{}</code>" \
+            "\n<b>GBanned:</b> <code>{}</code>".format(user.id, isUserGbanned), parse_mode=ParseMode.HTML
+            )
+            
     elif casPrefs and autoban and cas.banchecker(user.id):
         chat.kick_member(user.id)
         msg.reply_text("⚠️ *Warning!*\n{} has been banned!\nReason: [CAS Ban](https://combot.org/cas/query?u={})".format(mention_markdown(user.id, user.first_name), user.id), parse_mode="markdown", disable_web_page_preview=True)
