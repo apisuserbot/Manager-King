@@ -194,16 +194,18 @@ def ungban(bot: Bot, update: Update, args: List[str]):
 
     message.reply_text("I'll give {} a second chance, globally.".format(user_chat.first_name))
 
-    bot.send_message(MESSAGE_DUMP,
-                    "<b>Regression of Global Ban</b>" \
-                    "\n#UNGBAN" \
-                    "\n<b>Sudo Admin:</b> {}" \
-                    "\n<b>User:</b> {}" \
-                    "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),
-                                                          mention_html(user_chat.id, user_chat.first_name or "Deleted Account"), 
-                                                                       user_chat.id),
-                    html=True)
-
+    bot.send_message(
+        MESSAGE_DUMP,
+        "<b>Regression of Global Ban</b>" \
+        "\n#UNGBAN" \
+        "\n<b>Sudo Admin:</b> {}" \
+        "\n<b>Sudo Admin:</b> {}" \
+        "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),
+                                              mention_html(user_chat.id, user_chat.first_name or "Deleted Account"), 
+                                                           user_chat.id),
+        parse_mode=ParseMode.HTML
+    )
+                                                           
 
 @run_async
 def gbanlist(bot: Bot, update: Update):
