@@ -18,6 +18,7 @@ If you are going to use something from this repository in your bot, please give 
 - Paul Larsen - Marie and Rose creator, inspiration to do many things
 - FFBot - For translations functions.
 - Nuno Penim - For providing his proprietary Combot Anti Spam System API (pyCombotCAS_API), GitHub API (pyGitHub_API) etc.
+- Corsicanu - For the commands /getfw and /checkfw
 - Alisson - Helped clean up the code etc.
 
 And much more that we couldn't list it here!
@@ -31,7 +32,7 @@ Once you've setup your database and your configuration (see below) is complete, 
 
 ## Setting up the bot (Read this before trying to use!):
 Please make sure to use python3.8, as I cannot guarantee everything will work as expected on older python versions!
-This is because markdown parsing is done by iterating through a dict, which are ordered by default in 3.6.
+This is because markdown parsing is done by iterating through a dict, which are ordered by default in 3.8.
 
 ### Configuration
 
