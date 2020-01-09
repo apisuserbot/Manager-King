@@ -26,11 +26,11 @@ And much more that we couldn't list it here!
 
 Once you've setup your database and your configuration (see below) is complete, simply run:
 
-`python3 -m tg_bot`
+`python3 -m haruka`
 
 
 ## Setting up the bot (Read this before trying to use!):
-Please make sure to use python3.6, as I cannot guarantee everything will work as expected on older python versions!
+Please make sure to use python3.8, as I cannot guarantee everything will work as expected on older python versions!
 This is because markdown parsing is done by iterating through a dict, which are ordered by default in 3.6.
 
 ### Configuration
@@ -47,7 +47,7 @@ defaults set in the sample_config, hence making it easier to upgrade.
 
 An example `config.py` file could be:
 ```
-from tg_bot.sample_config import Config
+from haruka.sample_config import Config
 
 
 class Development(Config):
