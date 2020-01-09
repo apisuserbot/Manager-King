@@ -96,6 +96,7 @@ def getfw(bot, update, args):
     reply += f'{url1}\n'
     reply += f'{url2}\n'
     reply += f'{url3}\n'
+    reply += f'You can also receive real-time firmwares from SamFrew on the @SamFirm channel\n'
     update.message.reply_text("{}".format(reply),
                            parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
