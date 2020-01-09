@@ -1,5 +1,7 @@
 import json
 import re
+import html
+import time
 from datetime import datetime
 from typing import List
 
@@ -13,11 +15,14 @@ from telegram.ext import CommandHandler
 from telegram.ext import run_async
 
 from haruka import dispatcher, LOGGER
+from haruka.modules.helper_funcs.misc import split_message
 
 # DO NOT DELETE THIS, PLEASE.
-# Originally made by @RealAkito on GitHub and Telegram.
+# Originally made by @RealAkito on GitHub and Telegram
 # This module was inspired by Android Helper Bot by Vachounet.
 # None of the code is taken from the bot itself, to avoid any more confusion.
+# Command /getfw /magisk /twrp and /device were obtained thanks to corsicanu bot
+# Command /specs was only possible thanks to the help of AvinashReddy3108
 
 LOGGER.info("Original Android Modules by @RealAkito on Telegram, modified by @HitaloSama on Telegram")
 
@@ -28,7 +33,12 @@ DEVICES_DATA = 'https://raw.githubusercontent.com/androidtrackers/certified-andr
 @run_async
 def device(bot, update, args):
     if len(args) == 0:
-        update.effective_message.reply_text("No codename provided, write a codename for fetching informations.")
+        reply = f'No codename provided, write a codename for fetching informations.'
+        del_msg = update.effective_message.reply_text("{}".format(reply),
+                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        time.sleep(5)
+        del_msg.delete()
+        update.effective_message.delete()
         return
     device = " ".join(args)
     found = [
@@ -47,8 +57,47 @@ def device(bot, update, args):
                      f'Codename: <code>{codename}</code>\n\n'
     else:
         reply = f"Couldn't find info about {device}!\n"
+        del_msg = update.effective_message.reply_text("{}".format(reply),
+                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        time.sleep(5)
+        del_msg.delete()
+        update.effective_message.delete()
+        return
     update.message.reply_text("{}".format(reply),
                               parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+
+
+@run_async
+def getfw(bot, update, args):
+    if not len(args) == 2:
+        reply = f'Give me something to fetch, like:\n`/getfw SM-N975F DBT`'
+        del_msg = update.effective_message.reply_text("{}".format(reply),
+                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        time.sleep(5)
+        update.effective_message.delete()
+        del_msg.delete()
+        return
+    temp,csc = args
+    model = f'sm-'+temp if not temp.upper().startswith('SM-') else temp
+    test = get(f'https://samfrew.com/model/{model.upper()}/region/{csc.upper()}/')
+    if test.status_code == 404:
+        reply = f"Couldn't find any firmware downloads for {model.upper()} and {csc.upper()}, please refine your search or try again later!"
+        del_msg = update.effective_message.reply_text("{}".format(reply),
+                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        time.sleep(5)
+        update.effective_message.delete()
+        del_msg.delete()
+        return
+    url1 = f'• [samfrew.com](https://samfrew.com/model/{model.upper()}/region/{csc.upper()}/)'
+    url2 = f'• [sammobile.com](https://www.sammobile.com/samsung/firmware/{model.upper()}/{csc.upper()}/)'
+    url3 = f'• [sfirmware.com](https://sfirmware.com/samsung-{model.lower()}/#tab=firmwares)'
+
+    reply = f'*Downloads for {model.upper()} and {csc.upper()}*\n'
+    reply += f'{url1}\n'
+    reply += f'{url2}\n'
+    reply += f'{url3}\n'
+    update.message.reply_text("{}".format(reply),
+                           parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
 @run_async
@@ -65,14 +114,25 @@ def magisk(bot, update):
                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
+@run_async
 def twrp(bot, update, args):
     if len(args) == 0:
-        update.effective_message.reply_text("No codename provided, write a codename for fetching informations.")
+        reply='No codename provided, write a codename for fetching informations.'
+        del_msg = update.effective_message.reply_text("{}".format(reply),
+                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        time.sleep(5)
+        del_msg.delete()
+        update.effective_message.delete()
         return
     device = " ".join(args)
     url = get(f'https://dl.twrp.me/{device}/')
     if url.status_code == 404:
         reply = f"Couldn't find twrp downloads for {device}!\n"
+        del_msg = update.effective_message.reply_text("{}".format(reply),
+                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+        time.sleep(5)
+        del_msg.delete()
+        update.effective_message.delete()
         return
     reply = f'*Latest Official TWRP for {device}*\n'
     db = get(DEVICES_DATA).json()
@@ -248,7 +308,7 @@ def evo(bot: Bot, update: Update):
         return
 
     if device == 'gsi':
-        reply_text = "Please check TeamGSIs channel(@TeamGSI) for unofficial but updated GSIs" \
+        reply_text = "Please check Vega GSIs channel (@VegaGSIs) for unofficial but updated GSIs" \
                      " or click the button down to download the official GSIs!"
 
         keyboard = [[InlineKeyboardButton(text="Click to Download",
@@ -647,7 +707,9 @@ __help__ = """
  - /magisk: gets the latest magisk release for Stable/Beta/Canary
  - /twrp <codename>: gets latest twrp for the android device using the codename
  - /specs <brand> <device name>: will give you the complete specifications of a device
-
+ - /getfw <model> <csc>: (SAMSUNG ONLY) - gets firmware download links from samfrew, sammobile and sfirmwares for the given device
+ Eg: `/getfw SM-M205FN SER`
+ 
 *Specific ROM for a device*
  - /aex <device> <android version>: Get the latest AEX ROM for a device
  - /bootleggers <device>: Get the latest Bootleggers ROM for a device
@@ -685,6 +747,7 @@ PIXYS_HANDLER = CommandHandler("pixys", pixys, admin_ok=True)
 POSP_HANDLER = CommandHandler("posp", posp, admin_ok=True)
 VIPER_HANDLER = CommandHandler("viper", viper, admin_ok=True)
 SPECS_HANDLER = CommandHandler("specs", specs, pass_args=True)
+GETFW_HANDLER = CommandHandler("getfw", getfw, pass_args=True)
 
 dispatcher.add_handler(DEVICE_HANDLER)
 dispatcher.add_handler(MAGISK_HANDLER)
@@ -704,3 +767,4 @@ dispatcher.add_handler(PIXYS_HANDLER)
 dispatcher.add_handler(POSP_HANDLER)
 dispatcher.add_handler(VIPER_HANDLER)
 dispatcher.add_handler(SPECS_HANDLER)
+dispatcher.add_handler(GETFW_HANDLER)
