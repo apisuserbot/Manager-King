@@ -110,7 +110,7 @@ def getfw(bot, update, args):
     reply += f' • [sammobile.com]({url2})\n'
     reply += f' • [sfirmware.com]({url3})\n'
     reply += f' • [samfw.com]({url4})\n\n'
-    reply += f' • You can also receive real-time firmwares from SamFrew on the @SamFirm channel\n'
+    reply += f'You can also receive real-time firmwares from SamFrew on the @SamFirm channel\n'
     update.message.reply_text("{}".format(reply),
                            parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
@@ -143,7 +143,7 @@ def checkfw(bot, update, args):
     os2 = page2.find("latest").get("o")
     if page1.find("latest").text.strip():
         pda1,csc1,phone1=page1.find("latest").text.strip().split('/')
-        reply = f'*Latest released firmware for {model.upper()} {csc.upper()} is:*\n'
+        reply = f'*Latest released firmware for {model.upper()} {csc.upper()}:*\n'
         reply += f' • PDA: `{pda1}`\n • CSC: `{csc1}`\n'
         if phone1:
             reply += f' • Phone: `{phone1}`\n'
@@ -152,7 +152,7 @@ def checkfw(bot, update, args):
         reply += f'\n'
     else:
         reply = f'*No public release found for {model.upper()} {csc.upper()}.*\n\n'
-    reply += f'*Latest test firmware for {model.upper()} and {csc.upper()} is:*\n'
+    reply += f'*Latest test firmware for {model.upper()} and {csc.upper()}:*\n'
     if len(page2.find("latest").text.strip().split('/')) == 3:
         pda2,csc2,phone2=page2.find("latest").text.strip().split('/')
         reply += f' • PDA: `{pda2}`\n • CSC: `{csc2}`\n'
