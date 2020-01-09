@@ -21,7 +21,7 @@ from haruka.modules.helper_funcs.misc import split_message
 # Originally made by @RealAkito on GitHub and Telegram
 # This module was inspired by Android Helper Bot by Vachounet.
 # None of the code is taken from the bot itself, to avoid any more confusion.
-# Command /getfw /magisk /twrp and /device were obtained thanks to corsicanu bot
+# Command /getfw /magisk /twrp and /device were obtained thanks to corsicanu bot (originally kanged from UserBot PaperplaneExtended)
 # Command /specs was only possible thanks to the help of AvinashReddy3108
 
 LOGGER.info("Original Android Modules by @RealAkito on Telegram, modified by @HitaloSama on Telegram")
@@ -70,9 +70,9 @@ def device(bot, update, args):
 @run_async
 def getfw(bot, update, args):
     if not len(args) == 2:
-        reply = f'Give me something to fetch, like:\n`/getfw SM-N975F DBT`'
+        reply = f'Give me something to fetch, like: <code>/getfw SM-N975F DBT</code>'
         del_msg = update.effective_message.reply_text("{}".format(reply),
-                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+                               parse_mode=ParseMode.HTML)
         time.sleep(5)
         update.effective_message.delete()
         del_msg.delete()
@@ -81,24 +81,24 @@ def getfw(bot, update, args):
     model = f'sm-'+temp if not temp.upper().startswith('SM-') else temp
     test = get(f'https://samfrew.com/model/{model.upper()}/region/{csc.upper()}/')
     if test.status_code == 404:
-        reply = f"Couldn't find any firmware downloads for {model.upper()} and {csc.upper()}, please refine your search or try again later!"
+        reply = f"Couldn't find any firmware downloads for <code>{model.upper()} {csc.upper()}</code>, make sure you gave me the right CSC and model!"
         del_msg = update.effective_message.reply_text("{}".format(reply),
-                               parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+                               parse_mode=ParseMode.HTML)
         time.sleep(5)
         update.effective_message.delete()
         del_msg.delete()
         return
-    url1 = f'• [samfrew.com](https://samfrew.com/model/{model.upper()}/region/{csc.upper()}/)'
-    url2 = f'• [sammobile.com](https://www.sammobile.com/samsung/firmware/{model.upper()}/{csc.upper()}/)'
-    url3 = f'• [sfirmware.com](https://sfirmware.com/samsung-{model.lower()}/#tab=firmwares)'
+    url1 = f' • [samfrew.com](https://samfrew.com/model/{model.upper()}/region/{csc.upper()}/)'
+    url2 = f' • [sammobile.com](https://www.sammobile.com/samsung/firmware/{model.upper()}/{csc.upper()}/)'
+    url3 = f' • [sfirmware.com](https://sfirmware.com/samsung-{model.lower()}/#tab=firmwares)'
 
-    reply = f'*Downloads for {model.upper()} and {csc.upper()}*\n'
+    reply = f'<b>Downloads for {model.upper()} {csc.upper()}:</b>\n'
     reply += f'{url1}\n'
     reply += f'{url2}\n'
-    reply += f'{url3}\n'
+    reply += f'{url3}\n\n'
     reply += f'You can also receive real-time firmwares from SamFrew on the @SamFirm channel\n'
     update.message.reply_text("{}".format(reply),
-                           parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+                           parse_mode=ParseMode.HTML, disable_web_page_preview=True)
 
 
 @run_async
