@@ -88,17 +88,17 @@ def getfw(bot, update, args):
         update.effective_message.delete()
         del_msg.delete()
         return
-    url1 = f' • <a href="https://samfrew.com/model/{model.upper()}/region/{csc.upper()}/">samfrew.com</a>'
-    url2 = f' • <a href="https://sammobile.com/samsung/firmware/{model.upper()}/{csc.upper()}/">sammobile.com</a>'
-    url3 = f' • <a href="https://sfirmware.com/samsung-{model.lower()}/#tab=firmwares">sfirmware.com</a>'
+    url1 = f' • [samfrew.com](https://samfrew.com/model/{model.upper()}/region/{csc.upper()}/)'
+    url2 = f' • [sammobile.com](https://www.sammobile.com/samsung/firmware/{model.upper()}/{csc.upper()}/)'
+    url3 = f' • [sfirmware.com](https://sfirmware.com/samsung-{model.lower()}/#tab=firmwares)'
 
-    reply = f'<b>Downloads for {model.upper()} {csc.upper()}:</b>\n'
+    reply = f'*Downloads for {model.upper()} {csc.upper()}:*\n'
     reply += f'{url1}\n'
     reply += f'{url2}\n'
     reply += f'{url3}\n\n'
     reply += f'You can also receive real-time firmwares from SamFrew on the @SamFirm channel\n'
     update.message.reply_text("{}".format(reply),
-                           parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+                           parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
 
 
 @run_async
