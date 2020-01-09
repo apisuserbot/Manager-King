@@ -98,14 +98,14 @@ def getfw(bot, update, args):
     reply = ""
     if page.find("latest").text.strip():
         pda,csc2,phone=page.find("latest").text.strip().split('/')
-        reply += f'*Latest firmware for {model.upper()} {csc.upper()} is:*\n'
+        reply += f'*Latest firmware for {model.upper()} {csc.upper()}:*\n'
         reply += f' • PDA: `{pda}`\n • CSC: `{csc2}`\n'
         if phone:
             reply += f' • Phone: `{phone}`\n'
         if os:
             reply += f' • Android: `{os}`\n'
     reply += f'\n'
-    reply += f'*Downloads for {model.upper()} {csc.upper()}*\n'
+    reply += f'*Downloads for {model.upper()} {csc.upper()}:*\n'
     reply += f' • [samfrew.com]({url1})\n'
     reply += f' • [sammobile.com]({url2})\n'
     reply += f' • [sfirmware.com]({url3})\n'
