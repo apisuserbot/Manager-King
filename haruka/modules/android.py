@@ -89,7 +89,7 @@ def getfw(bot, update, args):
         del_msg.delete()
         return
     url1 = f' • <a href="https://samfrew.com/model/{model.upper()}/region/{csc.upper()}/">samfrew.com</a>'
-    url2 = f' • <a href="https://www.sammobile.com/samsung/firmware/{model.upper()}/{csc.upper()}/">sammobile.com</a>'
+    url2 = f' • <a href="https://sammobile.com/samsung/firmware/{model.upper()}/{csc.upper()}/">sammobile.com</a>'
     url3 = f' • <a href="https://sfirmware.com/samsung-{model.lower()}/#tab=firmwares">sfirmware.com</a>'
 
     reply = f'<b>Downloads for {model.upper()} {csc.upper()}:</b>\n'
