@@ -152,7 +152,7 @@ def checkfw(bot, update, args):
         reply += f'\n'
     else:
         reply = f'*No public release found for {model.upper()} {csc.upper()}.*\n\n'
-    reply += f'*Latest test firmware for {model.upper()} and {csc.upper()}:*\n'
+    reply += f'*Latest test firmware for {model.upper()} {csc.upper()}:*\n'
     if len(page2.find("latest").text.strip().split('/')) == 3:
         pda2,csc2,phone2=page2.find("latest").text.strip().split('/')
         reply += f' • PDA: `{pda2}`\n • CSC: `{csc2}`\n'

@@ -179,7 +179,7 @@ HIT = (
 MARKDOWN_HELP = """
 Você pode usar o markdown para tornar suas mensagens mais expressivas. Este é o markdown atualmente suportado:
 
-<code>palavras de código</code> os acentos graves permitem agrupar suas palavras em fontes monoespaçadas. Mostra como: <code>palavras de código</code>
+<code>`palavras de código`</code> os acentos graves permitem agrupar suas palavras em fontes monoespaçadas. Mostra como: <code>palavras de código</code>
 <code>*palavras em negrito*</code> asteriscos são usadas para fontes em negrito. Mostra como: <b>palavras em negrito</b>
 <code>_palavras em itálico_</code> sublinhados são usados ​​para itálico. Mostra como: <i>palavras em itálico</i>
 <code>[hyperlink](example.com)</code> isso é usado para <code>[hyperlink](example.com)</code>, and will show as such: hyperlink. Certifique-se de não adicionar espaços extras entre o ] e o ( ou não será um markdown válido.
@@ -434,7 +434,7 @@ PortugueseBrStrings = {
     "No results found": "Nenhum resultado encontrado",
     "Write a message to search from wikipedia sources": "Escreva uma mensagem para pesquisar em fontes da wikipedia",
     "The result of {} are:\n\n<b>{}</b>\n{}": "O resultado para {} é:\n\n<b>{}</b>\n{}",
-    "Read more..": "Ler mais...",
+    "Read more...": "Ler mais...",
 
 #Log channel
     "Now, forward the /setlog to the group you want to tie this channel to!":
@@ -667,6 +667,8 @@ Você pode até designar administradores para sua federação, para que seu admi
  - /magisk: obtém a versão mais recente do Magisk Estável/Beta/Canary
  - /twrp <codinome>: obtém o twrp mais recente para o dispositivo Android usando seu codinome
  - /specs <marca> <nome do aparelho>: fornecerá as especificações completas de um dispositivo
+ - /getfw <modelo> <csc>: (APENAS SAMSUNG) - obtém links de download de firmware do samfrew, sammobile e sfirmwares para o dispositivo especificado
+ - /checkfw <modelo> <csc>: (APENAS SAMSUNG) - mostra as informações mais recentes do firmware para o dispositivo fornecido, obtidas pelos servidores da Samsung
 
  *ROM específica para um dispositivo:*
  - /aex <dispositivo> <versão do Android>: Obtenha a ROM AEX mais recente para um dispositivo
@@ -719,9 +721,6 @@ Você pode melhorar sua proteção Antispam usando o comando /setcas para ativar
  - /setcas <on/off/true/false>: ativa /desativa a verificação do CAS nas boas-vindas
  - /getcas: obtém as configurações atuais do CAS
  - /setban <on/off/true/false>: ativa/desativa o banimento automático em usuários banidos no CAS.
-
-*Apenas Sudo:*
- - /gbanlist: fornecerá a lista completa de usuários banidos globalmente
 
 *Créditos:*
 Obrigado ao @nunopenim por fornecer sua API proprietária do Combot Anti Spam System - [(pyCombotCAS_API)](https://github.com/nunopenim/pyCombotCAS_API)
@@ -860,8 +859,19 @@ Para configurar um canal de logs é feito da seguinte forma:
 *Comandos disponíveis:*
  - /gitr <usuário>/<repo>: buscará a versão mais recente do release desse repositório.
  - /git: Retorna informações sobre um usuário ou organização do GitHub.
- - /repo: Retornar a lista de repositórios de usuários ou organizações do GitHub (Limitado em 40)
- 
+ - /repo: Retornar a lista de repositórios de usuários ou organizações do GitHub (Limitado em 40).
+ - /saverepo <palavra> <usuário>/<repo>: Salve os lançamentos de repositório no atalho chamado "palavra".
+ - /fetch <palavra>: Obtenha o atalho do repositório registrado para essa palavra.
+ - &<palavra>: o mesmo que /get palavra.
+ - /changelog <word>: obtém o registro de alterações de um atalho de repositório salvo.
+ - /delrepo <palavra>: Exclua o atalho do repositório chamado "palavra".
+ - /listrepo: Listar todos os atalhos de repositórios no grupo atual.
+
+Um exemplo de como salvar um atalho de repositório seria via: `/saverepo ptb python-telegrama-bot/python-telegram-bot` 
+Agora, qualquer pessoa que use "`/fetch ptb`" ou "`&ptb`" será respondida com os lançamentos do repositório fornecido.
+
+*Nota:* Os nomes dos atalhos não diferenciam maiúsculas de minúsculas e são automaticamente convertidos em minúsculas antes de serem salvos.
+
 Este apenas foi possível graças à [pyGitHyb_API](https://github.com/nunopenim/pyGitHyb_API)
 """,
 
@@ -880,7 +890,7 @@ Este apenas foi possível graças à [pyGitHyb_API](https://github.com/nunopenim
  - /pastestats: Obter estatísticas de uma pasta ou URL abreviado do [dogbin](https://del.dog)
  - /ud: Digite a palavra ou expressão que deseja pesquisar. Por exemplo /ud Gay
  - /removebotkeyboard: Tem um teclado de bot desagradável preso no seu grupo?
- - /exec <language> <code> [/stdin <stdin>]: Execute um código em uma língua especificada. Envie um comando vazio para obter as linguagens suportadas.
+ - /exec <linguagem> <código> [/stdin <stdin>]: Execute um código em uma língua especificada. Envie um comando vazio para obter as linguagens suportadas.
  - /wiki <palavras>: Obtenha artigos da Wikipedia apenas usando este bot!
 
 *Outras coisas:*
