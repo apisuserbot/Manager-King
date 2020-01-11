@@ -520,7 +520,7 @@ PortugueseBrStrings = {
     "*Notes in {}:*\n": "*Lista de notas em {}:*\n",
     "\nYou can retrieve these notes by using `/get notename`, or `#notename`": "Você pode obter essas notas usando `/get nomedanota`, ou `#nomedanota`",
     "There are no notes in this chat!": "Não há notas neste grupo!",
-    "There are no notes in *{}*!"; "Não há notas em *{}*",
+    "There are no notes in *{}*!": "Não há notas em *{}*",
 
 #Multi
     "Invalid Chat ID provided!": "O ID deste grupo não é válido", #Connections
