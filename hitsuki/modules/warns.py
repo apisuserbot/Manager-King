@@ -28,6 +28,7 @@ CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
 # Not async
 def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = None) -> str:
     bot = dispatcher.bot
+    chat = update.effective_chat  # type: Optional[Chat]
 
     if is_user_admin(chat, user.id):
         message.reply_text("I'm not going to warn an admin!")
@@ -73,10 +74,10 @@ def warn(user: User, chat: Chat, reason: str, message: Message, warner: User = N
         if rules:
             keyboard[0].append(InlineKeyboardButton("📝 Rules", url="t.me/{}?start={}".format(bot.username, chat.id)))
 
-        reply = "{} <b>has been warned!</b>\nThey have {}/{} warnings.".format(mention_html(user.id, user.first_name), num_warns,
-                                                             limit)
+        reply = (tld(chat.id, "{} <b>has been warned!</b>\nThey have {}/{} warnings.".format(mention_html(user.id, user.first_name), num_warns,
+                                                             limit))
         if reason:
-            reply += "\nThe latest warning was because:\n<code>{}</code>".format(html.escape(reason))
+            reply += (tld(chat.id, "\nThe latest warning was because:\n<code>{}</code>".format(html.escape(reason)))
 
         log_reason = "<b>{}:</b>" \
                      "\n#WARN" \

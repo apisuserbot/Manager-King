@@ -265,6 +265,9 @@ PortugueseBrStrings = {
     "No.": "Não.",
     "Maybe.": "Talvez.",
     
+    "{} <b>has been warned!</b>\nThey have {}/{} warnings.": " {} <b>foi avisado!</b>\nEle tem {}/{} avisos.",
+    "\nThe latest warning was because:\n<code>{}</code>": "\nO último aviso foi por:\n<code>{}</code>",
+    
     "Switched to {} successfully!": "Alterado para {} com sucesso!",
     "{} is not supported yet!": "{} não é suportado ainda!",
     "Is that even a valid language code? Use an internationally accepted ISO code!": "Isso é mesmo um código de idioma válido? Use um código ISO aceito internacionalmente!",
@@ -514,6 +517,10 @@ PortugueseBrStrings = {
     "This note does not exist": "Esta nota não existe",
     "Get what?": "Você quer o que?",
     "Ok, the note `{note_name}` is saved in *{chat_name}*.": "Ok, a nota `{note_name}` foi salva em *{chat_name}*.",
+    "*Notes in {}:*\n": "*Lista de notas em {}:*\n",
+    "\nYou can retrieve these notes by using `/get notename`, or `#notename`": "Você pode obter essas notas usando `/get nomedanota`, ou `#nomedanota`",
+    "There are no notes in this chat!": "Não há notas neste grupo!",
+    "There are no notes in *{}*!"; "Não há notas em *{}*",
 
 #Multi
     "Invalid Chat ID provided!": "O ID deste grupo não é válido", #Connections
