@@ -775,8 +775,6 @@ __help__ = """
  - /magisk: gets the latest magisk release for Stable/Beta/Canary
  - /twrp <codename>: gets latest twrp for the android device using the codename
  - /specs <brand> <device name>: will give you the complete specifications of a device
- - /getfw <model> <csc>: (SAMSUNG ONLY) - gets firmware download links from samfrew, sammobile and sfirmwares for the given device
- - /checkfw <model> <csc>: (SAMSUNG ONLY) - shows the latest firmware info for the given device, taken from samsung servers
  
 *Specific ROM for a device*
  - /aex <device> <android version>: Get the latest AEX ROM for a device
@@ -785,7 +783,6 @@ __help__ = """
  - /evo <device>: Get the latest Evolution X ROM for a device
  - /havoc <device>: Get the latest Havoc ROM for a device
  - /los <device>: Get the latest LineageOS ROM for a device
- - /miui <device>: Get the latest MIUI ROM for a device
  - /pe <device>: Get the latest PixelExperience ROM for a device
  - /pe10 <device>: Get the latest PixelExperience 10 ROM for a device
  - /peplus <device>: Get the latest PixelExperience Plus ROM for a device
@@ -793,6 +790,11 @@ __help__ = """
  - /pixys <device>: Get the latest Pixys ROM for a device
  - /posp <device>: Get the latest POSP ROM for a device
  - /viper <device>: Get the latest Viper ROM for a device
+
+*Firmwares:*
+ - /getfw <model> <csc>: (SAMSUNG ONLY) gets firmware download links from samfrew, sammobile and sfirmwares for the given device.
+ - /checkfw <model> <csc>: (SAMSUNG ONLY) shows the latest firmware info for the given device, taken from samsung server.
+ - /miui <device>: Get the latest MIUI ROM for a device.
 """
 
 __mod_name__ = "Android"

@@ -554,6 +554,7 @@ __help__ = """
  - /insults: reply a random string from an array of replies.
  - /slap: slap a user, or get slapped if not a reply.
  - /decide: Randomly answers yes/no/maybe.
+ - /status: Shows some bot information
 """
 
 __mod_name__ = "Misc"

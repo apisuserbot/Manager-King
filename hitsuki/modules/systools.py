@@ -19,6 +19,7 @@ from hitsuki.modules.disable import DisableAbleCommandHandler
 @run_async
 def status(bot: Bot, update: Update):
     reply = "<b>System Status:</b> <code>operational</code>\n\n"
+    reply += "<b>Hitsuki version:</b> <code>v2.5</code>\n"
     reply += "<b>Python version:</b> <code>"+python_version()+"</code>\n"
     reply += "<b>CAS API version:</b> <code>"+str(cas.vercheck())+"</code>\n"
     reply += "<b>GitHub API version:</b> <code>"+str(git.vercheck())+"</code>\n"
@@ -119,7 +120,7 @@ def speedtst(bot: Bot, update: Update):
                                         parse_mode=ParseMode.HTML)
 
 
-STATUS_HANDLER = CommandHandler("status", status, filters=CustomFilters.sudo_filter)
+STATUS_HANDLER = CommandHandler("status", status)
 IP_HANDLER = CommandHandler("ip", get_bot_ip, filters=Filters.chat(OWNER_ID))
 PING_HANDLER = CommandHandler("cping", ping, filters=CustomFilters.sudo_filter)
 SPEED_HANDLER = CommandHandler("speedtest", speedtst, filters=CustomFilters.sudo_filter)

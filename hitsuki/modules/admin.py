@@ -370,19 +370,20 @@ def reaction(bot: Bot, update: Update, args: List[str]) -> str:
 
 
 __help__ = """
-*Make it easy to promote and demote users with the admin module!*
+*Make it easy to promote and demote users and keep your chat up to date on the latest news with a simple pinned message!*
 
-*Available commands are:*
- - /promote: promote a user.
- - /demote: demote a user.
+Available commands:
  - /adminlist: list the admins in the current chat.
 
-*Keep your chat up to date on the latest news with a simple pinned message!*
-
-*Available commands are:*
+*Admin only:*
+ - /promote: promote a user.
+ - /demote: demote a user.
  - /pin: pin the message you replied to; add 'loud' or 'notify' to send a notification to group members.
  - /unpin: Unpin the currently pinned message.
  - /permanentpin: Set a permanent pin for supergroup chat, when an admin or telegram channel change pinned message, bot will change pinned message immediatelly
+ 
+An example of promoting someone to admins:
+`/promote @username`; this promotes a user to admins.
 """
 
 __mod_name__ = "Admin"

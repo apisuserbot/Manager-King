@@ -592,19 +592,20 @@ você tiver interesse""",
 
 #Help modules
 "Admin_help": """
-*Facilite a promoção e rebaixamento de usuários com o módulo de administração!*
+*Facilite a promoção e rebaixamento de usuários e também mantenha seu grupo atualizado sobre as últimas notícias com uma simples mensagem fixada!*
 
 *Comandos disponíveis:*
- - /promote: promove um usuário.
- - /demote: rebaixa um usuário.
  - /adminlist: lista os administradores no grupo atual.
 
-*Mantenha seu grupo atualizado sobre as últimas notícias com uma simples mensagem fixada!*
-
-*Comandos disponíveis:*
+Admin only:
+ - /promote: promove um usuário.
+ - /demote: rebaixa um usuário.
  - /pin: fixe a mensagem à qual você respondeu; adicione 'loud' ou 'notify' para enviar uma notificação aos membros do grupo.
  - /unpin: remover a mensagem atualmente fixada.
-  - /permanentpin: defina uma mensagem para ser fixada permanente em um supergrupo. Quando um canal de administrador ou o Telegram altera a mensagem fixada, o bot altera a mensagem fixada imediatamente
+ - /permanentpin: defina uma mensagem para ser fixada permanente em um supergrupo. Quando um canal de administrador ou o Telegram altera a mensagem fixada, o bot altera a mensagem fixada imediatamente
+
+Um exemplo de como promover alguém para administrador:
+`/promote @nomedeusuário`; isso promove um usuário para administrador.
 """,
 
 "AFK_help": """

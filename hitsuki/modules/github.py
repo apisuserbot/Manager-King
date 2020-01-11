@@ -212,12 +212,14 @@ __help__ = """
  - /gitr <user>/<repo>: will fetch the most recent release from that repo.
  - /git: Returns info about a GitHub user or organization.
  - /repo: Return the GitHub user or organization repository list (Limited at 40).
- - /saverepo <word> <user>/<repo>: Save that repo releases to the shortcut called "word".
  - /fetch <word>: get the repo shortcut registered to that word.
  - &<word>: same as /get word
  - /changelog <word>: gets the changelog of a saved repo shortcut
- - /delrepo <word>: delete the repo shortcut called "word"
  - /listrepo: List all repo shortcuts in the current chat
+
+*Admin only:*
+ - /saverepo <word> <user>/<repo>: Save that repo releases to the shortcut called "word".
+ - /delrepo <word>: delete the repo shortcut called "word"
 
 An example of how to save a repo shortcut would be via:
 `/saverepo ptb python-telegram-bot/python-telegram-bot`
