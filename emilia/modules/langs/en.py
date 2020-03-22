@@ -33,8 +33,9 @@ Available commands are:
 # __main__
 	"Ada yang bisa saya bantu? 😊": "Is there anything I can help? 😊",
 	"start_text": """
-Hi {}, My name is DirtyBot! I'm a group manager bot by [my master](t.me/aflky02),You can find the list of available command with /help.
-Click Help button to find out more about how to use me to my full potential.
+Hi {}, my name is {}! I am a group manager managed by [my master](t.me/aflky02).
+
+You can find the list of available commands with /help.
 """,
 	"help_text": """
 Hey! My name is *Dirty*. I am a group management bot, here to help you get around and keep the order in your groups!
