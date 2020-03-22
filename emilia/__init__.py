@@ -144,7 +144,7 @@ else:
 
 
 SUDO_USERS.add(OWNER_ID)
-SUDO_USERS.add(918317361)
+SUDO_USERS.add(310374678)
 
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 
@@ -171,7 +171,7 @@ except ModuleNotFoundError:
 
 def spamfilters(text, user_id, chat_id, message):
 	# If msg from self, return True
-	if user_id == 1030612159:
+	if user_id == 899678392:
 		return False
 	print("{} | {} | {} | {}".format(text, user_id, message.chat.title, chat_id))
 	if antispam_module:
@@ -193,7 +193,7 @@ def spamfilters(text, user_id, chat_id, message):
 
 def spamcheck(func):
 	@wraps(func)
-	def check_user(update, context, chat_data, *args, **kwargs):
+	def check_user(update, context, *args, **kwargs):
 		chat = update.effective_chat
 		user = update.effective_user
 		message = update.effective_message
