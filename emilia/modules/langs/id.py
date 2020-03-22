@@ -17,7 +17,6 @@ hal-hal yang bisa saya bantu.
  - /start: mulai bot
  - /help: PM Anda dengan pesan ini.
  - /help <module name>: PM Anda dengan info tentang modul itu.
- - /donate: informasi tentang cara menyumbang!
  - /settings:
    - di PM: akan mengirimkan pengaturan Anda untuk semua modul yang didukung.
    - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu.
