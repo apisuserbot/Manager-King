@@ -1724,7 +1724,7 @@ def __user_info__(user_id, chat_id):
 
 		elif fban:
 			text = tl(chat_id, "Dilarang di federasi saat ini: <b>Ya</b>")
-			text += tl(chat_id, "\n<b>Alasan:</b> {}").format(fbanreason)
+			text += tl(chat_id, "\nAlasan: <code>{}</code>").format(fbanreason)
 		else:
 			text = tl(chat_id, "Dilarang di federasi saat ini: <b>Tidak</b>")
 	else:
