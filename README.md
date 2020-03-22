@@ -10,6 +10,10 @@ Can be found as [Hitsuki](https://t.me/LordHitsukiBETA_BOT) on Telegram.
 
 Based on [Emilia Hikari](https://github.com/AyraHikari/EmiliaHikari)
 
+
+[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+
 ## Special Credits
 ----------
 
