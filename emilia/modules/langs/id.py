@@ -4,19 +4,12 @@ __lang__ = "🇮🇩 Indonesia"
 id = {
 # main stuff
 	"start_text": """
-Hai {}, nama saya {}! Saya seorang manajer grup yang dikelola oleh [master saya ini](tg://user?id={}).
-Untuk mendapatkan info status dan update bot ini, anda dapat bergabung dengan channel kami [Ayra's Bot News](https://t.me/AyraBotNews)
-
-Ada masalah atau butuh bantuan lebih?
-Gabung grup [Emilia Official Support](https://t.me/EmiliaOfficial)!
+Hai {}, nama saya {}! Saya seorang manajer grup yang dikelola oleh [master saya ini](t.me/aflky02)
 
 Anda dapat menemukan daftar perintah yang tersedia dengan /help.
-
-Jika Anda menikmati menggunakan saya, dan/atau ingin membantu saya bertahan hidup, tekan /donate untuk membantu \
-mendanai/meningkatkan VPS saya!
 """,
 	"help_text": """
-Hai! Nama saya adalah *Emilia*.
+Hai! Nama saya adalah *Dirty*.
 Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \
 hal-hal yang bisa saya bantu.
 
