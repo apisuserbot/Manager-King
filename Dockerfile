@@ -58,7 +58,7 @@ RUN python3 -m ensurepip \
 #
 # Clone repo and prepare working directory
 #
-RUN git clone 'https://github.com/HitaloSama/Hitsuki.git' /root/emilia
+RUN git clone 'https://github.com/bagus02/dirtybotx2.git' /root/emilia
 RUN mkdir /root/emilia/bin/
 WORKDIR /root/emilia/
 
