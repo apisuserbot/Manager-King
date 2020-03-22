@@ -33,17 +33,11 @@ Available commands are:
 # __main__
 	"Ada yang bisa saya bantu? 😊": "Is there anything I can help? 😊",
 	"start_text": """
-Hi {}! My name is *{}* - I'm here to help you manage your groups!
+Hi {}, My name is DirtyBot! I'm a group manager bot by [my master](t.me/aflky02),You can find the list of available command with /help.
 Click Help button to find out more about how to use me to my full potential.
-
-Follow [Hitsuki](https://t.me/HitsukiNews) ( @HitsukiNews ) if you want to keep up with the news, updates and bot downtime!
-
-This bot is managed by @HitaloSama
-
-Want to add me to your group? [Click here!](t.me/LordHitsuki_BOT?startgroup=true)
 """,
 	"help_text": """
-Hey! My name is *Hitsuki*. I am a group management bot, here to help you get around and keep the order in your groups!
+Hey! My name is *Dirty*. I am a group management bot, here to help you get around and keep the order in your groups!
 I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
 
 *Main commands available:*
