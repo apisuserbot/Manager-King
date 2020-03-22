@@ -78,7 +78,7 @@ def import_data(update, context):
 
 		try:
 			# If backup is from Emilia
-			if data.get('bot_base') == "Emilia":
+			if data.get('bot_base') == "Dirty":
 				imp_antiflood = False
 				imp_blacklist = False
 				imp_blacklist_count = 0
@@ -803,7 +803,7 @@ def export_data(update, context):
 	# Backup version
 	# Revision: 07/07/2019
 	backup_ver = 1
-	bot_base = "Emilia"
+	bot_base = "Dirty"
 
 	# Make sure this backup is for this bot
 	bot_id = context.bot.id
@@ -972,7 +972,7 @@ def export_data(update, context):
 
 
 	all_backups = json.dumps(backup, indent=4, cls=SetEncoder)
-	f = open("{}-Emilia.backup".format(chat_id), "w")
+	f = open("{}-Dirty.backup".format(chat_id), "w")
 	f.write(str(all_backups))
 	f.close()
 	context.bot.sendChatAction(current_chat_id, "upload_document")
@@ -981,13 +981,13 @@ def export_data(update, context):
 		context.bot.sendMessage(TEMPORARY_DATA, "*Berhasil mencadangan untuk:*\nNama chat: `{}`\nID chat: `{}`\nPada: `{}`".format(chat.title, chat_id, tgl), parse_mode=ParseMode.MARKDOWN)
 	except BadRequest:
 		pass
-	send = context.bot.sendDocument(current_chat_id, document=open('{}-Emilia.backup'.format(chat_id), 'rb'), caption=tl(update.effective_message, "*Berhasil mencadangan untuk:*\nNama chat: `{}`\nID chat: `{}`\nPada: `{}`\n\nNote: cadangan ini khusus untuk bot ini, jika di import ke bot lain maka catatan dokumen, video, audio, voice, dan lain-lain akan hilang").format(chat.title, chat_id, tgl), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
+	send = context.bot.sendDocument(current_chat_id, document=open('{}-Dirty.backup'.format(chat_id), 'rb'), caption=tl(update.effective_message, "*Berhasil mencadangan untuk:*\nNama chat: `{}`\nID chat: `{}`\nPada: `{}`\n\nNote: cadangan ini khusus untuk bot ini, jika di import ke bot lain maka catatan dokumen, video, audio, voice, dan lain-lain akan hilang").format(chat.title, chat_id, tgl), timeout=360, reply_to_message_id=msg.message_id, parse_mode=ParseMode.MARKDOWN)
 	try:
 		# Send to temp data for prevent unexpected issue
 		context.bot.sendDocument(TEMPORARY_DATA, document=send.document.file_id, caption=tl(update.effective_message, "*Berhasil mencadangan untuk:*\nNama chat: `{}`\nID chat: `{}`\nPada: `{}`\n\nNote: cadangan ini khusus untuk bot ini, jika di import ke bot lain maka catatan dokumen, video, audio, voice, dan lain-lain akan hilang").format(chat.title, chat_id, tgl), timeout=360, parse_mode=ParseMode.MARKDOWN)
 	except BadRequest:
 		pass
-	os.remove("{}-Emilia.backup".format(chat_id)) # Cleaning file
+	os.remove("{}-Dirty.backup".format(chat_id)) # Cleaning file
 
 
 class SetEncoder(json.JSONEncoder):
