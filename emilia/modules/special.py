@@ -509,7 +509,7 @@ def deEmojify(inputString):
 
 __help__ = "exclusive_help"
 
-__mod_name__ = "🚀 Hitsuki Exclusive 🚀"
+__mod_name__ = "🚀 Dirty Extras 🚀"
 
 PING_HANDLER = DisableAbleCommandHandler("ping", ping)
 GETLINK_HANDLER = CommandHandler("getlink", getlink, pass_args=True, filters=Filters.user(OWNER_ID))
