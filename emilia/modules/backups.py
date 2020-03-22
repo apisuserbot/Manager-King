@@ -478,8 +478,8 @@ def import_data(update, context):
 					os.remove("{}-notimported.txt".format(chat_id))
 				return
 		except Exception as err:
-			send_message(update.effective_message, tl(update.effective_message, "Telah terjadi kesalahan dalam import backup Emilia!\nGabung ke [Grup support](https://t.me/EmiliaOfficial) kami untuk melaporkan dan mengatasi masalah ini!\n\nTerima kasih"), parse_mode="markdown")
-			LOGGER.exception("An error when importing from Emilia base!")
+			send_message(update.effective_message, tl(update.effective_message, "Telah terjadi kesalahan dalam import backup Dirty!"), parse_mode="markdown")
+			LOGGER.exception("An error when importing from Dirty base!")
 			return
 
 		try:
