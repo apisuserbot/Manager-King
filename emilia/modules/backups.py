@@ -104,7 +104,7 @@ def import_data(update, context):
 					is_self = True
 				else:
 					is_self = False
-				if data.get('bot_base') == "Emilia":
+				if data.get('bot_base') == "Dirty":
 					is_emilia = True
 				else:
 					is_emilia = False
