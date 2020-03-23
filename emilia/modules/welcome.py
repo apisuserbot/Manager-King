@@ -32,7 +32,7 @@ from emilia.modules.helper_funcs.alternate import send_message
 
 
 OWNER_SPECIAL = False
-VALID_WELCOME_FORMATTERS = ['first', 'last', 'fullname', 'username', 'id', 'count', 'chatname', 'mention', 'rules, 'time']
+VALID_WELCOME_FORMATTERS = ['first', 'last', 'fullname', 'username', 'id', 'count', 'chatname', 'mention', 'rules', 'time']
 
 ENUM_FUNC_MAP = {
 	sql.Types.TEXT.value: dispatcher.bot.send_message,
