@@ -22,6 +22,4 @@ spongemock
 zalgo-text
 aiohttp
 tldextract
-requests
 pytz
-tzwhere
