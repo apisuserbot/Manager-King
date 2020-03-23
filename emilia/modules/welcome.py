@@ -1,5 +1,7 @@
 import html, time
 import re
+from datetime import datetime
+from pytz import timezone
 import threading
 import requests
 from typing import Optional, List
@@ -30,7 +32,7 @@ from emilia.modules.helper_funcs.alternate import send_message
 
 
 OWNER_SPECIAL = False
-VALID_WELCOME_FORMATTERS = ['first', 'last', 'fullname', 'username', 'id', 'count', 'chatname', 'mention', 'rules']
+VALID_WELCOME_FORMATTERS = ['first', 'last', 'fullname', 'username', 'id', 'count', 'chatname', 'mention', 'rules, 'time']
 
 ENUM_FUNC_MAP = {
 	sql.Types.TEXT.value: dispatcher.bot.send_message,
@@ -162,6 +164,24 @@ def new_member(update, context):
 						fullname = first_name
 					count = chat.get_members_count()
 					mention = mention_markdown(new_mem.id, first_name)
+                                        # Current time in UTC
+					now_utc = datetime.now(timezone('UTC'))
+
+					# Convert to Jakarta time zone
+					jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
+
+					if jakarta_timezone.hour < 4:
+					    waktu = "Selamat Dini Hari 🌚"
+					elif 4 <= jakarta_timezone.hour < 12:
+					    waktu = "Selamat Pagi 🌤"
+					elif 12 <= jakarta_timezone.hour < 15:
+					    waktu = "Selamat Siang ☀"
+					elif 15 <= jakarta_timezone.hour < 17:
+					    waktu = "Selamat Sore ⛅"
+					elif 17 <= jakarta_timezone.hour < 19:
+					    waktu = "Selamat Petang 🌥"
+					else:
+					    waktu = "Selamat Malam 🌙"
 					if new_mem.username:
 						username = "@" + escape_markdown(new_mem.username)
 					else:
@@ -172,7 +192,7 @@ def new_member(update, context):
 						formatted_text = cust_welcome.format(first=escape_markdown(first_name),
 											  last=escape_markdown(new_mem.last_name or first_name),
 											  fullname=escape_markdown(fullname), username=username, mention=mention,
-											  count=count, chatname=escape_markdown(chat.title), id=new_mem.id, rules=rules)
+											  count=count, time=waktu, chatname=escape_markdown(chat.title), id=new_mem.id, rules=rules)
 					else:
 						formatted_text = ""
 					# Build keyboard
@@ -234,6 +254,24 @@ def new_member(update, context):
 							fullname = first_name
 						count = chat.get_members_count()
 						mention = mention_markdown(new_mem.id, first_name)
+                                                # Current time in UTC
+						now_utc = datetime.now(timezone('UTC'))
+
+						# Convert to Jakarta time zone
+						jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
+
+						if jakarta_timezone.hour < 4:
+						    waktu = "Selamat Dini Hari 🌚"
+						elif 4 <= jakarta_timezone.hour < 12:
+						    waktu = "Selamat Pagi 🌤"
+						elif 12 <= jakarta_timezone.hour < 15:
+						    waktu = "Selamat Siang ☀"
+						elif 15 <= jakarta_timezone.hour < 17:
+						    waktu = "Selamat Sore ⛅"
+						elif 17 <= jakarta_timezone.hour < 19:
+						    waktu = "Selamat Petang 🌥"
+						else:
+						    waktu = "Selamat Malam 🌙"
 						if new_mem.username:
 							username = "@" + escape_markdown(new_mem.username)
 						else:
@@ -245,7 +283,7 @@ def new_member(update, context):
 							res = valid_format.format(first=escape_markdown(first_name),
 												  last=escape_markdown(new_mem.last_name or first_name),
 												  fullname=escape_markdown(fullname), username=username, mention=mention,
-												  count=count, chatname=escape_markdown(chat.title), id=new_mem.id, rules=rules)
+												  count=count, time=waktu, chatname=escape_markdown(chat.title), id=new_mem.id, rules=rules)
 						else:
 							res = ""
 						buttons = sql.get_welc_buttons(chat.id)
@@ -435,7 +473,7 @@ def check_bot_button(update, context):
 		formatted_text = cust_welcome.format(first=escape_markdown(first_name),
 											 last=escape_markdown(query.from_user.last_name or first_name),
 											 fullname=escape_markdown(fullname), username=username, mention=mention,
-											 count=count, chatname=escape_markdown(chat.title), id=query.from_user.id, rules=rules)
+											 count=count, time=waktu, chatname=escape_markdown(chat.title), id=query.from_user.id, rules=rules)
 		# Build keyboard
 		buttons = sql.get_welc_buttons(chat.id)
 		keyb = build_keyboard_parser(context.bot, chat.id, buttons)
@@ -458,6 +496,24 @@ def check_bot_button(update, context):
 			fullname = first_name
 		count = chat.get_members_count()
 		mention = mention_markdown(query.from_user.id, first_name)
+                # Current time in UTC
+		now_utc = datetime.now(timezone('UTC'))
+
+		# Convert to Jakarta time zone
+		jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
+
+		if jakarta_timezone.hour < 4:
+		    waktu = "Selamat Dini Hari 🌚"
+		elif 4 <= jakarta_timezone.hour < 12:
+		    waktu = "Selamat Pagi 🌤"
+		elif 12 <= jakarta_timezone.hour < 15:
+		    waktu = "Selamat Siang ☀"
+		elif 15 <= jakarta_timezone.hour < 17:
+		    waktu = "Selamat Sore ⛅"
+		elif 17 <= jakarta_timezone.hour < 19:
+		    waktu = "Selamat Petang 🌥"
+		else:
+		    waktu = "Selamat Malam 🌙"
 		if query.from_user.username:
 			username = "@" + escape_markdown(query.from_user.username)
 		else:
@@ -468,7 +524,7 @@ def check_bot_button(update, context):
 		res = valid_format.format(first=escape_markdown(first_name),
 								  last=escape_markdown(query.from_user.last_name or first_name),
 								  fullname=escape_markdown(fullname), username=username, mention=mention,
-								  count=count, chatname=escape_markdown(chat.title), id=query.from_user.id, rules=rules)
+								  count=count, time=waktu, chatname=escape_markdown(chat.title), id=query.from_user.id, rules=rules)
 		buttons = sql.get_welc_buttons(chat.id)
 		keyb = build_keyboard_parser(context.bot, chat.id, buttons)
 	else:
@@ -515,6 +571,24 @@ def left_member(update, context):
 					fullname = first_name
 				count = chat.get_members_count()
 				mention = mention_markdown(left_mem.id, first_name)
+                                # Current time in UTC
+				now_utc = datetime.now(timezone('UTC'))
+
+				# Convert to Jakarta time zone
+				jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
+
+				if jakarta_timezone.hour < 4:
+				    waktu = "Selamat Dini Hari 🌚"
+				elif 4 <= jakarta_timezone.hour < 12:
+				    waktu = "Selamat Pagi 🌤"
+				elif 12 <= jakarta_timezone.hour < 15:
+				    waktu = "Selamat Siang ☀"
+				elif 15 <= jakarta_timezone.hour < 17:
+				    waktu = "Selamat Sore ⛅"
+				elif 17 <= jakarta_timezone.hour < 19:
+				    waktu = "Selamat Petang 🌥"
+				else:
+				    waktu = "Selamat Malam 🌙"
 				if left_mem.username:
 					username = "@" + escape_markdown(left_mem.username)
 				else:
@@ -525,7 +599,7 @@ def left_member(update, context):
 					formatted_text = cust_goodbye.format(first=escape_markdown(first_name),
 											  last=escape_markdown(left_mem.last_name or first_name),
 											  fullname=escape_markdown(fullname), username=username, mention=mention,
-											  count=count, chatname=escape_markdown(chat.title), id=left_mem.id, rules=rules)
+											  count=count, time=waktu, chatname=escape_markdown(chat.title), id=left_mem.id, rules=rules)
 				else:
 					formatted_text = ""
 				# Build keyboard
@@ -547,6 +621,24 @@ def left_member(update, context):
 					fullname = first_name
 				count = chat.get_members_count()
 				mention = mention_markdown(left_mem.id, first_name)
+                                # Current time in UTC
+				now_utc = datetime.now(timezone('UTC'))
+
+				# Convert to Jakarta time zone
+				jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
+
+				if jakarta_timezone.hour < 4:
+				    waktu = "Selamat Dini Hari 🌚"
+				elif 4 <= jakarta_timezone.hour < 12:
+				    waktu = "Selamat Pagi 🌤"
+				elif 12 <= jakarta_timezone.hour < 15:
+				    waktu = "Selamat Siang ☀"
+				elif 15 <= jakarta_timezone.hour < 17:
+				    waktu = "Selamat Sore ⛅"
+				elif 17 <= jakarta_timezone.hour < 19:
+				    waktu = "Selamat Petang 🌥"
+				else:
+				    waktu = "Selamat Malam 🌙"
 				if left_mem.username:
 					username = "@" + escape_markdown(left_mem.username)
 				else:
@@ -557,7 +649,7 @@ def left_member(update, context):
 					res = valid_format.format(first=escape_markdown(first_name),
 										  last=escape_markdown(left_mem.last_name or first_name),
 										  fullname=escape_markdown(fullname), username=username, mention=mention,
-										  count=count, chatname=escape_markdown(chat.title), id=left_mem.id)
+										  count=count, time=waktu, chatname=escape_markdown(chat.title), id=left_mem.id)
 				else:
 					res = ""
 				buttons = sql.get_gdbye_buttons(chat.id)
