@@ -23,4 +23,3 @@ zalgo-text
 aiohttp
 tldextract
 pytz
-requests
