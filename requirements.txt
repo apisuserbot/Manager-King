@@ -22,4 +22,3 @@ spongemock
 zalgo-text
 aiohttp
 tldextract
-pytz
