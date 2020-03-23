@@ -12,9 +12,9 @@ import requests
 from telegram import Message, Chat, Update, Bot, MessageEntity
 from telegram import ParseMode
 from telegram.ext import CommandHandler, run_async, Filters
-from haruka import dispatcher
-from haruka.__main__ import STATS, USER_INFO
-from haruka.modules.disable import DisableAbleCommandHandler
+from emilia import dispatcher
+from emilia.__main__ import STATS, USER_INFO
+from emilia.modules.disable import DisableAbleCommandHandler
 
 def butts(bot: Bot, update: Update):
     nsfw = requests.get('http://api.obutts.ru/noise/1').json()[0]["preview"]
