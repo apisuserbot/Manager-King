@@ -1,7 +1,5 @@
 import html, time
 import re
-from datetime import datetime
-from pytz import timezone
 import threading
 import requests
 from typing import Optional, List
@@ -13,7 +11,7 @@ from telegram.ext import MessageHandler, Filters, CommandHandler, run_async, Cal
 from telegram.utils.helpers import mention_markdown, mention_html, escape_markdown
 
 import emilia.modules.sql.welcome_sql as sql
-from emilia import dispatcher, OWNER_ID, LOGGER, spamcheck, IS_DEBUG
+from emilia import dispatcher, OWNER_ID, LOGGER, spamcheck, IS_DEBUG, SUDO_USERS
 try:
 	from emilia import SPAMWATCH_TOKEN
 except:
@@ -32,7 +30,7 @@ from emilia.modules.helper_funcs.alternate import send_message
 
 
 OWNER_SPECIAL = False
-VALID_WELCOME_FORMATTERS = ['first', 'last', 'fullname', 'username', 'id', 'count', 'chatname', 'mention', 'rules', 'time']
+VALID_WELCOME_FORMATTERS = ['first', 'last', 'fullname', 'username', 'id', 'count', 'chatname', 'mention', 'rules']
 
 ENUM_FUNC_MAP = {
 	sql.Types.TEXT.value: dispatcher.bot.send_message,
@@ -111,8 +109,20 @@ def send(update, message, keyboard, backup_message):
 @run_async
 def new_member(update, context):
 	chat = update.effective_chat  # type: Optional[Chat]
+	user = update.effective_user  # type: Optional[User]
+	msg = update.effective_message  # type: Optional[Message]
 
 	should_welc, cust_welcome, cust_content, welc_type = sql.get_welc_pref(chat.id)
+
+	isAllowed = sql.isWhitelisted(str(chat.id))
+
+	if isAllowed or user.id in SUDO_USERS:
+		sql.whitelistChat(str(chat.id))
+	else:
+		msg.reply_text("Thanks for adding me to your group! But this group is not whitelisted to use the bot, sorry.\n\nFollow my news channel. @HitsukiNews")
+		context.bot.leave_chat(int(chat.id))
+		return
+	
 	cleanserv = sql.clean_service(chat.id)
 	if cleanserv:
 		new_members = update.effective_message.new_chat_members
@@ -152,24 +162,6 @@ def new_member(update, context):
 						fullname = first_name
 					count = chat.get_members_count()
 					mention = mention_markdown(new_mem.id, first_name)
-					# Current time in UTC
-					now_utc = datetime.now(timezone('UTC'))
-
-					# Convert to Jakarta time zone
-					jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
-
-					if jakarta_timezone.hour < 4:
-					    waktu = "Selamat Dini Hari 🌚"
-					elif 4 <= jakarta_timezone.hour < 12:
-					    waktu = "Selamat Pagi 🌤"
-					elif 12 <= jakarta_timezone.hour < 15:
-					    waktu = "Selamat Siang ☀"
-					elif 15 <= jakarta_timezone.hour < 17:
-					    waktu = "Selamat Sore ⛅"
-					elif 17 <= jakarta_timezone.hour < 19:
-					    waktu = "Selamat Petang 🌥"
-					else:
-					    waktu = "Selamat Malam 🌙"
 					if new_mem.username:
 						username = "@" + escape_markdown(new_mem.username)
 					else:
@@ -180,7 +172,7 @@ def new_member(update, context):
 						formatted_text = cust_welcome.format(first=escape_markdown(first_name),
 											  last=escape_markdown(new_mem.last_name or first_name),
 											  fullname=escape_markdown(fullname), username=username, mention=mention,
-											  count=count, time=waktu, chatname=escape_markdown(chat.title), id=new_mem.id, rules=rules)
+											  count=count, chatname=escape_markdown(chat.title), id=new_mem.id, rules=rules)
 					else:
 						formatted_text = ""
 					# Build keyboard
@@ -242,24 +234,6 @@ def new_member(update, context):
 							fullname = first_name
 						count = chat.get_members_count()
 						mention = mention_markdown(new_mem.id, first_name)
-						# Current time in UTC
-						now_utc = datetime.now(timezone('UTC'))
-
-						# Convert to Jakarta time zone
-						jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
-
-						if jakarta_timezone.hour < 4:
-						    waktu = "Selamat Dini Hari 🌚"
-						elif 4 <= jakarta_timezone.hour < 12:
-						    waktu = "Selamat Pagi 🌤"
-						elif 12 <= jakarta_timezone.hour < 15:
-						    waktu = "Selamat Siang ☀"
-						elif 15 <= jakarta_timezone.hour < 17:
-						    waktu = "Selamat Sore ⛅"
-						elif 17 <= jakarta_timezone.hour < 19:
-						    waktu = "Selamat Petang 🌥"
-						else:
-						    waktu = "Selamat Malam 🌙"
 						if new_mem.username:
 							username = "@" + escape_markdown(new_mem.username)
 						else:
@@ -271,7 +245,7 @@ def new_member(update, context):
 							res = valid_format.format(first=escape_markdown(first_name),
 												  last=escape_markdown(new_mem.last_name or first_name),
 												  fullname=escape_markdown(fullname), username=username, mention=mention,
-												  count=count, time=waktu, chatname=escape_markdown(chat.title), id=new_mem.id, rules=rules)
+												  count=count, chatname=escape_markdown(chat.title), id=new_mem.id, rules=rules)
 						else:
 							res = ""
 						buttons = sql.get_welc_buttons(chat.id)
@@ -344,7 +318,7 @@ def new_member(update, context):
 					sql.set_clean_welcome(chat.id, sent.message_id)
 	"""
 	fed_id = fedsql.get_fed_id(chat.id)
-	if fed_id == "TeamNusantaraDevs":
+	if fed_id == "HitsukiOfficial":
 		new_members = update.effective_message.new_chat_members
 		for new_mem in new_members:
 			# SpamWatch Security thread
@@ -461,7 +435,7 @@ def check_bot_button(update, context):
 		formatted_text = cust_welcome.format(first=escape_markdown(first_name),
 											 last=escape_markdown(query.from_user.last_name or first_name),
 											 fullname=escape_markdown(fullname), username=username, mention=mention,
-											 count=count, time=waktu, chatname=escape_markdown(chat.title), id=query.from_user.id, rules=rules)
+											 count=count, chatname=escape_markdown(chat.title), id=query.from_user.id, rules=rules)
 		# Build keyboard
 		buttons = sql.get_welc_buttons(chat.id)
 		keyb = build_keyboard_parser(context.bot, chat.id, buttons)
@@ -484,24 +458,6 @@ def check_bot_button(update, context):
 			fullname = first_name
 		count = chat.get_members_count()
 		mention = mention_markdown(query.from_user.id, first_name)
-		# Current time in UTC
-		now_utc = datetime.now(timezone('UTC'))
-
-		# Convert to Jakarta time zone
-		jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
-
-		if jakarta_timezone.hour < 4:
-		    waktu = "Selamat Dini Hari 🌚"
-		elif 4 <= jakarta_timezone.hour < 12:
-		    waktu = "Selamat Pagi 🌤"
-		elif 12 <= jakarta_timezone.hour < 15:
-		    waktu = "Selamat Siang ☀"
-		elif 15 <= jakarta_timezone.hour < 17:
-		    waktu = "Selamat Sore ⛅"
-		elif 17 <= jakarta_timezone.hour < 19:
-		    waktu = "Selamat Petang 🌥"
-		else:
-		    waktu = "Selamat Malam 🌙"
 		if query.from_user.username:
 			username = "@" + escape_markdown(query.from_user.username)
 		else:
@@ -512,7 +468,7 @@ def check_bot_button(update, context):
 		res = valid_format.format(first=escape_markdown(first_name),
 								  last=escape_markdown(query.from_user.last_name or first_name),
 								  fullname=escape_markdown(fullname), username=username, mention=mention,
-								  count=count, time=waktu, chatname=escape_markdown(chat.title), id=query.from_user.id, rules=rules)
+								  count=count, chatname=escape_markdown(chat.title), id=query.from_user.id, rules=rules)
 		buttons = sql.get_welc_buttons(chat.id)
 		keyb = build_keyboard_parser(context.bot, chat.id, buttons)
 	else:
@@ -559,24 +515,6 @@ def left_member(update, context):
 					fullname = first_name
 				count = chat.get_members_count()
 				mention = mention_markdown(left_mem.id, first_name)
-				# Current time in UTC
-				now_utc = datetime.now(timezone('UTC'))
-
-				# Convert to Jakarta time zone
-				jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
-
-				if jakarta_timezone.hour < 4:
-				    waktu = "Selamat Dini Hari 🌚"
-				elif 4 <= jakarta_timezone.hour < 12:
-				    waktu = "Selamat Pagi 🌤"
-				elif 12 <= jakarta_timezone.hour < 15:
-				    waktu = "Selamat Siang ☀"
-				elif 15 <= jakarta_timezone.hour < 17:
-				    waktu = "Selamat Sore ⛅"
-				elif 17 <= jakarta_timezone.hour < 19:
-				    waktu = "Selamat Petang 🌥"
-				else:
-				    waktu = "Selamat Malam 🌙"
 				if left_mem.username:
 					username = "@" + escape_markdown(left_mem.username)
 				else:
@@ -587,7 +525,7 @@ def left_member(update, context):
 					formatted_text = cust_goodbye.format(first=escape_markdown(first_name),
 											  last=escape_markdown(left_mem.last_name or first_name),
 											  fullname=escape_markdown(fullname), username=username, mention=mention,
-											  count=count, time=waktu, chatname=escape_markdown(chat.title), id=left_mem.id, rules=rules)
+											  count=count, chatname=escape_markdown(chat.title), id=left_mem.id, rules=rules)
 				else:
 					formatted_text = ""
 				# Build keyboard
@@ -609,24 +547,6 @@ def left_member(update, context):
 					fullname = first_name
 				count = chat.get_members_count()
 				mention = mention_markdown(left_mem.id, first_name)
-				# Current time in UTC
-				now_utc = datetime.now(timezone('UTC'))
-
-				# Convert to Jakarta time zone
-				jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
-
-				if jakarta_timezone.hour < 4:
-				    waktu = "Selamat Dini Hari 🌚"
-				elif 4 <= jakarta_timezone.hour < 12:
-				    waktu = "Selamat Pagi 🌤"
-				elif 12 <= jakarta_timezone.hour < 15:
-				    waktu = "Selamat Siang ☀"
-				elif 15 <= jakarta_timezone.hour < 17:
-				    waktu = "Selamat Sore ⛅"
-				elif 17 <= jakarta_timezone.hour < 19:
-				    waktu = "Selamat Petang 🌥"
-				else:
-				    waktu = "Selamat Malam 🌙"
 				if left_mem.username:
 					username = "@" + escape_markdown(left_mem.username)
 				else:
@@ -637,7 +557,7 @@ def left_member(update, context):
 					res = valid_format.format(first=escape_markdown(first_name),
 										  last=escape_markdown(left_mem.last_name or first_name),
 										  fullname=escape_markdown(fullname), username=username, mention=mention,
-										  count=count, time=waktu, chatname=escape_markdown(chat.title), id=left_mem.id)
+										  count=count, chatname=escape_markdown(chat.title), id=left_mem.id)
 				else:
 					res = ""
 				buttons = sql.get_gdbye_buttons(chat.id)
@@ -1061,151 +981,6 @@ def __chat_settings__(chat_id, user_id):
 		   "Untuk preferensi pesan selamat tinggal `{}`.\n" \
 		   "Bot `{}` menghapus notifikasi member masuk/keluar secara otomatis").format(welcome_pref, goodbye_pref, cleanserv)
 
-"""
-def __chat_settings_btn__(chat_id, user_id):
-	welcome_pref, _, _, _ = sql.get_welc_pref(chat_id)
-	goodbye_pref, _, _, _ = sql.get_gdbye_pref(chat_id)
-	cleanserv = sql.clean_service(chat_id)
-	if welcome_pref:
-		welc = "✅ Aktif"
-	else:
-		welc = "❎ Tidak Aktif"
-	if goodbye_pref:
-		gdby = "✅ Aktif"
-	else:
-		gdby = "❎ Tidak Aktif"
-	if cleanserv:
-		clserv = "✅ Aktif"
-	else:
-		clserv = "❎ Tidak Aktif"
-	button = []
-	button.append([InlineKeyboardButton(text="Selamat datang", callback_data="set_welc=w?|{}".format(chat_id)),
-		InlineKeyboardButton(text=welc, callback_data="set_welc=w|{}".format(chat_id))])
-	button.append([InlineKeyboardButton(text="Selamat tinggal", callback_data="set_welc=g?|{}".format(chat_id)),
-		InlineKeyboardButton(text=gdby, callback_data="set_welc=g|{}".format(chat_id))])
-	button.append([InlineKeyboardButton(text="Clean Service", callback_data="set_welc=s?|{}".format(chat_id)),
-		InlineKeyboardButton(text=clserv, callback_data="set_welc=s|{}".format(chat_id))])
-	return button
-
-def WELC_EDITBTN(update, context):
-	query = update.callback_query
-	user = update.effective_user
-	print("User {} clicked button WELC EDIT".format(user.id))
-	chat_id = query.data.split("|")[1]
-	data = query.data.split("=")[1].split("|")[0]
-	if data == "w?":
-		context.bot.answerCallbackQuery(query.id, "Bot akan mengirim pesan setiap ada member baru masuk jika di aktifkan.", show_alert=True)
-	if data == "g?":
-		context.bot.answerCallbackQuery(query.id, "Bot akan mengirim pesan setiap ada member yang keluar jika di aktifkan. Akan aktif hanya untuk grup dibawah 100 member.", show_alert=True)
-	if data == "s?":
-		context.bot.answerCallbackQuery(query.id, "Bot akan menghapus notifikasi member masuk atau member keluar secara otomatis jika di aktifkan.", show_alert=True)
-	if data == "w":
-		welcome_pref, _, _, _ = sql.get_welc_pref(chat_id)
-		goodbye_pref, _, _, _ = sql.get_gdbye_pref(chat_id)
-		cleanserv = sql.clean_service(chat_id)
-		if welcome_pref:
-			welc = "❎ Tidak Aktif"
-			sql.set_welc_preference(str(chat_id), False)
-		else:
-			welc = "✅ Aktif"
-			sql.set_welc_preference(str(chat_id), True)
-		if goodbye_pref:
-			gdby = "✅ Aktif"
-		else:
-			gdby = "❎ Tidak Aktif"
-		if cleanserv:
-			clserv = "✅ Aktif"
-		else:
-			clserv = "❎ Tidak Aktif"
-		chat = context.bot.get_chat(chat_id)
-		text = "*{}* memiliki pengaturan berikut untuk modul *Welcomes/Goodbyes*:\n\n".format(escape_markdown(chat.title))
-		text += "Obrolan ini preferensi pesan sambutannya telah diganti menjadi `{}`.\n".format(welc)
-		text += "Untuk preferensi pesan selamat tinggal `{}`.\n".format(gdby)
-		text += "Bot `{}` menghapus notifikasi member masuk/keluar secara otomatis".format(clserv)
-		button = []
-		button.append([InlineKeyboardButton(text="Selamat datang", callback_data="set_welc=w?|{}".format(chat_id)),
-			InlineKeyboardButton(text=welc, callback_data="set_welc=w|{}".format(chat_id))])
-		button.append([InlineKeyboardButton(text="Selamat tinggal", callback_data="set_welc=g?|{}".format(chat_id)),
-			InlineKeyboardButton(text=gdby, callback_data="set_welc=g|{}".format(chat_id))])
-		button.append([InlineKeyboardButton(text="Clean Service", callback_data="set_welc=s?|{}".format(chat_id)),
-			InlineKeyboardButton(text=clserv, callback_data="set_welc=s|{}".format(chat_id))])
-		button.append([InlineKeyboardButton(text="Kembali", callback_data="stngs_back({})".format(chat_id))])
-		query.message.edit_text(text=text,
-								  parse_mode=ParseMode.MARKDOWN,
-								  reply_markup=InlineKeyboardMarkup(button))
-		context.bot.answer_callback_query(query.id)
-	if data == "g":
-		welcome_pref, _, _, _ = sql.get_welc_pref(chat_id)
-		goodbye_pref, _, _, _ = sql.get_gdbye_pref(chat_id)
-		cleanserv = sql.clean_service(chat_id)
-		if welcome_pref:
-			welc = "✅ Aktif"
-		else:
-			welc = "❎ Tidak Aktif"
-		if goodbye_pref:
-			gdby = "❎ Tidak Aktif"
-			sql.set_gdbye_preference(str(chat_id), False)
-		else:
-			gdby = "✅ Aktif"
-			sql.set_gdbye_preference(str(chat_id), True)
-		if cleanserv:
-			clserv = "✅ Aktif"
-		else:
-			clserv = "❎ Tidak Aktif"
-		chat = context.bot.get_chat(chat_id)
-		text = "*{}* memiliki pengaturan berikut untuk modul *Welcomes/Goodbyes*:\n\n".format(escape_markdown(chat.title))
-		text += "Obrolan ini preferensi pesan selamat tinggal telah diganti menjadi `{}`.\n".format(gdby)
-		text += "Untuk preferensi pesan sambutan `{}`.\n".format(welc)
-		text += "Bot `{}` menghapus notifikasi member masuk/keluar secara otomatis".format(clserv)
-		button = []
-		button.append([InlineKeyboardButton(text="Selamat datang", callback_data="set_welc=w?|{}".format(chat_id)),
-			InlineKeyboardButton(text=welc, callback_data="set_welc=w|{}".format(chat_id))])
-		button.append([InlineKeyboardButton(text="Selamat tinggal", callback_data="set_welc=g?|{}".format(chat_id)),
-			InlineKeyboardButton(text=gdby, callback_data="set_welc=g|{}".format(chat_id))])
-		button.append([InlineKeyboardButton(text="Clean Service", callback_data="set_welc=s?|{}".format(chat_id)),
-			InlineKeyboardButton(text=clserv, callback_data="set_welc=s|{}".format(chat_id))])
-		button.append([InlineKeyboardButton(text="Kembali", callback_data="stngs_back({})".format(chat_id))])
-		query.message.edit_text(text=text,
-								  parse_mode=ParseMode.MARKDOWN,
-								  reply_markup=InlineKeyboardMarkup(button))
-		context.bot.answer_callback_query(query.id)
-	if data == "s":
-		welcome_pref, _, _, _ = sql.get_welc_pref(chat_id)
-		goodbye_pref, _, _, _ = sql.get_gdbye_pref(chat_id)
-		cleanserv = sql.clean_service(chat_id)
-		if welcome_pref:
-			welc = "✅ Aktif"
-		else:
-			welc = "❎ Tidak Aktif"
-		if goodbye_pref:
-			gdby = "✅ Aktif"
-		else:
-			gdby = "❎ Tidak Aktif"
-		if cleanserv:
-			clserv = "❎ Tidak Aktif"
-			sql.set_clean_service(chat_id, False)
-		else:
-			clserv = "✅ Aktif"
-			sql.set_clean_service(chat_id, True)
-		chat = context.bot.get_chat(chat_id)
-		text = "*{}* memiliki pengaturan berikut untuk modul *Welcomes/Goodbyes*:\n\n".format(escape_markdown(chat.title))
-		text += "Pengaturan clean service telah di ubah. Bot `{}` menghapus notifikasi member masuk/keluar.\n".format(clserv)
-		text += "Untuk preferensi pesan sambutan `{}`.\n".format(welc)
-		text += "Untuk preferensi pesan selamat tinggal `{}`.".format(gdby)
-		button = []
-		button.append([InlineKeyboardButton(text="Selamat datang", callback_data="set_welc=w?|{}".format(chat_id)),
-			InlineKeyboardButton(text=welc, callback_data="set_welc=w|{}".format(chat_id))])
-		button.append([InlineKeyboardButton(text="Selamat tinggal", callback_data="set_welc=g?|{}".format(chat_id)),
-			InlineKeyboardButton(text=gdby, callback_data="set_welc=g|{}".format(chat_id))])
-		button.append([InlineKeyboardButton(text="Clean Service", callback_data="set_welc=s?|{}".format(chat_id)),
-			InlineKeyboardButton(text=clserv, callback_data="set_welc=s|{}".format(chat_id))])
-		button.append([InlineKeyboardButton(text="Kembali", callback_data="stngs_back({})".format(chat_id))])
-		query.message.edit_text(text=text,
-								  parse_mode=ParseMode.MARKDOWN,
-								  reply_markup=InlineKeyboardMarkup(button))
-		context.bot.answer_callback_query(query.id)
-"""
-
 
 CAS_URL = "https://combot.org/api/cas/check"
 SPAMWATCH_URL = "https://api.spamwat.ch/banlist/"
@@ -1219,17 +994,17 @@ def check_cas(bot: Bot, user_id, user, message):
 				context.bot.kickChatMember(message.chat.id, user_id)
 				is_success = True
 			except:
-				context.bot.sendMessage(message.chat.id, "*⚠️ WARNING!*\n{} is a spammer from [CAS ban](https://combot.org/cas/query?u={}) and has been added to fedban list of *Team Nusantara Disciplinary Circle*!\n\nIt's recommended to banned him/her!".format(mention_markdown(user_id, user.first_name), user_id), parse_mode="markdown", disable_web_page_preview=True)
+				context.bot.sendMessage(message.chat.id, "*⚠️ WARNING!*\n{} is a spammer from [CAS ban](https://combot.org/cas/query?u={}) and has been added to fedban list of *Hitsuki Official*!\n\nIt's recommended to banned him/her!".format(mention_markdown(user_id, user.first_name), user_id), parse_mode="markdown", disable_web_page_preview=True)
 			if is_success:
-				context.bot.sendMessage(message.chat.id, "{} has been banned and added to fedban list of *Team Nusantara Disciplinary Circle*!\nReason: [CAS ban](https://combot.org/cas/query?u={}).".format(mention_markdown(user_id, user.first_name), user_id), parse_mode="markdown", disable_web_page_preview=True)
-			fed_id = fedsql.get_fed_info("TeamNusantaraDevs")
+				context.bot.sendMessage(message.chat.id, "{} has been banned and added to fedban list of *Hitsuki Official*!\nReason: [CAS ban](https://combot.org/cas/query?u={}).".format(mention_markdown(user_id, user.first_name), user_id), parse_mode="markdown", disable_web_page_preview=True)
+			fed_id = fedsql.get_fed_info("HitsukiOfficial")
 			if fed_id:
-				x = fedsql.fban_user("TeamNusantaraDevs", user_id, user.first_name, user.last_name, user.username, "CAS-Banned", int(time.time()))
+				x = fedsql.fban_user("HitsukiOfficial", user_id, user.first_name, user.last_name, user.username, "CAS-Banned", int(time.time()))
 				if not x:
 					LOGGER.warning("Cannot fban spammer user!")
 					return
-				text = "*New FedBan*\n*Fed:* `TeamNusantaraDevs`\n*FedAdmin*: {}\n*User:* {}\n*User ID:* `{}`\n*Reason:* [CAS ban](https://combot.org/cas/query?u={})".format(mention_markdown(692882995, "Emilia"), mention_markdown(user_id, user.first_name + (" " + user.last_name if user.last_name != None else "")), user_id, user_id)
-				context.bot.sendMessage(-1001338861977, text, parse_mode="markdown", disable_web_page_preview=True)
+				text = "*New FedBan*\n*Fed:* `HitsukiOfficial`\n*FedAdmin*: {}\n*User:* {}\n*User ID:* `{}`\n*Reason:* [CAS ban](https://combot.org/cas/query?u={})".format(mention_markdown(1030612159, "Hitsuki"), mention_markdown(user_id, user.first_name + (" " + user.last_name if user.last_name != None else "")), user_id, user_id)
+				context.bot.sendMessage(-1001433482821, text, parse_mode="markdown", disable_web_page_preview=True)
 				print(">>> NEW FBAN CAS: {} {} in {}".format(user.first_name, user_id, message.chat.title))
 
 def check_sw(bot: Bot, user_id, user, message):
@@ -1245,19 +1020,65 @@ def check_sw(bot: Bot, user_id, user, message):
 		context.bot.kickChatMember(message.chat.id, user_id)
 		is_success = True
 	except:
-		context.bot.sendMessage(message.chat.id, "*⚠️ WARNING!*\n{} is a spammer from SpamWatch and has been added to fedban list of *Team Nusantara Disciplinary Circle*!\n\nIt's recommended to banned him/her!".format(mention_markdown(user_id, user.first_name)), parse_mode="markdown", disable_web_page_preview=True)
+		context.bot.sendMessage(message.chat.id, "*⚠️ WARNING!*\n{} is a spammer from SpamWatch and has been added to fedban list of *Hitsuki Official*!\n\nIt's recommended to banned him/her!".format(mention_markdown(user_id, user.first_name)), parse_mode="markdown", disable_web_page_preview=True)
 	if is_success:
-		context.bot.sendMessage(message.chat.id, "{} has been banned and added to fedban list of *Team Nusantara Disciplinary Circle*!\nReason: {}.".format(mention_markdown(user_id, user.first_name), json.get('reason') if json.get('reason') else "Unknown reason"), parse_mode="markdown", disable_web_page_preview=True)
-	fed_id = fedsql.get_fed_info("TeamNusantaraDevs")
+		context.bot.sendMessage(message.chat.id, "{} has been banned and added to fedban list of *Hitsuki Official*!\nReason: {}.".format(mention_markdown(user_id, user.first_name), json.get('reason') if json.get('reason') else "Unknown reason"), parse_mode="markdown", disable_web_page_preview=True)
+	fed_id = fedsql.get_fed_info("HitsukiOfficial")
 	if fed_id:
-		x = fedsql.fban_user("TeamNusantaraDevs", user_id, user.first_name, user.last_name, user.username, json.get('reason') if json.get('reason') else "Unknown reason", int(time.time()))
+		x = fedsql.fban_user("HitsukiOfficial", user_id, user.first_name, user.last_name, user.username, json.get('reason') if json.get('reason') else "Unknown reason", int(time.time()))
 		if not x:
 			LOGGER.warning("Cannot fban spammer user!")
 			return
-		text = "*New FedBan*\n*Fed:* `TeamNusantaraDevs`\n*FedAdmin*: {}\n*User:* {}\n*User ID:* `{}`\n*Reason:* [SpamWatch] {}".format(mention_markdown(692882995, "Emilia"), mention_markdown(user_id, user.first_name + (" " + user.last_name if user.last_name != None else "")), user_id, json.get('reason') if json.get('reason') else "Unknown reason")
-		context.bot.sendMessage(-1001338861977, text, parse_mode="markdown", disable_web_page_preview=True)
+		text = "*New FedBan*\n*Fed:* `HitsukiOfficial`\n*FedAdmin*: {}\n*User:* {}\n*User ID:* `{}`\n*Reason:* [SpamWatch] {}".format(mention_markdown(1030612159, "Hitsuki"), mention_markdown(user_id, user.first_name + (" " + user.last_name if user.last_name != None else "")), user_id, json.get('reason') if json.get('reason') else "Unknown reason")
+		context.bot.sendMessage(-1001433482821, text, parse_mode="markdown", disable_web_page_preview=True)
 		print(">>> NEW FBAN SW: {} {} in {}".format(user.first_name, user_id, message.chat.title))
 
+
+@run_async
+def whChat(update, context):
+    args = context.args
+    if args and len(args) == 1:
+        chat_id = str(args[0])
+        del args[0]
+        try:
+            banner = update.effective_user
+            context.bot.send_message(MESSAGE_DUMP,
+                     "<b>Chat WhiteList</b>" \
+                     "\n#WHCHAT" \
+                     "\n<b>Status:</b> <code>Whitelisted</code>" \
+                     "\n<b>Sudo Admin:</b> {}" \
+                     "\n<b>Chat Name:</b> {}" \
+                     "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),userssql.get_chat_name(chat_id),chat_id), parse_mode=ParseMode.HTML)
+            sql.whitelistChat(chat_id)
+            update.effective_message.reply_text("Chat has been successfully whitelisted!")
+        except:
+            update.effective_message.reply_text("Error whitelisting chat!")
+    else:
+        update.effective_message.reply_text("Give me a valid chat id!")
+
+
+@run_async
+def unwhChat(update, context):
+    args = context.args
+    if args and len(args) == 1:
+        chat_id = str(args[0])
+        del args[0]
+        try:
+            banner = update.effective_user
+            context.bot.send_message(MESSAGE_DUMP,
+                     "<b>Regression of Chat WhiteList</b>" \
+                     "\n#UNWHCHAT" \
+                     "\n<b>Status:</b> <code>Un-Whitelisted</code>" \
+                     "\n<b>Sudo Admin:</b> {}" \
+                     "\n<b>Chat Name:</b> {}" \
+                     "\n<b>ID:</b> <code>{}</code>".format(mention_html(banner.id, banner.first_name),userssql.get_chat_name(chat_id),chat_id), parse_mode=ParseMode.HTML)
+            sql.unwhitelistChat(chat_id)
+            update.effective_message.reply_text("Chat has been successfully un-whitelisted!")
+            context.bot.leave_chat(int(chat_id))
+        except:
+            update.effective_message.reply_text("Error un-whitelisting chat!")
+    else:
+        update.effective_message.reply_text("Give me a valid chat id!")
 
 
 __help__ = "welcome_help"
@@ -1279,10 +1100,13 @@ SECURITY_MUTE_HANDLER = CommandHandler("welcomemutetime", security_mute, pass_ar
 SECURITY_BUTTONTXT_HANDLER = CommandHandler("setmutetext", security_text, pass_args=True, filters=Filters.group)
 SECURITY_BUTTONRESET_HANDLER = CommandHandler("resetmutetext", security_text_reset, filters=Filters.group)
 CLEAN_SERVICE_HANDLER = CommandHandler("cleanservice", cleanservice, pass_args=True, filters=Filters.group)
+WHCHAT_HANDLER = CommandHandler("whchat", whChat, pass_args=True, filters=Filters.user(OWNER_ID))
+UNWHCHAT_HANDLER = CommandHandler("unwhchat", unwhChat, pass_args=True, filters=Filters.user(OWNER_ID))
 
 welcomesec_callback_handler = CallbackQueryHandler(check_bot_button, pattern=r"check_bot_")
-# WELC_BTNSET_HANDLER = CallbackQueryHandler(WELC_EDITBTN, pattern=r"set_welc")
 
+dispatcher.add_handler(WHCHAT_HANDLER)
+dispatcher.add_handler(UNWHCHAT_HANDLER)
 dispatcher.add_handler(NEW_MEM_HANDLER)
 dispatcher.add_handler(LEFT_MEM_HANDLER)
 dispatcher.add_handler(WELC_PREF_HANDLER)
