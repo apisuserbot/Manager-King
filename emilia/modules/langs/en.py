@@ -1465,7 +1465,7 @@ This also works with /goodbye.
 	"Selamat tinggal semua 😁": "Goodbye everyone 😁",
 	"Saya telah keluar dari grup {}": "I have left the group {}",
 	"Sepertinya saya sudah keluar atau di tendang di grup tersebut": "Looks like I have been out or kicked in the group",
-	"Pong!\nKecepatannya: {0:.2f} detik": "Pong!\nSpeed was: {0:.2f}s",
+	"🏓 Pong!\n⏱️Kecepatannya: {0:.2f} detik": "🏓 Pong!\n⏱️Reply took: {0:.2f}s",
 	"Diterjemahkan dari `{}` ke `{}`:\n`{}`": "Translated from `{}` to `{}`:\n`{}`",
 	"Balas pesan atau tulis pesan dari bahasa lain untuk diterjemahkan kedalam bahasa yang di dituju\n\nContoh: `/tr en-id` untuk menerjemahkan dari Bahasa inggris ke Bahasa Indonesia\nAtau gunakan: `/tr id` untuk deteksi otomatis dan menerjemahkannya kedalam bahasa indonesia": "Reply to messages or write messages from other languages ​​to translate into the intended language\n\nExample: `/tr en-id` to translate from English to Indonesian\nOr use: `/tr id` for automatic detection and translating it into Indonesian",
 	"Bahasa yang di tuju tidak ditemukan!": "The destination language is not found!",
