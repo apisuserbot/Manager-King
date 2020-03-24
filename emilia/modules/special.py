@@ -133,11 +133,11 @@ def leavechat(update, context):
 @spamcheck
 def ping(update, context):
 	start_time = time.time()
-	test = send_message(update.effective_message, "Pong!")
+	test = send_message(update.effective_message, "🏓 Pong!")
 	end_time = time.time()
 	ping_time = float(end_time - start_time)
 	context.bot.editMessageText(chat_id=update.effective_chat.id, message_id=test.message_id,
-						text=tl(update.effective_message, "Pong!\nKecepatannya: {0:.2f} detik").format(round(ping_time, 2) % 60))
+						text=tl(update.effective_message, "🏓 Pong!\n⏱️Kecepatannya: {0:.2f} detik").format(round(ping_time, 2) % 60))
 
 @run_async
 @spamcheck
