@@ -69,8 +69,8 @@ def bot_can_delete(func):
 		if can_delete(update.effective_chat, context.bot.id):
 			return func(update, context, *args, **kwargs)
 		else:
-			update.effective_message.reply_text(languages.tl(update.effective_message, "I can't delete messages here! "
-                                                "Make sure I'm admin and can delete other user's messages."))
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak dapat menghapus pesan di sini! "
+												"Pastikan saya admin dan dapat menghapus pesan pengguna lain."))
 
 	return delete_rights
 
@@ -81,8 +81,8 @@ def can_pin(func):
 		if update.effective_chat.get_member(context.bot.id).can_pin_messages:
 			return func(update, context, *args, **kwargs)
 		else:
-			update.effective_message.reply_text(languages.tl(update.effective_message, "I can't pin messages here! "
-                                                "Make sure I'm admin and can pin messages."))
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak bisa menyematkan pesan di sini! "
+												"Pastikan saya admin dan dapat pin pesan."))
 
 	return pin_rights
 
@@ -93,8 +93,8 @@ def can_promote(func):
 		if update.effective_chat.get_member(context.bot.id).can_promote_members:
 			return func(update, context, *args, **kwargs)
 		else:
-			update.effective_message.reply_text(languages.tl(update.effective_message, "I can't promote/demote people here! "
-                                                "Make sure I'm admin and can appoint new admins."))
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak dapat mempromosikan/mendemosikan orang di sini! "
+												"Pastikan saya admin dan dapat menunjuk admin baru."))
 
 	return promote_rights
 
@@ -105,8 +105,8 @@ def can_restrict(func):
 		if update.effective_chat.get_member(context.bot.id).can_restrict_members:
 			return func(update, context, *args, **kwargs)
 		else:
-			update.effective_message.reply_text(languages.tl(update.effective_message, "I can't restrict people here! "
-                                                "Make sure I'm admin and can appoint new admins."))
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak bisa membatasi orang di sini! "
+												"Pastikan saya admin dan dapat menunjuk admin baru."))
 
 	return promote_rights
 
@@ -117,7 +117,8 @@ def bot_admin(func):
 		if is_bot_admin(update.effective_chat, context.bot.id):
 			return func(update, context, *args, **kwargs)
 		else:
-			update.effective_message.reply_text(languages.tl(update.effective_message, "I'm not admin!"))
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak bisa membatasi orang di sini! "
+												"Pastikan saya admin dan dapat menunjuk admin baru."))
 
 	return is_admin
 
@@ -138,7 +139,7 @@ def user_admin(func):
 			update.effective_message.delete()
 
 		else:
-			update.effective_message.reply_text(languages.tl(update.effective_message, "These are not the admin, Who gave the order to me?"))
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Siapa ini yang bukan admin memberikan perintah kepada saya?"))
 
 	return is_admin
 
@@ -157,7 +158,7 @@ def user_admin_no_reply(func):
 			update.effective_message.delete()
 
 		else:
-			context.bot.answer_callback_query(update.callback_query.id, languages.tl(update.effective_message, "You are not admin in this group!"))
+			context.bot.answer_callback_query(update.callback_query.id, languages.tl(update.effective_message, "Anda bukan admin di grup ini!"))
 
 	return is_admin
 
