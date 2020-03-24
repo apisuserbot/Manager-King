@@ -234,13 +234,13 @@ def help_button(update, context):
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = tl(update.effective_message, "Here is the help for the *{}* module:\n").format(HELPABLE[module].__mod_name__) \
+            text = tl(update.effective_message, "Ini bantuan untuk modul *{}* modul:\n").format(HELPABLE[module].__mod_name__) \
                    + tl(update.effective_message, HELPABLE[module].__help__)
 
             query.message.reply_text(text=text,
                                   parse_mode=ParseMode.MARKDOWN,
                                   reply_markup=InlineKeyboardMarkup(
-                                        [[InlineKeyboardButton(text=tl(query.message, "⬅️ Back"), callback_data="help_back")]]))
+                                        [[InlineKeyboardButton(text=tl(query.message, "⬅️ kembali"), callback_data="help_back")]]))
 
         elif prev_match:
             curr_page = int(prev_match.group(1))
