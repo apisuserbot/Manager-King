@@ -1113,7 +1113,7 @@ def check_cas(bot: Bot, user_id, user, message):
 				if not x:
 					LOGGER.warning("Cannot fban spammer user!")
 					return
-				text = "*New FedBan*\n*Fed:* `HitsukiOfficial`\n*FedAdmin*: {}\n*User:* {}\n*User ID:* `{}`\n*Reason:* [CAS ban](https://combot.org/cas/query?u={})".format(mention_markdown(1030612159, "Hitsuki"), mention_markdown(user_id, user.first_name + (" " + user.last_name if user.last_name != None else "")), user_id, user_id)
+				text = "*New FedBan*\n*Fed:* `HitsukiOfficial`\n*FedAdmin*: {}\n*User:* {}\n*User ID:* `{}`\n*Reason:* [CAS ban](https://combot.org/cas/query?u={})".format(mention_markdown(899678392, "Hitsuki"), mention_markdown(user_id, user.first_name + (" " + user.last_name if user.last_name != None else "")), user_id, user_id)
 				context.bot.sendMessage(-1001433482821, text, parse_mode="markdown", disable_web_page_preview=True)
 				print(">>> NEW FBAN CAS: {} {} in {}".format(user.first_name, user_id, message.chat.title))
 
@@ -1139,7 +1139,7 @@ def check_sw(bot: Bot, user_id, user, message):
 		if not x:
 			LOGGER.warning("Cannot fban spammer user!")
 			return
-		text = "*New FedBan*\n*Fed:* `HitsukiOfficial`\n*FedAdmin*: {}\n*User:* {}\n*User ID:* `{}`\n*Reason:* [SpamWatch] {}".format(mention_markdown(1030612159, "Hitsuki"), mention_markdown(user_id, user.first_name + (" " + user.last_name if user.last_name != None else "")), user_id, json.get('reason') if json.get('reason') else "Unknown reason")
+		text = "*New FedBan*\n*Fed:* `HitsukiOfficial`\n*FedAdmin*: {}\n*User:* {}\n*User ID:* `{}`\n*Reason:* [SpamWatch] {}".format(mention_markdown(899678392, "Hitsuki"), mention_markdown(user_id, user.first_name + (" " + user.last_name if user.last_name != None else "")), user_id, json.get('reason') if json.get('reason') else "Unknown reason")
 		context.bot.sendMessage(-1001433482821, text, parse_mode="markdown", disable_web_page_preview=True)
 		print(">>> NEW FBAN SW: {} {} in {}".format(user.first_name, user_id, message.chat.title))
 
