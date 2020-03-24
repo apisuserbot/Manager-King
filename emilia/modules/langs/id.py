@@ -446,10 +446,10 @@ This module was only possible thanks to the [pyGitHyb_API](https://github.com/nu
 
 # URL Blacklist
 "urlblacklist_help": """
-Domain daftar hitam digunakan untuk menghentikan domain tertentu dari yang disebutkan dalam sebuah kelompok, Setiap kali sebuah url pada domain yang disebutkan, /
+Domain daftar hitam digunakan untuk menghentikan domain tertentu dari yang disebutkan dalam sebuah grup, Setiap kali sebuah url pada domain yang disebutkan, /
 pesan akan segera dihapus.
 
-*CATATAN:* domain daftar hitam tidak mempengaruhi admin group.
+*CATATAN:* domain daftar hitam tidak mempengaruhi admin grup.
 
 - /geturl: Melihat url yang masuk daftar hitam saat ini
 
