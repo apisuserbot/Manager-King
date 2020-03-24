@@ -469,6 +469,26 @@ pesan akan segera dihapus.
 `Google Drive - MediaFire - SourceForge`
 """,
 
+# Memes
+"memes_help": """
+Ohai, saya melihat Anda ingin tahu meme apa yang saya miliki untuk dijual.
+Nah, di sini Anda pergi:
+
+*Beberapa meme perintah:*
+ - /owo: OwO Kirim OwOfies di pesan.
+ - /stretch: Peregangan huruf dalam pesan nomor acak.
+ - /vapor: Mengubah pesan menjadi teks vaporwave
+ - /mock: Mengolok-olok pesan menjawab menjilati meme spongebob.
+ - /zalgofy: merusak pesan.
+ - /shout <keyword>: Tuliskan apa pun yang Anda ingin memberikan berteriak keras
+ - /dllm: Beberapa meme Cina
+ - /thonkify <reply>/<args>: mengubah teks menjadi teks thonk (hanya mendukung huruf dan tidak ada simbol untuk saat ini).
+ - /forbes <reply>: mengubah pesan menjadi berita utama Forbes.
+ - /bify <reply>: Membalas pesan dengan mengganti karakter acak dengan B emoji.
+ - /clap <reply>: Menambahkan EMOJI bertepuk di awal, akhir, dan di setiap ruang dalam pesan.
+ - /cp <reply>: A replica of mattatas copypasta command.
+""",
+
 # warns
 	"CURRENT_WARNING_FILTER_STRING": "<b>Filter peringatan saat ini dalam obrolan ini:</b>\n",
 	"warns_help": """
