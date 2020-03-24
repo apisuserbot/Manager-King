@@ -368,7 +368,7 @@ KBBI_HANDLER = DisableAbleCommandHandler("kbbi", kamusbesarbahasaindonesia)
 UD_HANDLER = DisableAbleCommandHandler("ud", urbandictionary, pass_args=True)
 LOG_HANDLER = DisableAbleCommandHandler("log", log, filters=Filters.user(OWNER_ID))
 
-#dispatcher.add_handler(PING_HANDLER)
+dispatcher.add_handler(PING_HANDLER)
 dispatcher.add_handler(STICKERID_HANDLER)
 #dispatcher.add_handler(GETSTICKER_HANDLER)
 dispatcher.add_handler(STIKER_HANDLER)
