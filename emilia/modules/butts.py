@@ -20,11 +20,18 @@ def butts(bot: Bot, update: Update):
     nsfw = requests.get('http://api.obutts.ru/noise/1').json()[0]["preview"]
     final = "http://media.obutts.ru/{}".format(nsfw)
     update.message.reply_photo(final)
-		
-__help__ = """
+
+def boobs(bot: Bot, update: Update):
+    nsfw = requests.get('http://api.oboobs.ru/noise/1').json()[0]["preview"]
+    final = "http://media.oboobs.ru/{}".format(nsfw)
+    update.message.reply_photo(final)
+  
+help = """
  - /boobs: Sends Random Boobs pic.
  - /butts: Sends Random Butts pic.
 """
-__mod_name__ = "NSFW"
+mod_name = "NSFW"
 BUTTS_HANDLER = DisableAbleCommandHandler("butts", butts)
+BOOBS_HANDLER = DisableAbleCommandHandler("boobs", boobs)
 dispatcher.add_handler(BUTTS_HANDLER)
+dispatcher.add_handler(BOOBS_HANDLER)
