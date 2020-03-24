@@ -463,7 +463,7 @@ pesan akan segera dihapus.
 "directlinks_help": """
 *Modul ini memungkinkan Anda untuk menghasilkan link langsung dari berbagai situs.*
 
-/direct <url>: paste URL untuk menghasilkan link download langsung..
+/direct <url>: paste URL untuk menghasilkan link download langsung.
 
 *Daftar URL yang didukung:*
 `Google Drive - MediaFire - SourceForge`
