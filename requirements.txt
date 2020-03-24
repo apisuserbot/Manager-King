@@ -24,5 +24,3 @@ aiohttp
 tldextract
 pytz
 kbbi
-tswift
-PyLyrics
