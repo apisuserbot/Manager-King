@@ -1,163 +1,197 @@
-import random
-import re
-import time
+import sys
+import traceback
 
-from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, InputMediaPhoto, ChatPermissions
-from telegram.ext import CommandHandler, CallbackQueryHandler, Filters, run_async
-from telegram.error import BadRequest
-from telegram.utils.helpers import mention_markdown
+from functools import wraps
+from typing import Optional
 
-from emilia import dispatcher, updater, spamcheck, IS_DEBUG
-import emilia.modules.sql.welcome_sql as sql
-from emilia.modules.languages import tl
-from emilia.modules.connection import connected
+from telegram import User, Chat, ChatMember, Update, Bot
+from telegram import error
 
-from emilia.modules.helper_funcs.alternate import send_message, send_message_raw
-from emilia.modules.helper_funcs.chat_status import user_admin
-from emilia.modules.helper_funcs.string_handling import make_time, extract_time_int
+from emilia import DEL_CMDS, SUDO_USERS, WHITELIST_USERS
 
-def welcome_timeout(context):
-	for cht in sql.get_all_chat_timeout():
-		user_id = cht.user_id
-		chat_id = cht.chat_id
-		if int(time.time()) >= int(cht.timeout_int):
-			getcur, extra_verify, cur_value, timeout, timeout_mode, cust_text = sql.welcome_security(chat_id)
-			if timeout_mode == 1:
-				try:
-					context.bot.unbanChatMember(chat_id, user_id)
-					send_message_raw(chat_id, tl(user_id, "Verification failed!\n{} was kicked!").format(mention_markdown(user_id, context.bot.getChatMember(chat_id, user_id).user.first_name)), parse_mode="markdown")
-				except Exception as err:
-					send_message_raw(chat_id, tl(user_id, "Verification failed!\nBut was failed to kick {}: {}").format(mention_markdown(user_id, context.bot.getChatMember(chat_id, user_id).user.first_name), str(err)), parse_mode="markdown")
-			elif timeout_mode == 2:
-				try:
-					context.bot.kickChatMember(chat_id, user_id)
-					send_message_raw(chat_id, tl(user_id, "Verification failed!\n{} was banned!").format(mention_markdown(user_id, context.bot.getChatMember(chat_id, user_id).user.first_name)), parse_mode="markdown")
-				except Exception as err:
-					send_message_raw(chat_id, tl(user_id, "Verification failed!\nBut was failed to banned {}: {}").format(mention_markdown(user_id, context.bot.getChatMember(chat_id, user_id).user.first_name), str(err)), parse_mode="markdown")
-			sql.rm_from_timeout(chat_id, user_id)
+from emilia.modules import languages
 
 
+def can_delete(chat: Chat, bot_id: int) -> bool:
+	return chat.get_member(bot_id).can_delete_messages
 
-@run_async
-@spamcheck
-@user_admin
-def set_verify_welcome(update, context):
-	args = context.args
-	chat = update.effective_chat  # type: Optional[Chat]
-	getcur, extra_verify, cur_value, timeout, timeout_mode, cust_text = sql.welcome_security(chat.id)
-	if len(args) >= 1:
-		var = args[0].lower()
-		if (var == "yes" or var == "ya" or var == "on"):
-			check = context.bot.getChatMember(chat.id, context.bot.id)
-			if check.status == 'member' or check['can_restrict_members'] == False:
-				text = tl(update.effective_message, "I can't restrict member here! Make sure I'm an admin an can mute someone!")
-				send_message(update.effective_message, text, parse_mode="markdown")
-				return ""
-			sql.set_welcome_security(chat.id, getcur, True, str(cur_value), str(timeout), int(timeout_mode), cust_text)
-			send_message(update.effective_message, tl(update.effective_message, "Security for new members is activated! New users are required to complete verification to chat"))
-		elif (var == "no" or var == "ga" or var == "off"):
-			sql.set_welcome_security(chat.id, getcur, False, str(cur_value), str(timeout), int(timeout_mode), cust_text)
-			send_message(update.effective_message, tl(update.effective_message, "Disabled, users can once click the button to chat"))
+def user_can_delete(chat: Chat, user: User, bot_id: int) -> bool:
+	return chat.get_member(bot_id).can_delete_messages and chat.get_member(user.id).can_delete_messages
+
+def bot_can_restrict(chat: Chat, bot_id: int) -> bool:
+	return chat.get_member(bot_id).can_restrict_members
+
+
+def is_user_ban_protected(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+	if chat.type == 'private' \
+			or user_id in SUDO_USERS \
+			or user_id in WHITELIST_USERS \
+			or chat.all_members_are_administrators or user_id == 777000:
+		return True
+
+	if not member:
+		member = chat.get_member(user_id)
+	return member.status in ('administrator', 'creator')
+
+
+def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+	if chat.type == 'private' \
+			or user_id in SUDO_USERS \
+			or chat.all_members_are_administrators or user_id == 777000:
+		return True
+
+	try:
+		if not member:
+			member = chat.get_member(user_id)
+		return member.status in ('administrator', 'creator')
+	except:
+		return False
+
+
+def is_bot_admin(chat: Chat, bot_id: int, bot_member: ChatMember = None) -> bool:
+	if chat.type == 'private' \
+			or chat.all_members_are_administrators:
+		return True
+
+	if not bot_member:
+		bot_member = chat.get_member(bot_id)
+	return bot_member.status in ('administrator', 'creator')
+
+
+def is_user_in_chat(chat: Chat, user_id: int) -> bool:
+	member = chat.get_member(user_id)
+	return member.status not in ('left', 'kicked')
+
+
+def bot_can_delete(func):
+	@wraps(func)
+	def delete_rights(update, context, *args, **kwargs):
+		if can_delete(update.effective_chat, context.bot.id):
+			return func(update, context, *args, **kwargs)
 		else:
-			send_message(update.effective_message, tl(update.effective_message, "Please write `on`/`off`!"), parse_mode=ParseMode.MARKDOWN)
-	else:
-		getcur, extra_verify, cur_value, timeout, timeout_mode, cust_text = sql.welcome_security(chat.id)
-		if cur_value[:1] == "0":
-			cur_value = tl(update.effective_message, "Forever")
-		text = tl(update.effective_message, "Current settings are:\nWelcome security: `{}`\nVerify security: `{}`\nMembers will be muted for: `{}`\nVerification timeout: `{}`\nUnmute custom button: `{}`").format(getcur, extra_verify, cur_value, make_time(int(timeout)), cust_text)
-		send_message(update.effective_message, text, parse_mode="markdown")
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak dapat menghapus pesan di sini! "
+												"Pastikan saya admin dan dapat menghapus pesan pengguna lain."))
+
+	return delete_rights
 
 
-@run_async
-@spamcheck
-@user_admin
-def set_welctimeout(update, context):
-	args = context.args
-	chat = update.effective_chat  # type: Optional[Chat]
-	message = update.effective_message  # type: Optional[Message]
-	getcur, extra_verify, cur_value, timeout, timeout_mode, cust_text = sql.welcome_security(chat.id)
-	if len(args) >= 1:
-		var = args[0]
-		if var[:1] == "0":
-			mutetime = "0"
-			sql.set_welcome_security(chat.id, getcur, extra_verify, cur_value, "0", timeout_mode, cust_text)
-			text = tl(update.effective_message, "Verification timeout has been deactivated!")
+def can_pin(func):
+	@wraps(func)
+	def pin_rights(update, context, *args, **kwargs):
+		if update.effective_chat.get_member(context.bot.id).can_pin_messages:
+			return func(update, context, *args, **kwargs)
 		else:
-			mutetime = extract_time_int(message, var)
-			if mutetime == "":
-				return
-			sql.set_welcome_security(chat.id, getcur, extra_verify, cur_value, str(mutetime), timeout_mode, cust_text)
-			text = tl(update.effective_message, "If the new member doesn't verify for *{}* then he/she will *{}*").format(var, "Kick" if timeout_mode == 1 else "Banned")
-		send_message(update.effective_message, text, parse_mode="markdown")
-	else:
-		if timeout == "0":
-			send_message(update.effective_message, tl(update.effective_message, "Timeout settings: *{}*").format("Disabled"), parse_mode="markdown")
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak bisa menyematkan pesan di sini! "
+												"Pastikan saya admin dan dapat pin pesan."))
+
+	return pin_rights
+
+
+def can_promote(func):
+	@wraps(func)
+	def promote_rights(update, context, *args, **kwargs):
+		if update.effective_chat.get_member(context.bot.id).can_promote_members:
+			return func(update, context, *args, **kwargs)
 		else:
-			send_message(update.effective_message, tl(update.effective_message, "Timeout settings: *{}*").format(make_time(int(timeout))), parse_mode="markdown")
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak dapat mempromosikan/mendemosikan orang di sini! "
+												"Pastikan saya admin dan dapat menunjuk admin baru."))
 
-@run_async
-@spamcheck
-@user_admin
-def timeout_mode(update, context):
-	chat = update.effective_chat  # type: Optional[Chat]
-	user = update.effective_user  # type: Optional[User]
-	msg = update.effective_message  # type: Optional[Message]
-	args = context.args
+	return promote_rights
 
-	conn = connected(context.bot, update, chat, user.id, need_admin=True)
-	if conn:
-		chat = dispatcher.bot.getChat(conn)
-		chat_id = conn
-		chat_name = dispatcher.bot.getChat(conn).title
-	else:
-		if update.effective_message.chat.type == "private":
-			send_message(update.effective_message, tl(update.effective_message, "You can do this command in groups, not PM"))
-			return ""
-		chat = update.effective_chat
-		chat_id = update.effective_chat.id
-		chat_name = update.effective_message.chat.title
 
-	getcur, extra_verify, cur_value, timeout, timeout_mode, cust_text = sql.welcome_security(chat.id)
-
-	if args:
-		if args[0].lower() == 'kick' or args[0].lower() == 'tendang' or args[0].lower() == 'leave':
-			settypeblacklist = tl(update.effective_message, 'kick')
-			sql.set_welcome_security(chat.id, getcur, extra_verify, cur_value, timeout, 1, cust_text)
-		elif args[0].lower() == 'ban' or args[0].lower() == 'banned':
-			settypeblacklist = tl(update.effective_message, 'banned')
-			sql.set_welcome_security(chat.id, getcur, extra_verify, cur_value, timeout, 2, cust_text)
+def can_restrict(func):
+	@wraps(func)
+	def promote_rights(update, context, *args, **kwargs):
+		if update.effective_chat.get_member(context.bot.id).can_restrict_members:
+			return func(update, context, *args, **kwargs)
 		else:
-			send_message(update.effective_message, tl(update.effective_message, "I only understand kick/banned!"))
-			return
-		if conn:
-			text = tl(update.effective_message, "Timeout mode changed, User will be `{}` at *{}*!").format(settypeblacklist, chat_name)
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak bisa membatasi orang di sini! "
+												"Pastikan saya admin dan dapat menunjuk admin baru."))
+
+	return promote_rights
+
+
+def bot_admin(func):
+	@wraps(func)
+	def is_admin(update, context, *args, **kwargs):
+		if is_bot_admin(update.effective_chat, context.bot.id):
+			return func(update, context, *args, **kwargs)
 		else:
-			text = tl(update.effective_message, "Timeout mode changed, User will be `{}`!").format(settypeblacklist)
-		send_message(update.effective_message, text, parse_mode="markdown")
-	else:
-		if timeout_mode == 1:
-			settypeblacklist = tl(update.effective_message, "kick")
-		elif timeout_mode == 2:
-			settypeblacklist = tl(update.effective_message, "banned")
-		if conn:
-			text = tl(update.effective_message, "The current timeout mode is set to *{}* at *{}*.").format(settypeblacklist, chat_name)
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Saya tidak bisa membatasi orang di sini! "
+												"Pastikan saya admin dan dapat menunjuk admin baru."))
+
+	return is_admin
+
+
+def user_admin(func):
+	@wraps(func)
+	def is_admin(update, context, *args, **kwargs):
+		if update.effective_chat.type == "private":
+			return func(update, context, *args, **kwargs)
+		user = update.effective_user  # type: Optional[User]
+		if user and is_user_admin(update.effective_chat, user.id):
+			return func(update, context, *args, **kwargs)
+
+		elif not user:
+			pass
+
+		elif DEL_CMDS and " " not in update.effective_message.text:
+			update.effective_message.delete()
+
 		else:
-			text = tl(update.effective_message, "The current timeout mode is set to *{}*.").format(settypeblacklist)
-		send_message(update.effective_message, text, parse_mode=ParseMode.MARKDOWN)
-	return
+			update.effective_message.reply_text(languages.tl(update.effective_message, "Siapa ini yang bukan admin memberikan perintah kepada saya?"))
+
+	return is_admin
 
 
+def user_admin_no_reply(func):
+	@wraps(func)
+	def is_admin(update, context, *args, **kwargs):
+		user = update.effective_user  # type: Optional[User]
+		if user and is_user_admin(update.effective_chat, user.id):
+			return func(update, context, *args, **kwargs)
 
-job = updater.job_queue
+		elif not user:
+			pass
 
-job_timeout_set = job.run_repeating(welcome_timeout, interval=10, first=1)
-job_timeout_set.enabled = True
+		elif DEL_CMDS and " " not in update.effective_message.text:
+			update.effective_message.delete()
+
+		else:
+			context.bot.answer_callback_query(update.callback_query.id, languages.tl(update.effective_message, "Anda bukan admin di grup ini!"))
+
+	return is_admin
 
 
-WELCVERIFY_HANDLER = CommandHandler("welcomeverify", set_verify_welcome, pass_args=True, filters=Filters.group)
-WELTIMEOUT_HANDLER = CommandHandler("wtimeout", set_welctimeout, pass_args=True, filters=Filters.group)
-WELMODE_HANDLER = CommandHandler("wtmode", timeout_mode, pass_args=True, filters=Filters.group)
+def user_not_admin(func):
+	@wraps(func)
+	def is_not_admin(update, context, *args, **kwargs):
+		user = update.effective_user  # type: Optional[User]
+		if user and not is_user_admin(update.effective_chat, user.id):
+			return func(update, context, *args, **kwargs)
 
-dispatcher.add_handler(WELCVERIFY_HANDLER)
-dispatcher.add_handler(WELTIMEOUT_HANDLER)
-dispatcher.add_handler(WELMODE_HANDLER)
+	return is_not_admin
+
+# This is unused code
+def no_reply_handler(func):
+	@wraps(func)
+	def error_catcher(update, context, *args, **kwargs):
+		try:
+			func(update, context, *args,**kwargs)
+		except error.BadRequest as err:
+			if str(err) == "Reply message not found":
+				print('Error')
+				print(err)
+				exc_type, exc_obj, exc_tb = sys.exc_info()
+				log_errors = traceback.format_exception(etype=exc_type, value=exc_obj, tb=exc_tb)
+				tl = languages.tl
+				for x in log_errors:
+					if " update.effective_message" in x:
+						do_func = x.split("update.effective_message", 1)[1].split(")", 1)
+						do_func = "".join(do_func)
+						exec("update.effective_message" + do_func + ", quote=False)")
+					elif "message.reply_text(" in x:
+						do_func = x.split("message.reply_text", 1)[1].split(")", 1)
+						do_func = "".join(do_func)
+						exec("update.effective_message.reply_text" + do_func + ", quote=False)")
+	return error_catcher
