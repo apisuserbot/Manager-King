@@ -234,7 +234,7 @@ def help_button(update, context):
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = tl(update.effective_message, "Ini bantuan untuk modul *{}* modul:\n").format(HELPABLE[module].__mod_name__) \
+            text = tl(update.effective_message, "Ini bantuan untuk modul *{}*:\n").format(HELPABLE[module].__mod_name__) \
                    + tl(update.effective_message, HELPABLE[module].__help__)
 
             query.message.reply_text(text=text,
