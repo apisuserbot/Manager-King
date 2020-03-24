@@ -13,7 +13,7 @@ from emilia.modules.helper_funcs.filters import CustomFilters
 from emilia.modules.helper_funcs.chat_status import user_admin
 from emilia.modules.languages import tl
 
-from telegram.ext import CommandHandler, run_async, Filters, RegexHandler
+from telegram.ext import CommandHandler, run_async, Filters, MessageHandler
 from telegram import Message, Chat, Update, Bot, User, ParseMode, InlineKeyboardMarkup, MAX_MESSAGE_LENGTH
 
 
@@ -59,7 +59,7 @@ def getRepo(bot, update, reponame, show_none=True, no_format=False):
 def getRelease(update, context):
     args = context.args
     msg = update.effective_message
-    if(len(args) != 1 and not (len(args) == 2 and args[1].isdigit())):
+    if(len(args) != 1 and not (len(args) == 2 and args[1].isdigit()) and not ("/" in args[0])):
         msg.reply_text("Please specify a valid combination of <user>/<repo>")
         return
     index = 0
@@ -123,7 +123,7 @@ def saveRepo(update, context):
     args = context.args
     chat_id = update.effective_chat.id
     msg = update.effective_message
-    if(len(args) != 2 and (len(args) != 3 and not args[2].isdigit())):
+    if(len(args) != 2 and (len(args) != 3 and not args[2].isdigit()) or not ("/" in args[1])):
         msg.reply_text("Invalid data, use <reponame> <user>/<repo> <value (optional)>")
         return
     index = 0
@@ -155,10 +155,10 @@ def listRepo(update, context):
     chat = update.effective_chat
     chat_name = chat.title or chat.first or chat.username
     repo_list = sql.get_all_repos(str(chat_id))
-    msg = "*List of repo shotcuts in {}:*\n"
-    des = "You can get repo shortcuts by using `/fetch repo`, or `&repo`.\n"
+    msg = "*GitHub repo shotcuts in {}:*\n"
+    des = "\nYou can retrieve these repos by using `/fetch repo`, or `&repo`\n"
     for repo in repo_list:
-        repo_name = (" • `{}`\n".format(repo.name))
+        repo_name = (" • `&{}`\n".format(repo.name))
         if len(msg) + len(repo_name) > MAX_MESSAGE_LENGTH:
             update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
             msg = ""
@@ -236,15 +236,17 @@ __mod_name__ = "GitHub"
 
 GITHUB_HANDLER = CommandHandler("git", github)
 REPO_HANDLER = CommandHandler("repo", repo, pass_args=True)
+
 RELEASEHANDLER = CommandHandler("gitr", getRelease, pass_args=True)
 FETCH_HANDLER = CommandHandler("fetch", cmdFetch, pass_args=True)
+CHANGELOG_HANDLER = CommandHandler("changelog", changelog, pass_args=True)
+HASHFETCH_HANDLER = MessageHandler(Filters.regex(r"^&[^\s]+"), hashFetch)
+
 SAVEREPO_HANDLER = CommandHandler("saverepo", saveRepo)
 DELREPO_HANDLER = CommandHandler("delrepo", delRepo)
 LISTREPO_HANDLER = CommandHandler("listrepo", listRepo)
-VERCHECKER_HANDLER = CommandHandler("gitver", getVer)
-CHANGELOG_HANDLER = CommandHandler("changelog", changelog, pass_args=True)
 
-HASHFETCH_HANDLER = RegexHandler(r"^&[^\s]+", hashFetch)
+VERCHECKER_HANDLER = CommandHandler("gitver", getVer)
 
 dispatcher.add_handler(RELEASEHANDLER)
 dispatcher.add_handler(REPO_HANDLER)
