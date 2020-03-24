@@ -703,7 +703,7 @@ def import_data(update, context):
 						os.remove("{}-notimported.txt".format(chat_id))
 					return
 		except Exception as err:
-			send_message(update.effective_message, tl(update.effective_message, "Telah terjadi kesalahan dalam import backup Rose!\nGabung ke [Grup support](https://t.me/joinchat/Fykz0VTMpqZvlkb8S0JevQ) kami untuk melaporkan dan mengatasi masalah ini!\n\nTerima kasih"), parse_mode="markdown")
+			send_message(update.effective_message, tl(update.effective_message, "Telah terjadi kesalahan dalam import backup Rose!\nTerima kasih"), parse_mode="markdown")
 			LOGGER.exception("An error when importing from Rose base!")
 			return
 
