@@ -444,6 +444,31 @@ Now, anyone using "`/fetch ptb`", or "`&ptb`" will be answered with the releases
 This module was only possible thanks to the [pyGitHyb_API](https://github.com/nunopenim/pyGitHyb_API)
 """,
 
+# URL Blacklist
+"urlblacklist_help": """
+Domain blacklisting is used to stop certain domains from being mentioned in a group, Any time an url on that domain is mentioned, /
+the message will immediately be deleted.
+
+*NOTE:* domain blacklisting do not affect group admins.
+
+- /geturl: View the current blacklisted urls
+
+*Admin only:*
+
+- /addurl <urls>: Add a domain to the blacklist. The bot will automatically parse the url.
+- /delurl <urls>: Remove urls from the blacklist
+""",
+
+# Direct Links
+"directlinks_help": """
+*This module allows you to generate direct links from various websites.*
+
+/direct <url>: paste a URL to generate a direct download link.
+
+*List of supported URLs:*
+`Google Drive - MediaFire - SourceForge`
+""",
+
 # warns
 	"CURRENT_WARNING_FILTER_STRING": "<b>Filter peringatan saat ini dalam obrolan ini:</b>\n",
 	"warns_help": """
