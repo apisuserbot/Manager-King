@@ -446,26 +446,26 @@ This module was only possible thanks to the [pyGitHyb_API](https://github.com/nu
 
 # URL Blacklist
 "urlblacklist_help": """
-Domain blacklisting is used to stop certain domains from being mentioned in a group, Any time an url on that domain is mentioned, /
-the message will immediately be deleted.
+Domain daftar hitam digunakan untuk menghentikan domain tertentu dari yang disebutkan dalam sebuah kelompok, Setiap kali sebuah url pada domain yang disebutkan, /
+pesan akan segera dihapus.
 
-*NOTE:* domain blacklisting do not affect group admins.
+*CATATAN:* domain daftar hitam tidak mempengaruhi admin group.
 
-- /geturl: View the current blacklisted urls
+- /geturl: Melihat url yang masuk daftar hitam saat ini
 
-*Admin only:*
+*Hanya Admin:*
 
-- /addurl <urls>: Add a domain to the blacklist. The bot will automatically parse the url.
-- /delurl <urls>: Remove urls from the blacklist
+- /addurl <urls>: Tambahkan domain ke daftar hitam. bot akan secara otomatis mengurai url.
+- /delurl <urls>: Hapus url dari daftar hitam
 """,
 
 # Direct Links
 "directlinks_help": """
-*This module allows you to generate direct links from various websites.*
+*Modul ini memungkinkan Anda untuk menghasilkan link langsung dari berbagai situs.*
 
-/direct <url>: paste a URL to generate a direct download link.
+/direct <url>: paste URL untuk menghasilkan link download langsung..
 
-*List of supported URLs:*
+*Daftar URL yang didukung:*
 `Google Drive - MediaFire - SourceForge`
 """,
 
