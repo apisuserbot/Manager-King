@@ -100,6 +100,8 @@ def ban(update, context):
                                                        mention_html(user.id, user.first_name),
                                                        mention_html(member.user.id, member.user.first_name),
                                                        member.user.id)
+    
+    reply = "🔨 {} telah dilarang oleh {}!".format(mention_html(member.user.id, member.user.first_name), mention_html(user.id, user.first_name))
     if reason:
         log += "\n<b>Reason:</b> {}".format(reason)
 
@@ -361,12 +363,17 @@ def kick(update, context):
                 send_message(update.effective_message, text, parse_mode="markdown")
         log = "<b>{}:</b>" \
               "\n#KICKED" \
-              "\n<b>Admin:</b> {}" \
-              "\n<b>User:</b> {} (<code>{}</code>)".format(html.escape(chat.title),
+              "\n<b>• Admin:</b> {}" \
+              "\n<b>• User:</b> {}" \
+              "\n<b>• ID:</b> (<code>{}</code>)".format(html.escape(chat.title),
                                                            mention_html(user.id, user.first_name),
                                                            mention_html(member.user.id, member.user.first_name),
                                                            member.user.id)
-        log += "\n<b>Reason:</b> {}".format(reason)
+        keyboard = []
+        reply = "{} has been kicked by {}!".format(mention_html(member.user.id, member.user.first_name), mention_html(user.id, user.first_name))
+        if reason:
+            log += "\n<b>• Reason:</b> {}".format(reason)
+            reply += "\n<b>Reason:</b> <i>{}</i>".format(reason)
 
         return log
 
