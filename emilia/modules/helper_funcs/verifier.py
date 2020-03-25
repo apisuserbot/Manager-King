@@ -86,7 +86,7 @@ def verify_button_pressed(update, context):
 			query.answer(text=tl(update.effective_message, "Failed: user left chat"))
 			return
 		try:
-			context.bot.restrict_chat_member(chat_id, user_id, permissions=ChatPermissions(can_send_messages=True, can_send_media_messages=True, can_send_other_messages=True, can_add_web_page_previews=True))
+			context.bot.restrict_chat_member(chat_id, user_id, permissions=ChatPermissions(can_send_messages=True, can_send_media_messages=True, can_send_polls=True, can_send_other_messages=True, can_add_web_page_previews=True, can_invite_users=True))
 			sql.add_to_userlist(chat_id, user_id, True)
 			sql.rm_from_timeout(chat_id, user_id)
 		except BadRequest as err:
