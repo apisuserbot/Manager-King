@@ -321,7 +321,7 @@ When marked as AFK, any mentions will be replied to with a message to say you're
 	"- Pesan peraturan grup\n": "- Rules group\n",
 	"- Pengaturan bahasa\n": "- Language settings\n",
 	"- Pengaturan peringatan\n": "- Warn settings\n",
-	"Anda dapat mencadangan data selama 3 jam!\nAnda dapat mencadangan data lagi pada `{}`": "You can backup data once in 3 hours!\nYou can backup data again at `{}`",
+	"- Anda dapat mencadangan data sekali dalam 3 jam!\nAnda dapat mencadangan data lagi pada `{}`": "You can backup data once in 3 hours!\nYou can backup data again at `{}`",
 	"*Berhasil mencadangan untuk:*\nNama chat: `{}`\nID chat: `{}`\nPada: `{}`\n\nNote: cadangan ini khusus untuk bot ini, jika di import ke bot lain maka catatan dokumen, video, audio, voice, dan lain-lain akan hilang": "*Successfully backed up for:*\nChat: `{}`\nChat ID: `{}`\nAt: `{}`\n\nNote: This backup is specific to this bot, if it is imported to another bot then document, video, audio, voice, and other notes will be lost",
 	"backups_help": """
 *Admin only:*
