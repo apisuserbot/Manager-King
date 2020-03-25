@@ -434,6 +434,22 @@ multiple triggers at once.
  - /rmblacklist <triggers>: Same as above.
 """,
 
+# Stickers
+"stickers_kang_error": "Yea, I can't kang that.",
+"stickers_kang_success": "Sticker successfully added to [pack](t.me/addstickers/{}).\n Emoji: {}",
+"stickers_kang_only_img": "I can only kang images!",
+"stickers_kang_invalid_emoji": "Error: Invalid emoji(s).",
+"stickers_kang_too_much": "Error: Max packsize reached. Press F to pay respecc.",
+"stickers_kang_no_reply": "Please reply to a sticker or an image to kang it!\nOh, by the way. here are your packs:\n ",
+"stickers_pack_name_exists": "Your pack can be found [here](t.me/addstickers/%s)",
+"stickers_pack_contact_pm": "Contact me in PM first.",
+"stickers_pack_create_error": "Failed to create sticker pack. Possibly due to blek mejik.",
+"stickers_help": """
+ - /stickerid: reply to a sticker to me to tell you its file ID.
+ - /getsticker: reply to a sticker to me to upload its raw PNG file.
+ - /kang: reply to a sticker to add it to your pack.
+""",
+
 # Blacklist sticker
 	"<b>Daftar hitam stiker saat saat ini di {}:</b>\n": "<b>List black stickers currently in {}:</b>\n",
 	"Tidak ada stiker daftar hitam stiker di <b>{}</b>!": "There is no blacklist sticker in <b>{}</b>!",
