@@ -13,7 +13,7 @@ from emilia.modules.helper_funcs.chat_status import bot_admin
 
 @bot_admin
 @run_async
-def addsudo(bot: Bot, update: Update, args: List[str]):
+def addsudo(bot: Bot, update: Update, *args: List[str]):
     message = update.effective_message
     banner = update.effective_user
     user_id = extract_user(message, args)
