@@ -122,7 +122,7 @@ def kang(update, context):
                 makepack_internal(msg, user, open('kangsticker.png', 'rb'), sticker_emoji, context.bot, packname, packnum)
             elif e.message == "Sticker_png_dimensions":
                 im.save(kangsticker, "PNG")
-                bot.add_sticker_to_set(user_id=user.id,
+                context.bot.add_sticker_to_set(user_id=user.id,
                                        name=packname,
                                        png_sticker=open(
                                            'kangsticker.png', 'rb'),
@@ -222,7 +222,7 @@ def makepack_internal(update, msg, user, png_sticker, emoji, bot, packname, pack
         extra_version = ""
         if packnum > 0:
             extra_version = " " + str(packnum)
-        success = context.bot.create_new_sticker_set(user.id,
+        success = bot.create_new_sticker_set(user.id,
                                              packname,
                                              f"{name}'s Hitsuki Pack" +
                                              extra_version,
@@ -238,7 +238,7 @@ def makepack_internal(update, msg, user, png_sticker, emoji, bot, packname, pack
             msg.reply_text(tl(chat.id, 'stickers_pack_contact_pm'),
                            reply_markup=InlineKeyboardMarkup([[
                                InlineKeyboardButton(text="Start",
-                                                    url=f"t.me/{context.bot.username}")
+                                                    url=f"t.me/{bot.username}")
                            ]]))
         elif e.message == "Internal Server Error: created sticker set not found (500)":
             msg.reply_text(tl(chat.id, 'stickers_kang_success').format(packname, sticker_emoji),
