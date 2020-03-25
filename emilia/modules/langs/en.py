@@ -60,7 +60,7 @@ All donated money will be given to a better VPS to host me, and or some food. \
 He is just an ordinary person, so it will really help him!
 
 If you really are interested in donating, please visit ayrahikari.github.io/donations.html, Thank you 😁""",
-	"Kembali": "Back",
+	"⬅️ kembali": "⬅️ Back",
 	"Hubungi saya di PM untuk mendapatkan daftar perintah.": "Contact me in PM to get the list of possible commands.",
 	"Tolong": "Help",
 	"Ini adalah bantuan yang tersedia untuk modul *{}*:\n": "Here is the available help for the *{}* module:\n",
