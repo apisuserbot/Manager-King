@@ -83,7 +83,7 @@ Ketika ditandai sebagai AFK, sebutan apa pun akan dibalas dengan pesan untuk men
 *Hanya admin:*
  - /import: balas ke file cadangan grup butler/marie/rose/emilia/dirty untuk mengimpor sebanyak mungkin, membuat transfer menjadi sangat mudah! \
  Catatan bahwa file/foto tidak dapat diimpor karena pembatasan telegram. Kecuali backup dari Dirty.
- - /export: export data grup, hanya bisa di lakukan 12 jam sekali.
+ - /export: export data grup, bisa di lakukan setiap waktu.
 """,
 	"bans_help": """
  - /kickme: menendang pengguna yang mengeluarkan perintah
