@@ -119,7 +119,7 @@ def kang(update, context):
             return
         except TelegramError as e:
             if e.message == "Stickerset_invalid":
-                makepack_internal(msg, user, open, packnum('kangsticker.png', 'rb'), sticker_emoji, context.bot, packname, packnum)
+                makepack_internal(msg, user, open('kangsticker.png', 'rb'), sticker_emoji, context.bot, packname, packnum)
             elif e.message == "Sticker_png_dimensions":
                 im.save(kangsticker, "PNG")
                 bot.add_sticker_to_set(user_id=user.id,
