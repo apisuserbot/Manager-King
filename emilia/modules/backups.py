@@ -785,7 +785,7 @@ def export_data(update, context):
 		chat_name = update.effective_message.chat.title
 
 	jam = time.time()
-	new_jam = jam + 43200
+	new_jam = jam + 0
 	cek = get_chat(chat_id, chat_data)
 	if cek.get('status'):
 		if jam <= int(cek.get('value')):
