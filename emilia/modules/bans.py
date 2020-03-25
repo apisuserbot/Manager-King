@@ -106,31 +106,22 @@ def ban(update, context):
         log += "\n<b>Reason:</b> {}".format(reason)
 
     try:
-        if conn:
-            context.bot.kickChatMember(chat_id, user_id)
-            context.bot.send_sticker(currentchat.id, BAN_STICKER)  # banhammer marie sticker
-            send_message(update.effective_message, tl(update.effective_message, "Terbanned pada *{}*! 😝").format(chat_name), parse_mode="markdown")
-        else:
-            chat.kick_member(user_id)
-            if message.text.split(None, 1)[0][1:] == "sban":
-                update.effective_message.delete()
-            else:
-                context.bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-                send_message(update.effective_message, tl(update.effective_message, "Terbanned! 😝"))
+        chat.kick_member(user_id)
+        keyboard = []
+        bot.send_sticker(chat.id, BAN_STICKER)
+        message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
         return log
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            send_message(update.effective_message, tl(update.effective_message, "Terbanned! 😝"), quote=False)
+            message.reply_text('Banned!', quote=False)
             return log
-        elif excp.message == "Message can't be deleted":
-            pass
         else:
             LOGGER.warning(update)
-            LOGGER.exception("ERROR membanned pengguna %s di obrolan %s (%s) disebabkan oleh %s", user_id, chat.title, chat.id,
+            LOGGER.exception("ERROR banning user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            send_message(update.effective_message, tl(update.effective_message, "Yah sial, aku tidak bisa banned pengguna itu 😒"))
+            message.reply_text("Well damn, I can't ban that user.")
 
     return ""
 
@@ -361,6 +352,7 @@ def kick(update, context):
                 context.bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
                 text = tl(update.effective_message, "Tertendang! 😝")
                 send_message(update.effective_message, text, parse_mode="markdown")
+        
         log = "<b>{}:</b>" \
               "\n#KICKED" \
               "\n<b>• Admin:</b> {}" \
