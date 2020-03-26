@@ -529,7 +529,7 @@ def main():
         updater.start_polling(poll_interval=0.0,
                               timeout=10,
                               clean=True,
-                              bootstrap_retries=-1
+                              bootstrap_retries=-1,
                               read_latency=3.0)
 
     updater.idle()
