@@ -286,18 +286,18 @@ def get_help(update, context):
     if chat.type != chat.PRIVATE:
 
         # update.effective_message.reply_text("Contact me in PM to get the list of possible commands.",
-        update.effective_message.reply_text(tl(update.effective_message, "Contact me in PM to get the list of possible commands."),
+        update.effective_message.reply_text(tl(update.effective_message, "Hubungi saya di PM untuk mendapatkan daftar perintah."),
                                             reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text=tl(update.effective_message, "Help"),
+                                                [[InlineKeyboardButton(text=tl(update.effective_message, "Tolong"),
                                                                        url="t.me/{}?start=help".format(
                                                                            context.bot.username))]]))
         return
 
     elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
         module = args[1].lower()
-        text = tl(update.effective_message, "Here is the available help for the *{}* module:\n").format(HELPABLE[module].__mod_name__) \
+        text = tl(update.effective_message, "Ini adalah bantuan yang tersedia untuk modul *{}*:\n").format(HELPABLE[module].__mod_name__) \
                + tl(update.effective_message, HELPABLE[module].__help__)
-        send_help(chat.id, text, InlineKeyboardMarkup([[InlineKeyboardButton(text=tl(update.effective_message, "⬅️ Back"), callback_data="help_back")]]))
+        send_help(chat.id, text, InlineKeyboardMarkup([[InlineKeyboardButton(text=tl(update.effective_message, "⬅️ Kembali"), callback_data="help_back")]]))
 
     else:
         send_help(chat.id, tl(update.effective_message, HELP_STRINGS))
@@ -312,20 +312,20 @@ def send_settings(chat_id, user_id, user=False):
                                         parse_mode=ParseMode.MARKDOWN)
 
         else:
-            dispatcher.bot.send_message(user_id, tl(chat_id, "Seems like there aren't any user specific settings available 😢"),
+            dispatcher.bot.send_message(user_id, tl(chat_id, "Sepertinya tidak ada pengaturan khusus pengguna yang tersedia 😢"),
                                         parse_mode=ParseMode.MARKDOWN)
 
     else:
         if CHAT_SETTINGS:
             chat_name = dispatcher.bot.getChat(chat_id).title
             dispatcher.bot.send_message(user_id,
-                                        text=tl(chat_id, "Which module would you like to check {}'s settings for?").format(
+                                        text=tl(chat_id, "Modul mana yang ingin Anda periksa untuk pengaturan {}?").format(
                                             chat_name),
                                         reply_markup=InlineKeyboardMarkup(
                                             paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)))
         else:
-            dispatcher.bot.send_message(user_id, tl(chat_id, "Seems like there aren't any chat settings available :'(\n "
-                                                 "Send this in a group chat you're admin in to find its current settings!"),
+            dispatcher.bot.send_message(user_id, tl(chat_id, "Sepertinya tidak ada pengaturan obrolan yang tersedia 😢\nKirim ini "
+                                                 "ke obrolan Anda sebagai admin untuk menemukan pengaturannya saat ini!"),
                                         parse_mode=ParseMode.MARKDOWN)
 
 
@@ -347,7 +347,7 @@ def settings_button(update, context):
             if isadmin == False or user.id != OWNER_ID:
                 query.message.edit_text("Your admin status has changed")
                 return
-            text = tl(update.effective_message, "*{}* has the following settings for the *{}* module:\n\n").format(escape_markdown(chat.title),
+            text = tl(update.effective_message, "*{}* memiliki pengaturan berikut untuk modul *{}* module:\n\n").format(escape_markdown(chat.title),
                                                                                      CHAT_SETTINGS[
                                                                                         module].__mod_name__) + \
                    CHAT_SETTINGS[module].__chat_settings__(chat_id, user.id)
@@ -355,7 +355,7 @@ def settings_button(update, context):
                 set_button = CHAT_SETTINGS[module].__chat_settings_btn__(chat_id, user.id)
             except AttributeError:
                 set_button = []
-            set_button.append([InlineKeyboardButton(text=tl(query.message, "⬅️ Back"),
+            set_button.append([InlineKeyboardButton(text=tl(query.message, "⬅️ kembali"),
                                                                callback_data="stngs_back({})".format(chat_id))])
             query.message.reply_text(text=text,
                                   parse_mode=ParseMode.MARKDOWN,
@@ -365,8 +365,8 @@ def settings_button(update, context):
             chat_id = prev_match.group(1)
             curr_page = int(prev_match.group(2))
             chat = context.bot.get_chat(chat_id)
-            query.message.reply_text(text=tl(update.effective_message, "Hi there! There are quite a few settings for {} - go ahead and "
-                                       "pick what you're interested in").format(chat.title),
+            query.message.reply_text(text=tl(update.effective_message, "Hai! Ada beberapa pengaturan untuk {} - lanjutkan dan pilih "
+                                       "lanjutkan dan pilih").format(chat.title),
                                   reply_markup=InlineKeyboardMarkup(
                                         paginate_modules(curr_page - 1, CHAT_SETTINGS, "stngs",
                                                          chat=chat_id)))
@@ -375,8 +375,8 @@ def settings_button(update, context):
             chat_id = next_match.group(1)
             next_page = int(next_match.group(2))
             chat = context.bot.get_chat(chat_id)
-            query.message.reply_text(text=tl(update.effective_message, "Hi there! There are quite a few settings for {} - go ahead and "
-                                       "pick what you're interested in").format(chat.title),
+            query.message.reply_text(text=tl(update.effective_message, "Hai! Ada beberapa pengaturan untuk {} - lanjutkan dan pilih "
+                                       "lanjutkan dan pilih").format(chat.title),
                                   reply_markup=InlineKeyboardMarkup(
                                         paginate_modules(next_page + 1, CHAT_SETTINGS, "stngs",
                                                          chat=chat_id)))
@@ -384,8 +384,8 @@ def settings_button(update, context):
         elif back_match:
             chat_id = back_match.group(1)
             chat = context.bot.get_chat(chat_id)
-            query.message.reply_text(text=tl(update.effective_message, "Hi there! There are quite a few settings for {} - go ahead and "
-                                       "pick what you're interested in").format(escape_markdown(chat.title)),
+            query.message.reply_text(text=tl(update.effective_message, "Hai! Ada beberapa pengaturan untuk {} - lanjutkan dan pilih "
+                                       "lanjutkan dan pilih").format(escape_markdown(chat.title)),
                                   parse_mode=ParseMode.MARKDOWN,
                                   reply_markup=InlineKeyboardMarkup(paginate_modules(0, CHAT_SETTINGS, "stngs",
                                                                                      chat=chat_id)))
@@ -416,10 +416,10 @@ def get_settings(update, context):
     # ONLY send settings in PM
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):
-            text = tl(update.effective_message, "Click here to get this chat's settings, as well as yours.")
+            text = tl(update.effective_message, "Klik di sini untuk mendapatkan pengaturan obrolan ini, serta milik Anda.")
             msg.reply_text(text,
                            reply_markup=InlineKeyboardMarkup(
-                               [[InlineKeyboardButton(text="Settings",
+                               [[InlineKeyboardButton(text="Pengaturan",
                                                       url="t.me/{}?start=stngs_{}".format(
                                                           context.bot.username, chat.id))]]))
         # else:
