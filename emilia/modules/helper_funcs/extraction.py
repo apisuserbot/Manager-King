@@ -73,7 +73,8 @@ def extract_user_and_text(message: Message, args: List[str]) -> (Optional[int], 
         message.bot.get_chat(user_id)
     except BadRequest as excp:
         if excp.message in ("User_id_invalid", "Chat not found"):
-            return "error", "Saya sepertinya tidak pernah berinteraksi dengan pengguna ini sebelumnya - silakan meneruskan pesan dari mereka untuk memberi saya kontrol! (Seperti boneka voodoo, saya butuh sepotong untuk bisa untuk menjalankan perintah tertentu...)"
+            return "error", "I don't seem to have interacted with this user before - please forward a message from them to give me control!"
+
         else:
             LOGGER.exception("Exception %s on user %s", excp.message, user_id)
 

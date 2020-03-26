@@ -11,7 +11,7 @@ from emilia import dispatcher, DEL_CMDS, SUDO_USERS, WHITELIST_USERS, LOGGER
 
 from emilia.modules import languages
 
-DUMP_CHAT = -1001220772029
+DUMP_CHAT = -100 #IDK
 
 def send_message(message, text, target_id=None, *args,**kwargs):
 	if not target_id:
@@ -50,6 +50,15 @@ def send_message_raw(chat_id, text, *args, **kwargs):
 					return dispatcher.bot.sendMessage(chat_id, text, *args,**kwargs)
 				except error.BadRequest as err:
 					LOGGER.exception("ERROR: {}".format(err))
+		elif str(err) == "Have no rights to send a message":
+			try:
+				dispatcher.bot.leaveChat(message.chat.id)
+				dispatcher.bot.sendMessage(-1001180408164, "I am leave chat `{}`\nBecause of: `Muted`".format(message.chat.title))
+			except error.BadRequest as err:
+				if str(err) == "Chat not found":
+					pass
+		else:
+			LOGGER.exception("ERROR: {}".format(err))
 				'''elif str(err) == "Have no rights to send a message":
 									try:
 										dispatcher.bot.leaveChat(message.chat.id)

@@ -359,10 +359,6 @@ def fed_info(update, context):
 			return
 		info = sql.get_fed_info(fed_id)
 
-	if is_user_fed_admin(fed_id, user.id) == False:
-		send_message(update.effective_message, tl(update.effective_message, "Hanya admin federasi yang dapat melakukan ini!"))
-		return
-
 	owner = context.bot.get_chat(info['owner'])
 	try:
 		owner_name = owner.first_name + " " + owner.last_name
@@ -1011,10 +1007,11 @@ def fed_broadcast(update, context):
 
 @run_async
 @spamcheck
-def fed_ban_list(update, context, chat_data):
+def fed_ban_list(update, context):
 	chat = update.effective_chat  # type: Optional[Chat]
 	user = update.effective_user  # type: Optional[User]
 	args = context.args
+	chat_data = context.chat_data
 
 	if chat.type == 'private':
 		send_message(update.effective_message, tl(update.effective_message, "Perintah ini di khususkan untuk grup, bukan pada PM!"))
@@ -1724,7 +1721,7 @@ def __user_info__(user_id, chat_id):
 
 		elif fban:
 			text = tl(chat_id, "Dilarang di federasi saat ini: <b>Ya</b>")
-			text += tl(chat_id, "\nAlasan: <code>{}</code>").format(fbanreason)
+			text += tl(chat_id, "\n<b>Alasan:</b> {}").format(fbanreason)
 		else:
 			text = tl(chat_id, "Dilarang di federasi saat ini: <b>Tidak</b>")
 	else:
@@ -1771,7 +1768,7 @@ FED_ADMIN_HANDLER = CommandHandler("fedadmins", fed_admin, pass_args=True)
 FED_USERBAN_HANDLER = CommandHandler("fbanlist", fed_ban_list, pass_args=True, pass_chat_data=True)
 FED_NOTIF_HANDLER = CommandHandler("fednotif", fed_notif, pass_args=True)
 FED_CHATLIST_HANDLER = CommandHandler("fedchats", fed_chats, pass_args=True)
-#FED_IMPORTBAN_HANDLER = CommandHandler("importfbans", fed_import_bans, pass_chat_data=True, filters=Filters.user(OWNER_ID))
+FED_IMPORTBAN_HANDLER = CommandHandler("importfbans", fed_import_bans, pass_chat_data=True, filters=Filters.user(OWNER_ID))
 FEDSTAT_USER = DisableAbleCommandHandler(["fedstat", "fbanstat"], fed_stat_user, pass_args=True)
 SET_FED_LOG = CommandHandler("setfedlog", set_fed_log, pass_args=True)
 UNSET_FED_LOG = CommandHandler("unsetfedlog", unset_fed_log, pass_args=True)
@@ -1799,7 +1796,7 @@ dispatcher.add_handler(FED_ADMIN_HANDLER)
 dispatcher.add_handler(FED_USERBAN_HANDLER)
 dispatcher.add_handler(FED_NOTIF_HANDLER)
 dispatcher.add_handler(FED_CHATLIST_HANDLER)
-#dispatcher.add_handler(FED_IMPORTBAN_HANDLER)
+dispatcher.add_handler(FED_IMPORTBAN_HANDLER)
 dispatcher.add_handler(FEDSTAT_USER)
 dispatcher.add_handler(SET_FED_LOG)
 dispatcher.add_handler(UNSET_FED_LOG)

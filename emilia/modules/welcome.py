@@ -22,13 +22,14 @@ from emilia.modules.helper_funcs.chat_status import user_admin, is_user_ban_prot
 from emilia.modules.helper_funcs.misc import build_keyboard_parser, revert_buttons
 from emilia.modules.helper_funcs.msg_types import get_welcome_type
 from emilia.modules.helper_funcs.string_handling import markdown_parser, \
-	escape_invalid_curly_brackets, extract_time
+	escape_invalid_curly_brackets, extract_time, make_time
+
 from emilia.modules.helper_funcs.welcome_timeout import welcome_timeout
 from emilia.modules.log_channel import loggable
 
 import emilia.modules.sql.feds_sql as fedsql
 from emilia.modules.languages import tl
-from emilia.modules.helper_funcs.alternate import send_message
+from emilia.modules.helper_funcs.alternate import send_message, leave_chat
 
 
 OWNER_SPECIAL = False
@@ -93,6 +94,8 @@ def send(update, message, keyboard, backup_message):
 			LOGGER.warning(message)
 			LOGGER.warning(keyboard)
 			LOGGER.exception("Could not parse! got invalid url host errors")
+		elif excp.message == "Reply message not found":
+			msg = dispatcher.bot.send_message(chat.id, message, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard, disable_web_page_preview=True)
 		else:
 			try:
 				msg = dispatcher.bot.send_message(chat.id, markdown_parser(backup_message +
@@ -104,6 +107,11 @@ def send(update, message, keyboard, backup_message):
 			except BadRequest:
 				if IS_DEBUG:
 					print("Cannot send welcome msg, bot is muted!")
+			except BadRequest as err:
+				if IS_DEBUG:
+					print("Cannot send welcome msg at {} ({})".format(chat.title, chat.id))
+				if str(err) == "Have no rights to send a message":
+					leave_chat(update.message)
 				return ""
 	return msg
 
@@ -705,10 +713,10 @@ def security(update, context):
 		else:
 			send_message(update.effective_message, tl(update.effective_message, "Silakan tulis `on`/`ya`/`off`/`ga`!"), parse_mode=ParseMode.MARKDOWN)
 	else:
-		getcur, extra_verify, cur_value, timeout, cust_text = sql.welcome_security(chat.id)
+		getcur, extra_verify, cur_value, timeout, timeout_mode, cust_text = sql.welcome_security(chat.id)
 		if cur_value[:1] == "0":
 			cur_value = tl(update.effective_message, "Selamanya")
-		text = tl(update.effective_message, "Pengaturan saat ini adalah:\nWelcome security: `{}`\nVerify security: `{}`\nMember akan di mute selama: `{}`\nTombol unmute custom: `{}`").format(getcur, extra_verify, cur_value, cust_text)
+		text = tl(update.effective_message, "Pengaturan saat ini adalah:\nWelcome security: `{}`\nVerify security: `{}`\nMember akan di mute selama: `{}`\nWaktu verifikasi timeout: `{}` ({})\nTombol unmute custom: `{}`").format(getcur, extra_verify, cur_value, make_time(int(timeout)), "kick" if 1 else "banned", cust_text)
 		send_message(update.effective_message, text, parse_mode="markdown")
 
 
@@ -1067,18 +1075,6 @@ def welcome_help(update, context):
 	send_message(update.effective_message, tl(update.effective_message, "WELC_HELP_TXT").format(dispatcher.bot.username), parse_mode=ParseMode.MARKDOWN)
 
 
-# TODO: get welcome data from group butler snap
-# def __import_data__(chat_id, data):
-#     welcome = data.get('info', {}).get('rules')
-#     welcome = welcome.replace('$username', '{username}')
-#     welcome = welcome.replace('$name', '{fullname}')
-#     welcome = welcome.replace('$id', '{id}')
-#     welcome = welcome.replace('$title', '{chatname}')
-#     welcome = welcome.replace('$surname', '{lastname}')
-#     welcome = welcome.replace('$rules', '{rules}')
-#     sql.set_custom_welcome(chat_id, welcome, sql.Types.TEXT)
-
-
 def __migrate__(old_chat_id, new_chat_id):
 	sql.migrate_chat(old_chat_id, new_chat_id)
 
@@ -1116,6 +1112,7 @@ def check_cas(bot: Bot, user_id, user, message):
 				text = "*New FedBan*\n*Fed:* `HitsukiOfficial`\n*FedAdmin*: {}\n*User:* {}\n*User ID:* `{}`\n*Reason:* [CAS ban](https://combot.org/cas/query?u={})".format(mention_markdown(899678392, "Hitsuki"), mention_markdown(user_id, user.first_name + (" " + user.last_name if user.last_name != None else "")), user_id, user_id)
 				context.bot.sendMessage(-1001433482821, text, parse_mode="markdown", disable_web_page_preview=True)
 				print(">>> NEW FBAN CAS: {} {} in {}".format(user.first_name, user_id, message.chat.title))
+
 
 def check_sw(bot: Bot, user_id, user, message):
 	try:
