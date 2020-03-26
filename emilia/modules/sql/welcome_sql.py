@@ -123,7 +123,6 @@ class AllowedChat(BASE):
     def __init__(self, chat_id):
         self.chat_id = str(chat_id)
 
-
 class WelcomeTimeout(BASE):
 	__tablename__ = "welcome_timeout"
 	chat_id = Column(String(14), primary_key=True)
