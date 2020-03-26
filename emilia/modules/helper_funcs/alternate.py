@@ -59,7 +59,7 @@ def send_message_raw(chat_id, text, *args, **kwargs):
 					pass
 		else:
 			LOGGER.exception("ERROR: {}".format(err))
-				'''elif str(err) == "Have no rights to send a message":
+		'''elif str(err) == "Have no rights to send a message":
 									try:
 										dispatcher.bot.leaveChat(message.chat.id)
 										dispatcher.bot.sendMessage(DUMP_CHAT, "I am leave chat `{}`\nBecause of: `Muted`".format(message.chat.title))
