@@ -145,7 +145,7 @@ def start(update, context):
             buttons = InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="Add me to your group", url="https://t.me/DirtyRegetBot?startgroup=new")],
                 [InlineKeyboardButton(text="⚙️ Connections", callback_data="main_connect")],
-                [InlineKeyboardButton(text="🇺🇸 Language", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Help", url="https://t.me/DirtyRegetBot?start=help")]])
+                [InlineKeyboardButton(text="🇺🇲 Language", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Help", url="https://t.me/DirtyRegetBot?start=help")]])
             update.effective_message.reply_text(
                 tl(update.effective_message, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
                 disable_web_page_preview=True,
@@ -366,7 +366,7 @@ def settings_button(update, context):
             curr_page = int(prev_match.group(2))
             chat = context.bot.get_chat(chat_id)
             query.message.reply_text(text=tl(update.effective_message, "Hai! Ada beberapa pengaturan untuk {} - lanjutkan dan pilih "
-                                       "lanjutkan dan pilih").format(chat.title),
+                                       "apa yang Anda minati.").format(chat.title),
                                   reply_markup=InlineKeyboardMarkup(
                                         paginate_modules(curr_page - 1, CHAT_SETTINGS, "stngs",
                                                          chat=chat_id)))
@@ -376,7 +376,7 @@ def settings_button(update, context):
             next_page = int(next_match.group(2))
             chat = context.bot.get_chat(chat_id)
             query.message.reply_text(text=tl(update.effective_message, "Hai! Ada beberapa pengaturan untuk {} - lanjutkan dan pilih "
-                                       "lanjutkan dan pilih").format(chat.title),
+                                       "apa yang Anda minati.").format(chat.title),
                                   reply_markup=InlineKeyboardMarkup(
                                         paginate_modules(next_page + 1, CHAT_SETTINGS, "stngs",
                                                          chat=chat_id)))
@@ -385,7 +385,7 @@ def settings_button(update, context):
             chat_id = back_match.group(1)
             chat = context.bot.get_chat(chat_id)
             query.message.reply_text(text=tl(update.effective_message, "Hai! Ada beberapa pengaturan untuk {} - lanjutkan dan pilih "
-                                       "lanjutkan dan pilih").format(escape_markdown(chat.title)),
+                                       "apa yang Anda minati.").format(escape_markdown(chat.title)),
                                   parse_mode=ParseMode.MARKDOWN,
                                   reply_markup=InlineKeyboardMarkup(paginate_modules(0, CHAT_SETTINGS, "stngs",
                                                                                      chat=chat_id)))
