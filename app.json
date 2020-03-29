@@ -73,11 +73,11 @@
       "description": "Get API KEY from https://wall.alphacoders.com/",
       "value": ""
     },
-    "DOG_API": {
+    "DOG_API_KEY": {
       "description": "Get API KEY from http://thedogapi.com",
       "value": ""
     },
-    "CAT_API": {
+    "CAT_API_KEY": {
       "description": "Get API KEY from http://thecatapi.com",
       "value": ""
     }
