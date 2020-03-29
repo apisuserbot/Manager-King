@@ -11,6 +11,7 @@ from emilia.modules.disable import DisableAbleCommandHandler
 
 @run_async
 def wall(update, context):
+    args = context.args
     chat_id = update.effective_chat.id
     msg = update.effective_message
     msg_id = update.effective_message.message_id
