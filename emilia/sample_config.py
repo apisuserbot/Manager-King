@@ -38,6 +38,8 @@ class Config(object):
     SPAMMERS = "" # Will not allow to interact with bot
     TEMPORARY_DATA = None # Temporary data for backup module, use int number
     WALL_API = None
+    CAT_API_KEY = None
+    DOG_API_KEY = None
 
 
 class Production(Config):
