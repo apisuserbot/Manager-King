@@ -81,6 +81,7 @@ if ENV:
 	TEMPORARY_DATA = os.environ.get('TEMPORARY_DATA', None)
 	SPAMWATCH_TOKEN = os.environ.get('SPAMWATCH_TOKEN', None)
 	WALL_API = os.environ.get('WALL_API', None)
+	CAT_API_KEY = os.environ.get('CAT_API_KEY', None)
 
 else:
 	from emilia.config import Development as Config
