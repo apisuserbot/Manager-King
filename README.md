@@ -28,3 +28,10 @@ If you want to use some files of this repo, always make sure to give the proper 
 creators of each module, but please do not remove the credits to me or placed by me in the modules.
 ```
 ----------
+
+## Installing
+----------
+### The Easy Way
+
+[![Deploy To Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
