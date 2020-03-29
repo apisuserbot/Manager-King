@@ -148,9 +148,9 @@ def new_member(update, context):
 			# Give the owner a special welcome
 			if OWNER_SPECIAL and new_mem.id == OWNER_ID:
 				if cleanserv:
-					context.bot.send_message(chat.id, tl(update.effective_message, "Master has come home! Let's start this party! 😆"))
+					context.bot.send_message(chat.id, tl(update.effective_message, "Master telah pulang! Mari kita mulai pesta ini! 😆"))
 				else:
-					send_message(update.effective_message, tl(update.effective_message, "Master has come home! Let's start this party! 😆"))
+					send_message(update.effective_message, tl(update.effective_message, "Master telah pulang! Mari kita mulai pesta ini! 😆"))
 				continue
 
 			# Don't welcome yourself
