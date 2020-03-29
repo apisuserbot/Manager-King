@@ -35,7 +35,7 @@
     "MESSAGE_DUMP": {
       "description": "optional: a chat where your replied saved messages are stored, to stop people deleting their old",
       "value": "",
-      "required": -1001396716259
+      "required": "-1001396716259"
     },
     "STRICT_GBAN": {
       "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
@@ -68,6 +68,18 @@
     "ALLOW_EXCL": {
       "description": "Whether to allow using exclamation marks ! for commands as well as /.",
       "value": "True"
+    },
+    "WALL_API": {
+      "description": "Get API KEY from https://wall.alphacoders.com/",
+      "value": ""
+    },
+    "DOG_API_KEY": {
+      "description": "Get API KEY from http://thedogapi.com",
+      "value": ""
+    },
+    "CAT_API_KEY": {
+      "description": "Get API KEY from http://thecatapi.com",
+      "value": ""
     }
   },
   "addons": [
