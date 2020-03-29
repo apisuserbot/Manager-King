@@ -68,6 +68,10 @@
     "ALLOW_EXCL": {
       "description": "Whether to allow using exclamation marks ! for commands as well as /.",
       "value": "True"
+    },
+    "WALL_API": {
+      "description": "Get API KEY from https://wall.alphacoders.com/",
+      "value": ""
     }
   },
   "addons": [
