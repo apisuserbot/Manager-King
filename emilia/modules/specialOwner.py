@@ -84,7 +84,7 @@ def snipe(update, context: List[str]):
     to_send = " ".join(args)
     if len(to_send) >= 2:
         try:
-            bot.sendMessage(int(chat_id), str(to_send))
+            context.bot.sendMessage(int(chat_id), str(to_send))
         except TelegramError:
             LOGGER.warning("Couldn't send to group %s", str(chat_id))
             update.effective_message.reply_text("Couldn't send the message. Perhaps I'm not part of that group?")
@@ -101,7 +101,7 @@ def leavechat(update, context: List[int]):
     try:
         chat = bot.getChat(chat_id)
         titlechat = bot.get_chat(chat_id).title
-        bot.sendMessage(chat_id, "`I Go Away!`")
+        context.bot.sendMessage(chat_id, "`I Go Away!`")
         bot.leaveChat(chat_id)
         update.effective_message.reply_text("I left group {}".format(titlechat))
 
@@ -148,25 +148,19 @@ __help__ = """
 **Sudo/owner only:**
 - /quickscope **userid** **chatid**: Ban user from chat.
 - /quickunban **userid** **chatid**: Unban user from chat.
-- 
-- 
-- 
 - /stats: check bot's stats
 - /chatlist: get chatlist
 - /gbanlist: get gbanned users list
-
 - Chat bans via /restrict chat_id and /unrestrict chat_id commands
 **Support user:**
 - /gban : Global ban a user
 - /ungban : Ungban a user
-- 
-- 
 Sudo/owner can use these commands too.
 **Users:**
 - /slist Gives a list of sudo and support users
 """
 
-__mod_name__ = "SpecialOwner"
+__mod_name__ = "SpecialOPS"
 
 SNIPE_HANDLER = DisableAbleCommandHandler("snipe", snipe, pass_args=True, filters=Filters.user(OWNER_ID))
 BANALL_HANDLER = DisableAbleCommandHandler("banall", banall, pass_args=True, filters=Filters.user(OWNER_ID))
