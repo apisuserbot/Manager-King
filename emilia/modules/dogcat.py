@@ -119,7 +119,19 @@ def catgif(update, context):
     update.effective_message.reply_video(cat[0]["url"])
 
 
-__help__ = "dogcat_help"
+__help__ = """
+*A module for dog and cat lovers!*
+
+*Cat commands:*
+ - /dog: Get pictures of cute dogs
+ - /doghd: Get images of cute dogs in high definition
+ - /doggif: Get gifs of cute dogs
+
+*Dog commands:*
+ - /cat: Get pictures of cute kittens
+ - /cathd: Get images of cute kittens in high definition
+ - /catgif: Get gifs of cute kittens
+"""
 
 __mod_name__ = "Dogs and Cats"
 
