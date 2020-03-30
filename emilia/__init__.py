@@ -84,6 +84,7 @@ if ENV:
 	CAT_API_KEY = os.environ.get('CAT_API_KEY', None)
 	DOG_API_KEY = os.environ.get('DOG_API_KEY', None)
 	API_WEATHER = os.environ.get('API_OPENWEATHER', None)
+	TIME_API_KEY = os.environ.get('TIME_API_KEY', None)
 
 else:
 	from emilia.config import Development as Config
