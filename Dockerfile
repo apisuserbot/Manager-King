@@ -43,6 +43,7 @@ RUN apk add --no-cache --update \
     python-dev \
     python3-dev \
     sqlite-dev \
+    speedtest-cli \
     sudo \
     zlib-dev \
     zip
