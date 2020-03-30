@@ -28,7 +28,7 @@ def speed_convert(size):
 @run_async
 def speedtst(update, context):
     chat = update.effective_chat
-    del_msg = bot.send_message(chat.id, "<code>🔄 Running speedtest...</code>",
+    del_msg = context.bot.send_message(chat.id, "<code>🔄 Running speedtest...</code>",
                                parse_mode=ParseMode.HTML)
     test = speedtest.Speedtest()
     test.get_best_server()
