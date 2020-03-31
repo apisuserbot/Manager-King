@@ -8,5 +8,6 @@ RUN git clone https://github.com/bagus02/dirtybotx2.git /root/emilia
 RUN mkdir /root/emilia/bin/
 WORKDIR /root/emilia/
 RUN pip3 install tswift
+RUN pip3 install gTTS
 
 CMD ["python3","-m","emilia"]
