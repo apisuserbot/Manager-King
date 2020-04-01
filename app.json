@@ -79,6 +79,14 @@
     "CAT_API_KEY": {
       "description": "Get API KEY from http://thecatapi.com",
       "value": ""
+    },
+    "API_OPENWEATHER": {
+      "description": "Get API KEY from openweathermap",
+      "value": ""
+    },
+    "TIME_API_KEY": {
+      "description": "Get API KEY from timezonedb",
+      "value": ""
     }
   },
   "addons": [
