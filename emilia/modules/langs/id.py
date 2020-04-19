@@ -420,6 +420,15 @@ CATATAN: Dalam grup, hanya admin yang dapat menambah/menghapus tautan RSS ke lan
  - /me: akan mendapatkan info Anda atau pengguna lain
 """,
 
+# LastFM
+"lastfm_help": """
+Share what you're what listening to with the help of this module!
+*Available commands:*
+ - /setuser <username>: sets your last.fm username.
+ - /clearuser: removes your last.fm username from the bot's database.
+ - /lastfm: returns what you're scrobbling on last.fm.
+""",
+
 # GitHub
 "github_help": """
 *Need some GitHub release but don't want to have to go to GitHub and go to the repository? Here are some commands that can make your life easier with GitHub.*
