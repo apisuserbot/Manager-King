@@ -25,7 +25,7 @@ from zalgo_text import zalgo
 
 from deeppyer import deepfry
 from emilia.modules.disable import DisableAbleCommandHandler
-from emilia import dispatcher, spamcheck
+from emilia import dispatcher, spamcheck, DEEPFRY_TOKEN
 from emilia.modules.languages import tl
 
 MAXNUMURL = 'https://raw.githubusercontent.com/atanet90/expression-pack/master/meta'
@@ -110,7 +110,7 @@ def deepfryer(update, context):
     loop.close()
 
 
-async def process_deepfry(image: Image, reply: Message, bot: Bot):
+async def process_deepfry(image: Image, reply: Message, bot: Bot, context):
     bot = context.bot
     image = await deepfry(img=image,
                           token=DEEPFRY_TOKEN,
@@ -411,4 +411,3 @@ dispatcher.add_handler(FORBES_HANDLER)
 dispatcher.add_handler(CHINESEMEMES_HANDLER)
 dispatcher.add_handler(MOCK_HANDLER)
 dispatcher.add_handler(DEEPFRY_HANDLER)
-
