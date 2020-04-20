@@ -516,6 +516,7 @@ Nah, di sini Anda pergi:
  - /bify <reply>: Membalas pesan dengan mengganti karakter acak dengan B emoji.
  - /clap <reply>: Menambahkan EMOJI bertepuk di awal, akhir, dan di setiap ruang dalam pesan.
  - /cp <reply>: A replica of mattatas copypasta command.
+ - /deepfry <reply>: for when your images/stickers need to get a little fried.
 """,
 
 # warns
