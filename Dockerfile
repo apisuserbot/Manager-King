@@ -1,5 +1,5 @@
 # We're using prebuilt docker images
-FROM dasbastard/jnckdclxvi:latest
+FROM dasbastard/dirty:latest
 
 #
 # Clone repo and prepare working directory
@@ -7,8 +7,8 @@ FROM dasbastard/jnckdclxvi:latest
 RUN git clone 'https://github.com/AnggaR96s/dirtybotx2.git' /root/emilia
 RUN mkdir /root/emilia/bin/
 WORKDIR /root/emilia/
-RUN pip3 install tswift
-RUN pip3 install gTTS
-RUN pip3 install pynewtonmath
+
+# Try Upgrade some requirements
+RUN pip3 install -r requirements.txt --upgrade
 
 CMD ["python3","-m","emilia"]

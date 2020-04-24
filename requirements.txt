@@ -25,3 +25,6 @@ tldextract
 pytz
 kbbi
 speedtest-cli
+tswift
+gTTS
+pynewtonmath
