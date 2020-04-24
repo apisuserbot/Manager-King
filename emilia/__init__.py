@@ -77,12 +77,22 @@ if ENV:
 	WORKERS = int(os.environ.get('WORKERS', 8))
 	BAN_STICKER = os.environ.get('BAN_STICKER', 'CAADBAAD4kYAAuOnXQW5LUN400QOBQI')
 	# ALLOW_EXCL = os.environ.get('ALLOW_EXCL', False)
+	LASTFM_API_KEY = os.environ.get('LASTFM_API_KEY', "")
 	CUSTOM_CMD = os.environ.get('CUSTOM_CMD', False)
 	TEMPORARY_DATA = os.environ.get('TEMPORARY_DATA', None)
 	SPAMWATCH_TOKEN = os.environ.get('SPAMWATCH_TOKEN', None)
 	WALL_API = os.environ.get('WALL_API', None)
 	CAT_API_KEY = os.environ.get('CAT_API_KEY', None)
 	DOG_API_KEY = os.environ.get('DOG_API_KEY', None)
+
+	WALL_API = os.environ.get('WALL_API', None)
+	CAT_API_KEY = os.environ.get('CAT_API_KEY', None)
+	DOG_API_KEY = os.environ.get('DOG_API_KEY', None)
+	API_WEATHER = os.environ.get('API_OPENWEATHER', None)
+	TIME_API_KEY = os.environ.get('TIME_API_KEY', None)
+
+	DEEPFRY_TOKEN = os.environ.get('DEEPFRY_TOKEN', "")
+
 
 else:
 	from emilia.config import Development as Config
@@ -138,8 +148,10 @@ else:
 	WORKERS = Config.WORKERS
 	BAN_STICKER = Config.BAN_STICKER
 	# ALLOW_EXCL = Config.ALLOW_EXCL
+	LASTFM_API_KEY = Config.LASTFM_API_KEY
 	CUSTOM_CMD = Config.CUSTOM_CMD
 	TEMPORARY_DATA = Config.TEMPORARY_DATA
+	DEEPFRY_TOKEN = Config.DEEPFRY_TOKEN
 	try:
 		SPAMWATCH_TOKEN = Config.SPAMWATCH_TOKEN
 	except:

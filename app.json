@@ -34,8 +34,7 @@
     },
     "MESSAGE_DUMP": {
       "description": "optional: a chat where your replied saved messages are stored, to stop people deleting their old",
-      "value": "",
-      "required": "-1001396716259"
+      "value": "-1001396716259"
     },
     "STRICT_GBAN": {
       "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
@@ -79,6 +78,14 @@
     },
     "CAT_API_KEY": {
       "description": "Get API KEY from http://thecatapi.com",
+      "value": ""
+    },
+    "API_OPENWEATHER": {
+      "description": "Get API KEY from openweathermap",
+      "value": ""
+    },
+    "TIME_API_KEY": {
+      "description": "Get API KEY from timezonedb",
       "value": ""
     }
   },

@@ -36,9 +36,9 @@ Dia hanya orang biasa, jadi akan sangat membantu dia!
 Jika anda memang berminat untuk donate, silahkan kunjungi ayrahikari.github.io/donations.html, Terima kasih 😁""",
 	
 # Help modules
-	"language_help": """Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka Emilia menanggapi dalam bahasa mereka sendiri.
+	"language_help": """Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka Dirty menanggapi dalam bahasa mereka sendiri.
 
-Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan Emilia menjadi bahasa pilihan Anda!
+Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan Dirty menjadi bahasa pilihan Anda!
 
 Bahasa yang tersedia adalah:
 - 🇮🇩 Indonesia
@@ -420,6 +420,15 @@ CATATAN: Dalam grup, hanya admin yang dapat menambah/menghapus tautan RSS ke lan
  - /me: akan mendapatkan info Anda atau pengguna lain
 """,
 
+# LastFM
+"lastfm_help": """
+Share what you're what listening to with the help of this module!
+*Available commands:*
+ - /setuser <username>: sets your last.fm username.
+ - /clearuser: removes your last.fm username from the bot's database.
+ - /lastfm: returns what you're scrobbling on last.fm.
+""",
+
 # GitHub
 "github_help": """
 *Need some GitHub release but don't want to have to go to GitHub and go to the repository? Here are some commands that can make your life easier with GitHub.*
@@ -507,6 +516,7 @@ Nah, di sini Anda pergi:
  - /bify <reply>: Membalas pesan dengan mengganti karakter acak dengan B emoji.
  - /clap <reply>: Menambahkan EMOJI bertepuk di awal, akhir, dan di setiap ruang dalam pesan.
  - /cp <reply>: A replica of mattatas copypasta command.
+ - /deepfry <reply>: for when your images/stickers need to get a little fried.
 """,
 
 # warns

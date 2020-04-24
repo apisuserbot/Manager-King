@@ -29,13 +29,13 @@ def getData(url, index):
     name = api.getReleaseName(recentRelease)
     assets = api.getAssets(recentRelease)
     releaseName = api.getReleaseName(recentRelease)
-    message = "Author: [{}]({})\n".format(author, authorUrl)
-    message += "Release Name: "+releaseName+"\n\n"
+    message = "<b>Author:</b> <a href='{}'>{}</a>\n".format(authorUrl, author)
+    message += "<b>Release Name:</b> "+releaseName+"\n\n"
     for asset in assets:
-        message += "*Asset:* \n"
+        message += "<b>Asset:</b> \n"
         fileName = api.getReleaseFileName(asset)
         fileURL = api.getReleaseFileURL(asset)
-        assetFile = "[{}]({})".format(fileName, fileURL)
+        assetFile = "<a href='{}'>{}</a>".format(fileURL, fileName)
         sizeB = ((api.getSize(asset))/1024)/1024
         size = "{0:.2f}".format(sizeB)
         downloadCount = api.getDownloadCount(asset)
@@ -52,7 +52,7 @@ def getRepo(bot, update, reponame, show_none=True, no_format=False):
     repo = sql.get_repo(str(chat_id), reponame)
     if repo:
         return repo.value, repo.backoffset
-    return None
+    return None, None
 
 @run_async
 @spamcheck
@@ -67,7 +67,7 @@ def getRelease(update, context):
         index = int(args[1])
     url = args[0]
     text = getData(url, index)
-    msg.reply_text(text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+    msg.reply_text(text, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     return
 
 @run_async
@@ -79,8 +79,11 @@ def hashFetch(update, context):
     fst_word = message.split()[0]
     no_hash = fst_word[1:]
     url, index = getRepo(context.bot, update, no_hash)
+    if url is None and index is None:
+        msg.reply_text("There was a problem parsing your request. Likely this is not a saved repo shortcut", parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+        return
     text = getData(url, index)
-    msg.reply_text(text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+    msg.reply_text(text, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     return
     
 @run_async
@@ -92,8 +95,11 @@ def cmdFetch(update, context):
         msg.reply_text("Invalid repo name")
         return
     url, index = getRepo(context.bot, update, args[0])
+    if url is None and index is None:
+        msg.reply_text("There was a problem parsing your request. Likely this is not a saved repo shortcut", parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+        return
     text = getData(url, index)
-    msg.reply_text(text, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True)
+    msg.reply_text(text, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
     return
 
 
@@ -106,6 +112,9 @@ def changelog(update, context):
         msg.reply_text("Invalid repo name")
         return
     url, index = getRepo(context.bot, update, args[0])
+    if url is None and index is None:
+        msg.reply_text("There was a problem parsing your request. Likely this is not a saved repo shortcut", parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+        return
     if not api.getData(url):
         msg.reply_text("Invalid <user>/<repo> combo")
         return
@@ -155,18 +164,18 @@ def listRepo(update, context):
     chat = update.effective_chat
     chat_name = chat.title or chat.first or chat.username
     repo_list = sql.get_all_repos(str(chat_id))
-    msg = "*GitHub repo shotcuts in {}:*\n"
-    des = "\nYou can retrieve these repos by using `/fetch repo`, or `&repo`\n"
+    msg = "<b>GitHub repo shotcuts in {}:</b>\n"
+    des = "\nYou can retrieve these repos by using <code>/fetch repo</code>, or <code>&repo</code>\n"
     for repo in repo_list:
-        repo_name = (" • `&{}`\n".format(repo.name))
+        repo_name = (" • <code>&{}</code>\n".format(repo.name))
         if len(msg) + len(repo_name) > MAX_MESSAGE_LENGTH:
-            update.effective_message.reply_text(msg, parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text(msg, parse_mode=ParseMode.HTML)
             msg = ""
         msg += repo_name
-    if msg == "*List of repo shotcuts in {}:*\n":
+    if msg == "<b>List of repo shotcuts in {}:</b>\n":
         update.effective_message.reply_text("No repo shortcuts in this chat!")
     elif len(msg) != 0:
-        update.effective_message.reply_text(msg.format(chat_name) + des, parse_mode=ParseMode.MARKDOWN)
+        update.effective_message.reply_text(msg.format(chat_name) + des, parse_mode=ParseMode.HTML)
         
 def getVer(update, context):
     msg = update.effective_message
