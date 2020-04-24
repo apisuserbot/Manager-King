@@ -9,6 +9,6 @@ RUN mkdir /root/emilia/bin/
 WORKDIR /root/emilia/
 
 # Try Upgrade some requirements
-RUN pip3 install -r requirements.txt --upgrade
+# RUN pip3 install -r requirements.txt --upgrade
 
 CMD ["python3","-m","emilia"]
