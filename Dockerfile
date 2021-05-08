@@ -1,9 +1,9 @@
 # We're using prebuilt docker images
 FROM dasbastard/dirty:latest
 
-# Dockerfile
+# Docker
 # Clone repo and prepare working directory
-# Dockerfile
+# Docker
 RUN git clone 'https://github.com/apisuserbot/Manager-King.git' /root/emilia
 RUN mkdir /root/emilia/bin/
 WORKDIR /root/emilia/
