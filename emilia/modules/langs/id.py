@@ -9,9 +9,9 @@ Hai {}, nama saya {}! Saya seorang manajer grup yang dikelola oleh [master saya 
 Anda dapat menemukan daftar perintah yang tersedia dengan /help.
 """,
 	"help_text": """
-Hai! Nama saya adalah *Dirty*.
+Hai! Nama saya adalah *Manager-King*
 Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \
-hal-hal yang bisa saya bantu.
+hal-hal yang bisa saya bantu
 
 *Perintah utama* yang tersedia:
  - /start: mulai bot
