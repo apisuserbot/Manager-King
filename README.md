@@ -1,36 +1,39 @@
 # Manager-King
+
+![Logo Manager](https://telegra.ph/file/6ba6021e53d713a4741b7.jpg)
+
+----------
+Bot Python telegram modular berjalan di python3 dengan database sqlalchemy
+
+Awalnya bot manajemen grup sederhana dengan beberapa fitur admin, telah berkembang menjadi
+dasar untuk bot modular yang bertujuan untuk menyediakan perluasan modul sederhana melalui drag and drop sederhana
+
+[Manager](https://t.me/manage_king_bot)
+
+Dengan Base [Emilia Hikari](https://github.com/AyraHikari/EmiliaHikari)
+
+## Spesial Kredit
 ----------
 
-A modular telegram Python bot running on python3 with an sqlalchemy database.
-
-Originally a simple group management bot with multiple admin features, it has evolved into becoming 
-a basis for modular bots aiming to provide simple plugin expansion via a simple drag and drop.
-
-Can be found as [DirtyBot](https://t.me/DirtyReget_Bot)
-
-Based on [Emilia Hikari](https://github.com/AyraHikari/EmiliaHikari)
-
-## Special Credits
-----------
-
-### Thanks to this users:
-* [@PaulSonOfLars](https://github.com/PaulSonOfLars) - marie creator, inspiration to do many things.
-* [@MrYacha](https://github.com/MrYacha) - for welcome security base and connection base and maybe others.
-* [@RealAkito](https://github.com/RealAkito) - for reworked federation, Android module and other things.
-* [@RaphielGang](https://github.com/RaphielGang) - for the base of the direct link module.
-* [@AvinashReddy3108](https://github.com/AvinashReddy3108) - for the base used in Dockerfile.
-* [@AnimeKaizoku](https://github.com/AnimeKaizoku) - for dbcleanup module
-* [@nunopenim](https://github.com/nunopenim) - for the codes of CAS and GitHub
+### Terima kasih kepada pengguna ini
+* [@PaulSonOfLars](https://github.com/PaulSonOfLars) - marie pembuat, inspirasi untuk melakukan banyak hal.
+* [@MrYacha](https://github.com/MrYacha) - untuk basis keamanan dan basis koneksi selamat datang dan mungkin yang lain
+* [@RealAkito](https://github.com/RealAkito) - untuk federasi yang dikerjakan ulang, modul Android, dan hal-hal lain
+* [@RaphielGang](https://github.com/RaphielGang) - untuk dasar modul tautan langsung
+* [@AvinashReddy3108](https://github.com/AvinashReddy3108) - untuk dasar yang digunakan dalam Dockerfile
+* [@AnimeKaizoku](https://github.com/AnimeKaizoku) - untuk modul dbcleanup
+* [@nunopenim](https://github.com/nunopenim) - untuk kode CAS dan GitHub
+* [@apisuserbor](https://github.com/apisuserbot) - untuk menambahkan img pada start text modul
 
 ----------
 ```
-If you want to use some files of this repo, always make sure to give the proper credits to the 
-creators of each module, but please do not remove the credits to me or placed by me in the modules.
+Jika Anda ingin menggunakan beberapa file repo ini, selalu pastikan untuk memberikan kredit yang tepat untuk
+pencipta setiap modul, tetapi tolong jangan hapus kredit kepada saya atau ditempatkan oleh saya di modul
 ```
 ----------
 
 ## Installing
 ----------
-### The Easy Way
+### Deploy 
 
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/apisuserbot/Manager-King/tree/master"> <img src="https://img.shields.io/badge/Deploy%20Ke%20Heroku-blue?style=flat&logo=heroku" width="210" height="34.45" /></a></p>
