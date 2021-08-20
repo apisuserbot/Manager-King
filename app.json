@@ -25,6 +25,10 @@
       "description": "Dapatkan Bot Token Di @BotFather",
       "value": ""
     },
+    "MANAGER_IMG": {
+      "description": "Foto Botmu Dengan Link Telegraph",
+      "value": ""
+    },
     "OWNER_ID": {
       "description": "ID Telegramu",
       "value": ""
