@@ -1,92 +1,88 @@
 {
-  "name": "DirtyBot",
-  "description": "Telegram's sassiest group manager. Modular Telegram group management bot!",
+  "name": "Manager King",
+  "description": "Untuk Bot Assistant Di Grup Telegram Anda!",
+  "logo": "",
   "keywords": [
     "telegram",
     "best",
     "group",
     "manager",
-    "3"
   ],
-  "repository": "https://github.com/bagus02/dirtybotx2",
-  "success_url": "https://t.me/Aflky02",
+  "repository": "https://github.com/apisuserbot/Manager-King",
+  "success_url": "# SUCCES",
   "stack": "container",
   "env": {
     "ENV": {
-      "description": "Setting this to ANYTHING will enable env variables. But, you need to understand the code to know what to set here!",
+      "description": "Jangan Diubah Karena Ini Sistem Botnya!",
       "value": "ANYTHING"
     },
     "TOKEN": {
-      "description": "Your bot token, as a string.",
+      "description": "Dapatkan Bot Token Di @BotFather",
       "value": ""
     },
     "OWNER_ID": {
-      "description": "An integer of consisting of your owner ID",
-      "value": "310374678"
+      "description": "ID Telegramu",
+      "value": ""
     },
     "OWNER_USERNAME": {
-      "description": "Your username",
-      "value": "Aflky02"
+      "description": "Username Telegramu Tanpa(@)",
+      "value": ""
     },
     "URL": {
-      "description": "The Heroku App URL similar to https://<appname>.herokuapp.com/",
+      "description": "Isi URL [https://<appname>.herokuapp.com/]",
       "value": ""
     },
     "MESSAGE_DUMP": {
-      "description": "optional: a chat where your replied saved messages are stored, to stop people deleting their old",
-      "value": "-1001396716259"
+      "description": "Buat Sebuah Group, Lalu Tambahkan Rose Ketik /id Di Group, Jangan Lupa Publikan Groupmu!",
+      "value": ""
     },
     "STRICT_GBAN": {
-      "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
+      "description": "Strict Gban Di Sistem Bot Ini!",
       "value": "True"
     },
     "DEL_CMDS": {
-      "description": "Whether to delete commands from users which don't have rights to use that command",
+      "description": "Perintah Hapus Pesan Untuk Pengguna",
       "value": "True"
     },
     "SUDO_USERS": {
-      "description": "A space separated list of user_ids which should be considered sudo users",
-      "value": "310374678"
+      "description": "Sudo ID Telegram Temanmu Atau ID Kamu",
+      "value": ""
     },
     "SUPPORT_USERS": {
-      "description": "A space separated list of user_ids which should be considered support users (can gban/ungban, nothing else)",
-      "value": "310374678"
+      "description": "Support ID Telegram Temanmu Atau ID Kamu",
+      "value": ""
     },
     "WHITELIST_USERS": {
-      "description": "A space separated list of user_ids which should be considered whitelisted - they can't be banned.",
-      "value": "310374678"
+      "description": "Whitelist ID Telegram Temanmu Atau ID Kamu",
+      "value": ""
     },
     "PORT": {
-      "description": "Port to use for your webhooks",
+      "description": "Atur Port Botmu Sendiri, Default(5000)",
       "value": "5000"
     },
     "API_OPENWEATHER": {
-      "description": "Your open weather API key for weather module to run",
-      "value": ""
+      "description": "Sudah Terisi",
+      "value": "5ed2fcba931692ec6bd0a8a3f8d84936"
     },
     "ALLOW_EXCL": {
-      "description": "Whether to allow using exclamation marks ! for commands as well as /.",
+      "description": "Apakah akan mengizinkan penggunaan tanda seru ! Untuk perintah sebagai dengan baik sebagai /",
       "value": "True"
     },
     "WALL_API": {
-      "description": "Get API KEY from https://wall.alphacoders.com/",
-      "value": ""
+      "description": "Sudah Terisi",
+      "value": "0"
     },
     "DOG_API_KEY": {
-      "description": "Get API KEY from http://thedogapi.com",
-      "value": ""
+      "description": "Sudah Terisi",
+      "value": "d7ada86d-d58e-4019-853c-3409ec255fd7"
     },
     "CAT_API_KEY": {
-      "description": "Get API KEY from http://thecatapi.com",
-      "value": ""
-    },
-    "API_OPENWEATHER": {
-      "description": "Get API KEY from openweathermap",
-      "value": ""
+      "description": "Sudah Terisi",
+      "value": "7d5a0ba6-cf84-41a5-b6a1-3201e596d971"
     },
     "TIME_API_KEY": {
-      "description": "Get API KEY from timezonedb",
-      "value": ""
+      "description": "Sudah Terisi",
+      "value": "9KMN7D16IOUQ"
     }
   },
   "addons": [
