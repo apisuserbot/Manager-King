@@ -151,8 +151,8 @@ def start(update, context):
             first_name = update.effective_user.first_name
             buttons = InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="➕ Tambahkan Saya Ke Grup ➕", url=f"https://t.me/{BOT}?startgroup=new")],
-                [InlineKeyboardButton(text="⚙️ Koneksi Grup", callback_data="main_connect")],
-                [InlineKeyboardButton(text="🇺🇲 Bahasa", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Bantuan", url=f"https://t.me/{BOT}?start=help")]])
+                [InlineKeyboardButton(text="⚙️ Koneksi", callback_data="main_connect")],
+                [InlineKeyboardButton(text="🏳‍🌈 Bahasa", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Bantuan", url=f"https://t.me/{BOT}?start=help")]])
             update.effective_message.reply_photo(
                 tl(update.effective_message, MANAGER_IMG, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
                 disable_web_page_preview=True,
