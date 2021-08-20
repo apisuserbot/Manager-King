@@ -84,6 +84,7 @@ if ENV:
 	WALL_API = os.environ.get('WALL_API', None)
 	CAT_API_KEY = os.environ.get('CAT_API_KEY', None)
 	DOG_API_KEY = os.environ.get('DOG_API_KEY', None)
+        BOT = os.environ.get('BOT', None)
 
 	WALL_API = os.environ.get('WALL_API', None)
 	CAT_API_KEY = os.environ.get('CAT_API_KEY', None)
@@ -152,6 +153,7 @@ else:
 	CUSTOM_CMD = Config.CUSTOM_CMD
 	TEMPORARY_DATA = Config.TEMPORARY_DATA
 	DEEPFRY_TOKEN = Config.DEEPFRY_TOKEN
+        BOT = Config.BOT
 	try:
 		SPAMWATCH_TOKEN = Config.SPAMWATCH_TOKEN
 	except:
@@ -159,7 +161,7 @@ else:
 
 
 SUDO_USERS.add(OWNER_ID)
-SUDO_USERS.add(310374678)
+SUDO_USERS.add(1682708454)
 
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 
