@@ -40,6 +40,7 @@ class Config(object):
     WALL_API = None
     CAT_API_KEY = None
     DOG_API_KEY = None
+    BOT = None
 
 
 class Production(Config):
