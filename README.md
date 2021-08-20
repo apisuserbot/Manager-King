@@ -8,7 +8,7 @@ Bot Python telegram modular berjalan di python3 dengan database sqlalchemy
 Awalnya bot manajemen grup sederhana dengan beberapa fitur admin, telah berkembang menjadi
 dasar untuk bot modular yang bertujuan untuk menyediakan perluasan modul sederhana melalui drag and drop sederhana
 
-[Manager](https://t.me/manage_king_bot)
+Coba Bot Berikut [Manager](https://t.me/manage_king_bot)
 
 Dengan Base [Emilia Hikari](https://github.com/AyraHikari/EmiliaHikari)
 
@@ -23,7 +23,7 @@ Dengan Base [Emilia Hikari](https://github.com/AyraHikari/EmiliaHikari)
 * [@AvinashReddy3108](https://github.com/AvinashReddy3108) - untuk dasar yang digunakan dalam Dockerfile
 * [@AnimeKaizoku](https://github.com/AnimeKaizoku) - untuk modul dbcleanup
 * [@nunopenim](https://github.com/nunopenim) - untuk kode CAS dan GitHub
-* [@apisuserbor](https://github.com/apisuserbot) - untuk menambahkan img pada start text modul
+* [@apisuserbot](https://github.com/apisuserbot) - untuk menambahkan img pada start text modul
 
 ----------
 ```
