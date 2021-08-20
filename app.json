@@ -9,7 +9,7 @@
     "manager",
   ],
   "repository": "https://github.com/apisuserbot/Manager-King",
-  "success_url": "# SUCCES",
+  "success_url": "t.me/KingUserbotSupport",
   "stack": "container",
   "env": {
     "ENV": {
