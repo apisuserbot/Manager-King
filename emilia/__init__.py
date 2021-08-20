@@ -73,7 +73,6 @@ if ENV:
 	LOAD = os.environ.get("LOAD", "").split()
 	NO_LOAD = os.environ.get("NO_LOAD", "").split()
 	DEL_CMDS = bool(os.environ.get('DEL_CMDS', False))
-        BOT = os.environ.get('BOT', "")
 	STRICT_GBAN = bool(os.environ.get('STRICT_GBAN', False))
 	WORKERS = int(os.environ.get('WORKERS', 8))
 	BAN_STICKER = os.environ.get('BAN_STICKER', 'CAADBAAD4kYAAuOnXQW5LUN400QOBQI')
@@ -85,7 +84,7 @@ if ENV:
 	WALL_API = os.environ.get('WALL_API', None)
 	CAT_API_KEY = os.environ.get('CAT_API_KEY', None)
 	DOG_API_KEY = os.environ.get('DOG_API_KEY', None)
-
+        BOT = os.environ.get('BOT', None)
 	WALL_API = os.environ.get('WALL_API', None)
 	CAT_API_KEY = os.environ.get('CAT_API_KEY', None)
 	DOG_API_KEY = os.environ.get('DOG_API_KEY', None)
