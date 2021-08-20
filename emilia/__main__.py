@@ -147,9 +147,9 @@ def start(update, context):
         else:
             first_name = update.effective_user.first_name
             buttons = InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Add me to your group", url="https://t.me/DirtyReget_Bot?startgroup=new")],
-                [InlineKeyboardButton(text="⚙️ Connections", callback_data="main_connect")],
-                [InlineKeyboardButton(text="🇺🇲 Language", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Help", url="https://t.me/DirtyReget_Bot?start=help")]])
+                [[InlineKeyboardButton(text="➕ Tambahkan Saya Ke Grup ➕", url=f"https://t.me/{}?startgroup=new")],
+                [InlineKeyboardButton(text="⚙️ Koneksi Grup", callback_data="main_connect")],
+                [InlineKeyboardButton(text="🇺🇲 Bahasa", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Bantuan", url=f"https://t.me/{}?start=help")]])
             update.effective_message.reply_text(
                 tl(update.effective_message, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
                 disable_web_page_preview=True,
