@@ -33,15 +33,15 @@ Available commands are:
 # __main__
 	"Ada yang bisa saya bantu? 😊": "Is there anything I can help? 😊",
 	"start_text": """
-Hi {}, my name is {}! I am a group manager managed by [my master](t.me/aflky02).
+Hi {}, my name is {}! I am a group manager managed by [Group Support](t.me/KingUserbotSupport)
 
 You can find the list of available commands with /help.
 """,
 	"help_text": """
-Hey! My name is *Dirty*. I am a group management bot, here to help you get around and keep the order in your groups!
+Hey! My name is *Manager-King* I am a group management bot, here to help you get around and keep the order in your groups!
 I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
 
-*Main commands available:*
+*Main commands available :*
  - /start: cool command to check if the bot is alive or not.
  - /help: PM's you this message.
  - /help <module name>: PM's you info about that module.
