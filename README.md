@@ -33,4 +33,4 @@ creators of each module, but please do not remove the credits to me or placed by
 ----------
 ### The Easy Way
 
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/apisuserbot/Manager-King"> <img src="https://img.shields.io/badge/Deploy%20Ke%20Heroku-blue?style=flat&logo=heroku" width="210" height="34.45" /></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/apisuserbot/Manager-King/tree/master"> <img src="https://img.shields.io/badge/Deploy%20Ke%20Heroku-blue?style=flat&logo=heroku" width="210" height="34.45" /></a></p>
