@@ -31,7 +31,9 @@ from emilia.modules.languages import set_language
 
 PM_START_TEXT = "start_text"
 
-HELP_STRINGS = "help_text"#.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
+HELP_STRINGS = "help_text" # format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
+
+MANAGER_IMG = "https://telegra.ph/file/6ba6021e53d713a4741b7.jpg"
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -151,8 +153,8 @@ def start(update, context):
                 [[InlineKeyboardButton(text="➕ Tambahkan Saya Ke Grup ➕", url=f"https://t.me/{BOT}?startgroup=new")],
                 [InlineKeyboardButton(text="⚙️ Koneksi Grup", callback_data="main_connect")],
                 [InlineKeyboardButton(text="🇺🇲 Bahasa", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Bantuan", url=f"https://t.me/{BOT}?start=help")]])
-            update.effective_message.reply_text(
-                tl(update.effective_message, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
+            update.effective_message.reply_photo(
+                tl(update.effective_message, MANAGER_IMG, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
                 disable_web_page_preview=True,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=buttons)
