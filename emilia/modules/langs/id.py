@@ -22,12 +22,12 @@ hal-hal yang bisa saya bantu
    - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu.
 
 
-All commands can either be used with / or !.
+Semua perintah dapat digunakan dengan / atau !
 
-Dan berikut ini:
+Dan berikut ini :
 """,
 	"donate_text": """Hai, senang mendengar Anda ingin menyumbang!
-Butuh banyak pekerjaan untuk [pencipta saya](tg://user?id=388576209) untuk membawa saya ke tempat saya sekarang, dan \
+Butuh banyak pekerjaan untuk [pencipta saya](t.me/PacarFerdilla) untuk membawa saya ke tempat saya sekarang, dan \
 setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik.
 
 Semua uang sumbangan akan diberikan ke VPS yang lebih baik untuk menjadi tuan rumah saya, dan atau beberapa makanan. \
