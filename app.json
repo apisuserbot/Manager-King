@@ -16,6 +16,10 @@
       "description": "Jangan Diubah Karena Ini Sistem Botnya!",
       "value": "ANYTHING"
     },
+    "BOT": {
+      "description": "Isi Username Bot Anda Tanpa (@)",
+      "value": ""
+    },
     "TOKEN": {
       "description": "Dapatkan Bot Token Di @BotFather",
       "value": ""
