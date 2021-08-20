@@ -515,7 +515,7 @@ def main():
     # dispatcher.add_error_handler(error_callback)
 
     if WEBHOOK:
-        LOGGER.info("Using webhooks.")
+        LOGGER.info("Pengguna webhooks")
         updater.start_webhook(listen="127.0.0.1",
                               port=PORT,
                               url_path=TOKEN)
@@ -527,7 +527,7 @@ def main():
             updater.bot.set_webhook(url=URL + TOKEN)
 
     else:
-        LOGGER.info("Using long polling.")
+        LOGGER.info("Bot Manager Anda Telah Aktif!")
         # updater.start_polling(timeout=15, read_latency=4)
         updater.start_polling(poll_interval=0.0,
                               timeout=10,
