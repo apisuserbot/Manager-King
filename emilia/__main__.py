@@ -33,7 +33,7 @@ PM_START_TEXT = "start_text"
 
 HELP_STRINGS = "help_text" # format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
-MANAGER_IMG = ""
+MANAGER_IMG = None
 
 IMPORTED = {}
 MIGRATEABLE = []
