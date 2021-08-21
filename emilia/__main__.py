@@ -154,12 +154,12 @@ def start(update, context):
                 [InlineKeyboardButton(text="⚙️ Koneksi", callback_data="main_connect")],
                 [InlineKeyboardButton(text="🏳‍🌈 Bahasa", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Bantuan", url=f"https://t.me/{BOT}?start=help")]])
             update.effective_message.reply_photo(
-                tl(update.effective_message, MANAGER_IMG, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
+                MANAGER_IMG, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
                 disable_web_page_preview=True,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=buttons)
     else:
-        update.effective_message.reply_text(tl(update.effective_message, "Ada yang bisa saya bantu? 😊"))
+        update.effective_message.reply_text("Ada yang bisa saya bantu? 😊"))
 
 
 def m_connect_button(update, context):
