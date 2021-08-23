@@ -12,48 +12,38 @@ id = {
                       f" Saya Adalah Bot Yang Dapat Membantumu \n"
                       f" Mengelola Group Menjadi Aman dan Menyenangkan \n" 
                       f" Gunakan Perintah /help untuk mengetahui fitur saya \n"
-                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n"
+                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n\n"
                       f"Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah! \n"
                       f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME}) \n
 ",
-	"help_text": """
-Hai! Nama saya adalah *{BOT_NAME}*
-Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \
-hal-hal yang bisa saya bantu
-
-*Perintah utama* yang tersedia:
- - /start: mulai bot
- - /help: PM Anda dengan pesan ini.
- - /help <module name>: PM Anda dengan info tentang modul itu.
- - /settings:
-   - di PM: akan mengirimkan pengaturan Anda untuk semua modul yang didukung.
-   - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu.
-
-
-Semua perintah dapat digunakan dengan perintah /
-
-Dan berikut ini :
-""",
-	"donate_text": f"Hai, senang mendengar Anda ingin menyumbang!
-Butuh banyak pekerjaan untuk [owner saya](https://t.me/{OWNER_USERNAME}) untuk membawa saya ke tempat saya sekarang, dan \
-setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik.
-
-Semua uang sumbangan akan diberikan ke VPS yang lebih baik untuk menjadi tuan rumah saya, dan atau beberapa makanan. \
-Dia hanya orang biasa, jadi akan sangat membantu dia!
-
-Jika anda memang berminat untuk donate, silahkan kunjungi ayrahikari.github.io/donations.html, Terima kasih 😁",
+	"help_text": f"Hai! Nama saya adalah *{BOT_NAME}* \n"
+                     f"Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \ \n"
+                     f"hal-hal yang bisa saya bantu \n\n"
+                     f"*Perintah utama* yang tersedia: \n"
+                     f"- /start: mulai bot \n"
+                     f"- /help: PM Anda dengan pesan ini. \n"
+                     f"- /help <module name>: PM Anda dengan info tentang modul itu. \n"
+                     f"- /settings: \n"
+                     f"   - di PM: akan mengirimkan pengaturan Anda untuk semua modul yang didukung. \n" 
+                     f"   - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu. \n\n"
+                     f"  Semua perintah dapat digunakan dengan perintah / \n\n"
+                     f"  Dan berikut ini : \n
+",
+	"donate_text": f"Hai, senang mendengar Anda ingin menyumbang! \n"
+                       f"Butuh banyak pekerjaan untuk [owner saya](https://t.me/{OWNER_USERNAME}) untuk membawa saya ke tempat saya sekarang, dan \ \n"
+                       f"setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik. \n\n"
+                       f"Semua uang sumbangan akan diberikan ke VPS yang lebih baik untuk menjadi tuan rumah saya, dan atau beberapa makanan. \ \n\n"
+                       f"Dia hanya orang biasa, jadi akan sangat membantu dia! \n"
+                       f"Jika anda memang berminat untuk donate, silahkan kunjungi ayrahikari.github.io/donations.html, Terima kasih 😁",
 	
 # Help modules
-	"language_help": f"Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka {BOT_NAME} menanggapi dalam bahasa mereka sendiri.
-
-Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan {BOT_NAME} menjadi bahasa pilihan Anda!
-
-Bahasa yang tersedia adalah:
-- 🇮🇩 Indonesia
-- 🇺🇸 English
-
-Perintah yang tersedia adalah:
- - /setlang: atur bahasa pilihan Anda.",
+	"language_help": f"Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka {BOT_NAME} menanggapi dalam bahasa mereka sendiri. \n\n"
+                         f"Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan {BOT_NAME} menjadi bahasa pilihan Anda! \n\n"
+                         f"Bahasa yang tersedia adalah : \n"
+                         f"- 🇮🇩 Indonesia \n"
+                         f"- 🇺🇸 English \n\n"
+                         f"Perintah yang tersedia adalah : \n"
+                         f" - /setlang: atur bahasa pilihan Anda",
 
 	"admin_help": """
  - /adminlist | /admins: daftar admin dalam obrolan
