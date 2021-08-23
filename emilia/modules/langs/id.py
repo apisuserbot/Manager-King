@@ -32,7 +32,7 @@ Semua perintah dapat digunakan dengan perintah /
 Dan berikut ini : 
 """,
 	"donate_text": """Hai, senang mendengar Anda ingin menyumbang!
-Butuh banyak pekerjaan untuk [owner saya](https://t.me/{}) untuk membawa saya ke tempat saya sekarang, dan \
+Butuh banyak pekerjaan untuk owner saya untuk membawa saya ke tempat saya sekarang, dan \
 setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik.
 
 Semua uang sumbangan akan diberikan ke VPS yang lebih baik untuk menjadi tuan rumah saya, dan atau beberapa makanan. \
