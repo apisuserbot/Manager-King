@@ -33,26 +33,29 @@ Available commands are:
 
 # __main__
 	"Ada yang bisa saya bantu? 😊": "Is there anything I can help? 😊",
-	"start_text": f"Hi, my name is {}! \n"
-                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n"
-                      f"I Am A Bot That Can Help You Managing Groups \n"
-                      f"To Be Safe and Fun \n"
-                      f"Use the /help command to find out my features \n"
-                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n\n"
-                      f"Want to add me to your group? Just click the button below! \n"
-                      f"If you want to ask something, you can love [my owner](https://t.me/{OWNER_USERNAME}}) ",
-
-	"help_text": f"Hey! My name is *{BOT_NAME}* I am a group management bot, here to help you get around and keep the order in your groups! \n"
-                     f"I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords. \n\n"
-                     f"*Main commands available :* \n"
-                     f" - /start: cool command to check if the bot is alive or not. \n"
-                     f" - /help: PM's you this message. \n"
-                     f" - /help <module name>: PM's you info about that module. \n"
-                     f" - /setlang: change bot language. \n"
-                     f" - /settings: settings your bot \n"
-                     f"   - in PM: will send you your settings for all supported modules. \n"
-                     f"   - in a group: will redirect you to pm, with all that chat's settings. \n\n"
-                     f"All commands can either be used with / ",
+	"start_text": """
+Hi, my name is {}!
+━━━━━━━━━━━━━━━━━━━━━━━ ️ 
+I Am A Bot That Can Help You Managing Groups 
+To Be Safe and Fun 
+Use the /help command to find out my features ️ 
+━━━━━━━━━━━━━━━━━━━━━━━
+Want to add me to your group? Just click the button below! 
+If you want to ask something, you can love [my owner](https://t.me/{OWNER_USERNAME}})
+""",
+	"help_text": """
+Hey! My name is *{BOT_NAME}* I am a group management bot, here to help you get around and keep the order in your groups!
+I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
+*Main commands available :*
+ - /start: cool command to check if the bot is alive or not.
+ - /help: PM's you this message.
+ - /help <module name>: PM's you info about that module.
+ - /setlang: change bot language.
+ - /settings:
+   - in PM: will send you your settings for all supported modules.
+   - in a group: will redirect you to pm, with all that chat's settings.
+All commands can either be used with /
+""",
 
 	"donate_text": f"Hello, glad to hear you want to donate! \n"
                        f"Need a lot of work for [my owner](https://t.me/{OWNER_USERNAME}) to take me to my place now, and \ \n"
