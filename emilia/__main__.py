@@ -152,7 +152,7 @@ def start(update, context):
                 [[InlineKeyboardButton(text="➕ Tambahkan Saya Ke Grup ➕", url=f"https://t.me/{BOT}?startgroup=new")],
                 [InlineKeyboardButton(text="⚙️ Koneksi", callback_data="main_connect")],
                 [InlineKeyboardButton(text="🏳‍🌈 Bahasa", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Bantuan", url=f"https://t.me/{BOT}?start=help")]])
-            update.effective_message.reply_photo(
+            update.effective_message.reply_text(
                 tl(update.effective_message, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
                 disable_web_page_preview=True,
                 parse_mode=ParseMode.MARKDOWN,
