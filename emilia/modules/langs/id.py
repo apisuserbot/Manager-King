@@ -7,7 +7,7 @@ __lang__ = "🇮🇩 Indonesia"
 
 id = {
 # main stuff
-	"start_text": f"""
+	"start_text": """
 Hai {}, nama saya {}!
 ━━━━━━━━━━━━━━━━━━━━━━━
 Saya Adalah Bot Yang Dapat Membantumu
