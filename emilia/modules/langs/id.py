@@ -1,3 +1,6 @@
+from emilia.vars import BOT_NAME
+
+# ------------------------------STARTING---------------------------------------- #
 
 __lang__ = "🇮🇩 Indonesia"
 
@@ -8,8 +11,8 @@ Hai {}, nama saya {}! Saya seorang manajer grup dan jangan lupa gabung [Group Su
 
 Anda dapat menemukan daftar perintah yang tersedia dengan /help.
 """,
-	"help_text": """
-Hai! Nama saya adalah *Manager-King*
+	"help_text": f"""
+Hai! Nama saya adalah *{BOT_NAME}*
 Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \
 hal-hal yang bisa saya bantu
 
