@@ -7,17 +7,16 @@ __lang__ = "🇮🇩 Indonesia"
 
 id = {
 # main stuff
-	"start_text": """
-Hai {}, nama saya {}!
-━━━━━━━━━━━━━━━━━━━━━━━
-Saya Adalah Bot Yang Dapat Membantumu
-Mengelola Group Menjadi Aman dan Menyenangkan,
-Gunakan Perintah /help untuk mengetahui fitur saya
-━━━━━━━━━━━━━━━━━━━━━━━
-Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah!
-f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME})
-""",
-	"help_text": f"
+	"start_text": f"Hai {}, nama saya {}! \n"
+                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n"
+                      f" Saya Adalah Bot Yang Dapat Membantumu \n"
+                      f" Mengelola Group Menjadi Aman dan Menyenangkan \n" 
+                      f" Gunakan Perintah /help untuk mengetahui fitur saya \n"
+                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n"
+                      f"Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah! \n"
+                      f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME})
+",
+	"help_text": """
 Hai! Nama saya adalah *{BOT_NAME}*
 Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \
 hal-hal yang bisa saya bantu
@@ -34,7 +33,7 @@ hal-hal yang bisa saya bantu
 Semua perintah dapat digunakan dengan perintah /
 
 Dan berikut ini :
-",
+""",
 	"donate_text": f"Hai, senang mendengar Anda ingin menyumbang!
 Butuh banyak pekerjaan untuk [owner saya](https://t.me/{OWNER_USERNAME}) untuk membawa saya ke tempat saya sekarang, dan \
 setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik.
