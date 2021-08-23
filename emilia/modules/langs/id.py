@@ -44,13 +44,16 @@ Dia hanya orang biasa, jadi akan sangat membantu dia!
 Jika anda memang berminat untuk donate, silahkan kunjungi @KingUserbotSupport, Terima kasih 😁""",
 	
 # Help modules
-	"language_help": f"Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka {BOT_NAME} menanggapi dalam bahasa mereka sendiri. \n\n"
-                         f"Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan {BOT_NAME} menjadi bahasa pilihan Anda! \n\n"
-                         f"Bahasa yang tersedia adalah : \n"
-                         f"- 🇮🇩 Indonesia \n"
-                         f"- 🇺🇸 English \n\n"
-                         f"Perintah yang tersedia adalah : \n"
-                         f" - /setlang: atur bahasa pilihan Anda ",
+	"language_help": """Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka {BOT_NAME} menanggapi dalam bahasa mereka sendiri.
+
+Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan {BOT_NAME} menjadi bahasa pilihan Anda!
+
+Bahasa yang tersedia adalah :
+- 🇮🇩 Indonesia
+- 🇺🇸 English
+
+Perintah yang tersedia adalah :
+ - /setlang: atur bahasa pilihan Anda""",
 
 	"admin_help": """
  - /adminlist | /admins: daftar admin dalam obrolan
