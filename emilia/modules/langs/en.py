@@ -23,7 +23,7 @@ en = {
 	"Bahasa telah di ubah ke {}!": "Language changed to {}!",
 	"Bahasa di *{}* saat ini adalah:\n{}.\n\nPilih bahasa:": "Current language in *{}* is:\n{}.\n\nSelect language:",
 	"obrolan saat ini": "current in this chat",
-	"language_help": """Not every group speaks indonesian; some groups would rather have Emilia respond in their own language.
+	"language_help": f"""Not every group speaks indonesian; some groups would rather have {BOT_NAME} respond in their own language.
 
 This is where translations come in; you can change most of Emilia's replies to be in the language of your choice!
 
