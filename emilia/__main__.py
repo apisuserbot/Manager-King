@@ -153,7 +153,7 @@ def start(update, context):
                 [InlineKeyboardButton(text="⚙️ Koneksi", callback_data="main_connect")],
                 [InlineKeyboardButton(text="🏳‍🌈 Bahasa", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Bantuan", url=f"https://t.me/{BOT}?start=help")]])
             update.effective_message.reply_text(
-                tl(update.effective_message, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), (OWNER_USERNAME),
+                tl(update.effective_message, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_USERNAME),
                 disable_web_page_preview=True,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=buttons)
