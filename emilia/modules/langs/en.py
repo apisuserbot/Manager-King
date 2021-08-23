@@ -57,12 +57,13 @@ I have lots of handy features, such as flood control, a warning system, a note k
 All commands can either be used with /
 """,
 
-	"donate_text": f"Hello, glad to hear you want to donate! \n"
-                       f"Need a lot of work for [my owner](https://t.me/{OWNER_USERNAME}) to take me to my place now, and \ \n"
-                       f"every donation helps and motivates him to make me better. \n\n"
-                       f"All donated money will be given to a better VPS to host me, and or some food. \ \n"
-                       f"He is just an ordinary person, so it will really help him! \n\n"
-                       f"If you really are interested in donating, please visit ayrahikari.github.io/donations.html, Thank you 😁 ",
+	"donate_text": """Hello, glad to hear you want to donate!
+Need a lot of work for [my owner](https://t.me/{OWNER_USERNAME}) to take me to my place now, and \
+every donation helps and motivates him to make me better
+All donated money will be given to a better VPS to host me, and or some food \
+He is just an ordinary person, so it will really help him!
+
+If you really are interested in donating, please visit @KingUserbotSupport, Thank you 😁""",
 	"⬅️ kembali": "⬅️ Back",
 	"Hubungi saya di PM untuk mendapatkan daftar perintah.": "Contact me in PM to get the list of possible commands.",
 	"Tolong": "Help",
