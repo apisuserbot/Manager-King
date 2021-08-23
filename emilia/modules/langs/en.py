@@ -1,3 +1,5 @@
+from emilia import OWNER_USERNAME
+from emilia.vars import BOT_NAME
 
 __lang__ = "🇺🇸 English"
 
@@ -32,13 +34,18 @@ Available commands are:
 
 # __main__
 	"Ada yang bisa saya bantu? 😊": "Is there anything I can help? 😊",
-	"start_text": """
-Hi {}, my name is {}! I am a group manager managed by [Group Support](t.me/KingUserbotSupport)
+	"start_text": f"""
+Hi, my name is {}!
+━━━━━━━━━━━━━━━━━━━━━━━ ️ 
+I Am A Bot That Can Help You Managing Groups To Be Safe and Fun 
+Use the /help command to find out my features ️ 
 
-You can find the list of available commands with /help.
+Want to add me to your group? Just click the button below! 
+If you want to ask something, you can love [my owner](https://t.me/{OWNER_USERNAME}})
+━━━━━━━━━━━━━━━━━━━━━━━
 """,
-	"help_text": """
-Hey! My name is *Manager-King* I am a group management bot, here to help you get around and keep the order in your groups!
+	"help_text": f"""
+Hey! My name is *{BOT_NAME}* I am a group management bot, here to help you get around and keep the order in your groups!
 I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
 
 *Main commands available :*
@@ -50,10 +57,10 @@ I have lots of handy features, such as flood control, a warning system, a note k
    - in PM: will send you your settings for all supported modules.
    - in a group: will redirect you to pm, with all that chat's settings.
 
-All commands can either be used with / or !.
+All commands can either be used with /
 """,
-	"donate_text": """Hello, glad to hear you want to donate!
-Need a lot of work for [my creator](tg://user?id=388576209) to take me to my place now, and \
+	"donate_text": f"""Hello, glad to hear you want to donate!
+Need a lot of work for [my owner](https://t.me/{OWNER_USERNAME}) to take me to my place now, and \
 every donation helps and motivates him to make me better.
 
 All donated money will be given to a better VPS to host me, and or some food. \
