@@ -23,45 +23,37 @@ en = {
 	"Bahasa telah di ubah ke {}!": "Language changed to {}!",
 	"Bahasa di *{}* saat ini adalah:\n{}.\n\nPilih bahasa:": "Current language in *{}* is:\n{}.\n\nSelect language:",
 	"obrolan saat ini": "current in this chat",
-	"language_help": f"""Not every group speaks indonesian; some groups would rather have {BOT_NAME} respond in their own language.
-
-This is where translations come in; you can change most of Emilia's replies to be in the language of your choice!
-
-Available languages are:
-- 🇮🇩 Indonesia
-- 🇺🇸 English
-
-Available commands are:
- - /setlang: set your prefered language.""",
+	"language_help": f"Not every group speaks indonesian; some groups would rather have {BOT_NAME} respond in their own language. \n\n"
+                         f"This is where translations come in; you can change most of Emilia's replies to be in the language of your choice! \n\n"
+                         f"Available languages are:
+                         f"- 🇮🇩 Indonesia
+                         f"- 🇺🇸 English \n\n"
+                         f"Available commands are:
+                         f" - /setlang: set your prefered language ",
 
 # __main__
 	"Ada yang bisa saya bantu? 😊": "Is there anything I can help? 😊",
-	"start_text": f"""
-Hi, my name is {}!
-━━━━━━━━━━━━━━━━━━━━━━━ ️ 
-I Am A Bot That Can Help You Managing Groups 
-To Be Safe and Fun 
-Use the /help command to find out my features ️ 
-━━━━━━━━━━━━━━━━━━━━━━━
+	"start_text": f"Hi, my name is {}! \n"
+                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n"
+                      f"I Am A Bot That Can Help You Managing Groups \n"
+                      f"To Be Safe and Fun \n"
+                      f"Use the /help command to find out my features \n"
+                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n\n"
+                      f"Want to add me to your group? Just click the button below! \n"
+                      f"If you want to ask something, you can love [my owner](https://t.me/{OWNER_USERNAME}}) ",
 
-Want to add me to your group? Just click the button below! 
-If you want to ask something, you can love [my owner](https://t.me/{OWNER_USERNAME}})
-""",
-	"help_text": f"""
-Hey! My name is *{BOT_NAME}* I am a group management bot, here to help you get around and keep the order in your groups!
-I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
+	"help_text": f"Hey! My name is *{BOT_NAME}* I am a group management bot, here to help you get around and keep the order in your groups! \n"
+                     f"I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords. \n\n"
+                     f"*Main commands available :* \n"
+                     f" - /start: cool command to check if the bot is alive or not. \n"
+                     f" - /help: PM's you this message. \n"
+                     f" - /help <module name>: PM's you info about that module. \n"
+                     f" - /setlang: change bot language. \n"
+                     f" - /settings: settings your bot \n"
+                     f"   - in PM: will send you your settings for all supported modules. \n"
+                     f"   - in a group: will redirect you to pm, with all that chat's settings. \n\n"
+                     f"All commands can either be used with / ",
 
-*Main commands available :*
- - /start: cool command to check if the bot is alive or not.
- - /help: PM's you this message.
- - /help <module name>: PM's you info about that module.
- - /setlang: change bot language.
- - /settings:
-   - in PM: will send you your settings for all supported modules.
-   - in a group: will redirect you to pm, with all that chat's settings.
-
-All commands can either be used with /
-""",
 	"donate_text": f"""Hello, glad to hear you want to donate!
 Need a lot of work for [my owner](https://t.me/{OWNER_USERNAME}) to take me to my place now, and \
 every donation helps and motivates him to make me better.
