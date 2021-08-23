@@ -15,7 +15,7 @@ Mengelola Group Menjadi Aman dan Menyenangkan,
 Gunakan Perintah /help untuk mengetahui fitur saya
 ━━━━━━━━━━━━━━━━━━━━━━━
 Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah!
-f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{f"OWNER_USERNAME"})
+f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME})
 """,
 	"help_text": """
 Hai! Bertemu Lagi Bersama Saya Di Menu Help! 
@@ -30,16 +30,18 @@ hal-hal yang bisa saya bantu
    - di PM: akan mengirimkan pengaturan Anda untuk semua modul yang didukung
    - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu
 
- Semua perintah dapat digunakan dengan perintah / 
+Semua perintah dapat digunakan dengan perintah / 
 
-Dan berikut ini : """,
+Dan berikut ini : 
+""",
+	"donate_text": """Hai, senang mendengar Anda ingin menyumbang!
+Butuh banyak pekerjaan untuk [owner saya](https://t.me/{OWNER_USERNAME}) untuk membawa saya ke tempat saya sekarang, dan \
+setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik.
 
-	"donate_text": f"Hai, senang mendengar Anda ingin menyumbang! \n"
-                       f"Butuh banyak pekerjaan untuk [owner saya](https://t.me/{OWNER_USERNAME}) untuk membawa saya ke tempat saya sekarang, dan \ \n"
-                       f"setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik. \n\n"
-                       f"Semua uang sumbangan akan diberikan ke VPS yang lebih baik untuk menjadi tuan rumah saya, dan atau beberapa makanan. \ \n\n"
-                       f"Dia hanya orang biasa, jadi akan sangat membantu dia! \n"
-                       f"Jika anda memang berminat untuk donate, silahkan kunjungi ayrahikari.github.io/donations.html, Terima kasih 😁 ",
+Semua uang sumbangan akan diberikan ke VPS yang lebih baik untuk menjadi tuan rumah saya, dan atau beberapa makanan. \
+Dia hanya orang biasa, jadi akan sangat membantu dia!
+
+Jika anda memang berminat untuk donate, silahkan kunjungi @KingUserbotSupport, Terima kasih 😁""",
 	
 # Help modules
 	"language_help": f"Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka {BOT_NAME} menanggapi dalam bahasa mereka sendiri. \n\n"
