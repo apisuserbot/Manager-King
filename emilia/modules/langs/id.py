@@ -45,9 +45,9 @@ Dia hanya orang biasa, jadi akan sangat membantu dia!
 Jika anda memang berminat untuk donate, silahkan kunjungi ayrahikari.github.io/donations.html, Terima kasih 😁""",
 	
 # Help modules
-	"language_help": """Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka Dirty menanggapi dalam bahasa mereka sendiri.
+	"language_help": f"""Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka {BOT_NAME} menanggapi dalam bahasa mereka sendiri.
 
-Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan Dirty menjadi bahasa pilihan Anda!
+Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan {BOT_NAME} menjadi bahasa pilihan Anda!
 
 Bahasa yang tersedia adalah:
 - 🇮🇩 Indonesia
