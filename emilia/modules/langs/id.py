@@ -1,6 +1,3 @@
-from emilia import OWNER_USERNAME
-from emilia.vars import BOT_NAME
-
 # ------------------------------STARTING---------------------------------------- #
 
 __lang__ = "🇮🇩 Indonesia"
@@ -15,7 +12,7 @@ Mengelola Group Menjadi Aman dan Menyenangkan,
 Gunakan Perintah /help untuk mengetahui fitur saya
 ━━━━━━━━━━━━━━━━━━━━━━━
 Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah!
-f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME})
+f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{})
 """,
 	"help_text": """
 Hai! Bertemu Lagi Bersama Saya Di Menu Help! 
@@ -35,7 +32,7 @@ Semua perintah dapat digunakan dengan perintah /
 Dan berikut ini : 
 """,
 	"donate_text": """Hai, senang mendengar Anda ingin menyumbang!
-Butuh banyak pekerjaan untuk [owner saya](https://t.me/{OWNER_USERNAME}) untuk membawa saya ke tempat saya sekarang, dan \
+Butuh banyak pekerjaan untuk [owner saya](https://t.me/{}) untuk membawa saya ke tempat saya sekarang, dan \
 setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik.
 
 Semua uang sumbangan akan diberikan ke VPS yang lebih baik untuk menjadi tuan rumah saya, dan atau beberapa makanan. \
