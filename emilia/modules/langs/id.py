@@ -14,8 +14,8 @@ id = {
                       f" Gunakan Perintah /help untuk mengetahui fitur saya \n"
                       f"━━━━━━━━━━━━━━━━━━━━━━━ \n\n"
                       f"Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah! \n"
-                      f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME}) \n
-",
+                      f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME}) ",
+
 	"help_text": f"Hai! Nama saya adalah *{BOT_NAME}* \n"
                      f"Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \ \n"
                      f"hal-hal yang bisa saya bantu \n\n"
@@ -27,14 +27,14 @@ id = {
                      f"   - di PM: akan mengirimkan pengaturan Anda untuk semua modul yang didukung. \n" 
                      f"   - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu. \n\n"
                      f"  Semua perintah dapat digunakan dengan perintah / \n\n"
-                     f"  Dan berikut ini : \n
-",
+                     f"  Dan berikut ini : ",
+
 	"donate_text": f"Hai, senang mendengar Anda ingin menyumbang! \n"
                        f"Butuh banyak pekerjaan untuk [owner saya](https://t.me/{OWNER_USERNAME}) untuk membawa saya ke tempat saya sekarang, dan \ \n"
                        f"setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik. \n\n"
                        f"Semua uang sumbangan akan diberikan ke VPS yang lebih baik untuk menjadi tuan rumah saya, dan atau beberapa makanan. \ \n\n"
                        f"Dia hanya orang biasa, jadi akan sangat membantu dia! \n"
-                       f"Jika anda memang berminat untuk donate, silahkan kunjungi ayrahikari.github.io/donations.html, Terima kasih 😁",
+                       f"Jika anda memang berminat untuk donate, silahkan kunjungi ayrahikari.github.io/donations.html, Terima kasih 😁 ",
 	
 # Help modules
 	"language_help": f"Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka {BOT_NAME} menanggapi dalam bahasa mereka sendiri. \n\n"
@@ -43,7 +43,7 @@ id = {
                          f"- 🇮🇩 Indonesia \n"
                          f"- 🇺🇸 English \n\n"
                          f"Perintah yang tersedia adalah : \n"
-                         f" - /setlang: atur bahasa pilihan Anda",
+                         f" - /setlang: atur bahasa pilihan Anda ",
 
 	"admin_help": """
  - /adminlist | /admins: daftar admin dalam obrolan
