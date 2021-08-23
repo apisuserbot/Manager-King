@@ -56,10 +56,10 @@ I have lots of handy features, such as flood control, a warning system, a note k
    - in a group: will redirect you to pm, with all that chat's settings.
 All commands can either be used with /
 """,
-
 	"donate_text": """Hello, glad to hear you want to donate!
 Need a lot of work for [my owner](https://t.me/{OWNER_USERNAME}) to take me to my place now, and \
 every donation helps and motivates him to make me better
+
 All donated money will be given to a better VPS to host me, and or some food \
 He is just an ordinary person, so it will really help him!
 
