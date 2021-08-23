@@ -15,7 +15,7 @@ from telegram.ext import CommandHandler, Filters, MessageHandler, CallbackQueryH
 from telegram.ext.dispatcher import run_async, DispatcherHandlerStop, Dispatcher
 from telegram.utils.helpers import escape_markdown, mention_html
 
-from emilia import dispatcher, updater, TOKEN, WEBHOOK, OWNER_ID, DONATION_LINK, CERT_PATH, PORT, URL, LOGGER, spamcheck
+from emilia import dispatcher, updater, TOKEN, WEBHOOK, OWNER_USERNAME, OWNER_ID, DONATION_LINK, CERT_PATH, PORT, URL, LOGGER, spamcheck
 from emilia.vars import BOT
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
@@ -153,7 +153,7 @@ def start(update, context):
                 [InlineKeyboardButton(text="⚙️ Koneksi", callback_data="main_connect")],
                 [InlineKeyboardButton(text="🏳‍🌈 Bahasa", callback_data="main_setlang"), InlineKeyboardButton(text="❓ Bantuan", url=f"https://t.me/{BOT}?start=help")]])
             update.effective_message.reply_text(
-                tl(update.effective_message, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID),
+                tl(update.effective_message, PM_START_TEXT).format(escape_markdown(first_name), escape_markdown(context.bot.first_name), OWNER_ID), OWNER_USERNAME),
                 disable_web_page_preview=True,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=buttons)
