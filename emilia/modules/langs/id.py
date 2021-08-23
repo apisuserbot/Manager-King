@@ -14,7 +14,7 @@ id = {
                       f" Gunakan Perintah /help untuk mengetahui fitur saya \n"
                       f"━━━━━━━━━━━━━━━━━━━━━━━ \n"
                       f"Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah! \n"
-                      f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME})
+                      f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME}) \n
 ",
 	"help_text": """
 Hai! Nama saya adalah *{BOT_NAME}*
