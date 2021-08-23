@@ -1,6 +1,8 @@
 from emilia import OWNER_USERNAME
 from emilia.vars import BOT_NAME
 
+# ------------------------------STARTING---------------------------------------- #
+
 __lang__ = "🇺🇸 English"
 
 en = {
@@ -37,12 +39,13 @@ Available commands are:
 	"start_text": f"""
 Hi, my name is {}!
 ━━━━━━━━━━━━━━━━━━━━━━━ ️ 
-I Am A Bot That Can Help You Managing Groups To Be Safe and Fun 
+I Am A Bot That Can Help You Managing Groups 
+To Be Safe and Fun 
 Use the /help command to find out my features ️ 
+━━━━━━━━━━━━━━━━━━━━━━━
 
 Want to add me to your group? Just click the button below! 
 If you want to ask something, you can love [my owner](https://t.me/{OWNER_USERNAME}})
-━━━━━━━━━━━━━━━━━━━━━━━
 """,
 	"help_text": f"""
 Hey! My name is *{BOT_NAME}* I am a group management bot, here to help you get around and keep the order in your groups!
