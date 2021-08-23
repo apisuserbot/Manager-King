@@ -7,7 +7,7 @@ __lang__ = "🇮🇩 Indonesia"
 
 id = {
 # main stuff
-	"start_text": f"
+	"start_text": f"\n"\n"
 Hai {}, nama saya {}!
 ━━━━━━━━━━━━━━━━━━━━━━━
 Saya Adalah Bot Yang Dapat Membantumu
@@ -16,7 +16,7 @@ Gunakan Perintah /help untuk mengetahui fitur saya
 ━━━━━━━━━━━━━━━━━━━━━━━
 Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah!
 Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME})
-",
+""",
 	"help_text": f"
 Hai! Nama saya adalah *{BOT_NAME}*
 Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \
