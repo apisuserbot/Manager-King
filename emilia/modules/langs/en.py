@@ -1,6 +1,3 @@
-from emilia import OWNER_USERNAME
-from emilia.vars import BOT_NAME
-
 # ------------------------------STARTING---------------------------------------- #
 
 __lang__ = "🇺🇸 English"
@@ -25,39 +22,43 @@ en = {
 	"obrolan saat ini": "current in this chat",
 	"language_help": """Not every group speaks indonesian; some groups would rather have {BOT_NAME} respond in their own language
 This is where translations come in; you can change most of {BOT_NAME} replies to be in the language of your choice!
-Available languages are:
+Available languages are :
 - 🇮🇩 Indonesia
 - 🇺🇸 English
-Available commands are:
+Available commands are :
  - /setlang: set your prefered language""",
 
 # __main__
 	"Ada yang bisa saya bantu? 😊": "Is there anything I can help? 😊",
 	"start_text": """
-Hi, my name is {}!
+Hi {} , my name is {}!
 ━━━━━━━━━━━━━━━━━━━━━━━ ️ 
 I Am A Bot That Can Help You Managing Groups 
 To Be Safe and Fun 
 Use the /help command to find out my features ️ 
 ━━━━━━━━━━━━━━━━━━━━━━━
 Want to add me to your group? Just click the button below! 
-If you want to ask something, you can love [my owner](https://t.me/{OWNER_USERNAME}})
+If you want to ask something, you can love [my owner](https://t.me/{})
 """,
 	"help_text": """
-Hey! My name is *{BOT_NAME}* I am a group management bot, here to help you get around and keep the order in your groups!
+Hey! Meet Again With Me On Help Menu!
+I am a group management bot, here to help you get around and keep the order in your groups!
 I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
 *Main commands available :*
- - /start: cool command to check if the bot is alive or not.
- - /help: PM's you this message.
- - /help <module name>: PM's you info about that module.
- - /setlang: change bot language.
+ - /start: cool command to check if the bot is alive or not
+ - /help: PM's you this message
+ - /help <module name>: PM's you info about that module
+ - /setlang: change bot language
  - /settings:
-   - in PM: will send you your settings for all supported modules.
-   - in a group: will redirect you to pm, with all that chat's settings.
+   - in PM: will send you your settings for all supported modules
+   - in a group: will redirect you to pm, with all that chat's settings
+
 All commands can either be used with /
+
+And Here :
 """,
 	"donate_text": """Hello, glad to hear you want to donate!
-Need a lot of work for [my owner](https://t.me/{OWNER_USERNAME}) to take me to my place now, and \
+Need a lot of work for my owner to take me to my place now, and \
 every donation helps and motivates him to make me better
 
 All donated money will be given to a better VPS to host me, and or some food \
