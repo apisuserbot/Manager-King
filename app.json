@@ -21,6 +21,10 @@
       "description": "Isi Username Bot Anda Tanpa (@)",
       "value": ""
     },
+    "BOT_NAME": {
+      "description": "Isi Nama Botmu!",
+      "value": ""
+    },
     "TOKEN": {
       "description": "Dapatkan Bot Token Di @BotFather",
       "value": ""
