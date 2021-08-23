@@ -7,27 +7,32 @@ __lang__ = "🇮🇩 Indonesia"
 
 id = {
 # main stuff
-	"start_text": f"Hai {}, nama saya {}! \n"
-                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n"
-                      f" Saya Adalah Bot Yang Dapat Membantumu \n"
-                      f" Mengelola Group Menjadi Aman dan Menyenangkan \n" 
-                      f" Gunakan Perintah /help untuk mengetahui fitur saya \n"
-                      f"━━━━━━━━━━━━━━━━━━━━━━━ \n\n"
-                      f"Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah! \n"
-                      f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME}) ",
+	"start_text": """
+Hai {}, nama saya {}!
+━━━━━━━━━━━━━━━━━━━━━━━
+Saya Adalah Bot Yang Dapat Membantumu
+Mengelola Group Menjadi Aman dan Menyenangkan,
+Gunakan Perintah /help untuk mengetahui fitur saya
+━━━━━━━━━━━━━━━━━━━━━━━
+Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah!
+f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{f"OWNER_USERNAME"})
+""",
+	"help_text": """
+Hai! Bertemu Lagi Bersama Saya Di Menu Help! 
+Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \ 
+hal-hal yang bisa saya bantu 
+               
+*Perintah utama* yang tersedia: 
+- /start: mulai bot 
+- /help: PM Anda dengan pesan ini
+- /help <module name>: PM Anda dengan info tentang modul itu
+- /settings: 
+   - di PM: akan mengirimkan pengaturan Anda untuk semua modul yang didukung
+   - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu
 
-	"help_text": f"Hai! Nama saya adalah *{BOT_NAME}* \n"
-                     f"Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Silahkan lihat berikut ini untuk beberapa ide dari \ \n"
-                     f"hal-hal yang bisa saya bantu \n\n"
-                     f"*Perintah utama* yang tersedia: \n"
-                     f"- /start: mulai bot \n"
-                     f"- /help: PM Anda dengan pesan ini. \n"
-                     f"- /help <module name>: PM Anda dengan info tentang modul itu. \n"
-                     f"- /settings: \n"
-                     f"   - di PM: akan mengirimkan pengaturan Anda untuk semua modul yang didukung. \n" 
-                     f"   - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu. \n\n"
-                     f"  Semua perintah dapat digunakan dengan perintah / \n\n"
-                     f"  Dan berikut ini : ",
+ Semua perintah dapat digunakan dengan perintah / 
+
+Dan berikut ini : """,
 
 	"donate_text": f"Hai, senang mendengar Anda ingin menyumbang! \n"
                        f"Butuh banyak pekerjaan untuk [owner saya](https://t.me/{OWNER_USERNAME}) untuk membawa saya ke tempat saya sekarang, dan \ \n"
