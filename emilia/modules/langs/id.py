@@ -1,3 +1,4 @@
+from emilia import OWNER_USERNAME
 from emilia.vars import BOT_NAME
 
 # ------------------------------STARTING---------------------------------------- #
@@ -6,10 +7,15 @@ __lang__ = "🇮🇩 Indonesia"
 
 id = {
 # main stuff
-	"start_text": """
-Hai {}, nama saya {}! Saya seorang manajer grup dan jangan lupa gabung [Group Support](t.me/KingUserbotSupport)
-
-Anda dapat menemukan daftar perintah yang tersedia dengan /help.
+	"start_text": f"""
+Hai {}, nama saya {}!
+━━━━━━━━━━━━━━━━━━━━━━━
+Saya Adalah Bot Yang Dapat Membantumu
+Mengelola Group Menjadi Aman dan Menyenangkan,
+Gunakan Perintah /help untuk mengetahui fitur saya
+━━━━━━━━━━━━━━━━━━━━━━━
+Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah!
+Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{OWNER_USERNAME})
 """,
 	"help_text": f"""
 Hai! Nama saya adalah *{BOT_NAME}*
@@ -25,12 +31,12 @@ hal-hal yang bisa saya bantu
    - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu.
 
 
-Semua perintah dapat digunakan dengan / atau !
+Semua perintah dapat digunakan dengan perintah /
 
 Dan berikut ini :
 """,
-	"donate_text": """Hai, senang mendengar Anda ingin menyumbang!
-Butuh banyak pekerjaan untuk [pencipta saya](t.me/PacarFerdilla) untuk membawa saya ke tempat saya sekarang, dan \
+	"donate_text": f"""Hai, senang mendengar Anda ingin menyumbang!
+Butuh banyak pekerjaan untuk [owner saya](https://t.me/{OWNER_USERNAME}) untuk membawa saya ke tempat saya sekarang, dan \
 setiap sumbangan membantu dan memotivasi dia untuk membuat saya lebih baik.
 
 Semua uang sumbangan akan diberikan ke VPS yang lebih baik untuk menjadi tuan rumah saya, dan atau beberapa makanan. \
