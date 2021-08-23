@@ -25,10 +25,10 @@ en = {
 	"obrolan saat ini": "current in this chat",
 	"language_help": f"Not every group speaks indonesian; some groups would rather have {BOT_NAME} respond in their own language. \n\n"
                          f"This is where translations come in; you can change most of Emilia's replies to be in the language of your choice! \n\n"
-                         f"Available languages are:
-                         f"- 🇮🇩 Indonesia
+                         f"Available languages are: \n"
+                         f"- 🇮🇩 Indonesia \n"
                          f"- 🇺🇸 English \n\n"
-                         f"Available commands are:
+                         f"Available commands are: \n"
                          f" - /setlang: set your prefered language ",
 
 # __main__
@@ -54,14 +54,12 @@ en = {
                      f"   - in a group: will redirect you to pm, with all that chat's settings. \n\n"
                      f"All commands can either be used with / ",
 
-	"donate_text": f"""Hello, glad to hear you want to donate!
-Need a lot of work for [my owner](https://t.me/{OWNER_USERNAME}) to take me to my place now, and \
-every donation helps and motivates him to make me better.
-
-All donated money will be given to a better VPS to host me, and or some food. \
-He is just an ordinary person, so it will really help him!
-
-If you really are interested in donating, please visit ayrahikari.github.io/donations.html, Thank you 😁""",
+	"donate_text": f"Hello, glad to hear you want to donate! \n"
+                       f"Need a lot of work for [my owner](https://t.me/{OWNER_USERNAME}) to take me to my place now, and \ \n"
+                       f"every donation helps and motivates him to make me better. \n\n"
+                       f"All donated money will be given to a better VPS to host me, and or some food. \ \n"
+                       f"He is just an ordinary person, so it will really help him! \n\n"
+                       f"If you really are interested in donating, please visit ayrahikari.github.io/donations.html, Thank you 😁 ",
 	"⬅️ kembali": "⬅️ Back",
 	"Hubungi saya di PM untuk mendapatkan daftar perintah.": "Contact me in PM to get the list of possible commands.",
 	"Tolong": "Help",
