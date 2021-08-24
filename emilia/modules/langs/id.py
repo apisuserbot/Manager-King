@@ -20,8 +20,8 @@ Saya adalah bot manajemen grup dengan beberapa kelebihan yang menyenangkan! Sila
 hal-hal yang bisa saya bantu 
                
 *Perintah utama* yang tersedia: 
-- /start: mulai bot 
-- /help: PM Anda dengan pesan ini
+- /start : mulai bot 
+- /help : PM Anda dengan pesan ini
 - /help <module name>: PM Anda dengan info tentang modul itu
 - /settings : Pengaturan Botmu!
    - di PM : akan mengirimkan pengaturan Anda untuk semua modul yang didukung
@@ -41,9 +41,9 @@ Dia hanya orang biasa, jadi akan sangat membantu dia!
 Jika anda memang berminat untuk donate, silahkan kunjungi @KingUserbotSupport, Terima kasih 😁""",
 	
 # Help modules
-	"language_help": """Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka {BOT_NAME} menanggapi dalam bahasa mereka sendiri.
+	"language_help": """Tidak semua grup berbicara bahasa Indonesia; beberapa grup lebih suka bot menanggapi dalam bahasa mereka sendiri.
 
-Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan {BOT_NAME} menjadi bahasa pilihan Anda!
+Di sinilah terjemahan masuk; Anda dapat mengubah sebagian besar balasan bot menjadi bahasa pilihan Anda!
 
 Bahasa yang tersedia adalah :
 - 🇮🇩 Indonesia
