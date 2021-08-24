@@ -37,4 +37,4 @@ pencipta setiap modul, tetapi tolong jangan hapus kredit kepada saya atau ditemp
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/apisuserbot/Manager-King/tree/master"> <img src="https://img.shields.io/badge/Deploy%20Ke%20Heroku-blue?style=flat&logo=heroku" width="210" height="34.45" /></a></p>
 
 ### License 
-Lisensi Untuk Repository Ini Adalah [GPL-3](https://github.com/apisuserbot/Manager-King/blob/master/LICENSE)
+Lisensi Untuk Repository Ini Adalah [GPL-3.0](https://github.com/apisuserbot/Manager-King/blob/master/LICENSE) GNU General Public License v3.0
