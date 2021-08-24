@@ -12,7 +12,7 @@ Mengelola Group Menjadi Aman dan Menyenangkan,
 Gunakan Perintah /help untuk mengetahui fitur saya
 ━━━━━━━━━━━━━━━━━━━━━━━
 Ingin menambahkan saya ke grup Anda? Cukup klik tombol di bawah!
-f"Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{})
+Jika ingin menanyakan sesuatu bisa tanyakan [owner saya ini](https://t.me/{})
 """,
 	"help_text": """
 Hai! Bertemu Lagi Bersama Saya Di Menu Help! 
@@ -23,9 +23,9 @@ hal-hal yang bisa saya bantu
 - /start: mulai bot 
 - /help: PM Anda dengan pesan ini
 - /help <module name>: PM Anda dengan info tentang modul itu
-- /settings: 
-   - di PM: akan mengirimkan pengaturan Anda untuk semua modul yang didukung
-   - di grup: akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu
+- /settings : Pengaturan Botmu!
+   - di PM : akan mengirimkan pengaturan Anda untuk semua modul yang didukung
+   - di grup : akan mengarahkan Anda ke pm, dengan semua pengaturan obrolan itu
 
 Semua perintah dapat digunakan dengan perintah / 
 
