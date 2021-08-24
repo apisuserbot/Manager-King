@@ -43,7 +43,8 @@ If you want to ask something, you can love [my owner](https://t.me/{})
 	"help_text": """
 Hey! Meet Again With Me On Help Menu!
 I am a group management bot, here to help you get around and keep the order in your groups!
-I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
+I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords
+
 *Main commands available :*
  - /start : cool command to check if the bot is alive or not
  - /help : PM's you this message
