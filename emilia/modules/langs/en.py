@@ -20,8 +20,8 @@ en = {
 	"Bahasa telah di ubah ke {}!": "Language changed to {}!",
 	"Bahasa di *{}* saat ini adalah:\n{}.\n\nPilih bahasa:": "Current language in *{}* is:\n{}.\n\nSelect language:",
 	"obrolan saat ini": "current in this chat",
-	"language_help": """Not every group speaks indonesian; some groups would rather have {BOT_NAME} respond in their own language
-This is where translations come in; you can change most of {BOT_NAME} replies to be in the language of your choice!
+	"language_help": """Not every group speaks indonesian; some groups would rather have bot respond in their own language
+This is where translations come in; you can change most of bot replies to be in the language of your choice!
 Available languages are :
 - 🇮🇩 Indonesia
 - 🇺🇸 English
