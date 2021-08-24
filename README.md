@@ -23,7 +23,7 @@ Dengan Base [Emilia Hikari](https://github.com/AyraHikari/EmiliaHikari)
 * [@AvinashReddy3108](https://github.com/AvinashReddy3108) - untuk dasar yang digunakan dalam Dockerfile
 * [@AnimeKaizoku](https://github.com/AnimeKaizoku) - untuk modul dbcleanup
 * [@nunopenim](https://github.com/nunopenim) - untuk kode CAS dan GitHub
-* [@apisuserbot](https://github.com/apisuserbot) - untuk menambahkan img pada start text modul
+* [@apisuserbot](https://github.com/apisuserbot) - untuk mengupdate fitur dan suasan terbaru
 
 ----------
 ```
@@ -32,8 +32,9 @@ pencipta setiap modul, tetapi tolong jangan hapus kredit kepada saya atau ditemp
 ```
 ----------
 
-## Installing
-----------
 ### Deploy 
 
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/apisuserbot/Manager-King/tree/master"> <img src="https://img.shields.io/badge/Deploy%20Ke%20Heroku-blue?style=flat&logo=heroku" width="210" height="34.45" /></a></p>
+
+### License 
+Lisensi Untuk Repository Ini Adalah [GPL-3](https://github.com/apisuserbot/Manager-King/blob/master/LICENSE)
