@@ -26,7 +26,7 @@ Available languages are :
 - 🇮🇩 Indonesia
 - 🇺🇸 English
 Available commands are :
- - /setlang: set your prefered language""",
+ - /setlang : set your prefered language""",
 
 # __main__
 	"Ada yang bisa saya bantu? 😊": "Is there anything I can help? 😊",
@@ -45,13 +45,13 @@ Hey! Meet Again With Me On Help Menu!
 I am a group management bot, here to help you get around and keep the order in your groups!
 I have lots of handy features, such as flood control, a warning system, a note keeping system, and even predetermined replies on certain keywords.
 *Main commands available :*
- - /start: cool command to check if the bot is alive or not
- - /help: PM's you this message
+ - /start : cool command to check if the bot is alive or not
+ - /help : PM's you this message
  - /help <module name>: PM's you info about that module
- - /setlang: change bot language
- - /settings:
-   - in PM: will send you your settings for all supported modules
-   - in a group: will redirect you to pm, with all that chat's settings
+ - /setlang : change bot language
+ - /settings : Settings Your Bot!
+   - in PM : will send you your settings for all supported modules
+   - in a group : will redirect you to pm, with all that chat's settings
 
 All commands can either be used with /
 
